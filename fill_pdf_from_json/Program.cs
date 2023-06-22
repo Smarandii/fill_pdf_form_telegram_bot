@@ -45,14 +45,19 @@ public class Item
 }
 
 
-class FlattenXFA
+class PdfFormFiller
 {
-    private const string XFAFilePathInput = @"E:\Projects\Python Projects\FillPdfForms\fill_pdf_from_json\ar-11-unlocked.pdf";
-    private const string XFAFilePathOutput = @"E:\Projects\Python Projects\FillPdfForms\fill_pdf_from_json\ar-11-unlocked-filled.pdf";
-    private const string JsonFileInput = @"E:\Projects\Python Projects\FillPdfForms\fill_pdf_from_json\test-data.json";
-
+    private static string XFAFilePathInput = @"";
+    private static string JsonFileInput = @"";
+    private static string XFAFilePathOutput = @"";
+    
     static void Main(string[] args)
     {
+        Console.WriteLine(args[0] + args[1] + args[2]);
+        XFAFilePathInput = args[0];
+        JsonFileInput = args[1];
+        XFAFilePathOutput = args[2];
+        Console.ReadKey();
         FillPdfFieldsWithJsonValues();
     }
 
@@ -85,7 +90,7 @@ class FlattenXFA
         int cnt = 0;
         foreach (PdfObject option in options)
         {
-            if (option.ToString() == Convert.ToString(inputJsonValues[jsonKey]))
+            if (option.ToString().Contains(Convert.ToString(inputJsonValues[jsonKey])))
             {
                 break;
             }
@@ -110,11 +115,6 @@ class FlattenXFA
                 string jsonKey = generateJsonKeyForPdfFieldKey(pdfField.Key);
                 if (jsonKey != "")
                 {
-                    Console.WriteLine(jsonKey);
-                    if (jsonKey == "S2B_Unit" || jsonKey == "S2B_Unit_1" || jsonKey == "S2B_Unit_2")
-                    {
-                        pdfField.Value.SetValue(Convert.ToString(inputJsonValues[jsonKey]));
-                    }
                     if (jsonKey == "S2B_State" || jsonKey == "S2C_State" || jsonKey == "S2A_State")
                     {
                         PdfChoiceFormField stateChoiceField = (PdfChoiceFormField)pdfField.Value;
@@ -127,7 +127,7 @@ class FlattenXFA
 
                         pdfField.Value.SetValue(Convert.ToString(inputJsonValues[jsonKey]));
                     }
-                    //Console.WriteLine("Field: " + jsonKey);
+                    Console.WriteLine("Field: " + jsonKey);
                 }
             }
             pdfDoc.Close();
