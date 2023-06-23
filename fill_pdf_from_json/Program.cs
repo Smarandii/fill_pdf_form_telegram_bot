@@ -9,41 +9,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using iText.Layout.Properties;
 
-public class Item
-{
-    public string S1_MiddleName { get; set; }
-    public string S1_GivenName { get; set; }
-    public string S1_FamilyName { get; set; }
-    public string S1_DateOfBirth { get; set; }
-    public string S2B_State { get; set; }
-    public string S2B_ZipCode { get; set; }
-    public bool S2B_Unit0 { get; set; }
-    public bool S2B_Unit1 { get; set; }
-    public bool S2B_Unit2 { get; set; }
-    public string S2B_AptSteFlrNumber { get; set; }
-    public string S2B_StreetNumberName { get; set; }
-    public string S2B_CityOrTown { get; set; }
-    public string S2C_State { get; set; }
-    public string S2C_ZipCode { get; set; }
-    public bool S2C_Unit0 { get; set; }
-    public bool S2C_Unit1 { get; set; }
-    public bool S2C_Unit2 { get; set; }
-    public string S2C_AptSteFlrNumber { get; set; }
-    public string S2C_StreetNumberName { get; set; }
-    public string S2C_CityOrTown { get; set; }
-    public string AlienNumber { get; set; }
-    public string S3_SignatureApplicant { get; set; }
-    public string S3_DateofSignature { get; set; }
-    public string S2A_State { get; set; }
-    public string S2A_ZipCode { get; set; }
-    public bool S2A_Unit0 { get; set; }
-    public bool S2A_Unit1 { get; set; }
-    public bool S2A_Unit2 { get; set; }
-    public string S2A_AptSteFlrNumber { get; set; }
-    public string S2A_StreetNumberName { get; set; }
-    public string S2A_CityOrTown { get; set; }
-}
-
 
 class PdfFormFiller
 {
@@ -53,11 +18,10 @@ class PdfFormFiller
     
     static void Main(string[] args)
     {
-        Console.WriteLine(args[0] + args[1] + args[2]);
+        Console.WriteLine("pdf_input: " + args[0] + " json_input " + args[1] + " pdf_output " + args[2]);
         XFAFilePathInput = args[0];
         JsonFileInput = args[1];
         XFAFilePathOutput = args[2];
-        Console.ReadKey();
         FillPdfFieldsWithJsonValues();
     }
 
