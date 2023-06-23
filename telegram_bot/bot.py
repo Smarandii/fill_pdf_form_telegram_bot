@@ -127,18 +127,48 @@ async def process_s2b_city_or_town(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['S2B_CityOrTown'] = message.text
     await Form.next()
-    await bot.send_message(message.from_user.id, "Send any 'x' if you want t:")
+    await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Apt. checkbox:")
 
 
 @dp.message_handler(state=Form.S2B_Unit)
 async def process_s2b_unit(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_Unit'] = message.text
+        if message.text.lower() == "x" or message.text.lower() == "х":
+            data['S2B_Unit'] = message.text
+            await bot.send_message(message.from_user.id, "Enter your Apt. number:")
+            await Form.S2B_AptSteFlrNumber.set()
+        else:
+            data['S2B_Unit'] = ""
+            await Form.next()
+            await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Ste. checkbox")
+
+
+@dp.message_handler(state=Form.S2B_Unit_1)
+async def process_s2b_unit_1(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        if message.text.lower() == "x" or message.text.lower() == "х":
+            data['S2B_Unit_1'] = message.text
+            await bot.send_message(message.from_user.id, "Enter your Ste. number:")
+            await Form.S2B_AptSteFlrNumber.set()
+        else:
+            data['S2B_Unit_1'] = ""
+            await Form.next()
+
+
+@dp.message_handler(state=Form.S2B_Unit_2)
+async def process_s2b_unit_2(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['S2B_Unit_2'] = message.text
+        await bot.send_message(message.from_user.id, "Enter your Flr. number:")
+        await Form.S2B_AptSteFlrNumber.set()
+
+
+@dp.message_handler(state=Form.S2B_CityOrTown)
+async def process_s2b_city_or_town(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['S2B_CityOrTown'] = message.text
     await Form.next()
-    await bot.send_message(message.from_user.id, "Enter your City or Town:")
-
-
-
+    await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Apt. checkbox:")
 
 
 
