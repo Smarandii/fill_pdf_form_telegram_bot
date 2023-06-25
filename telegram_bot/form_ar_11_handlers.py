@@ -248,14 +248,20 @@ async def process_s2c_unit_1(message: types.Message, state: FSMContext):
             await Form_AR_11.S2C_AptSteFlrNumber.set()
         else:
             await Form_AR_11.next()
+            await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Flr. checkbox")
 
 
 @dp.message_handler(state=Form_AR_11.S2C_Unit_2)
 async def process_s2c_unit_2(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_Unit_2'] = message.text
-        await bot.send_message(message.from_user.id, "Enter your Flr. number:")
-        await Form_AR_11.S2C_AptSteFlrNumber.set()
+        data['S2C_Unit_2'] = ""
+        if message.text.lower() == "x" or message.text.lower() == "х":
+            data['S2C_Unit_2'] = message.text
+            await bot.send_message(message.from_user.id, "Enter your Flr. number:")
+            await Form_AR_11.S2C_AptSteFlrNumber.set()
+        else:
+            await bot.send_message(message.from_user.id, "Enter your state (e.g. CA, NY, AZ and so on):")
+            await Form_AR_11.S2C_State.set()
 
 
 @dp.message_handler(state=Form_AR_11.S2C_AptSteFlrNumber)
