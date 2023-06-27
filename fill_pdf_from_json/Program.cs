@@ -12,29 +12,31 @@ using iText.Layout.Properties;
 
 class PdfFormFiller
 {
-    private static string XFAFilePathInput = @"";
+    private static string PdfFilePathInput = @"";
     private static string JsonFileInput = @"";
-    private static string XFAFilePathOutput = @"";
+    private static string PdfFilePathOutput = @"";
     
     static void Main(string[] args)
     {
-        Console.WriteLine("pdf_input: " + args[0] + " json_input " + args[1] + " pdf_output " + args[2]);
-        XFAFilePathInput = args[0];
-        JsonFileInput = args[1];
-        XFAFilePathOutput = args[2];
-        FillPdfFieldsWithJsonValues();
+        if (args.Length == 1)
+        {
+            Console.WriteLine("Getting fields of pdf_input: " + args[0]);
+            PdfFilePathInput = args[0];
+            PrintAllPdfFields();
+        }
+        else {
+            Console.WriteLine("pdf_input: " + args[0] + " json_input " + args[1] + " pdf_output " + args[2]);
+            PdfFilePathInput = args[0];
+            JsonFileInput = args[1];
+            PdfFilePathOutput = args[2];
+            FillPdfFieldsWithJsonValues();
+        }
     }
 
     public static string generateJsonKeyForPdfFieldKey(string initialFieldKey)
     {
-        Console.WriteLine(initialFieldKey);
-        string jsonKey = initialFieldKey.Replace("form1[0].#subform[0]", "");
-        jsonKey = jsonKey.Replace("[0]", "");
-        jsonKey = jsonKey.Replace("[1]", "_1");
-        jsonKey = jsonKey.Replace("[2]", "_2");
-        jsonKey = jsonKey.Replace(".", "");
-        jsonKey = jsonKey.Replace("__", "_");
-
+        string jsonKey = initialFieldKey.Replace("form1[0].#subform", "");
+        jsonKey = jsonKey.Replace("form1[0].#pageSet", "");
         if (jsonKey.Length > 0 || jsonKey != "form" || jsonKey != "form1")
             return jsonKey;
         else
@@ -63,10 +65,28 @@ class PdfFormFiller
         return cnt;
     }
 
+    public static void PrintAllPdfFields() {
+
+        using (PdfReader reader = new PdfReader(PdfFilePathInput))
+        using (PdfDocument pdfDoc = new PdfDocument(reader))
+        {
+            PdfAcroForm form = PdfAcroForm.GetAcroForm(pdfDoc, true);
+            IDictionary<String, PdfFormField> fieldsDictionary = form.GetAllFormFields();
+
+            foreach (KeyValuePair<string, PdfFormField> pdfField in fieldsDictionary) { 
+            
+                Console.WriteLine(pdfField.Key.ToString() + " : " + generateJsonKeyForPdfFieldKey(pdfField.Key.ToString()));
+            }
+        
+        }
+
+
+    }
+
     public static void FillPdfFieldsWithJsonValues()
     {
-        using (PdfReader reader = new PdfReader(XFAFilePathInput))
-        using (PdfWriter writer = new PdfWriter(XFAFilePathOutput))
+        using (PdfReader reader = new PdfReader(PdfFilePathInput))
+        using (PdfWriter writer = new PdfWriter(PdfFilePathOutput))
         using (PdfDocument pdfDoc = new PdfDocument(reader, writer))
         {
             PdfAcroForm form = PdfAcroForm.GetAcroForm(pdfDoc, true);

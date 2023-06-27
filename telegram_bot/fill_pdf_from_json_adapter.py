@@ -5,7 +5,7 @@ class FillPdfFromJsonAdapter:
     def __init__(self, data, form_identifier, user_id, timestamp):
         self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[form_identifier]
         self.json_input_file_path = rf"../json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
-        self.pdf_output_file_path = rf"../pdf_outputs/{form_identifier}-{data['S1_FamilyName']}-{data['S1_GivenName']}-{user_id}.pdf"
+        self.pdf_output_file_path = rf"../pdf_outputs/{form_identifier}-{data['[0].S1_FamilyName[0]']}-{data['[0].S1_GivenName[0]']}-{user_id}.pdf"
 
     def save_json(self, data):
         import json

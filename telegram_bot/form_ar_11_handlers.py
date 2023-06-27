@@ -12,10 +12,11 @@ async def ar_11_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
     await bot.send_message(callback_query.from_user.id, "Enter your Family Name:")
     await Form_AR_11.S1_FamilyName.set()
 
+
 @dp.message_handler(state=Form_AR_11.S1_FamilyName)
 async def process_s1_family_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S1_FamilyName'] = message.text
+        data['[0].S1_FamilyName[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your Given Name:")
 
@@ -23,7 +24,7 @@ async def process_s1_family_name(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S1_GivenName)
 async def process_s1_given_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S1_GivenName'] = message.text
+        data['[0].S1_GivenName[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your Middle Name:")
 
@@ -31,7 +32,7 @@ async def process_s1_given_name(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S1_MiddleName)
 async def process_s1_middle_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S1_MiddleName'] = message.text
+        data['[0].S1_MiddleName[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your Date Of Birth:")
 
@@ -39,7 +40,7 @@ async def process_s1_middle_name(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S1_DateOfBirth)
 async def process_s1_date_of_birth(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S1_DateOfBirth'] = message.text
+        data['[0].S1_DateOfBirth[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your Alien Number:")
 
@@ -47,7 +48,7 @@ async def process_s1_date_of_birth(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.AlienNumber)
 async def process_alien_number(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['AlienNumber'] = message.text
+        data['[0].AlienNumber[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your Street Name and Number:")
 
@@ -55,7 +56,7 @@ async def process_alien_number(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2B_StreetNumberName)
 async def process_s2b_street_number_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_StreetNumberName'] = message.text
+        data['[0].S2B_StreetNumberName[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your City or Town:")
 
@@ -63,7 +64,7 @@ async def process_s2b_street_number_name(message: types.Message, state: FSMConte
 @dp.message_handler(state=Form_AR_11.S2B_CityOrTown)
 async def process_s2b_city_or_town(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_CityOrTown'] = message.text
+        data['[0].S2B_CityOrTown[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Apt. checkbox:")
 
@@ -71,10 +72,12 @@ async def process_s2b_city_or_town(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2B_Unit)
 async def process_s2b_unit(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_Unit'] = ""
-        data['S2B_AptSteFlrNumber'] = ""
+        data['[0].S2B__Unit[0]'] = ""
+        data['[0].S2B__Unit[1]'] = ""
+        data['[0].S2B__Unit[2]'] = ""
+        data['[0].S2B_AptSteFlrNumber[0]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2B_Unit'] = message.text
+            data['[0].S2B__Unit[0]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Apt. number:")
             await Form_AR_11.S2B_AptSteFlrNumber.set()
         else:
@@ -85,9 +88,8 @@ async def process_s2b_unit(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2B_Unit_1)
 async def process_s2b_unit_1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_Unit_1'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2B_Unit_1'] = message.text
+            data['[0].S2B__Unit[1]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Ste. number:")
             await Form_AR_11.S2B_AptSteFlrNumber.set()
         else:
@@ -98,9 +100,8 @@ async def process_s2b_unit_1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2B_Unit_2)
 async def process_s2b_unit_2(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_Unit_2'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2B_Unit_2'] = message.text
+            data['[0].S2B__Unit[2]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Flr. number:")
             await Form_AR_11.S2B_AptSteFlrNumber.set()
         else:
@@ -111,7 +112,7 @@ async def process_s2b_unit_2(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2B_AptSteFlrNumber)
 async def process_s2b_apt_ste_flr_number(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_AptSteFlrNumber'] = message.text
+        data['[0].S2B_AptSteFlrNumber[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your state (e.g. CA, NY, AZ and so on):")
 
@@ -119,7 +120,7 @@ async def process_s2b_apt_ste_flr_number(message: types.Message, state: FSMConte
 @dp.message_handler(state=Form_AR_11.S2B_State)
 async def process_s2b_state(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_State'] = message.text
+        data['[0].S2B_State[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your zipcode (e.g. 123456) "
                                                  "US ZIP code lookup: https://tools.usps.com/go/ZipLookupAction_input")
@@ -128,7 +129,7 @@ async def process_s2b_state(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2B_ZipCode)
 async def process_s2b_zip_code(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2B_ZipCode'] = message.text
+        data['[0].S2B_ZipCode[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Ok! Let's fill previous physical address now:")
     await bot.send_message(message.from_user.id, "Enter your Street Name and Number:")
@@ -137,7 +138,7 @@ async def process_s2b_zip_code(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2A_StreetNumberName)
 async def process_s2a_street_number_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_StreetNumberName'] = message.text
+        data['[0].S2A_StreetNumberName[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your City or Town:")
 
@@ -145,7 +146,7 @@ async def process_s2a_street_number_name(message: types.Message, state: FSMConte
 @dp.message_handler(state=Form_AR_11.S2A_CityOrTown)
 async def process_s2a_city_or_town(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_CityOrTown'] = message.text
+        data['[0].S2A_CityOrTown[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Apt. checkbox:")
 
@@ -153,10 +154,10 @@ async def process_s2a_city_or_town(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2A_Unit)
 async def process_s2a_unit(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_Unit'] = ""
-        data['S2A_AptSteFlrNumber'] = ""
+        data['[0].S2A_Unit[0]'] = ""
+        data['[0].S2A_AptSteFlrNumber[0]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2A_Unit'] = message.text
+            data['[0].S2A_Unit[0]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Apt. number:")
             await Form_AR_11.S2A_AptSteFlrNumber.set()
         else:
@@ -167,9 +168,9 @@ async def process_s2a_unit(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2A_Unit_1)
 async def process_s2a_unit_1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_Unit_1'] = ""
+        data['[0].S2A_Unit[1]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2A_Unit_1'] = message.text
+            data['[0].S2A_Unit[1]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Ste. number:")
             await Form_AR_11.S2A_AptSteFlrNumber.set()
         else:
@@ -180,9 +181,9 @@ async def process_s2a_unit_1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2A_Unit_2)
 async def process_s2a_unit_2(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_Unit_2'] = ""
+        data['[0].S2A_Unit[2]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2A_Unit_2'] = message.text
+            data['[0].S2A_Unit[2]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Flr. number:")
             await Form_AR_11.S2B_AptSteFlrNumber.set()
         else:
@@ -193,7 +194,7 @@ async def process_s2a_unit_2(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2A_AptSteFlrNumber)
 async def process_s2a_apt_ste_flr_number(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_AptSteFlrNumber'] = message.text
+        data['[0].S2A_AptSteFlrNumber[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your state (e.g. CA, NY, AZ and so on):")
 
@@ -201,7 +202,7 @@ async def process_s2a_apt_ste_flr_number(message: types.Message, state: FSMConte
 @dp.message_handler(state=Form_AR_11.S2A_State)
 async def process_s2a_state(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_State'] = message.text
+        data['[0].S2A_State[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your zipcode (e.g. 123456) "
                                                  "US ZIP code lookup: https://tools.usps.com/go/ZipLookupAction_input")
@@ -211,7 +212,7 @@ async def process_s2a_state(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2C_StreetNumberName)
 async def process_s2c_street_number_name(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_StreetNumberName'] = message.text
+        data['[0].S2C_StreetNumberName[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your City or Town:")
 
@@ -219,7 +220,7 @@ async def process_s2c_street_number_name(message: types.Message, state: FSMConte
 @dp.message_handler(state=Form_AR_11.S2C_CityOrTown)
 async def process_s2c_city_or_town(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_CityOrTown'] = message.text
+        data['[0].S2C_CityOrTown[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Send 'x' if you want to check the Apt. checkbox:")
 
@@ -227,10 +228,10 @@ async def process_s2c_city_or_town(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2C_Unit)
 async def process_s2c_unit(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_Unit'] = ""
-        data['S2C_AptSteFlrNumber'] = ""
+        data['[0].S2C_Unit[0]'] = ""
+        data['[0].S2C_AptSteFlrNumber[0]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2C_Unit'] = message.text
+            data['[0].S2C_Unit[0]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Apt. number:")
             await Form_AR_11.S2C_AptSteFlrNumber.set()
         else:
@@ -241,9 +242,9 @@ async def process_s2c_unit(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2C_Unit_1)
 async def process_s2c_unit_1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_Unit_1'] = ""
+        data['[0].S2C_Unit[1]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2C_Unit_1'] = message.text
+            data['[0].S2C_Unit[1]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Ste. number:")
             await Form_AR_11.S2C_AptSteFlrNumber.set()
         else:
@@ -254,9 +255,9 @@ async def process_s2c_unit_1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2C_Unit_2)
 async def process_s2c_unit_2(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_Unit_2'] = ""
+        data['[0].S2C_Unit[2]'] = ""
         if message.text.lower() == "x" or message.text.lower() == "х":
-            data['S2C_Unit_2'] = message.text
+            data['[0].S2C_Unit[2]'] = message.text
             await bot.send_message(message.from_user.id, "Enter your Flr. number:")
             await Form_AR_11.S2C_AptSteFlrNumber.set()
         else:
@@ -267,7 +268,7 @@ async def process_s2c_unit_2(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2C_AptSteFlrNumber)
 async def process_s2c_apt_ste_flr_number(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_AptSteFlrNumber'] = message.text
+        data['[0].S2C_AptSteFlrNumber[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your state (e.g. CA, NY, AZ and so on):")
 
@@ -275,7 +276,7 @@ async def process_s2c_apt_ste_flr_number(message: types.Message, state: FSMConte
 @dp.message_handler(state=Form_AR_11.S2C_State)
 async def process_s2c_state(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_State'] = message.text
+        data['[0].S2C_State[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Enter your zipcode (e.g. 123456) "
                                                  "US ZIP code lookup: https://tools.usps.com/go/ZipLookupAction_input")
@@ -284,7 +285,7 @@ async def process_s2c_state(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2C_ZipCode)
 async def process_s2b_zip_code(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2C_ZipCode'] = message.text
+        data['[0].S2C_ZipCode[0]'] = message.text
     await Form_AR_11.next()
     await bot.send_message(message.from_user.id, "Ok! All that's left is your signature:")
 
@@ -292,7 +293,7 @@ async def process_s2b_zip_code(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Form_AR_11.S2A_ZipCode)
 async def process_s2a_zip_code(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S2A_ZipCode'] = message.text
+        data['[0].S2A_ZipCode[0]'] = message.text
     keyboard = Form_AR_11_Mailing_Address_Choice_Keyboard()
     await message.answer("Ok! Let's fill your Mailing Address now. "
                          "Before that a quick question, does your present physical address "
@@ -304,15 +305,15 @@ async def callback_query_handler_mailing_same_as_physical_yes(callback_query: ty
     await bot.send_message(callback_query.from_user.id, "You've pushed 'Yes' button, I will copy information "
                                                         "from Present Physical Address to Mailing Address")
     async with state.proxy() as data:
-        data['S2C_StreetNumberName'] = data['S2B_StreetNumberName']
-        data['S2C_StreetNumberName'] = data['S2B_CityOrTown']
-        data['S2C_Unit'] = data['S2B_Unit']
-        data['S2C_Unit_1'] = data['S2B_Unit_1']
-        data['S2C_Unit_2'] = data['S2B_Unit_2']
-        data['S2C_AptSteFlrNumber'] = data['S2B_AptSteFlrNumber']
-        data['S2C_State'] = data['S2B_State']
-        data['S2C_CityOrTown'] = data['S2B_CityOrTown']
-        data['S2C_ZipCode'] = data['S2B_ZipCode']
+        data['[0].S2C_StreetNumberName[0]'] = data['[0].S2B_StreetNumberName[0]']
+        data['[0].S2C_CityOrTown[0]'] = data['[0].S2B_CityOrTown[0]']
+        data['[0].S2C_Unit[0]'] = data['[0].S2B__Unit[0]']
+        data['[0].S2C_Unit[1]'] = data['[0].S2B__Unit[1]']
+        data['[0].S2C_Unit[2]'] = data['[0].S2B__Unit[2]']
+        data['[0].S2C_AptSteFlrNumber[0]'] = data['[0].S2B_AptSteFlrNumber[0]']
+        data['[0].S2C_State[0]'] = data['[0].S2B_State[0]']
+        data['[0].S2C_CityOrTown[0]'] = data['[0].S2B_CityOrTown[0]']
+        data['[0].S2C_ZipCode[0]'] = data['[0].S2B_ZipCode[0]']
 
     await Form_AR_11.S3_SignatureApplicant.set()
     await bot.send_message(callback_query.from_user.id, "Enter your Signature:")
@@ -337,8 +338,8 @@ async def callback_query_handler_mailing_empty(callback_query: types.CallbackQue
 @dp.message_handler(state=Form_AR_11.S3_SignatureApplicant)
 async def process_s3_signature_applicant(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['S3_SignatureApplicant'] = message.text
-        data['S3_DateofSignature'] = datetime.now().strftime("%d/%m/%Y")
+        data['[0].S3_SignatureApplicant[0]'] = message.text
+        data['[0].S3_DateofSignature[0]'] = datetime.now().strftime("%d/%m/%Y")
 
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
