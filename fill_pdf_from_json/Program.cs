@@ -75,7 +75,7 @@ class PdfFormFiller
 
             foreach (KeyValuePair<string, PdfFormField> pdfField in fieldsDictionary) { 
             
-                Console.WriteLine(pdfField.Key.ToString() + " : " + generateJsonKeyForPdfFieldKey(pdfField.Key.ToString()));
+                Console.WriteLine(generateJsonKeyForPdfFieldKey(pdfField.Key.ToString()));
             }
         
         }
