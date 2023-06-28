@@ -529,7 +529,7 @@
     "[12].SuppALine21_CheckBox[0]": "If in the U.S., is this child to be included in this application? (Check the appropriate box.) Yes",
     "[12].SuppALine21_CheckBox[1]": "If in the U.S., is this child to be included in this application? (Check the appropriate box.) No",
 
-     "[13].PtAILine1_ANumber[2]": "324 A-Number (if available)",
+    "[13].PtAILine1_ANumber[2]": "324 A-Number (if available)",
     "[13].DateTimeField58[0]": "325 Date",
     "[13].SupBApplicantName[0]": "326 Applicant's Name",
     "[13].TextField30[0]": "327 Applicant's Signature",
