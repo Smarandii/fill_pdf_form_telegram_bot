@@ -19,7 +19,7 @@ class Form_I_589(StatesGroup):
     A_I_PtAILine8_AreaCode_0 = State()  # 13 Telephone Number
     A_I_PtAILine8_TelephoneNumber_0 = State()  # 14  # Telephone Number
 
-    A_I_PtAILine9_InCareOf_0 = State()  # 15  # In Care Of (if applicable) = State()
+    A_I_PtAILine9_InCareOf_0 = State()  # 15  # In Care Of (if applicable)
     A_I_PtAILine9_AreaCode_0 = State()  # 16  # Telephone Number
     A_I_PtAILine9_TelephoneNumbe_0 = State()  # 17  # Telephone Number
     A_I_PtAILine9_StreetNumandName_0 = State()  # 18 Street Number and Name
