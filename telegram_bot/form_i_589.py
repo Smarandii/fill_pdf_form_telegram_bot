@@ -16,12 +16,12 @@ class Form_I_589(StatesGroup):
     A_I_TextField1_2 = State()  # 10 City
     A_I_PtAILine8_State_0 = State()  # 11 State
     A_I_PtAILine8_Zipcode_0 = State()  # 12 Zip Code
-    A_I_PtAILine8_AreaCode_0 = State()  # 13 Telephone Number
+    A_I_PtAILine8_AreaCode_0 = State()  # 13 Telephone Area Code
     A_I_PtAILine8_TelephoneNumber_0 = State()  # 14  # Telephone Number
 
     A_I_PtAILine9_InCareOf_0 = State()  # 15  # In Care Of (if applicable)
-    A_I_PtAILine9_AreaCode_0 = State()  # 16  # Telephone Number
-    A_I_PtAILine9_TelephoneNumbe_0 = State()  # 17  # Telephone Number
+    A_I_PtAILine9_AreaCode_0 = State()  # 16  # Telephone Area Code
+    A_I_PtAILine9_TelephoneNumber_0 = State()  # 17  # Telephone Number
     A_I_PtAILine9_StreetNumandName_0 = State()  # 18 Street Number and Name
     A_I_PtAILine9_AptNumber_0 = State()  # 19 Apt. Number
     A_I_PtAILine9_City_0 = State()  # 20 City

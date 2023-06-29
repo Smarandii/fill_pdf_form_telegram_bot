@@ -126,6 +126,38 @@ async def process_A_I_PtAILine8_TelephoneNumber_0(message: types.Message, state:
     await bot.send_message(message.from_user.id, "Enter In Care Of (if applicable):")
 
 
+@dp.message_handler(state=Form_I_589.A_I_PtAILine9_InCareOf_0)
+async def process_A_I_PtAILine9_InCareOf_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].PtAILine9_InCareOf[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter your Telephone Area Code:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_PtAILine9_AreaCode_0)
+async def process_A_I_PtAILine9_AreaCode_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].PtAILine8_AreaCode[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter your Telephone Number:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_PtAILine9_TelephoneNumber_0)
+async def process_A_I_PtAILine8_TelephoneNumber_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].PtAILine9_AreaCode[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter Street Number and Name:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_PtAILine8_TelephoneNumber_0)
+async def process_A_I_PtAILine9_StreetNumandName_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].PtAILine9_StreetNumandName[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter Street Number and Name:")
+
+
 @dp.message_handler(state=Form_I_589.A_I_PartALine9Gender_1)
 async def process_A_I_PartALine9Gender_1(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
