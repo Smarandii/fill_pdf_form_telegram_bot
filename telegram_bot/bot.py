@@ -1,15 +1,15 @@
 from telegram_bot import bot, dp
 from aiogram import types
 from aiogram.dispatcher import filters
-from telegram_bot import AvailableFormsKeyboardFactory
+from telegram_bot import AvailableFormsKeyboard
 import form_ar_11_handlers
 import form_i_589_handlers
 
 
 @dp.message_handler(filters.Command("start"))
 async def start_cmd_handler(message: types.Message):
-    keyboard_factory = AvailableFormsKeyboardFactory()
-    keyboard = keyboard_factory.keyboard_markup
+    keyboard = AvailableFormsKeyboard()
+    keyboard = keyboard.keyboard_markup
     await message.answer("Hello! Here are the forms available for filling:", reply_markup=keyboard)
 
 

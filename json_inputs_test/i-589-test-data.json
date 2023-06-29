@@ -66,12 +66,12 @@
     "[0].CheckBox4[0]": "Are you fluent in English? No",
     "[0].TextField7[1]": "46 What other languages do you speak fluently?",
 
-    "[0].TextField8[0]": "47 For EOIR use only.",
-    "[0].DateTimeField2[6]": "48 Interview Date",
-    "[0].TextField9[0]": "49 Asylum Officer ID No.",
-    "[0].DateTimeField2[3]": "50 Approval Date",
-    "[0].DateTimeField2[4]": "51 Denial Date",
-    "[0].DateTimeField2[5]": "52 Referral Date",
+    "[0].TextField8[0]": "",
+    "[0].DateTimeField2[6]": "",
+    "[0].TextField9[0]": "",
+    "[0].DateTimeField2[3]": "",
+    "[0].DateTimeField2[4]": "",
+    "[0].DateTimeField2[5]": "",
 
 
     "[1].CheckBox5[0]": "I am not married. (Skip to Your Children below.)",

@@ -5,7 +5,14 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from dotenv import load_dotenv
 from datetime import datetime
 from fill_pdf_from_json_adapter import FillPdfFromJsonAdapter
-from forms_keyboards import AvailableFormsKeyboardFactory, Form_AR_11_Mailing_Address_Choice_Keyboard
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from common_keyboards import AvailableFormsKeyboard
+from f_ar_11_keyboards import Form_AR_11_Mailing_Address_Choice_Keyboard
+from f_i_589_keyboards import Form_I_589_Gender_Choice, \
+    Form_I_589_Marital_Status_Choice, \
+    Form_I_589_Immigration_Court_Choice, \
+    Form_I_94_Number_Choice
+
 
 load_dotenv()
 
