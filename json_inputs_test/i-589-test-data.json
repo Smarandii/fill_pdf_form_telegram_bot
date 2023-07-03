@@ -45,21 +45,25 @@
 
     "[0].DateTimeField6[0]": "29 When did you last leave your country? (mm/dd/yyyy)",
     "[0].TextField3[0]": "30 What is your current I-94 Number, if any?",
+
     "[0].DateTimeField2[0]": "31 Date",
     "[0].TextField4[0]": "32 Place",
     "[0].TextField4[1]": "33 Status",
-    "[0].DateTimeField3[0]": "34 Date",
-    "[0].TextField4[2]": "35 Place",
-    "[0].TextField4[3]": "36 Status",
-    "[0].DateTimeField4[0]": "37 Date",
-    "[0].TextField4[4]": "38 Place",
-    "[0].TextField4[5]": "39 Status",
-    "[0].DateTimeField2[1]": "40 Date Status Expires",
+    "[0].DateTimeField2[1]": "34 Date Status Expires",
+
+    "[0].DateTimeField3[0]": "35 Date",
+    "[0].TextField4[2]": "36 Place",
+    "[0].TextField4[3]": "37 Status",
+
+    "[0].DateTimeField4[0]": "38 Date",
+    "[0].TextField4[4]": "39 Place",
+    "[0].TextField4[5]": "40 Status",
+
 
     "[0].TextField5[0]": "41 What country issued your last passport or travel\ndocument?",
     "[0].TextField5[1]": "42 Passport Number",
     "[0].TextField5[2]": "43 Travel Document Number",
-    "[0].DateTimeField2[2]": "44 Expiration Date\n(mm/dd/yyyy)",
+    "[0].DateTimeField2[2]": "44 Expiration Date (mm/dd/yyyy)",
 
     "[0].TextField7[0]": "45 What is your native language (include dialect, if applicable)?",
     "[0].CheckBox4[1]": "Are you fluent in English? Yes",
@@ -75,6 +79,7 @@
 
 
     "[1].CheckBox5[0]": "I am not married. (Skip to Your Children below.)",
+
     "[1].NotMarried[0].PtAIILine1_ANumber[0]": "53 Alien Registration Number (A-Number)\n(if any)",
     "[1].NotMarried[0].TextField10[1]": "54 Passport/ID Card Number\n(if any)",
     "[1].NotMarried[0].DateTimeField7[0]": "55 Date of Birth (mm/dd/yyyy)",
@@ -104,6 +109,7 @@
     "[1].NotMarried[0].PtAIILine23_PreviousArrivalDate[0]": "73 If previously in the U.S., date of\nprevious arrival (mm/dd/yyyy)",
     "[1].NotMarried[0].PtAIILine24_Yes[0]": " If in the U.S., is your spouse to be included in this application? (Check the appropriate box.) Yes",
     "[1].NotMarried[0].PtAIILine24_No[0]": " If in the U.S., is your spouse to be included in this application? (Check the appropriate box.) No",
+
     "[1].ChildrenCheckbox[1]": "I do not have any children. (Skip to Part A.III., Information about your background.)",
     "[1].ChildrenCheckbox[0]": "I have children.",
     "[1].TotalChild[0]": "74 Total number of children",

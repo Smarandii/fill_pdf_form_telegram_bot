@@ -43,3 +43,23 @@ class Form_I_94_Number_Choice:
         button = InlineKeyboardButton("I don't have an I-94 number", callback_data="blank_i_94")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
+
+
+class Form_I_589_English_Fluency_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_eng_fluent")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_eng_fluent")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Marriage_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_married")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_married")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup

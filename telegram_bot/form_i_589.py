@@ -47,35 +47,42 @@ class Form_I_589(StatesGroup):
 
     A_I_DateTimeField6_0 = State()  # 29 When did you last leave your country? (mm/dd/yyyy)
     A_I_TextField3_0 = State()  # 30 What is your current I-94  # Number if any?
-    A_I_DateTimeField2_0 = State()  # 31 Date
-    A_I_TextField4_0 = State()  # 32 Place
-    A_I_TextField4_1 = State()  # 33 Status
-    A_I_DateTimeField3_0 = State()  # 34  # Date
-    A_I_TextField4_2 = State()  # 35  # Place
-    A_I_TextField4_3 = State()  # 36  # Status
-    A_I_DateTimeField4_0 = State()  # 37  # Date
-    A_I_TextField4_4 = State()  # 38 Place
-    A_I_TextField4_5 = State()  # 39 Status
-    A_I_DateTimeField2_1 = State()  # 40 Date Status Expires
 
-    A_I_TextField5_0 = State()  # 41 What country issued your last passport or travel\ndocument?
+    A_I_FirstUsEntry = State()
+    # A_I_DateTimeField2_0 = State()  # 31 Date
+    # A_I_TextField4_0 = State()  # 32 Place
+    # A_I_TextField4_1 = State()  # 33 Status
+    # A_I_DateTimeField2_1 = State()  # 34 Date Status Expires
+
+    A_I_SecondUsEntry = State()
+    # A_I_DateTimeField3_0 = State()  # 35  # Date
+    # A_I_TextField4_2 = State()  # 36  # Place
+    # A_I_TextField4_3 = State()  # 37  # Status
+
+    A_I_ThirdUsEntry = State()
+    # A_I_DateTimeField4_0 = State()  # 38  # Date
+    # A_I_TextField4_4 = State()  # 39 Place
+    # A_I_TextField4_5 = State()  # 40 Status
+
+    A_I_TextField5_0 = State()  # 41 What country issued your last passport or travel document?
     A_I_TextField5_1 = State()  # 42 Passport Number
     A_I_TextField5_2 = State()  # 43 Travel Document Number
     A_I_DateTimeField2_2 = State()  # 44  # Expiration Date\n(mm/dd/yyyy)
 
     A_I_TextField7_0 = State()  # 45  # What is your native language (include dialect if applicable)?
-    A_I_CheckBox4_1 = State()  # Are you fluent in English? Yes
-    A_I_CheckBox4_0 = State()  # Are you fluent in English? No
+    A_I_EngFluencyChoice = State()
+    # A_I_CheckBox4_1 = State()  # Are you fluent in English? Yes
+    # A_I_CheckBox4_0 = State()  # Are you fluent in English? No
     A_I_TextField7_1 = State()  # 46  # What other languages do you speak fluently?
 
-    A_I_TextField8_0 = State()  # 47  # For EOIR use only_
-    A_I_DateTimeField2_6 = State()  # 48 Interview Date
-    A_I_TextField9_0 = State()  # 49 Asylum Officer ID No_
-    A_I_DateTimeField2_3 = State()  # 50 Approval Date
-    A_I_DateTimeField2_4 = State()  # 51 Denial Date
-    A_I_DateTimeField2_5 = State()  # 52 Referral Date
+    # A_I_TextField8_0 = State()  # 47  # For EOIR use only_
+    # A_I_DateTimeField2_6 = State()  # 48 Interview Date
+    # A_I_TextField9_0 = State()  # 49 Asylum Officer ID No_
+    # A_I_DateTimeField2_3 = State()  # 50 Approval Date
+    # A_I_DateTimeField2_4 = State()  # 51 Denial Date
+    # A_I_DateTimeField2_5 = State()  # 52 Referral Date
 
-    A_II_CheckBox5_0 = State()  # I am not married_ (Skip to Your Children below_)
+    A_II_CheckBox5_0 = State()  # I am not married (Skip to Your Children below)
     A_II_NotMarried_0_PtAIILine1_ANumber_0 = State()  # 53 Alien Registration Number (A-Number)\n(if any)
     A_II_NotMarried_0_TextField10_1 = State()  # 54  # Passport/ID Card Number\n(if any)
     A_II_NotMarried_0_DateTimeField7_0 = State()  # 55  # Date of Birth (mm/dd/yyyy)
@@ -105,8 +112,10 @@ class Form_I_589(StatesGroup):
     A_II_NotMarried_0_PtAIILine23_PreviousArrivalDate_0 = State()  # 73 If previously in the U_S_ date of\nprevious arrival (mm/dd/yyyy)
     A_II_NotMarried_0_PtAIILine24_Yes_0 = State()  # If in the U_S_ is your spouse to be included in this application? (Check the appropriate box_) Yes
     A_II_NotMarried_0_PtAIILine24_No_0 = State()  # If in the U_S_ is your spouse to be included in this application? (Check the appropriate box_) No
-    A_II_ChildrenCheckbox_1 = State()  # I do not have any children_ (Skip to Part A_III_ Information about your background_)
-    A_II_ChildrenCheckbox_0 = State()  # I have children_
+
+    A_II_HaveChildrenChoice = State()
+    # A_II_ChildrenCheckbox_1 = State()  # I do not have any children_ (Skip to Part A_III_ Information about your background_)
+    # A_II_ChildrenCheckbox_0 = State()  # I have children_
     A_II_TotalChild_0 = State()  # 74  # Total number of children
 
     A_II_ChildAlien1_0 = State()  # 75  # Alien Registration Number (A-Number)\n(if any)

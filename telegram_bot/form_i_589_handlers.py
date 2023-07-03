@@ -5,7 +5,10 @@ from telegram_bot import bot, dp, \
     FillPdfFromJsonAdapter, datetime, \
     Form_I_589_Gender_Choice, \
     Form_I_589_Marital_Status_Choice, \
-    Form_I_589_Immigration_Court_Choice, Form_I_94_Number_Choice
+    Form_I_589_Immigration_Court_Choice, \
+    Form_I_94_Number_Choice, \
+    Form_I_589_English_Fluency_Choice, \
+    Form_I_589_Marriage_Choice
 
 
 @dp.callback_query_handler(text="I-589")
@@ -345,11 +348,136 @@ async def process_A_I_TextField3_0(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField3[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "List each entry into the U.S. beginning with your most recent entry. List date (mm/dd/yyyy), place, and your status for each entry. (Attach additional sheets as needed.)")
+    await bot.send_message(message.from_user.id, "List first entry into the U.S. beginning with your most recent entry. List date, place, your status, date status expires (mm/dd/yyyy, place, status, date status expires).")
 
 
+def retrieve_entry_into_us_description(text, n=2):
+    if text.count(",") == n:
+        return text.split(",")
+    elif text.count(" ") == n:
+        return text.split(" ")
+    else:
+        return ['', '', '', '']
 
 
+@dp.message_handler(state=Form_I_589.A_I_FirstUsEntry)
+async def process_A_I_FirstUsEntry(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        date, place, status, date_status_expires = retrieve_entry_into_us_description(message.text, 3)
+        data['[0].DateTimeField2[0]'] = date
+        data['[0].TextField4[0]'] = place
+        data['[0].TextField4[1]'] = status
+        data['[0].DateTimeField2[1]'] = date_status_expires
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List second entry into the U.S.. List date, place, your status.")
 
 
+@dp.message_handler(state=Form_I_589.A_I_SecondUsEntry)
+async def process_A_I_SecondUsEntry(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        date, place, status, date_status_expires = retrieve_entry_into_us_description(message.text, 2)
+        data['[0].DateTimeField3[0]'] = date
+        data['[0].TextField4[2]'] = place
+        data['[0].TextField4[3]'] = status
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List third entry into the U.S.. List date, place, and your status.")
+
+
+@dp.message_handler(state=Form_I_589.A_I_ThirdUsEntry)
+async def process_A_I_ThirdUsEntry(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        date, place, status, date_status_expires = retrieve_entry_into_us_description(message.text, 2)
+        data['[0].DateTimeField4[0]'] = date
+        data['[0].TextField4[4]'] = place
+        data['[0].TextField4[5]'] = status
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "What country issued your last passport or travel document?")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField5_0)
+async def process_A_I_TextField5_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField5[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Passport Number")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField5_1)
+async def process_A_I_TextField5_1(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField5[1]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Travel Document Number")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField5_2)
+async def process_A_I_TextField5_2(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField5[2]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Expiration Date (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_I_DateTimeField2_2)
+async def process_A_I_DateTimeField2_2(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].DateTimeField2[2]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "What is your native language (include dialect, if applicable)?")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField7_0)
+async def process_A_I_TextField7_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField7[0]'] = message.text
+    keyboard = Form_I_589_English_Fluency_Choice()
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Are you fluent in English?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_eng_fluent", state=Form_I_589.A_I_EngFluencyChoice)
+async def process_A_I_CheckBox4_1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].CheckBox4[1]'] = callback_query.data
+        data['[0].CheckBox4[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you are fluent in English.")
+    await bot.send_message(callback_query.from_user.id, "Enter What other languages do you speak fluently?")
+
+
+@dp.callback_query_handler(text="no_eng_fluent", state=Form_I_589.A_I_EngFluencyChoice)
+async def process_A_I_CheckBox4_0(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].CheckBox4[0]'] = callback_query.data
+        data['[0].CheckBox4[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you are not fluent in English.")
+    await bot.send_message(callback_query.from_user.id, "Enter What other languages do you speak fluently?")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField7_1)
+async def process_A_I_TextField7_1(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField7[1]'] = message.text
+    keyboard = Form_I_589_Marriage_Choice()
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Are you married?", reply_markup=keyboard)
+
+
+@dp.callback_query_handler(text="yes_married", state=Form_I_589.A_I_EngFluencyChoice)
+async def process_A_I_CheckBox5_0(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox5[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you are married.")
+    await bot.send_message(callback_query.from_user.id, "Enter your spouse's Alien Registration Number (A-Number)\n(if any)?")
+
+
+@dp.callback_query_handler(text="no_married", state=Form_I_589.A_I_EngFluencyChoice)
+async def process_A_I_CheckBox5_0(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox5[0]'] = ""
+    await Form_I_589.A_II_HaveChildrenChoice.set()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you are not married.")
+    await bot.send_message(callback_query.from_user.id, "Enter What other languages do you speak fluently?")
 
