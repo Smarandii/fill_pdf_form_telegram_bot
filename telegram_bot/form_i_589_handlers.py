@@ -8,7 +8,8 @@ from telegram_bot import bot, dp, \
     Form_I_589_Immigration_Court_Choice, \
     Form_I_94_Number_Choice, \
     Form_I_589_English_Fluency_Choice, \
-    Form_I_589_Marriage_Choice
+    Form_I_589_Marriage_Choice, \
+    Form_I_589_Location_Choice
 
 
 @dp.callback_query_handler(text="I-589")
@@ -464,7 +465,7 @@ async def process_A_I_TextField7_1(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "Are you married?", reply_markup=keyboard)
 
 
-@dp.callback_query_handler(text="yes_married", state=Form_I_589.A_I_EngFluencyChoice)
+@dp.callback_query_handler(text="yes_married", state=Form_I_589.A_II_CheckBox5_0)
 async def process_A_I_CheckBox5_0(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].CheckBox5[0]'] = callback_query.data
@@ -473,11 +474,270 @@ async def process_A_I_CheckBox5_0(callback_query: types.CallbackQuery, state: FS
     await bot.send_message(callback_query.from_user.id, "Enter your spouse's Alien Registration Number (A-Number)\n(if any)?")
 
 
-@dp.callback_query_handler(text="no_married", state=Form_I_589.A_I_EngFluencyChoice)
+@dp.callback_query_handler(text="no_married", state=Form_I_589.A_II_CheckBox5_0)
 async def process_A_I_CheckBox5_0(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].CheckBox5[0]'] = ""
     await Form_I_589.A_II_HaveChildrenChoice.set()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are not married.")
     await bot.send_message(callback_query.from_user.id, "Enter What other languages do you speak fluently?")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine1_ANumber_0)
+async def process_A_II_NotMarried_0_PtAIILine1_ANumber_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Passport/ID Card Number (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_1)
+async def process_A_II_NotMarried_0_TextField10_1(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[1]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of Birth (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_DateTimeField7_0)
+async def process_A_II_NotMarried_0_DateTimeField7_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].DateTimeField7[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "U.S. Social Security Number (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_2)
+async def process_A_II_NotMarried_0_TextField10_2(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[2]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Complete Last Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine5_LastName_0)
+async def process_A_II_NotMarried_0_PtAIILine5_LastName_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine5_LastName[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "First Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine6_FirstName_0)
+async def process_A_II_NotMarried_0_PtAIILine6_FirstName_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine6_FirstName[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Middle Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine7_MiddleName_0)
+async def process_A_II_NotMarried_0_PtAIILine7_MiddleName_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine7_MiddleName[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Other names used (include\nmaiden name and aliases)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_3)
+async def process_A_II_NotMarried_0_TextField10_3(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[3]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of Marriage (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_DateTimeField8_0)
+async def process_A_II_NotMarried_0_DateTimeField8_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].DateTimeField8[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Place of Marriage")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_4)
+async def process_A_II_NotMarried_0_TextField10_4(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[4]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "City and Country of Birth")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_5)
+async def process_A_II_NotMarried_0_TextField10_5(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[5]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Nationality (Citizenship)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_0)
+async def process_A_II_NotMarried_0_TextField10_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Race, Ethnic, or Tribal Group")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_0)
+async def process_A_II_NotMarried_0_TextField10_6(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[6]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Gender_Choice()
+    await bot.send_message(message.from_user.id, "Choose Gender of your spouse", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseSpouseGender)
+async def process_A_II_ChooseSpouseGender(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].CheckBox14_Gender[0]'] = ""
+        data['[1].NotMarried[0].CheckBox14_Gender[1]'] = callback_query.data
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your spouse is female.")
+    await bot.send_message(callback_query.from_user.id, "Is this person in the U.S.?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseSpouseGender)
+async def process_A_II_ChooseSpouseGender(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].CheckBox14_Gender[0]'] = callback_query.data
+        data['[1].NotMarried[0].CheckBox14_Gender[1]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your spouse is male.")
+    await bot.send_message(callback_query.from_user.id, "Is this person in the U.S.?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_ChooseSpouseGender)
+async def process_A_II_IsSpouseInUSChoice(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine15_CheckBox15[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine15_CheckBox15[1]'] = callback_query.data
+    await Form_I_589.A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0.set()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your spouse is in US.")
+    await bot.send_message(callback_query.from_user.id, "Provide place of last entry into the U.S.")
+
+
+@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_ChooseSpouseGender)
+async def process_A_II_IsSpouseInUSChoice(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine15_CheckBox15[0]'] = callback_query.data
+        data['[1].NotMarried[0].PtAIILine15_CheckBox15[1]'] = ""
+    await Form_I_589.A_II_NotMarried_0_PtAIILine15_Specify_0.set()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your spouse is not in US.")
+    await bot.send_message(callback_query.from_user.id, "Specify location of your spouse")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine15_Specify_0)
+async def process_A_II_NotMarried_0_PtAIILine15_Specify_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine15_Specify[0]'] = message.text
+    await Form_I_589.A_II_HaveChildrenChoice.set()
+    await bot.send_message(message.from_user.id, "Choose Gender of your spouse")
+
+
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0)
+async def process_A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine16_PlaceofLastEntry[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of last entry into the U.S. (mm/dd/yyyy)")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

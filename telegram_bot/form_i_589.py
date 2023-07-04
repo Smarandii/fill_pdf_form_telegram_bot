@@ -96,10 +96,12 @@ class Form_I_589(StatesGroup):
     A_II_NotMarried_0_TextField10_5 = State()  # 63 City and Country of Birth
     A_II_NotMarried_0_TextField10_0 = State()  # 64  # Nationality (Citizenship)
     A_II_NotMarried_0_TextField10_6 = State()  # 65  # Race Ethnic or Tribal Group
-    A_II_NotMarried_0_CheckBox14_Gender_0 = State()  # Gender Male
-    A_II_NotMarried_0_CheckBox14_Gender_1 = State()  # Gender Female
-    A_II_NotMarried_0_PtAIILine15_CheckBox15_1 = State()  # Is this person in the U_S_? Yes (Complete Blocks 16  # to 24_)
-    A_II_NotMarried_0_PtAIILine15_CheckBox15_0 = State()  # Is this person in the U_S_? No (Specify location) = State()
+    A_II_ChooseSpouseGender = State()
+    # A_II_NotMarried_0_CheckBox14_Gender_0 = State()  # Gender Male
+    # A_II_NotMarried_0_CheckBox14_Gender_1 = State()  # Gender Female
+    A_II_IsSpouseInUSChoice = State()
+    # A_II_NotMarried_0_PtAIILine15_CheckBox15_1 = State()  # Is this person in the U_S_? Yes (Complete Blocks 16  # to 24_)
+    # A_II_NotMarried_0_PtAIILine15_CheckBox15_0 = State()  # Is this person in the U_S_? No (Specify location) = State()
     A_II_NotMarried_0_PtAIILine15_Specify_0 = State()  # 66  # Specify location
     A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0 = State()  # 67  # Place of last entry into the\nU_S_
     A_II_NotMarried_0_PtAIILine17_DateofLastEntry_0 = State()  # 68 Date of last entry into the\nU_S_ (mm/dd/yyyy)

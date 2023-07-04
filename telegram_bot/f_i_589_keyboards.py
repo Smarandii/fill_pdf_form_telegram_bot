@@ -4,9 +4,9 @@ from telegram_bot import InlineKeyboardMarkup, InlineKeyboardButton
 class Form_I_589_Gender_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Female", callback_data=f"female")
+        button = InlineKeyboardButton("Female", callback_data="female")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Male", callback_data=f"male")
+        button = InlineKeyboardButton("Male", callback_data="male")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -61,5 +61,15 @@ class Form_I_589_Marriage_Choice:
         button = InlineKeyboardButton("Yes", callback_data="yes_married")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("No", callback_data="no_married")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Location_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_location")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_location")
         keyboard_markup.add(button)
         self.markup = keyboard_markup

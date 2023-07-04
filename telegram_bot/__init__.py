@@ -13,7 +13,8 @@ from f_i_589_keyboards import Form_I_589_Gender_Choice, \
     Form_I_589_Immigration_Court_Choice, \
     Form_I_94_Number_Choice, \
     Form_I_589_English_Fluency_Choice, \
-    Form_I_589_Marriage_Choice
+    Form_I_589_Marriage_Choice, \
+    Form_I_589_Location_Choice
 
 
 load_dotenv()
