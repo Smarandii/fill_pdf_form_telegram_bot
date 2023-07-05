@@ -37,6 +37,37 @@ class Form_I_589_Immigration_Court_Choice:
         self.markup = keyboard_markup
 
 
+class Form_I_589_Spouse_Immigration_Court_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_spouse_imc")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data=f"no_spouse_imc")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Include_Spouse_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_include_spouse")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data=f"no_include_spouse")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Have_Children_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("I do not have any children. (Skip to Part A.III., Information about your background.)",
+                                      callback_data="dont_have_children")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("I have children.", callback_data="have_children")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class Form_I_94_Number_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)

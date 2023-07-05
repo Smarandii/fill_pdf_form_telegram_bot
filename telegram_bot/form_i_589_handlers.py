@@ -9,7 +9,8 @@ from telegram_bot import bot, dp, \
     Form_I_94_Number_Choice, \
     Form_I_589_English_Fluency_Choice, \
     Form_I_589_Marriage_Choice, \
-    Form_I_589_Location_Choice
+    Form_I_589_Location_Choice, Form_I_589_Spouse_Immigration_Court_Choice, Form_I_589_Include_Spouse_Choice, \
+    Form_I_589_Have_Children_Choice
 
 
 @dp.callback_query_handler(text="I-589")
@@ -195,62 +196,77 @@ async def process_A_I_PtAILine9_ZipCode_0(message: types.Message, state: FSMCont
     async with state.proxy() as data:
         data['[0].PtAILine9_ZipCode[0]'] = message.text
     keyboard = Form_I_589_Gender_Choice()
+    await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Choose Gender", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="male", state=Form_I_589.A_I_PtAILine9_ZipCode_0)
+@dp.callback_query_handler(text="male", state=Form_I_589.A_I_ChooseGender)
 async def process_A_I_PartALine9Gender_0(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PartALine9Gender[0]'] = "Male"
         data['[0].PartALine9Gender[1]'] = ""
     keyboard = Form_I_589_Marital_Status_Choice()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are a male.")
     await bot.send_message(callback_query.from_user.id, "Choose Marital Status", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="female", state=Form_I_589.A_I_PtAILine9_ZipCode_0)
+@dp.callback_query_handler(text="female", state=Form_I_589.A_I_ChooseGender)
 async def process_A_I_PartALine9Gender_1(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PartALine9Gender[0]'] = ""
         data['[0].PartALine9Gender[1]'] = "Female"
     keyboard = Form_I_589_Marital_Status_Choice()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are a female.")
     await bot.send_message(callback_query.from_user.id, "Choose Marital Status", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="ms_single", state=Form_I_589.A_I_PtAILine9_ZipCode_0)
-async def process_A_I_Marital_0(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(text="ms_single", state=Form_I_589.A_I_ChooseMaritalStatus)
+async def process_A_I_ChooseMaritalStatus(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Marital[0]'] = callback_query.data
         data['[0].Marital[1]'] = ""
         data['[0].Marital[2]'] = ""
         data['[0].Marital[3]'] = ""
-    await Form_I_589.A_I_DateTimeField1_0.set()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are single.")
     await bot.send_message(callback_query.from_user.id, "Enter Date of Birth (mm/dd/yyyy):")
 
 
-@dp.callback_query_handler(text="ms_married", state=Form_I_589.A_I_PtAILine9_ZipCode_0)
-async def process_A_I_Marital_1(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(text="ms_married", state=Form_I_589.A_I_ChooseMaritalStatus)
+async def process_A_I_ChooseMaritalStatus(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Marital[0]'] = ""
         data['[0].Marital[1]'] = callback_query.data
         data['[0].Marital[2]'] = ""
         data['[0].Marital[3]'] = ""
-    await Form_I_589.A_I_DateTimeField1_0.set()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are married.")
     await bot.send_message(callback_query.from_user.id, "Enter Date of Birth (mm/dd/yyyy):")
 
 
-@dp.callback_query_handler(text="ms_divorced", state=Form_I_589.A_I_PtAILine9_ZipCode_0)
-async def process_A_I_Marital_2(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(text="ms_divorced", state=Form_I_589.A_I_ChooseMaritalStatus)
+async def process_A_I_ChooseMaritalStatus(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Marital[0]'] = ""
         data['[0].Marital[1]'] = ""
         data['[0].Marital[2]'] = callback_query.data
         data['[0].Marital[3]'] = ""
-    await Form_I_589.A_I_DateTimeField1_0.set()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are divorced.")
+    await bot.send_message(callback_query.from_user.id, "Enter Date of Birth (mm/dd/yyyy):")
+
+
+@dp.callback_query_handler(text="ms_widowed", state=Form_I_589.A_I_ChooseMaritalStatus)
+async def process_A_I_ChooseMaritalStatus(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].Marital[0]'] = ""
+        data['[0].Marital[1]'] = ""
+        data['[0].Marital[2]'] = ""
+        data['[0].Marital[3]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you are widowed.")
     await bot.send_message(callback_query.from_user.id, "Enter Date of Birth (mm/dd/yyyy):")
 
 
@@ -479,8 +495,10 @@ async def process_A_I_CheckBox5_0(callback_query: types.CallbackQuery, state: FS
     async with state.proxy() as data:
         data['[1].CheckBox5[0]'] = ""
     await Form_I_589.A_II_HaveChildrenChoice.set()
+    keyboard = Form_I_589_Have_Children_Choice()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are not married.")
-    await bot.send_message(callback_query.from_user.id, "Enter What other languages do you speak fluently?")
+    await bot.send_message(callback_query.from_user.id, "Do you have children? (regardless of age, location, or marital status)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine1_ANumber_0)
@@ -588,7 +606,7 @@ async def process_A_II_NotMarried_0_TextField10_6(message: types.Message, state:
     await bot.send_message(message.from_user.id, "Choose Gender of your spouse", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseSpouseGender)
+@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseGenderSpouse)
 async def process_A_II_ChooseSpouseGender(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].CheckBox14_Gender[0]'] = ""
@@ -599,7 +617,7 @@ async def process_A_II_ChooseSpouseGender(callback_query: types.CallbackQuery, s
     await bot.send_message(callback_query.from_user.id, "Is this person in the U.S.?", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseSpouseGender)
+@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseGenderSpouse)
 async def process_A_II_ChooseSpouseGender(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].CheckBox14_Gender[0]'] = callback_query.data
@@ -610,7 +628,7 @@ async def process_A_II_ChooseSpouseGender(callback_query: types.CallbackQuery, s
     await bot.send_message(callback_query.from_user.id, "Is this person in the U.S.?", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_ChooseSpouseGender)
+@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_IsInUSChoiceSpouse)
 async def process_A_II_IsSpouseInUSChoice(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine15_CheckBox15[0]'] = ""
@@ -620,7 +638,7 @@ async def process_A_II_IsSpouseInUSChoice(callback_query: types.CallbackQuery, s
     await bot.send_message(callback_query.from_user.id, "Provide place of last entry into the U.S.")
 
 
-@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_ChooseSpouseGender)
+@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_IsInUSChoiceSpouse)
 async def process_A_II_IsSpouseInUSChoice(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine15_CheckBox15[0]'] = callback_query.data
@@ -634,8 +652,10 @@ async def process_A_II_IsSpouseInUSChoice(callback_query: types.CallbackQuery, s
 async def process_A_II_NotMarried_0_PtAIILine15_Specify_0(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine15_Specify[0]'] = message.text
+    keyboard = Form_I_589_Have_Children_Choice()
     await Form_I_589.A_II_HaveChildrenChoice.set()
-    await bot.send_message(message.from_user.id, "Choose Gender of your spouse")
+    await bot.send_message(message.from_user.id, "Do you have children? (regardless of age, location, or marital status)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0)
@@ -646,22 +666,166 @@ async def process_A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0(message: type
     await bot.send_message(message.from_user.id, "Date of last entry into the U.S. (mm/dd/yyyy)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine17_DateofLastEntry_0)
+async def process_A_II_NotMarried_0_PtAIILine17_DateofLastEntry_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine17_DateofLastEntry[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "I-94 Number (send 0 if you don't have I-94 number)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine18_I94Number_0)
+async def process_A_II_NotMarried_0_PtAIILine18_I94Number_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        if message.text != "0":
+            data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = message.text
+        else:
+            data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Status when last admitted (Visa type, if any) (send 0 if you didn't have had Status when last admitted)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0)
+async def process_A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        if message.text != "0":
+            data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = message.text
+        else:
+            data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "What is your spouse's current status?")
 
 
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine20_SpouseCurrentStatus_0)
+async def process_A_II_NotMarried_0_PtAIILine20_SpouseCurrentStatus_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine20_SpouseCurrentStatus[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine21_ExpDateofAuthorizedStay_0)
+async def process_A_II_NotMarried_0_PtAIILine21_ExpDateofAuthorizedStay_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        if message.text != "0":
+            data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = message.text
+        else:
+            data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Spouse_Immigration_Court_Choice()
+    await bot.send_message(message.from_user.id, "Is your spouse in Immigration Court proceedings?", reply_markup=keyboard.markup)
 
 
+@dp.callback_query_handler(text="yes_spouse_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsSpouse)
+async def process_A_II_IsImmigrationCourtProceedingsSpouse(callback_query: types.CallbackQuery,
+                                                           state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine22_No[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine22_Yes[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your spouse is in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id, "If previously in the U.S., date of previous arrival (mm/dd/yyyy) else send 0")
 
 
+@dp.callback_query_handler(text="no_spouse_imc",
+                           state=Form_I_589.A_II_IsImmigrationCourtProceedingsSpouse)
+async def process_A_II_IsImmigrationCourtProceedingsSpouse(callback_query: types.CallbackQuery,
+                                                           state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine22_No[0]'] = callback_query.data
+        data['[1].NotMarried[0].PtAIILine22_Yes[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "You have indicated that your spouse is not in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id, "If previously in the U.S., date of previous arrival (mm/dd/yyyy) else send 0")
 
 
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine23_PreviousArrivalDate_0)
+async def process_A_II_NotMarried_0_PtAIILine23_PreviousArrivalDate_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        if message.text != "0":
+            data['[1].NotMarried[0].PtAIILine23_PreviousArrivalDate[0]'] = message.text
+        else:
+            data['[1].NotMarried[0].PtAIILine23_PreviousArrivalDate[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Include_Spouse_Choice()
+    await bot.send_message(message.from_user.id, "If in the U.S., is your spouse to be included in this application?", reply_markup=keyboard.markup)
 
 
+@dp.callback_query_handler(text="yes_include_spouse", state=Form_I_589.A_II_IsSpouseIncludedInApplication)
+async def process_A_II_IsSpouseIncludedInApplication(callback_query: types.CallbackQuery,
+                                                           state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine24_No[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine24_Yes[0]'] = callback_query.data
+    await Form_I_589.next()
+    keyboard = Form_I_589_Have_Children_Choice()
+    await bot.send_message(callback_query.from_user.id, "You have indicated your spouse to be included in this application")
+    await bot.send_message(callback_query.from_user.id, "Do you have children? (regardless of age, location, or marital status)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_include_spouse",
+                           state=Form_I_589.A_II_IsSpouseIncludedInApplication)
+async def process_A_II_IsSpouseIncludedInApplication(callback_query: types.CallbackQuery,
+                                                           state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine24_No[0]'] = callback_query.data
+        data['[1].NotMarried[0].PtAIILine24_Yes[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Have_Children_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "You have indicated that your spouse not to be included in this application")
+    await bot.send_message(callback_query.from_user.id, "Do you have children? (regardless of age, location, or marital status)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="dont_have_children", state=Form_I_589.A_II_HaveChildrenChoice)
+async def process_A_II_HaveChildrenChoice(callback_query: types.CallbackQuery,
+                                                           state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildrenCheckbox[0]'] = ""
+        data['[1].ChildrenCheckbox[1]'] = callback_query.data
+    await Form_I_589.A_III_TextField13_0.set()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you don't have children")
+    await bot.send_message(callback_query.from_user.id, "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+
+
+@dp.callback_query_handler(text="have_children",
+                           state=Form_I_589.A_II_HaveChildrenChoice)
+async def process_A_II_HaveChildrenChoice(callback_query: types.CallbackQuery,
+                                                           state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildrenCheckbox[0]'] = callback_query.data
+        data['[1].ChildrenCheckbox[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "You have indicated that you have children")
+    await bot.send_message(callback_query.from_user.id, "Total number of children:")
+
+
+@dp.message_handler(state=Form_I_589.A_II_TotalChild_0)
+async def process_A_II_TotalChild_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].TotalChild[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Alien Registration Number of your first child (A-Number) (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildAlien1_0)
+async def process_A_II_ChildAlien1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your first child (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildMarital1_0)
+async def process_A_II_ChildMarital1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your first child (if any)")
 
 
 

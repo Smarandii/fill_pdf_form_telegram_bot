@@ -28,12 +28,15 @@ class Form_I_589(StatesGroup):
     A_I_PtAILine9_State_0 = State()  # 21 State
     A_I_PtAILine9_ZipCode_0 = State()  # 22 Zip Code
 
-    A_I_PartALine9Gender_0 = State()  # Gender Male
-    A_I_PartALine9Gender_1 = State()  # Gender Female
-    A_I_Marital_0 = State()  # Marital Status Single
-    A_I_Marital_1 = State()  # Marital Status Married
-    A_I_Marital_2 = State()  # Marital Status Divorced
-    A_I_Marital_3 = State()  # Marital Status Widowed
+    A_I_ChooseGender = State()
+    # A_I_PartALine9Gender_0 = State()  # Gender Male
+    # A_I_PartALine9Gender_1 = State()  # Gender Female
+
+    A_I_ChooseMaritalStatus = State()
+    # A_I_Marital_0 = State()  # Marital Status Single
+    # A_I_Marital_1 = State()  # Marital Status Married
+    # A_I_Marital_2 = State()  # Marital Status Divorced
+    # A_I_Marital_3 = State()  # Marital Status Widowed
 
     A_I_DateTimeField1_0 = State()  # 23 Date of Birth (mm/dd/yyyy)
     A_I_TextField1_4 = State()  # 24  # City and Country of Birth
@@ -96,10 +99,10 @@ class Form_I_589(StatesGroup):
     A_II_NotMarried_0_TextField10_5 = State()  # 63 City and Country of Birth
     A_II_NotMarried_0_TextField10_0 = State()  # 64  # Nationality (Citizenship)
     A_II_NotMarried_0_TextField10_6 = State()  # 65  # Race Ethnic or Tribal Group
-    A_II_ChooseSpouseGender = State()
+    A_II_ChooseGenderSpouse = State()
     # A_II_NotMarried_0_CheckBox14_Gender_0 = State()  # Gender Male
     # A_II_NotMarried_0_CheckBox14_Gender_1 = State()  # Gender Female
-    A_II_IsSpouseInUSChoice = State()
+    A_II_IsInUSChoiceSpouse = State()
     # A_II_NotMarried_0_PtAIILine15_CheckBox15_1 = State()  # Is this person in the U_S_? Yes (Complete Blocks 16  # to 24_)
     # A_II_NotMarried_0_PtAIILine15_CheckBox15_0 = State()  # Is this person in the U_S_? No (Specify location) = State()
     A_II_NotMarried_0_PtAIILine15_Specify_0 = State()  # 66  # Specify location
@@ -109,17 +112,20 @@ class Form_I_589(StatesGroup):
     A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0 = State()  # 70 Status when last admitted\n(Visa type if any)
     A_II_NotMarried_0_PtAIILine20_SpouseCurrentStatus_0 = State()  # 71 What is your spouse s\ncurrent status?
     A_II_NotMarried_0_PtAIILine21_ExpDateofAuthorizedStay_0 = State()  # 72 What is the expiration date of his/her\nauthorized stay if any? (mm/dd/yyyy)
-    A_II_NotMarried_0_PtAIILine22_Yes_0 = State()  # Is your spouse in Immigration\nCourt proceedings? Yes
-    A_II_NotMarried_0_PtAIILine22_No_0 = State()  # Is your spouse in Immigration\nCourt proceedings? No
+    A_II_IsImmigrationCourtProceedingsSpouse = State()
+    # A_II_NotMarried_0_PtAIILine22_Yes_0 = State()  # Is your spouse in Immigration\nCourt proceedings? Yes
+    # A_II_NotMarried_0_PtAIILine22_No_0 = State()  # Is your spouse in Immigration\nCourt proceedings? No
     A_II_NotMarried_0_PtAIILine23_PreviousArrivalDate_0 = State()  # 73 If previously in the U_S_ date of\nprevious arrival (mm/dd/yyyy)
-    A_II_NotMarried_0_PtAIILine24_Yes_0 = State()  # If in the U_S_ is your spouse to be included in this application? (Check the appropriate box_) Yes
-    A_II_NotMarried_0_PtAIILine24_No_0 = State()  # If in the U_S_ is your spouse to be included in this application? (Check the appropriate box_) No
+    A_II_IsSpouseIncludedInApplication = State()
+    # A_II_NotMarried_0_PtAIILine24_Yes_0 = State()  # If in the U_S_ is your spouse to be included in this application? (Check the appropriate box_) Yes
+    # A_II_NotMarried_0_PtAIILine24_No_0 = State()  # If in the U_S_ is your spouse to be included in this application? (Check the appropriate box_) No
 
     A_II_HaveChildrenChoice = State()
     # A_II_ChildrenCheckbox_1 = State()  # I do not have any children_ (Skip to Part A_III_ Information about your background_)
     # A_II_ChildrenCheckbox_0 = State()  # I have children_
     A_II_TotalChild_0 = State()  # 74  # Total number of children
 
+    # Child 1
     A_II_ChildAlien1_0 = State()  # 75  # Alien Registration Number (A-Number)\n(if any)
     A_II_ChildPassport1_0 = State()  # 76  # Passport/ID Card Number\n(if any
     A_II_ChildMarital1_0 = State()  # 77  # Marital Status (Married Single\nDivorced Widowed)
@@ -131,10 +137,15 @@ class Form_I_589(StatesGroup):
     A_II_ChildCity1_0 = State()  # 84  # City and Country of Birth
     A_II_ChildNat1_0 = State()  # 85  # Nationality (Citizenship)
     A_II_ChildRace1_0 = State()  # 86  # Race Ethnic or Tribal Group
-    A_II_CheckBox16_0 = State()  # Gender Male
-    A_II_CheckBox16_1 = State()  # Gender Female
-    A_II_CheckBox17_0 = State()  # Yes (Complete Blocks 14  # to 21_)
-    A_II_CheckBox17_1 = State()  # No (Specify location) = State()  # {PtAIILine13_Specify_0}
+
+    A_II_ChooseGenderChild1 = State()
+    # A_II_CheckBox16_0 = State()  # Gender Male
+    # A_II_CheckBox16_1 = State()  # Gender Female
+
+    A_II_ChooseLocationChild1 = State()
+    # A_II_CheckBox17_0 = State()  # Yes (Complete Blocks 14  # to 21_)
+    # A_II_CheckBox17_1 = State()  # No (Specify location) = State()  # {PtAIILine13_Specify_0}
+
     A_II_PtAIILine13_Specify_0 = State()  # 87  # (Specify location)
     A_II_PtAIILine14_PlaceofLastEntry_0 = State()  # 88 Place of last entry into the U_S_
     A_II_PtAIILine15_ExpirationDate_0 = State()  # 89 Date of last entry into the\nU_S_ (mm/dd/yyyy)
@@ -142,11 +153,16 @@ class Form_I_589(StatesGroup):
     A_II_PtAIILine17_StatusofLastAdmission_0 = State()  # 91 Status when last admitted\n(Visa type if any
     A_II_PtAIILine18_CurrentStatusofChild_0 = State()  # 92 What is your child s current status?
     A_II_PtAIILine19_ExpDateofAuthorizedStay_0 = State()  # 93 What is the expiration date of his/her\nauthorized stay if any? (mm/dd/yyyy)
-    A_II_PtAIILine20_Yes_0 = State()  # Is your child in Immigration Court proceedings? Yes
-    A_II_PtAIILine20_No_0 = State()  # Is your child in Immigration Court proceedings? No
-    A_II_PtAIILine21_Yes_0 = State()  # If in the U_S_ is this child to be included in this application? Yes
-    A_II_PtAIILine21_No_0 = State()  # If in the U_S_ is this child to be included in this application? No
 
+    A_II_IsImmigrationCourtProceedingsChild1 = State()
+    # A_II_PtAIILine20_Yes_0 = State()  # Is your child in Immigration Court proceedings? Yes
+    # A_II_PtAIILine20_No_0 = State()  # Is your child in Immigration Court proceedings? No
+
+    A_II_IsIncludedInApplicationChild1 = State()
+    # A_II_PtAIILine21_Yes_0 = State()  # If in the U_S_ is this child to be included in this application? Yes
+    # A_II_PtAIILine21_No_0 = State()  # If in the U_S_ is this child to be included in this application? No
+
+    # Child 2
     A_II_ChildAlien2_0 = State()  # 94  # Alien Registration Number (A-Number)\n(if any)
     A_II_ChildPassport2_0 = State()  # 95  # Passport/ID Card Number\n(if any)
     A_II_ChildMarital2_0 = State()  # 96  # Marital Status (Married Single\nDivorced Widowed)
@@ -158,12 +174,15 @@ class Form_I_589(StatesGroup):
     A_II_ChildCity2_0 = State()  # 102 City and Country of Birth
     A_II_ChildNat2_0 = State()  # 103 Nationality (Citizenship)
     A_II_ChildRace2_0 = State()  # 104  # Race Ethnic or Tribal Group
-    A_II_CheckBox26_Gender_0 = State()  # Gender Male
-    A_II_CheckBox26_Gender_1 = State()  # Gender Female
-    A_II_PtAIILine21_Yes2_0 = State()  # If in the U_S_ is this child to be included in this application? Yes
-    A_II_PtAIILine21_No2_0 = State()  # If in the U_S_ is this child to be included in this application? No
-    A_II_CheckBox27_0 = State()  # Is this child in the U_S_ ? Yes (Complete Blocks 14  # to 21_)
-    A_II_CheckBox27_1 = State()  # Is this child in the U_S_ ? No (Specify location) = State()  # {_3_PtAIILine13_Specify2_0}
+
+    A_II_ChooseGenderChild2 = State()
+    # A_II_CheckBox26_Gender_0 = State()  # Gender Male
+    # A_II_CheckBox26_Gender_1 = State()  # Gender Female
+
+    A_II_ChooseLocationChild2 = State()
+    # A_II_CheckBox27_0 = State()  # Is this child in the U_S_ ? Yes (Complete Blocks 14  # to 21_)
+    # A_II_CheckBox27_1 = State()  # Is this child in the U_S_ ? No (Specify location) = State()  # {_3_PtAIILine13_Specify2_0}
+
     A_II_PtAIILine13_Specify2_0 = State()  # 105  # Specify location
     A_II_PtAIILine14_PlaceofLastEntry2_0 = State()  # 106  # Place of last entry into the U_S_
     A_II_PtAIILine15_DateofLastEntry2_0 = State()  # 107  # Date of last entry into the\nU_S_ (mm/dd/yyyy)
@@ -171,9 +190,16 @@ class Form_I_589(StatesGroup):
     A_II_PtAIILine17_StatusofLastAdmission2_0 = State()  # 109 Status when last admitted\n(Visa type if any)
     A_II_PtAIILine18_ChildCurrentStatus2_0 = State()  # 110 What is your child s current status?
     A_II_PtAIILine19_ExpDateofAuthorizedStay2_0 = State()  # 111 What is the expiration date of his/her\nauthorized stay if any? (mm/dd/yyyy)
-    A_II_PtAIILine20_Yes2_0 = State()  # Is your child in Immigration Court proceedings? Yes
-    A_II_PtAIILine20_No2_0 = State()  # Is your child in Immigration Court proceedings? No
 
+    A_II_IsImmigrationCourtProceedingsChild2 = State()
+    # A_II_PtAIILine20_Yes2_0 = State()  # Is your child in Immigration Court proceedings? Yes
+    # A_II_PtAIILine20_No2_0 = State()  # Is your child in Immigration Court proceedings? No
+
+    A_II_IsIncludedInApplicationChild2 = State()
+    # A_II_PtAIILine21_Yes2_0 = State()  # If in the U_S_ is this child to be included in this application? Yes
+    # A_II_PtAIILine21_No2_0 = State()  # If in the U_S_ is this child to be included in this application? No
+
+    # Child 3
     A_II_ChildAlien3_0 = State()  # 112 Alien Registration Number (A-Number)\n(if any)
     A_II_ChildPassport3_0 = State()  # 113 Passport/ID Card Number\n(if any)
     A_II_ChildMarital3_0 = State()  # 114  # Marital Status (Married Single\nDivorced Widowed)
@@ -185,10 +211,15 @@ class Form_I_589(StatesGroup):
     A_II_ChildCity3_0 = State()  # 120 City and Country of Birth
     A_II_ChildNat3_0 = State()  # 121 Nationality (Citizenship)
     A_II_ChildRace3_0 = State()  # 122 Race Ethnic or Tribal Group
-    A_II_CheckBox36_Gender_0 = State()  # Gender Male
-    A_II_CheckBox36_Gender_1 = State()  # Gender Female
-    A_II_CheckBox37_0 = State()  # Is this child in the U_S_ ? Yes (Complete Blocks 14  # to 21_)
-    A_II_CheckBox37_1 = State()  # Is this child in the U_S_ ? No (Specify location) = State()  # {_3_PtAIILine13_Specify3_0}
+
+    A_II_ChooseGenderChild3 = State()
+    # A_II_CheckBox36_Gender_0 = State()  # Gender Male
+    # A_II_CheckBox36_Gender_1 = State()  # Gender Female
+
+    A_II_ChooseLocationChild3 = State()
+    # A_II_CheckBox37_0 = State()  # Is this child in the U_S_ ? Yes (Complete Blocks 14  # to 21_)
+    # A_II_CheckBox37_1 = State()  # Is this child in the U_S_ ? No (Specify location) = State()  # {_3_PtAIILine13_Specify3_0}
+
     A_II_PtAIILine13_Specify3_0 = State()  # 123 Specify location
     A_II_PtAIILine14_PlaceofLastEntry3_0 = State()  # 124  # Place of last entry into the U_S_
     A_II_PtAIILine15_DateofLastEntry3_0 = State()  # 125  # Date of last entry into the\nU_S_ (mm/dd/yyyy)
@@ -196,11 +227,15 @@ class Form_I_589(StatesGroup):
     A_II_PtAIILine17_StatusofLastAdmission3_0 = State()  # 127  # Status when last admitted\n(Visa type if any)
     A_II_PtAIILine18_ChildCurrentStatus3_0 = State()  # 128 What is your child s current status?
     A_II_PtAIILine19_ExpDateofAuthorizedStay3_0 = State()  # 129 What is the expiration date of his/her\nauthorized stay if any? (mm/dd/yyyy)
-    A_II_PtAIILine20_Yes3_0 = State()  # Is your child in Immigration Court proceedings? yes
-    A_II_PtAIILine20_No3_0 = State()  # Is your child in Immigration Court proceedings? no
+
+    A_II_IsImmigrationCourtProceedingsChild3 = State()
+    # A_II_PtAIILine20_Yes3_0 = State()  # Is your child in Immigration Court proceedings? yes
+    # A_II_PtAIILine20_No3_0 = State()  # Is your child in Immigration Court proceedings? no
+
     A_II_PtAIILine21_Yes3_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) Yes
     A_II_PtAIILine21_No3_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
 
+    # Child 4
     A_II_ChildAlien4_0 = State()  # 130 Alien Registration Number (A-Number)\n(if any)
     A_II_ChildPassport4_0 = State()  # 131 Passport/ID Card Number\n(if any
     A_II_ChildMarital4_0 = State()  # 132 Marital Status (Married Single\nDivorced Widowed)
@@ -212,23 +247,29 @@ class Form_I_589(StatesGroup):
     A_II_ChildCity4_0 = State()  # 138 City and Country of Birth
     A_II_ChildNat4_0 = State()  # 139 Nationality (Citizenship)
     A_II_ChildRace4_0 = State()  # 140 Race Ethnic or Tribal Group
+
+    A_II_ChooseGenderChild4 = State()
+    # A_II_CheckBox46_Gender_0 = State()  # Gender Male
+    # A_II_CheckBox46_Gender_1 = State()  # Gender Female
+
     A_II_CheckBox47_0 = State()  # Is this child in the U_S_ ? Yes (Complete Blocks 14  # to 21_)
     A_II_CheckBox47_1 = State()  # Is this child in the U_S_ ? No (Specify location) = State()  # {_3_PtAIILine13_Specify4_0}
-    A_II_CheckBox46_Gender_0 = State()  # Gender Male
-    A_II_CheckBox46_Gender_1 = State()  # Gender Female
-    A_II_PtAIILine13_Specify4_0 = State()  # 141 Specify location
 
+    A_II_PtAIILine13_Specify4_0 = State()  # 141 Specify location
     A_II_PtAIILine14_PlaceofLastEntry4_0 = State()  # 142 Place of last entry into the U_S_
     A_II_PtAIILine15_DateofLastEntry4_0 = State()  # 143 Date of last entry into the\nU_S_ (mm/dd/yyyy)
     A_II_PtAIILine16_I94Number4_0 = State()  # 144  # I-94  # Number (If any)
     A_II_PtAIILine17_StatusofLastAdmission4_0 = State()  # 145  # Status when last admitted\n(Visa type if any)
     A_II_PtAIILine18_ChildCurrentStatus4_0 = State()  # 146  # What is your child s current status?
     A_II_PtAIILine19_ExpDateofAuthorizedStay4_0 = State()  # 147  # What is the expiration date of his/her\nauthorized stay if any? (mm/dd/yyyy)
+
     A_II_PtAIILine20_Yes4_0 = State()  # Is your child in Immigration Court proceedings? Yes
     A_II_PtAIILine20_No4_0 = State()  # Is your child in Immigration Court proceedings? No
+
     A_II_PtAIILine21_Yes4_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) Yes
     A_II_PtAIILine21_No4_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
 
+    # A III
     A_III_TextField13_0 = State()  # 148 Number and Street\n(Provide if available)
     A_III_TextField13_2 = State()  # 149 City/Town
     A_III_TextField13_4 = State()  # 150 Department Province or State
