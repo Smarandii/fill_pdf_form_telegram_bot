@@ -17,7 +17,9 @@ from f_i_589_keyboards import Form_I_589_Gender_Choice, \
     Form_I_589_Location_Choice, \
     Form_I_589_Spouse_Immigration_Court_Choice, \
     Form_I_589_Include_Spouse_Choice,\
-    Form_I_589_Have_Children_Choice
+    Form_I_589_Have_Children_Choice, \
+    Form_I_589_Child_Immigration_Court_Choice, \
+    Form_I_589_Fill_Next_Child_Choice
 
 
 load_dotenv()

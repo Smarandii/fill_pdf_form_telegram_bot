@@ -10,7 +10,7 @@ from telegram_bot import bot, dp, \
     Form_I_589_English_Fluency_Choice, \
     Form_I_589_Marriage_Choice, \
     Form_I_589_Location_Choice, Form_I_589_Spouse_Immigration_Court_Choice, Form_I_589_Include_Spouse_Choice, \
-    Form_I_589_Have_Children_Choice
+    Form_I_589_Have_Children_Choice, Form_I_589_Fill_Next_Child_Choice
 
 
 @dp.callback_query_handler(text="I-589")
@@ -76,6 +76,7 @@ async def process_A_I_TextField1_1(message: types.Message, state: FSMContext):
         data['[0].TextField1[1]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Enter your Street Number and Name:")
+
 
 # 8. Residence in the U.S. (where you physically reside)
 @dp.message_handler(state=Form_I_589.A_I_PtAILine8_StreetNumandName_0)
@@ -315,38 +316,39 @@ async def process_A_I_TextField1_7(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[7]'] = message.text
     keyboard = Form_I_589_Immigration_Court_Choice()
+    await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Check the button, that applies", reply_markup=keyboard.markup)
 
 
-@dp.callback_query_handler(text="never_been_imc", state=Form_I_589.A_I_TextField1_7)
-async def process_A_I_CheckBox3_0(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(text="never_been_imc", state=Form_I_589.A_I_ChooseImmigrationCourtProceedingsStatus)
+async def process_A_I_ChooseImmigrationCourtProceedingsStatus(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].CheckBox3[0]'] = callback_query.data
         data['[0].CheckBox3[1]'] = ""
         data['[0].CheckBox3[2]'] = ""
-    await Form_I_589.A_I_DateTimeField6_0.set()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are never been in Immigration Court proceedings.")
     await bot.send_message(callback_query.from_user.id, "Enter When did you last leave your country? (mm/dd/yyyy):")
 
 
-@dp.callback_query_handler(text="now_in_imc", state=Form_I_589.A_I_TextField1_7)
-async def process_A_I_CheckBox3_1(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(text="now_in_imc", state=Form_I_589.A_I_ChooseImmigrationCourtProceedingsStatus)
+async def process_A_I_ChooseImmigrationCourtProceedingsStatus(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].CheckBox3[0]'] = ""
         data['[0].CheckBox3[1]'] = callback_query.data
         data['[0].CheckBox3[2]'] = ""
-    await Form_I_589.A_I_DateTimeField6_0.set()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are now in Immigration Court proceedings.")
     await bot.send_message(callback_query.from_user.id, "Enter When did you last leave your country? (mm/dd/yyyy):")
 
 
-@dp.callback_query_handler(text="not_now_but_been_in_imc", state=Form_I_589.A_I_TextField1_7)
-async def process_A_I_CheckBox3_2(callback_query: types.CallbackQuery, state: FSMContext):
+@dp.callback_query_handler(text="not_now_but_been_in_imc", state=Form_I_589.A_I_ChooseImmigrationCourtProceedingsStatus)
+async def process_A_I_ChooseImmigrationCourtProceedingsStatus(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].CheckBox3[0]'] = ""
         data['[0].CheckBox3[1]'] = ""
         data['[0].CheckBox3[2]'] = callback_query.data
-    await Form_I_589.A_I_DateTimeField6_0.set()
+    await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you are not now in Immigration Court proceedings, but I have been in the past.")
     await bot.send_message(callback_query.from_user.id, "Enter When did you last leave your country? (mm/dd/yyyy):")
 
@@ -754,7 +756,7 @@ async def process_A_II_NotMarried_0_PtAIILine23_PreviousArrivalDate_0(message: t
 
 @dp.callback_query_handler(text="yes_include_spouse", state=Form_I_589.A_II_IsSpouseIncludedInApplication)
 async def process_A_II_IsSpouseIncludedInApplication(callback_query: types.CallbackQuery,
-                                                           state: FSMContext):
+                                                     state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine24_No[0]'] = ""
         data['[1].NotMarried[0].PtAIILine24_Yes[0]'] = callback_query.data
@@ -768,7 +770,7 @@ async def process_A_II_IsSpouseIncludedInApplication(callback_query: types.Callb
 @dp.callback_query_handler(text="no_include_spouse",
                            state=Form_I_589.A_II_IsSpouseIncludedInApplication)
 async def process_A_II_IsSpouseIncludedInApplication(callback_query: types.CallbackQuery,
-                                                           state: FSMContext):
+                                                     state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine24_No[0]'] = callback_query.data
         data['[1].NotMarried[0].PtAIILine24_Yes[0]'] = ""
@@ -782,7 +784,7 @@ async def process_A_II_IsSpouseIncludedInApplication(callback_query: types.Callb
 
 @dp.callback_query_handler(text="dont_have_children", state=Form_I_589.A_II_HaveChildrenChoice)
 async def process_A_II_HaveChildrenChoice(callback_query: types.CallbackQuery,
-                                                           state: FSMContext):
+                                          state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildrenCheckbox[0]'] = ""
         data['[1].ChildrenCheckbox[1]'] = callback_query.data
@@ -794,7 +796,7 @@ async def process_A_II_HaveChildrenChoice(callback_query: types.CallbackQuery,
 @dp.callback_query_handler(text="have_children",
                            state=Form_I_589.A_II_HaveChildrenChoice)
 async def process_A_II_HaveChildrenChoice(callback_query: types.CallbackQuery,
-                                                           state: FSMContext):
+                                          state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildrenCheckbox[0]'] = callback_query.data
         data['[1].ChildrenCheckbox[1]'] = ""
@@ -812,6 +814,7 @@ async def process_A_II_TotalChild_0(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "Alien Registration Number of your first child (A-Number) (if any)")
 
 
+# Child 1
 @dp.message_handler(state=Form_I_589.A_II_ChildAlien1_0)
 async def process_A_II_ChildAlien1_0(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
@@ -820,22 +823,841 @@ async def process_A_II_ChildAlien1_0(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "Passport/ID Card Number of your first child (if any)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildPassport1_0)
+async def process_A_II_ChildPassport1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Marital Status (Married Single Divorced Widowed)")
+
+
 @dp.message_handler(state=Form_I_589.A_II_ChildMarital1_0)
 async def process_A_II_ChildMarital1_0(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your first child (if any)")
+    await bot.send_message(message.from_user.id, "U.S. Social Security Number (if any)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildSSN1_0)
+async def process_A_II_ChildSSN1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter complete Last Name")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildLast1_0)
+async def process_A_II_ChildLast1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildLast1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter First Name")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildFirst1_0)
+async def process_A_II_ChildFirst1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildFirst1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter Middle Name")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildMiddle1_0)
+async def process_A_II_ChildMiddle1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMiddle1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of Birth (mm/dd/yyyy)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildDOB1_0)
+async def process_A_II_ChildDOB1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildDOB1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "City and Country of Birth")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildCity1_0)
+async def process_A_II_ChildCity1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildCity1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Nationality (Citizenship)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildNat1_0)
+async def process_A_II_ChildNat1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildNat1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Race, Ethnic, or Tribal Group")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildRace1_0)
+async def process_A_II_ChildRace1_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildRace1[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Gender_Choice()
+    await bot.send_message(message.from_user.id, "Choose gender of first child", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseGenderChild1)
+async def process_A_II_ChooseGenderChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox16[1]'] = callback_query.data
+        data['[1].CheckBox16[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is female")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseGenderChild1)
+async def process_A_II_ChooseGenderChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox16[0]'] = callback_query.data
+        data['[1].CheckBox16[1]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is male")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_ChooseLocationChild1)
+async def process_A_II_ChooseLocationChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox17[0]'] = callback_query.data
+        data['[1].CheckBox17[1]'] = ""
+    await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry_0.set()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is in U.S")
+    await bot.send_message(callback_query.from_user.id, "Enter Place of last entry into the U.S.")
+
+
+@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_ChooseLocationChild1)
+async def process_A_II_ChooseLocationChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox17[1]'] = callback_query.data
+        data['[1].CheckBox17[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is not in U.S")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine13_Specify_0)
+async def process_A_II_PtAIILine13_Specify_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine13_Specify[0]'] = message.text
+        total_number_of_children = data["[1].TotalChild[0]"]
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild2.set()
+        await bot.send_message(message.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(message.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine14_PlaceofLastEntry_0)
+async def process_A_II_PtAIILine14_PlaceofLastEntry_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine14_PlaceofLastEntry[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Date of last entry into the U.S. for your first child (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine15_ExpirationDate_0)
+async def process_A_II_PtAIILine15_ExpirationDate_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine15_ExpirationDate[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter I-94 Number (If any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number_0)
+async def process_A_II_PtAIILine16_I94Number_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Status when last admitted (Visa type, if any")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission_0)
+async def process_A_II_PtAIILine17_StatusofLastAdmission_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine17_StatusofLastAdmission[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is your child's current status?")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine18_CurrentStatusofChild_0)
+async def process_A_II_PtAIILine18_CurrentStatusofChild_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine18_CurrentStatusofChild[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay_0)
+async def process_A_II_PtAIILine19_ExpDateofAuthorizedStay_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Immigration_Court_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Is your child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild1)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes[0]'] = callback_query.data
+        data['[1].PtAIILine20_No[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="no_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild1)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes[0]'] = ""
+        data['[1].PtAIILine20_No[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is not in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="yes_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild1)
+async def process_A_II_IsIncludedInApplicationChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes[0]'] = callback_query.data
+        data['[1].PtAIILine21_No[0]'] = ""
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild2.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="no_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild1)
+async def process_A_II_IsIncludedInApplicationChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes[0]'] = ""
+        data['[1].PtAIILine21_No[0]'] = callback_query.data
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild2.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="yes_fill_next_child", state=Form_I_589.A_II_IsFillChild2)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Alien Registration Number (A-Number) (if any) for second child")
+
+
+@dp.callback_query_handler(text="no_fill_next_child", state=Form_I_589.A_II_IsFillChild2)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_0.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+
+
+# Child 2
+@dp.message_handler(state=Form_I_589.A_II_ChildAlien2_0)
+async def process_A_II_ChildAlien2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your second child (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildPassport2_0)
+async def process_A_II_ChildPassport2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Marital Status (Married Single Divorced Widowed)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildMarital2_0)
+async def process_A_II_ChildMarital2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "U.S. Social Security Number (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildSSN2_0)
+async def process_A_II_ChildSSN2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter complete Last Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildLast2_0)
+async def process_A_II_ChildLast2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildLast2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter First Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildFirst2_0)
+async def process_A_II_ChildFirst2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildFirst2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter Middle Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildMiddle2_0)
+async def process_A_II_ChildMiddle2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMiddle2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of Birth (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildDOB2_0)
+async def process_A_II_ChildDOB2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildDOB2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "City and Country of Birth")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildCity2_0)
+async def process_A_II_ChildCity2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildCity2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Nationality (Citizenship)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildNat2_0)
+async def process_A_II_ChildNat2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildNat2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Race, Ethnic, or Tribal Group")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildRace2_0)
+async def process_A_II_ChildRace2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildRace2[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Gender_Choice()
+    await bot.send_message(message.from_user.id, "Choose gender of second child", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseGenderChild2)
+async def process_A_II_ChooseGenderChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].CheckBox26_Gender[0]'] = callback_query.data
+        data['[3].CheckBox26_Gender[1]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your second child is female")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseGenderChild2)
+async def process_A_II_ChooseGenderChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].CheckBox26_Gender[1]'] = callback_query.data
+        data['[3].CheckBox26_Gender[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your second child is male")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_ChooseLocationChild2)
+async def process_A_II_ChooseLocationChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox27[0]'] = callback_query.data
+        data['[1].CheckBox27[1]'] = ""
+    await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry_0.set()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your second child is in U.S")
+    await bot.send_message(callback_query.from_user.id, "Enter Place of last entry into the U.S.")
+
+
+@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_ChooseLocationChild2)
+async def process_A_II_ChooseLocationChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox27[1]'] = callback_query.data
+        data['[1].CheckBox27[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your second child is not in U.S")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine13_Specify2_0)
+async def process_A_II_PtAIILine13_Specify2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine13_Specify2[0]'] = message.text
+        total_number_of_children = data["[1].TotalChild[0]"]
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild3.set()
+        await bot.send_message(message.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(message.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine14_PlaceofLastEntry2_0)
+async def process_A_II_PtAIILine14_PlaceofLastEntry2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine14_PlaceofLastEntry2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Date of last entry into the U.S. for your first child (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine15_DateofLastEntry2_0)
+async def process_A_II_PtAIILine15_DateofLastEntry2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine15_DateofLastEntry2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter I-94 Number (If any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number2_0)
+async def process_A_II_PtAIILine16_I94Number2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Status when last admitted (Visa type, if any")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission2_0)
+async def process_A_II_PtAIILine17_StatusofLastAdmission2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine17_StatusofLastAdmission2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is your child's current status?")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine18_ChildCurrentStatus2_0)
+async def process_A_II_PtAIILine18_CurrentStatusofChild_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine18_ChildCurrentStatus2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay2_0)
+async def process_A_II_PtAIILine19_ExpDateofAuthorizedStay2_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Immigration_Court_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Is your child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild2)
+async def process_A_II_IsImmigrationCourtProceedingsChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes2[0]'] = callback_query.data
+        data['[1].PtAIILine20_No2[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="no_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild2)
+async def process_A_II_IsImmigrationCourtProceedingsChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes2[0]'] = ""
+        data['[1].PtAIILine20_No2[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is not in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="yes_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild2)
+async def process_A_II_IsIncludedInApplicationChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes2[0]'] = callback_query.data
+        data['[1].PtAIILine21_No2[0]'] = ""
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild3.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="no_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild2)
+async def process_A_II_IsIncludedInApplicationChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes2[0]'] = ""
+        data['[1].PtAIILine21_No2[0]'] = callback_query.data
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your first child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild3.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="yes_fill_next_child", state=Form_I_589.A_II_IsFillChild3)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Alien Registration Number (A-Number) (if any) for second child")
+
+
+@dp.callback_query_handler(text="no_fill_next_child", state=Form_I_589.A_II_IsFillChild3)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_0.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+
+
+# Child 3
+@dp.message_handler(state=Form_I_589.A_II_ChildAlien3_0)
+async def process_A_II_ChildAlien3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your third child (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildPassport3_0)
+async def process_A_II_ChildPassport3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Marital Status (Married Single Divorced Widowed)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildMarital3_0)
+async def process_A_II_ChildMarital3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "U.S. Social Security Number (if any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildSSN3_0)
+async def process_A_II_ChildSSN3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter complete Last Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildLast3_0)
+async def process_A_II_ChildLast3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildLast3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter First Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildFirst3_0)
+async def process_A_II_ChildFirst3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildFirst3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter Middle Name")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildMiddle3_0)
+async def process_A_II_ChildMiddle3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMiddle3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of Birth (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildDOB3_0)
+async def process_A_II_ChildDOB3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildDOB3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "City and Country of Birth")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildCity3_0)
+async def process_A_II_ChildCity3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildCity3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Nationality (Citizenship)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildNat3_0)
+async def process_A_II_ChildNat3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildNat3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Race, Ethnic, or Tribal Group")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildRace3_0)
+async def process_A_II_ChildRace3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildRace3[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Gender_Choice()
+    await bot.send_message(message.from_user.id, "Choose gender of third child", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseGenderChild3)
+async def process_A_II_ChooseGenderChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].CheckBox36_Gender[0]'] = callback_query.data
+        data['[3].CheckBox36_Gender[1]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is female")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseGenderChild3)
+async def process_A_II_ChooseGenderChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].CheckBox36_Gender[1]'] = callback_query.data
+        data['[3].CheckBox36_Gender[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is male")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_ChooseLocationChild3)
+async def process_A_II_ChooseLocationChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox37[0]'] = callback_query.data
+        data['[1].CheckBox37[1]'] = ""
+    await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry_0.set()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is in U.S")
+    await bot.send_message(callback_query.from_user.id, "Enter Place of last entry into the U.S.")
+
+
+@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_ChooseLocationChild3)
+async def process_A_II_ChooseLocationChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox37[1]'] = callback_query.data
+        data['[1].CheckBox37[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is not in U.S")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine13_Specify3_0)
+async def process_A_II_PtAIILine13_Specify3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine13_Specify3[0]'] = message.text
+        total_number_of_children = data["[1].TotalChild[0]"]
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild4.set()
+        await bot.send_message(message.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(message.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine14_PlaceofLastEntry3_0)
+async def process_A_II_PtAIILine14_PlaceofLastEntry3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine14_PlaceofLastEntry3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Date of last entry into the U.S. for your third child (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine15_DateofLastEntry3_0)
+async def process_A_II_PtAIILine15_DateofLastEntry3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine15_DateofLastEntry3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter I-94 Number (If any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number3_0)
+async def process_A_II_PtAIILine16_I94Number3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Status when last admitted (Visa type, if any")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission3_0)
+async def process_A_II_PtAIILine17_StatusofLastAdmission3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine17_StatusofLastAdmission3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is your child's current status?")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine18_ChildCurrentStatus3_0)
+async def process_A_II_PtAIILine18_CurrentStatusofChild3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine18_ChildCurrentStatus3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay3_0)
+async def process_A_II_PtAIILine19_ExpDateofAuthorizedStay3_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay3[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Immigration_Court_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Is your child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild3)
+async def process_A_II_IsImmigrationCourtProceedingsChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes3[0]'] = callback_query.data
+        data['[1].PtAIILine20_No3[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="no_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild3)
+async def process_A_II_IsImmigrationCourtProceedingsChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes3[0]'] = ""
+        data['[1].PtAIILine20_No3[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is not in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="yes_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild3)
+async def process_A_II_IsIncludedInApplicationChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes3[0]'] = callback_query.data
+        data['[1].PtAIILine21_No3[0]'] = ""
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild4.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="no_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild3)
+async def process_A_II_IsIncludedInApplicationChild3(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes3[0]'] = ""
+        data['[1].PtAIILine21_No3[0]'] = callback_query.data
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild4.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="yes_fill_next_child", state=Form_I_589.A_II_IsFillChild4)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Alien Registration Number (A-Number) (if any) for fourth child")
+
+
+@dp.callback_query_handler(text="no_fill_next_child", state=Form_I_589.A_II_IsFillChild4)
+async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_0.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
 
 
 

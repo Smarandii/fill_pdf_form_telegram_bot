@@ -32,7 +32,7 @@ class Form_I_589_Immigration_Court_Choice:
         keyboard_markup.add(button)
         button = InlineKeyboardButton("I am now in Immigration Court proceedings.", callback_data=f"now_in_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("I am not now in Immigration Court proceedings, but I have been in the past.", callback_data=f"not_now_but_been_in_imc")
+        button = InlineKeyboardButton("I am not now in Immigration Court proceedings, but I have been in the past.", callback_data="not_now_but_been_in_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -42,7 +42,17 @@ class Form_I_589_Spouse_Immigration_Court_Choice:
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
         button = InlineKeyboardButton("Yes", callback_data="yes_spouse_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data=f"no_spouse_imc")
+        button = InlineKeyboardButton("No", callback_data="no_spouse_imc")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Child_Immigration_Court_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_child_imc")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_child_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -52,7 +62,27 @@ class Form_I_589_Include_Spouse_Choice:
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
         button = InlineKeyboardButton("Yes", callback_data="yes_include_spouse")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data=f"no_include_spouse")
+        button = InlineKeyboardButton("No", callback_data="no_include_spouse")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Include_Child_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_include_child")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_include_child")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Fill_Next_Child_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_fill_next_child")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_fill_next_child")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
