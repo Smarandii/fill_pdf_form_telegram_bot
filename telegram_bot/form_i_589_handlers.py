@@ -790,7 +790,7 @@ async def process_A_II_HaveChildrenChoice(callback_query: types.CallbackQuery,
         data['[1].ChildrenCheckbox[1]'] = callback_query.data
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id, "You have indicated that you don't have children")
-    await bot.send_message(callback_query.from_user.id, "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+    await bot.send_message(callback_query.from_user.id, "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
 
 
 @dp.callback_query_handler(text="have_children",
@@ -959,7 +959,7 @@ async def process_A_II_PtAIILine13_Specify_0(message: types.Message, state: FSMC
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(message.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1057,7 +1057,7 @@ async def process_A_II_IsIncludedInApplicationChild1(callback_query: types.Callb
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(callback_query.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1078,7 +1078,7 @@ async def process_A_II_IsIncludedInApplicationChild1(callback_query: types.Callb
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(callback_query.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1093,7 +1093,7 @@ async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types
 async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
-                           "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
 
 
 # Child 2
@@ -1233,7 +1233,7 @@ async def process_A_II_PtAIILine13_Specify2_0(message: types.Message, state: FSM
         data['[1].PtAIILine13_Specify2[0]'] = message.text
         total_number_of_children = data["[1].TotalChild[0]"]
 
-    if total_number_of_children > 1:
+    if total_number_of_children > 2:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(message.from_user.id,
@@ -1241,7 +1241,7 @@ async def process_A_II_PtAIILine13_Specify2_0(message: types.Message, state: FSM
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(message.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1331,7 +1331,7 @@ async def process_A_II_IsIncludedInApplicationChild2(callback_query: types.Callb
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your first child is to be included in this application")
 
-    if total_number_of_children > 1:
+    if total_number_of_children > 2:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(callback_query.from_user.id,
@@ -1339,7 +1339,7 @@ async def process_A_II_IsIncludedInApplicationChild2(callback_query: types.Callb
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(callback_query.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1352,7 +1352,7 @@ async def process_A_II_IsIncludedInApplicationChild2(callback_query: types.Callb
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your first child is to be included in this application")
 
-    if total_number_of_children > 1:
+    if total_number_of_children > 2:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(callback_query.from_user.id,
@@ -1360,7 +1360,7 @@ async def process_A_II_IsIncludedInApplicationChild2(callback_query: types.Callb
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(callback_query.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1375,7 +1375,7 @@ async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types
 async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
-                           "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
 
 
 # Child 3
@@ -1515,7 +1515,7 @@ async def process_A_II_PtAIILine13_Specify3_0(message: types.Message, state: FSM
         data['[1].PtAIILine13_Specify3[0]'] = message.text
         total_number_of_children = data["[1].TotalChild[0]"]
 
-    if total_number_of_children > 1:
+    if total_number_of_children > 3:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(message.from_user.id,
@@ -1523,7 +1523,7 @@ async def process_A_II_PtAIILine13_Specify3_0(message: types.Message, state: FSM
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(message.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1613,7 +1613,7 @@ async def process_A_II_IsIncludedInApplicationChild3(callback_query: types.Callb
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your third child is to be included in this application")
 
-    if total_number_of_children > 1:
+    if total_number_of_children > 3:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(callback_query.from_user.id,
@@ -1621,7 +1621,7 @@ async def process_A_II_IsIncludedInApplicationChild3(callback_query: types.Callb
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(callback_query.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1634,7 +1634,7 @@ async def process_A_II_IsIncludedInApplicationChild3(callback_query: types.Callb
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your third child is to be included in this application")
 
-    if total_number_of_children > 1:
+    if total_number_of_children > 3:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(callback_query.from_user.id,
@@ -1642,7 +1642,7 @@ async def process_A_II_IsIncludedInApplicationChild3(callback_query: types.Callb
                                reply_markup=keyboard.markup)
     else:
         await bot.send_message(callback_query.from_user.id,
-                               "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1657,27 +1657,422 @@ async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types
 async def process_A_II_IsImmigrationCourtProceedingsChild1(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
-                           "List your last address where you lived before coming to the United States. If this is not the country where you fear persecution, also list the last address in the country where you fear persecution. (List Address, City/Town, Department, Province, or State and Country.)")
+                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
 
-# copy from Child 3 to 1661 row and then change to be a Child 4
+
 # Child 4
+@dp.message_handler(state=Form_I_589.A_II_ChildAlien4_0)
+async def process_A_II_ChildAlien4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your third child (if any)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildPassport4_0)
+async def process_A_II_ChildPassport4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Marital Status (Married Single Divorced Widowed)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildMarital4_0)
+async def process_A_II_ChildMarital4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "U.S. Social Security Number (if any)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildSSN4_0)
+async def process_A_II_ChildSSN4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter complete Last Name")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildLast4_0)
+async def process_A_II_ChildLast4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildLast4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter First Name")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildFirst4_0)
+async def process_A_II_ChildFirst4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildFirst4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Enter Middle Name")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildMiddle4_0)
+async def process_A_II_ChildMiddle4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMiddle4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Date of Birth (mm/dd/yyyy)")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildDOB4_0)
+async def process_A_II_ChildDOB4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildDOB4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "City and Country of Birth")
 
 
+@dp.message_handler(state=Form_I_589.A_II_ChildCity4_0)
+async def process_A_II_ChildCity4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildCity4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Nationality (Citizenship)")
 
+
+@dp.message_handler(state=Form_I_589.A_II_ChildNat4_0)
+async def process_A_II_ChildNat4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildNat4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "Race, Ethnic, or Tribal Group")
+
+
+@dp.message_handler(state=Form_I_589.A_II_ChildRace4_0)
+async def process_A_II_ChildRace4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildRace4[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Gender_Choice()
+    await bot.send_message(message.from_user.id, "Choose gender of third child", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="female", state=Form_I_589.A_II_ChooseGenderChild4)
+async def process_A_II_ChooseGenderChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].CheckBox46_Gender[0]'] = callback_query.data
+        data['[3].CheckBox46_Gender[1]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is female")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="male", state=Form_I_589.A_II_ChooseGenderChild4)
+async def process_A_II_ChooseGenderChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].CheckBox46_Gender[1]'] = callback_query.data
+        data['[3].CheckBox46_Gender[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Location_Choice()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is male")
+    await bot.send_message(callback_query.from_user.id, "Is this child in U.S?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_location", state=Form_I_589.A_II_ChooseLocationChild4)
+async def process_A_II_ChooseLocationChild2(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox47[0]'] = callback_query.data
+        data['[1].CheckBox47[1]'] = ""
+    await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry_0.set()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is in U.S")
+    await bot.send_message(callback_query.from_user.id, "Enter Place of last entry into the U.S.")
+
+
+@dp.callback_query_handler(text="no_location", state=Form_I_589.A_II_ChooseLocationChild4)
+async def process_A_II_ChooseLocationChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].CheckBox47[1]'] = callback_query.data
+        data['[1].CheckBox47[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is not in U.S")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine13_Specify4_0)
+async def process_A_II_PtAIILine13_Specify4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine13_Specify4[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
+    await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine14_PlaceofLastEntry4_0)
+async def process_A_II_PtAIILine14_PlaceofLastEntry4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine14_PlaceofLastEntry4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Date of last entry into the U.S. for your third child (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine15_DateofLastEntry4_0)
+async def process_A_II_PtAIILine15_DateofLastEntry4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine15_DateofLastEntry4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter I-94 Number (If any)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number4_0)
+async def process_A_II_PtAIILine16_I94Number4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Status when last admitted (Visa type, if any")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission4_0)
+async def process_A_II_PtAIILine17_StatusofLastAdmission4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine17_StatusofLastAdmission4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is your child's current status?")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine18_ChildCurrentStatus4_0)
+async def process_A_II_PtAIILine18_CurrentStatusofChild4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine18_ChildCurrentStatus4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)")
+
+
+@dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay4_0)
+async def process_A_II_PtAIILine19_ExpDateofAuthorizedStay4_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay4[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Immigration_Court_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Is your child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild4)
+async def process_A_II_IsImmigrationCourtProceedingsChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes4[0]'] = callback_query.data
+        data['[1].PtAIILine20_No4[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="no_child_imc", state=Form_I_589.A_II_IsImmigrationCourtProceedingsChild3)
+async def process_A_II_IsImmigrationCourtProceedingsChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine20_Yes4[0]'] = ""
+        data['[1].PtAIILine20_No4[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is not in Immigration Court proceedings")
+    await bot.send_message(callback_query.from_user.id,
+                           "If in the U.S., is this child to be included in this application?")
+
+
+@dp.callback_query_handler(text="yes_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild3)
+async def process_A_II_IsIncludedInApplicationChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes4[0]'] = callback_query.data
+        data['[1].PtAIILine21_No4[0]'] = ""
+        total_number_of_children = data["[1].TotalChild[0]"]
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is to be included in this application")
+
+    if total_number_of_children > 1:
+        keyboard = Form_I_589_Fill_Next_Child_Choice()
+        await Form_I_589.A_II_IsFillChild4.set()
+        await bot.send_message(callback_query.from_user.id,
+                               "Do you wish fill same data for your next child?",
+                               reply_markup=keyboard.markup)
+    else:
+        await bot.send_message(callback_query.from_user.id,
+                               "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
+        await Form_I_589.A_III_TextField13_0.set()
+
+
+@dp.callback_query_handler(text="no_include_child", state=Form_I_589.A_II_IsIncludedInApplicationChild4)
+async def process_A_II_IsIncludedInApplicationChild4(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine21_Yes4[0]'] = ""
+        data['[1].PtAIILine21_No4[0]'] = callback_query.data
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your third child is to be included in this application")
+
+    await bot.send_message(callback_query.from_user.id,
+                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street.")
+    await Form_I_589.A_III_TextField13_0.set()
+
+
+# Last address with no fear of persecution
+@dp.message_handler(state=Form_I_589.A_III_TextField13_0)
+async def process_A_III_TextField13_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town of your last address where you lived before coming to the United States where you DON'T FEAR persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_2)
+async def process_A_III_TextField13_2(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[2]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Department, Province, or State of your last address where you lived before coming to the United States where you don't fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_4)
+async def process_A_III_TextField13_4(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[4]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Country of your last address where you lived before coming to the United States where you don't fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_6)
+async def process_A_III_TextField13_6(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[6]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Date From (Mo/Yr) you were living on your last address where you lived before coming to the United States where you don't fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_DateTimeField21_0)
+async def process_A_III_DateTimeField21_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].DateTimeField21[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Last Date (Mo/Yr) when you were living on your last address where you lived before coming to the United States where you don't fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_DateTimeField20_0)
+async def process_A_III_DateTimeField20_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].DateTimeField20[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your last address where you lived before coming to the United States where you FEAR persecution. First enter Number and Street.")
+
+
+# Last address with fear of persecution
+@dp.message_handler(state=Form_I_589.A_III_TextField13_1)
+async def process_A_III_TextField13_1(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[1]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town of your last address where you lived before coming to the United States where you FEAR persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_3)
+async def process_A_III_TextField13_3(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[3]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Department, Province, or State of your last address where you lived before coming to the United States where you fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_5)
+async def process_A_III_TextField13_5(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[5]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Country of your last address where you lived before coming to the United States where you fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_7)
+async def process_A_III_TextField13_7(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[7]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Date From (Mo/Yr) you were living on your last address where you lived before coming to the United States where you fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_DateTimeField22_0)
+async def process_A_III_DateTimeField22_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].DateTimeField22[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Last Date (Mo/Yr) when you were living on your last address where you lived before coming to the United States where you don't fear persecution.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_DateTimeField23_0)
+async def process_A_III_DateTimeField23_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].DateTimeField23[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your present address. First Enter Number and Street.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_8)
+async def process_A_III_TextField13_8(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[8]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your present address. Enter City/Town.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_10)
+async def process_A_III_TextField13_10(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[10]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your present address. Enter Department, Province, or State.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_12)
+async def process_A_III_TextField13_12(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[12]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your present address. Enter Country.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_TextField13_14)
+async def process_A_III_TextField13_14(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].TextField13[14]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your present address. Enter Date when you moved in.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_DateTimeField24_0)
+async def process_A_III_DateTimeField24_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].DateTimeField24[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "List your present address. Enter Date when you planning to move out.")
+
+
+@dp.message_handler(state=Form_I_589.A_III_DateTimeField26_0)
+async def process_A_III_DateTimeField26_0(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[4].DateTimeField26[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Provide the following information about your residences during the past 5 years. (4 Addreses available)")
 
 
 

@@ -293,6 +293,7 @@ class Form_I_589(StatesGroup):
     # A_II_PtAIILine21_No4_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
 
     # A III
+    # Address Where Don't Fear Persecution
     A_III_TextField13_0 = State()  # 148 Number and Street (Provide if available)
     A_III_TextField13_2 = State()  # 149 City/Town
     A_III_TextField13_4 = State()  # 150 Department Province or State
@@ -300,6 +301,7 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField21_0 = State()  # 152 Dates From (Mo/Yr)
     A_III_DateTimeField20_0 = State()  # 153 To (Mo/Yr)
 
+    # Address Where Fear Persecution
     A_III_TextField13_1 = State()  # 154  # Number and Street (Provide if available)
     A_III_TextField13_3 = State()  # 155  # City/Town
     A_III_TextField13_5 = State()  # 156  # Department Province or State
@@ -307,6 +309,7 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField22_0 = State()  # 158 Dates From (Mo/Yr)
     A_III_DateTimeField23_0 = State()  # 159 To (Mo/Yr)
 
+    # Present Address
     A_III_TextField13_8 = State()  # 160 Number and Street
     A_III_TextField13_10 = State()  # 161 City/Town
     A_III_TextField13_12 = State()  # 162 Department Province or State
