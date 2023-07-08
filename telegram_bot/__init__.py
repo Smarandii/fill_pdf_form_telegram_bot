@@ -19,7 +19,15 @@ from f_i_589_keyboards import Form_I_589_Gender_Choice, \
     Form_I_589_Include_Spouse_Choice,\
     Form_I_589_Have_Children_Choice, \
     Form_I_589_Child_Immigration_Court_Choice, \
-    Form_I_589_Fill_Next_Child_Choice
+    Form_I_589_Fill_Next_Child_Choice, \
+    Form_I_589_Mother_Deceased_Choice, \
+    Form_I_589_Father_Deceased_Choice, \
+    Form_I_589_1Sibling_Deceased_Choice, \
+    Form_I_589_2Sibling_Deceased_Choice, \
+    Form_I_589_3Sibling_Deceased_Choice, \
+    Form_I_589_4Sibling_Deceased_Choice, \
+    Form_I_589_Asylum_Reason_Choice, \
+    Form_I_589_Family_Experienced_Harm_Choice
 
 
 load_dotenv()

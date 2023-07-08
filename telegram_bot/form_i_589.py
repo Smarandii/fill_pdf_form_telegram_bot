@@ -317,6 +317,7 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField24_0 = State()  # 164  # Dates From (Mo/Yr)
     A_III_DateTimeField26_0 = State()  # 165  # Dates To (Mo/Yr)
 
+    # First Residence Address
     A_III_TextField13_9 = State()  # 166  # Number and Street
     A_III_TextField13_11 = State()  # 167  # City/Town
     A_III_TextField13_13 = State()  # 168 Department Province or State
@@ -324,6 +325,7 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField25_0 = State()  # 170 Dates From (Mo/Yr)
     A_III_DateTimeField27_0 = State()  # 171 Dates To (Mo/Yr)
 
+    # Second Residence Address
     A_III_TextField13_16 = State()  # 172 Number and Street
     A_III_TextField13_17 = State()  # 173 City/Town
     A_III_TextField13_18 = State()  # 174  # Department Province or State
@@ -331,6 +333,7 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField28_0 = State()  # 176  # Dates From (Mo/Yr)
     A_III_DateTimeField29_0 = State()  # 177  # Dates To (Mo/Yr)
 
+    # Third Residence Address
     A_III_TextField13_20 = State()  # 178 Number and Street
     A_III_TextField13_21 = State()  # 179 City/Town
     A_III_TextField13_22 = State()  # 180 Department Province or State
@@ -338,6 +341,7 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField30_0 = State()  # 182 Dates From (Mo/Yr)
     A_III_DateTimeField31_0 = State()  # 183 Dates To (Mo/Yr)
 
+    # Fourth Residence Address
     A_III_TextField13_24 = State()  # 184  # Number and Street
     A_III_TextField13_25 = State()  # 185  # City/Town
     A_III_TextField13_26 = State()  # 186  # Department Province or State
@@ -345,85 +349,100 @@ class Form_I_589(StatesGroup):
     A_III_DateTimeField32_0 = State()  # 188 Dates From (Mo/Yr)
     A_III_DateTimeField33_0 = State()  # 189 Dates To (Mo/Yr)
 
+    # First School
     A_III_TextField13_28 = State()  # 190 Name of School
     A_III_TextField13_30 = State()  # 191 Type of School
     A_III_TextField13_32 = State()  # 192 Location (Address)
     A_III_DateTimeField41_0 = State()  # 193 Attended From (Mo/Yr)
     A_III_DateTimeField40_0 = State()  # 194  # Attended To (Mo/Yr)
 
+    # Second School
     A_III_TextField13_29 = State()  # 195  # Name of School
     A_III_TextField13_31 = State()  # 196  # Type of School
     A_III_TextField13_33 = State()  # 197  # Location (Address)
     A_III_DateTimeField38_0 = State()  # 198 Attended From (Mo/Yr)
     A_III_DateTimeField39_0 = State()  # 199 Attended To (Mo/Yr)
 
+    # Third School
     A_III_TextField13_34 = State()  # 200 Name of School
     A_III_TextField13_35 = State()  # 201 Type of School
     A_III_TextField13_36 = State()  # 202 Location (Address)
     A_III_DateTimeField37_0 = State()  # 203 Attended From (Mo/Yr)
     A_III_DateTimeField36_0 = State()  # 204  # Attended To (Mo/Yr)
 
+    # Fourth School
     A_III_TextField13_37 = State()  # 205  # Name of School
     A_III_TextField13_38 = State()  # 206  # Type of School
     A_III_TextField13_39 = State()  # 207  # Location (Address)
     A_III_DateTimeField34_0 = State()  # 208 Attended From (Mo/Yr)
     A_III_DateTimeField35_0 = State()  # 209 Attended To (Mo/Yr)
 
+    # First Employer
     A_III_TextField13_40 = State()  # 210 Name and Address of Employer
     A_III_TextField13_42 = State()  # 211 Your Occupation
     A_III_DateTimeField42_0 = State()  # 212 Dates From (Mo/Yr)
     A_III_DateTimeField44_0 = State()  # 213 Dates To (Mo/Yr)
 
+    # Second Employer
     A_III_TextField13_41 = State()  # 214  # Name and Address of Employer
     A_III_TextField13_43 = State()  # 215  # Your Occupation
     A_III_DateTimeField43_0 = State()  # 216  # Dates From (Mo/Yr)
     A_III_DateTimeField45_0 = State()  # 217  # Dates To (Mo/Yr)
 
+    # Third Employer
     A_III_TextField13_44 = State()  # 218 Name and Address of Employer
     A_III_TextField13_45 = State()  # 219 Your Occupation
     A_III_DateTimeField46_0 = State()  # 220 Dates From (Mo/Yr)
     A_III_DateTimeField47_0 = State()  # 221 Dates To (Mo/Yr)
 
+    # Mother
     A_III_TextField13_46 = State()  # 222 Full Name
     A_III_TextField13_49 = State()  # 223 City/Town and Country of Birth
     A_III_CheckBoxAIII5_m_0 = State()  # Mother Deceased
     A_III_TextField35_0 = State()  # 224  # Current Location
 
+    # Father
     A_III_TextField13_47 = State()  # 225  # Full Name
     A_III_TextField13_50 = State()  # 226  # City/Town and Country of Birth
     A_III_CheckBoxAIII5_f_0 = State()  # Father Deceased
     A_III_TextField35_1 = State()  # 228 Current Location
 
+    # Sibling 1
     A_III_TextField13_48 = State()  # 229 Full Name
     A_III_TextField13_51 = State()  # 230 City/Town and Country of Birth
     A_III_CheckBoxAIII5_s1_0 = State()  # 1 Sibling Deceased
     A_III_TextField35_2 = State()  # 232 Current Location
 
+    # Sibling 2
     A_III_TextField13_52 = State()  # 233 Full Name
     A_III_TextField13_53 = State()  # 234  # City/Town and Country of Birth
     A_III_CheckBoxAIII5_s2_0 = State()  # 2 Sibling Deceased
     A_III_TextField35_3 = State()  # 236  # Current Location
 
+    # Sibling 3
     A_III_TextField13_54 = State()  # 237  # Full Name
     A_III_TextField13_55 = State()  # 238 City/Town and Country of Birth
     A_III_CheckBoxAIII5_s3_0 = State()  # 3 Sibling Deceased
     A_III_TextField35_4 = State()  # 239 Current Location
 
+    # Sibling 4
     A_III_TextField13_56 = State()  # 240 Full Name
     A_III_TextField13_57 = State()  # 241 City/Town and Country of Birth
     A_III_CheckBoxAIII5_s4_0 = State()  # 4  # Sibling Deceased
     A_III_TextField35_5 = State()  # 242 Current Location
 
-    B_CheckBoxrace_0 = State()  # I am seeking asylum or withholding of removal based on Race
-    B_CheckBoxreligion_0 = State()  # I am seeking asylum or withholding of removal based on Religion
-    B_CheckBoxnationality_0 = State()  # I am seeking asylum or withholding of removal based on Nationality
-    B_CheckBoxpolitics_0 = State()  # I am seeking asylum or withholding of removal based on Political opinion
-    B_CheckBoxsocial_0 = State()  # I am seeking asylum or withholding of removal based on Membership in a particular social group
-    B_CheckBoxtorture_0 = State()  # I am seeking asylum or withholding of removal based on Torture Convention
+    B_Asylum_Reason_Choice = State()
+    # B_CheckBoxrace_0 = State()  # I am seeking asylum or withholding of removal based on Race
+    # B_CheckBoxreligion_0 = State()  # I am seeking asylum or withholding of removal based on Religion
+    # B_CheckBoxnationality_0 = State()  # I am seeking asylum or withholding of removal based on Nationality
+    # B_CheckBoxpolitics_0 = State()  # I am seeking asylum or withholding of removal based on Political opinion
+    # B_CheckBoxsocial_0 = State()  # I am seeking asylum or withholding of removal based on Membership in a particular social group
+    # B_CheckBoxtorture_0 = State()  # I am seeking asylum or withholding of removal based on Torture Convention
 
-    B_ckboxyn1a_1 = State()  # Have you your family or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone? No
-    B_ckboxyn1a_0 = State()  # Have you your family or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone? Yes
-    B_TextField14_0 = State()  # 243 If \Yes\ explain in detail = State()
+    B_Family_Experienced_Harm_Choice = State()
+    # B_ckboxyn1a_1 = State()  # Have you your family or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone? No
+    # B_ckboxyn1a_0 = State()  # Have you your family or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone? Yes
+    # B_TextField14_0 = State()  # 243 If \Yes\ explain in detail = State()
 
     B_ckboxyn1b_1 = State()  # Do you fear harm or mistreatment if you return to your home country? No
     B_ckboxyn1b_0 = State()  # Do you fear harm or mistreatment if you return to your home country? Yes

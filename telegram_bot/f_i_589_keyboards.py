@@ -134,3 +134,92 @@ class Form_I_589_Location_Choice:
         button = InlineKeyboardButton("No", callback_data="no_location")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
+
+
+class Form_I_589_Mother_Deceased_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_mother_deceased")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_mother_deceased")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Father_Deceased_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_father_deceased")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_father_deceased")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_1Sibling_Deceased_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_1sibling_deceased")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_1sibling_deceased")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_2Sibling_Deceased_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_2sibling_deceased")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_2sibling_deceased")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_3Sibling_Deceased_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_3sibling_deceased")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_3sibling_deceased")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_4Sibling_Deceased_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_4sibling_deceased")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_4sibling_deceased")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Asylum_Reason_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Race", callback_data="race_asylum_reason")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Religion", callback_data="religion_asylum_reason")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Nationality", callback_data="nationality_asylum_reason")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Political opinion", callback_data="political_asylum_reason")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Membership in a particular social group", callback_data="membership_asylum_reason")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Torture Convention", callback_data="torture_asylum_reason")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Family_Experienced_Harm_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_family_harm")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_family_harm")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
