@@ -2,8 +2,6 @@ from telegram_bot import bot, dp
 from aiogram import types
 from aiogram.dispatcher import filters
 from telegram_bot import AvailableFormsKeyboard
-import form_ar_11_handlers
-import form_i_589_handlers
 
 
 @dp.message_handler(filters.Command("start"))
