@@ -86,10 +86,8 @@ class Form_I_589(StatesGroup):
     # A_I_DateTimeField2_4 = State()  # 51 Denial Date
     # A_I_DateTimeField2_5 = State()  # 52 Referral Date
 
-    A_II_CheckBox5_0 = State()  # I am not married (Skip to Your Children below)
-
     # Spouse
-    A_II_NotMarried_0_PtAIILine1_ANumber_0 = State()  # 53 Alien Registration Number (A-Number) (if any)
+    A_II_NotMarried_0_PtAIILine1_ANumber_0 = State()  # 53 Alien Registration Number of your spouse (A-Number) (if any)
     A_II_NotMarried_0_TextField10_1 = State()  # 54  # Passport/ID Card Number (if any)
     A_II_NotMarried_0_DateTimeField7_0 = State()  # 55  # Date of Birth (mm/dd/yyyy)
     A_II_NotMarried_0_TextField10_2 = State()  # 56  # U_S_ Social Security Number (if any)
