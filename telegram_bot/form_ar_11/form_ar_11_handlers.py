@@ -1,6 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-from form_ar_11 import Form_AR_11
+from telegram_bot.form_ar_11.form_ar_11_state_group import Form_AR_11
 from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, Form_AR_11_Mailing_Address_Choice_Keyboard
 
 

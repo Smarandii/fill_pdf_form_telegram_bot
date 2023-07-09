@@ -32,7 +32,7 @@ class Form_I_589_Immigration_Court_Choice:
         keyboard_markup.add(button)
         button = InlineKeyboardButton("I am now in Immigration Court proceedings.", callback_data=f"now_in_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("I am not now in Immigration Court proceedings, but I have been in the past.", callback_data="not_now_but_been_in_imc")
+        button = InlineKeyboardButton("I have been in Immigration Court proceedings in the past.", callback_data="not_now_but_been_in_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 

@@ -53,21 +53,18 @@ class Form_I_589(StatesGroup):
     A_I_DateTimeField6_0 = State()  # 29 When did you last leave your country? (mm/dd/yyyy)
     A_I_TextField3_0 = State()  # 30 What is your current I-94  # Number if any?
 
-    A_I_FirstUsEntry = State()
-    # A_I_DateTimeField2_0 = State()  # 31 Date
-    # A_I_TextField4_0 = State()  # 32 Place
-    # A_I_TextField4_1 = State()  # 33 Status
-    # A_I_DateTimeField2_1 = State()  # 34 Date Status Expires
+    A_I_DateTimeField2_0 = State()  # 31 Date
+    A_I_TextField4_0 = State()  # 32 Place
+    A_I_TextField4_1 = State()  # 33 Status
+    A_I_DateTimeField2_1 = State()  # 34 Date Status Expires
 
-    A_I_SecondUsEntry = State()
-    # A_I_DateTimeField3_0 = State()  # 35  # Date
-    # A_I_TextField4_2 = State()  # 36  # Place
-    # A_I_TextField4_3 = State()  # 37  # Status
+    A_I_DateTimeField3_0 = State()  # 35  # Date
+    A_I_TextField4_2 = State()  # 36  # Place
+    A_I_TextField4_3 = State()  # 37  # Status
 
-    A_I_ThirdUsEntry = State()
-    # A_I_DateTimeField4_0 = State()  # 38  # Date
-    # A_I_TextField4_4 = State()  # 39 Place
-    # A_I_TextField4_5 = State()  # 40 Status
+    A_I_DateTimeField4_0 = State()  # 38  # Date
+    A_I_TextField4_4 = State()  # 39 Place
+    A_I_TextField4_5 = State()  # 40 Status
 
     A_I_TextField5_0 = State()  # 41 What country issued your last passport or travel document?
     A_I_TextField5_1 = State()  # 42 Passport Number

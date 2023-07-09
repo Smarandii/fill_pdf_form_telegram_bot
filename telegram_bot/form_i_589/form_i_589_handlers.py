@@ -1,6 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-from form_i_589 import Form_I_589
+from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot import bot, dp, \
     FillPdfFromJsonAdapter, datetime, \
     Form_I_589_Gender_Choice, \
@@ -178,10 +178,10 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "Enter City:")
 
 
-@dp.message_handler(state=Form_I_589.A_I_PtAILine9_City_0)
+@dp.message_handler(state=Form_I_589.A_I_TextField1_2)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].PtAILine9_City[0]'] = message.text
+        data['[0].TextField1[2]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Enter State:")
 
@@ -378,48 +378,85 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField3[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "List first entry into the U.S. beginning with your most recent entry. List date, place, your status, date status expires (mm/dd/yyyy, place, status, date status expires)")
+    await bot.send_message(message.from_user.id, "List most recent entry entry into the U.S. Enter date of your most recent entry:")
 
 
-def retrieve_entry_into_us_description(text, n=2):
-    if text.count(",") == n:
-        return text.split(",")
-    elif text.count(" ") == n:
-        return text.split(" ")
-    else:
-        return ['', '', '', '']
-
-
-@dp.message_handler(state=Form_I_589.A_I_FirstUsEntry)
+@dp.message_handler(state=Form_I_589.A_I_DateTimeField2_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        date, place, status, date_status_expires = retrieve_entry_into_us_description(message.text, 3)
-        data['[0].DateTimeField2[0]'] = date
-        data['[0].TextField4[0]'] = place
-        data['[0].TextField4[1]'] = status
-        data['[0].DateTimeField2[1]'] = date_status_expires
+        data['[0].DateTimeField2[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "List second entry into the U.S.. List date, place, your status")
+    await bot.send_message(message.from_user.id, "List most recent entry entry into the U.S. Enter place of your most recent entry:")
 
 
-@dp.message_handler(state=Form_I_589.A_I_SecondUsEntry)
+@dp.message_handler(state=Form_I_589.A_I_TextField4_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        date, place, status, date_status_expires = retrieve_entry_into_us_description(message.text, 2)
-        data['[0].DateTimeField3[0]'] = date
-        data['[0].TextField4[2]'] = place
-        data['[0].TextField4[3]'] = status
+        data['[0].TextField4[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "List third entry into the U.S.. List date, place, and your status")
+    await bot.send_message(message.from_user.id, "List most recent entry entry into the U.S. Enter status of your most recent entry:")
 
 
-@dp.message_handler(state=Form_I_589.A_I_ThirdUsEntry)
+@dp.message_handler(state=Form_I_589.A_I_TextField4_1)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        date, place, status, date_status_expires = retrieve_entry_into_us_description(message.text, 2)
-        data['[0].DateTimeField4[0]'] = date
-        data['[0].TextField4[4]'] = place
-        data['[0].TextField4[5]'] = status
+        data['[0].TextField4[1]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List most recent entry entry into the U.S. Enter date status of your most recent entry expires :")
+
+
+@dp.message_handler(state=Form_I_589.A_I_DateTimeField2_1)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].DateTimeField2[1]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List second most recent entry entry into the U.S. Enter date:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_DateTimeField3_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].DateTimeField3[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List second most recent entry entry into the U.S. Enter place:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField4_2)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField4[2]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List second most recent entry entry into the U.S. Enter status:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField4_3)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField4[3]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List third most recent entry entry into the U.S. Enter date:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_DateTimeField4_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].DateTimeField4[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List third most recent entry entry into the U.S. Enter place:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField4_4)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField4[4]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id, "List third most recent entry entry into the U.S. Enter status:")
+
+
+@dp.message_handler(state=Form_I_589.A_I_TextField4_5)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField4[5]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "What country issued your last passport or travel document?")
 

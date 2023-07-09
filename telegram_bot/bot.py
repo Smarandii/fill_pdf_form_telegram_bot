@@ -1,7 +1,6 @@
-from telegram_bot import bot, dp
-from aiogram import types
-from aiogram.dispatcher import filters
-from telegram_bot import AvailableFormsKeyboard
+from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard
+from form_ar_11 import form_ar_11_handlers
+from form_i_589 import form_i_589_handlers
 
 
 @dp.message_handler(filters.Command("start"))
