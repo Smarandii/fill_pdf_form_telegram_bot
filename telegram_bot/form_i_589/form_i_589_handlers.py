@@ -1,18 +1,34 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
-from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
-from telegram_bot import bot, dp, \
-    FillPdfFromJsonAdapter, datetime, \
+
+from telegram_bot.form_i_589.f_i_589_keyboards import \
+    Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice, \
+    Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice, \
     Form_I_589_Gender_Choice, \
     Form_I_589_Marital_Status_Choice, \
     Form_I_589_Immigration_Court_Choice, \
     Form_I_94_Number_Choice, \
     Form_I_589_English_Fluency_Choice, \
-    Form_I_589_Marriage_Choice, \
-    Form_I_589_Location_Choice, Form_I_589_Spouse_Immigration_Court_Choice, Form_I_589_Include_Spouse_Choice, \
-    Form_I_589_Have_Children_Choice, Form_I_589_Fill_Next_Child_Choice, Form_I_589_Mother_Deceased_Choice, \
-    Form_I_589_Father_Deceased_Choice, Form_I_589_1Sibling_Deceased_Choice, Form_I_589_2Sibling_Deceased_Choice, \
-    Form_I_589_3Sibling_Deceased_Choice, Form_I_589_Asylum_Reason_Choice, Form_I_589_Family_Experienced_Harm_Choice
+    Form_I_589_Location_Choice, \
+    Form_I_589_Spouse_Immigration_Court_Choice, \
+    Form_I_589_Include_Spouse_Choice, \
+    Form_I_589_Have_Children_Choice, \
+    Form_I_589_Fill_Next_Child_Choice, \
+    Form_I_589_Mother_Deceased_Choice, \
+    Form_I_589_Father_Deceased_Choice, \
+    Form_I_589_1Sibling_Deceased_Choice, \
+    Form_I_589_2Sibling_Deceased_Choice, \
+    Form_I_589_3Sibling_Deceased_Choice, \
+    Form_I_589_Asylum_Reason_Choice, \
+    Form_I_589_Family_Experienced_Harm_Choice
+
+from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
+
+from telegram_bot import \
+    bot,\
+    dp, \
+    FillPdfFromJsonAdapter, \
+    datetime
 
 
 @dp.callback_query_handler(text="I-589")
@@ -3664,7 +3680,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.B_Family_Experienced_Harm_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[5].#subform[6].ckboxyn1a[1]'] = callback_query.data
+        data['[5].#subform[6].ckboxyn1a[0]'] = callback_query.data
+        data['[5].#subform[6].ckboxyn1a[1]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that  your family, or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone")
     await bot.send_message(callback_query.from_user.id,
@@ -3680,13 +3697,41 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].ckboxyn1a[1]'] = callback_query.data
+        data['[5].#subform[6].ckboxyn1a[0]'] = ""
     await Form_I_589.B_You_Fear_Harm_Or_Mistreatment_Choice.set()
     await bot.send_message(callback_query.from_user.id, "You indicated that  your family, or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone")
-    # keyboard =
+    keyboard = Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Do you fear harm or mistreatment if you return to your home country?")
+                           "Do you fear harm or mistreatment if you return to your home country?",
+                           reply_markup=keyboard.markup)
 
 
+@dp.callback_query_handler(text="yes_you_fear_harm",
+                           state=Form_I_589.B_You_Fear_Harm_Or_Mistreatment_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[5].#subform[6].ckboxyn1b[0]'] = callback_query.data
+        data['[5].#subform[6].ckboxyn1b[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you fear harm or mistreatment if you return to your home country")
+    keyboard = Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Have you or your family members ever been accused, charged, arrested, detained, interrogated, convicted and sentenced, or imprisoned in any country other than the United States (including for an immigration law violation)?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_you_fear_harm",
+                           state=Form_I_589.B_You_Fear_Harm_Or_Mistreatment_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[5].#subform[6].ckboxyn1b[1]'] = callback_query.data
+        data['[5].#subform[6].ckboxyn1b[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you don't fear harm or mistreatment if you return to your home country")
+    keyboard = Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Have you or your family members ever been accused, charged, arrested, detained, interrogated, convicted and sentenced, or imprisoned in any country other than the United States (including for an immigration law violation)?",
+                           reply_markup=keyboard.markup)
 
 
 

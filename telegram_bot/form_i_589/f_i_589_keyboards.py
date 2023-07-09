@@ -116,16 +116,6 @@ class Form_I_589_English_Fluency_Choice:
         self.markup = keyboard_markup
 
 
-class Form_I_589_Marriage_Choice:
-    def __init__(self):
-        keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_married")
-        keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_married")
-        keyboard_markup.add(button)
-        self.markup = keyboard_markup
-
-
 class Form_I_589_Location_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
@@ -220,6 +210,26 @@ class Form_I_589_Family_Experienced_Harm_Choice:
         button = InlineKeyboardButton("Yes", callback_data="yes_family_harm")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("No", callback_data="no_family_harm")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_you_fear_harm")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_you_fear_harm")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_violated_law")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_violated_law")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
