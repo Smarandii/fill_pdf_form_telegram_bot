@@ -227,6 +227,69 @@
     "[3].PtAIILine21_Yes4[0]": " If in the U.S., is this child to be included in this application? (Check the appropriate box.) Yes",
     "[3].PtAIILine21_No4[0]": " If in the U.S., is this child to be included in this application? (Check the appropriate box.) No",
 
+    "[12].TextField12[6]": "288 A-Number",
+    "[12].TextField12[7]": "289 Passport/ID Card Number",
+    "[12].TextField12[8]": "290 Marital Status",
+    "[12].TextField12[9]": "291 U.S. Social Security Number",
+
+    "[12].TextField12[0]": "292 Complete Last Name",
+    "[12].TextField12[2]": "293 First Name",
+    "[12].TextField12[3]": "294 Middle Name",
+    "[12].DateTimeField14[0]": "295 Date of Birth (mm/dd/yyyy)",
+
+    "[12].TextField12[1]": "296 City and Country of Birth",
+    "[12].TextField12[4]": "297 Nationality (Citizenship)",
+    "[12].TextField12[5]": "298 Race, Ethnic, or Tribal Group",
+    "[12].CheckBox12_Gender[0]": "Gender Male",
+    "[12].CheckBox12_Gender[1]": "Gender Female",
+    "[12].CheckBox57[0]": "Is this child in the U.S. ? Yes",
+    "[12].CheckBox57[1]": "Is this child in the U.S. ? No specify location: {[12].SuppLALine13_Specify[0]}",
+    "[12].SuppLALine13_Specify[0]": "299 Specify location",
+    "[12].ChildEntry5[0]": "300 Place of last entry into the U.S.",
+    "[12].ChildExp5[0]": "301 Date of last entry into the U.S",
+    "[12].ChildINum5[0]": "302 I-94 Number",
+    "[12].ChildStatus5[0]": "303 Status when last admitted",
+    "[12].ChildCurrent5[0]": "304 What is your child's current status?",
+    "[12].ChildExpAuth5[0]": "305 What is the expiration date of his/her authorized stay",
+    "[12].SuppA_CheckBox20[0]": " Is your child in Immigration Court proceedings? Yes",
+    "[12].SuppA_CheckBox20[1]": " Is your child in Immigration Court proceedings? No",
+
+    "[12].SuppA_CheckBox21[0]": " If in the U.S., is this child to be included in this application? (Check the appropriate box.) yes",
+    "[12].SuppA_CheckBox21[1]": " If in the U.S., is this child to be included in this application? (Check the appropriate box.) no",
+
+
+    "[12].TextField12[16]": "306 A-Number (If available)",
+    "[12].TextField12[17]": "307 Passport/ID Card Number",
+    "[12].TextField12[18]": "308 Marital Status",
+    "[12].TextField12[19]": "309 U.S. Social Security Number",
+
+    "[12].TextField12[10]": "310 Complete Last Name",
+    "[12].TextField12[12]": "311 First Name",
+    "[12].TextField12[13]": "312 Middle Name",
+    "[12].DateTimeField14[1]": "313 Date of Birth",
+
+    "[12].TextField12[11]": "314 City and Country of Birth",
+    "[12].TextField12[14]": "315 Nationality",
+    "[12].TextField12[15]": "316 Race, Ethnic, or Tribal Group",
+    "[12].SuppAL12_CheckBox[0]": "Gender Male",
+    "[12].SuppAL12_CheckBox[1]": "Gender Female",
+    "[12].SuppAL13_CheckBox[0]": "Is this child in the U.S. ? Yes",
+    "[12].SuppAL13_CheckBox[1]": "Is this child in the U.S. ? No",
+    "[12].SuppLALine13_Specify2[0]": "317 Specify location",
+
+    "[12].ChildEntry6[0]": "318 Place of last entry into the U.S.",
+    "[12].ChildExp6[0]": "319 Date of last entry into the U.S.",
+    "[12].ChildINum6[0]": "320 I-94 Number",
+    "[12].ChildStatus6[0]": "321 Status when last admitted (Visa type, if any)",
+    "[12].ChildCurrent6[0]": "322 What is your child's current status?",
+    "[12].ChildExpAuth6[0]": "323 What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)",
+
+    "[12].SuppALine20_CheckBox2[0]": "Is your child in Immigration Court proceedings? Yes",
+    "[12].SuppALine20_CheckBox2[1]": "Is your child in Immigration Court proceedings? No",
+
+    "[12].SuppALine21_CheckBox[0]": "If in the U.S., is this child to be included in this application? (Check the appropriate box.) Yes",
+    "[12].SuppALine21_CheckBox[1]": "If in the U.S., is this child to be included in this application? (Check the appropriate box.) No",
+
 
     "[4].TextField13[0]": "148 Number and Street (Provide if available)",
     "[4].TextField13[2]": "149 City/Town",
@@ -381,8 +444,6 @@
     "[7].PB4_TextField[0]": "248 If \"Yes,\" explain why you are afraid and describe the nature of torture you fear, by whom, and why it would be inflicted.",
 
 
-
-
     "[8].ckboxync1[0]": "Have you, your spouse, your child(ren), your parents or your siblings ever applied to the U.S. Government for refugee status, asylum, or withholding of removal? Yes",
     "[8].ckboxync1[1]": "Have you, your spouse, your child(ren), your parents or your siblings ever applied to the U.S. Government for refugee status, asylum, or withholding of removal? No",
     "[8].PCL1_TextField[0]": "249 If \"Yes,\" explain the decision and what happened",
@@ -453,7 +514,7 @@
     "[11].TextField27[2]": "276 Signature of applicant",
     "[11].DateTimeField49[0]": "277 Date (mm/dd/yyyy)",
     "[11].TextField27[1]": "278 Write Your Name in Your Native Alphabet",
-    "[11].TextField27[0]": "Signature of Asylum Officer",
+    "[11].TextField27[0]": "",
 
     "[11].PG_CheckBox[0]": "All True",
     "[11].PG_CheckBox[1]": "Not All True",
@@ -463,7 +524,7 @@
     "[11].TextField27[5]": "281 Signature of Applicant",
     "[11].DateTimeField50[0]": "282 Date (mm/dd/yyyy)",
     "[11].TextField27[4]": "283 Write Your Name in Your Native Alphabet",
-    "[11].TextField27[3]": "Signature of Immigration Judge",
+    "[11].TextField27[3]": "",
 
 
 
@@ -471,69 +532,6 @@
     "[12].DateTimeField57[0]": "285 Date",
     "[12].ApplicantName[0]": "286 Applicant's Name",
     "[12].TextField28[0]": "287 Applicant's Signature",
-
-    "[12].TextField12[6]": "288 A-Number",
-    "[12].TextField12[7]": "289 Passport/ID Card Number",
-    "[12].TextField12[8]": "290 Marital Status",
-    "[12].TextField12[9]": "291 U.S. Social Security Number",
-
-    "[12].TextField12[0]": "292 Complete Last Name",
-    "[12].TextField12[2]": "293 First Name",
-    "[12].TextField12[3]": "294 Middle Name",
-    "[12].DateTimeField14[0]": "295 Date of Birth (mm/dd/yyyy)",
-
-    "[12].TextField12[1]": "296 City and Country of Birth",
-    "[12].TextField12[4]": "297 Nationality (Citizenship)",
-    "[12].TextField12[5]": "298 Race, Ethnic, or Tribal Group",
-    "[12].CheckBox12_Gender[0]": "Gender Male",
-    "[12].CheckBox12_Gender[1]": "Gender Female",
-    "[12].CheckBox57[0]": "Is this child in the U.S. ? Yes",
-    "[12].CheckBox57[1]": "Is this child in the U.S. ? No specify location: {[12].SuppLALine13_Specify[0]}",
-    "[12].SuppLALine13_Specify[0]": "299 Specify location",
-    "[12].ChildEntry5[0]": "300 Place of last entry into the U.S.",
-    "[12].ChildExp5[0]": "301 Date of last entry into the U.S",
-    "[12].ChildINum5[0]": "302 I-94 Number",
-    "[12].ChildStatus5[0]": "303 Status when last admitted",
-    "[12].ChildCurrent5[0]": "304 What is your child's current status?",
-    "[12].ChildExpAuth5[0]": "305 What is the expiration date of his/her authorized stay",
-    "[12].SuppA_CheckBox20[0]": " Is your child in Immigration Court proceedings? Yes",
-    "[12].SuppA_CheckBox20[1]": " Is your child in Immigration Court proceedings? No",
-
-    "[12].SuppA_CheckBox21[0]": " If in the U.S., is this child to be included in this application? (Check the appropriate box.) yes",
-    "[12].SuppA_CheckBox21[1]": " If in the U.S., is this child to be included in this application? (Check the appropriate box.) no",
-
-
-    "[12].TextField12[16]": "306 A-Number (If available)",
-    "[12].TextField12[17]": "307 Passport/ID Card Number",
-    "[12].TextField12[18]": "308 Marital Status",
-    "[12].TextField12[19]": "309 U.S. Social Security Number",
-
-    "[12].TextField12[10]": "310 Complete Last Name",
-    "[12].TextField12[12]": "311 First Name",
-    "[12].TextField12[13]": "312 Middle Name",
-    "[12].DateTimeField14[1]": "313 Date of Birth",
-
-    "[12].TextField12[11]": "314 City and Country of Birth",
-    "[12].TextField12[14]": "315 Nationality",
-    "[12].TextField12[15]": "316 Race, Ethnic, or Tribal Group",
-    "[12].SuppAL12_CheckBox[0]": "Gender Male",
-    "[12].SuppAL12_CheckBox[1]": "Gender Female",
-    "[12].SuppAL13_CheckBox[0]": "Is this child in the U.S. ? Yes",
-    "[12].SuppAL13_CheckBox[1]": "Is this child in the U.S. ? No",
-    "[12].SuppLALine13_Specify2[0]": "317 Specify location",
-
-    "[12].ChildEntry6[0]": "318 Place of last entry into the U.S.",
-    "[12].ChildExp6[0]": "319 Date of last entry into the U.S.",
-    "[12].ChildINum6[0]": "320 I-94 Number",
-    "[12].ChildStatus6[0]": "321 Status when last admitted (Visa type, if any)",
-    "[12].ChildCurrent6[0]": "322 What is your child's current status?",
-    "[12].ChildExpAuth6[0]": "323 What is the expiration date of his/her authorized stay, if any? (mm/dd/yyyy)",
-
-    "[12].SuppALine20_CheckBox2[0]": "Is your child in Immigration Court proceedings? Yes",
-    "[12].SuppALine20_CheckBox2[1]": "Is your child in Immigration Court proceedings? No",
-
-    "[12].SuppALine21_CheckBox[0]": "If in the U.S., is this child to be included in this application? (Check the appropriate box.) Yes",
-    "[12].SuppALine21_CheckBox[1]": "If in the U.S., is this child to be included in this application? (Check the appropriate box.) No",
 
     "[13].PtAILine1_ANumber[2]": "324 A-Number (if available)",
     "[13].DateTimeField58[0]": "325 Date",

@@ -292,6 +292,84 @@ class Form_I_589(StatesGroup):
     # A_II_PtAIILine21_Yes4_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) Yes
     # A_II_PtAIILine21_No4_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
 
+    Supplement_A_IsFillChild5 = State()
+
+    # Child 5
+    Supplement_A_TextField12_6 = State()  # 288 A-Number
+    Supplement_A_TextField12_7 = State()  # 289 Passport/ID Card Number
+    Supplement_A_TextField12_8 = State()  # 290 Marital Status
+    Supplement_A_TextField12_9 = State()  # 291 U_S_ Social Security Number
+    Supplement_A_TextField12_0 = State()  # 292 Complete Last Name
+    Supplement_A_TextField12_2 = State()  # 293 First Name
+    Supplement_A_TextField12_3 = State()  # 294  # Middle Name
+    Supplement_A_DateTimeField14_0 = State()  # 295  # Date of Birth (mm/dd/yyyy)
+    Supplement_A_TextField12_1 = State()  # 296  # City and Country of Birth
+    Supplement_A_TextField12_4 = State()  # 297  # Nationality (Citizenship)
+    Supplement_A_TextField12_5 = State()  # 298 Race Ethnic or Tribal Group
+
+    Supplement_A_ChooseGenderChild5 = State()
+    # Supplement_A_CheckBox12_Gender_0 = State()  # Gender Male
+    # Supplement_A_CheckBox12_Gender_1 = State()  # Gender Female
+
+    Supplement_A_ChooseLocationChild5 = State()
+    # Supplement_A_CheckBox57_0 = State()  # Is this child in the U_S_ ? Yes
+    # Supplement_A_CheckBox57_1 = State()  # Is this child in the U_S_ ? No specify location = State()  # {Supplement_A_SuppLALine13_Specify_0}
+
+    Supplement_A_SuppLALine13_Specify_0 = State()  # 299 Specify location
+    Supplement_A_ChildEntry5_0 = State()  # 300 Place of last entry into the U_S_
+    Supplement_A_ChildExp5_0 = State()  # 301 Date of last entry into the U_S
+    Supplement_A_ChildINum5_0 = State()  # 302 I-94  # Number
+    Supplement_A_ChildStatus5_0 = State()  # 303 Status when last admitted
+    Supplement_A_ChildCurrent5_0 = State()  # 304  # What is your child s current status?
+    Supplement_A_ChildExpAuth5_0 = State()  # 305  # What is the expiration date of his/her authorized stay
+
+    Supplement_A_IsImmigrationCourtProceedingsChild5 = State()
+    # Supplement_A_SuppA_CheckBox20_0 = State()  # Is your child in Immigration Court proceedings? Yes
+    # Supplement_A_SuppA_CheckBox20_1 = State()  # Is your child in Immigration Court proceedings? No
+
+    Supplement_A_IsIncludedInApplicationChild5 = State()
+    # Supplement_A_SuppA_CheckBox21_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) yes
+    # Supplement_A_SuppA_CheckBox21_1 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) no
+
+    Supplement_A_IsFillChild6 = State()
+
+    # Child 6
+    Supplement_A_TextField12_16 = State()  # 306  # A-Number (If available)
+    Supplement_A_TextField12_17 = State()  # 307  # Passport/ID Card Number
+    Supplement_A_TextField12_18 = State()  # 308 Marital Status
+    Supplement_A_TextField12_19 = State()  # 309 U_S_ Social Security Number
+    Supplement_A_TextField12_10 = State()  # 310 Complete Last Name
+    Supplement_A_TextField12_12 = State()  # 311 First Name
+    Supplement_A_TextField12_13 = State()  # 312 Middle Name
+    Supplement_A_DateTimeField14_1 = State()  # 313 Date of Birth
+    Supplement_A_TextField12_11 = State()  # 314  # City and Country of Birth
+    Supplement_A_TextField12_14 = State()  # 315  # Nationality
+    Supplement_A_TextField12_15 = State()  # 316  # Race Ethnic or Tribal Group
+
+    Supplement_A_ChooseGenderChild6 = State()
+    # Supplement_A_SuppAL12_CheckBox_0 = State()  # Gender Male
+    # Supplement_A_SuppAL12_CheckBox_1 = State()  # Gender Female
+
+    Supplement_A_ChooseLocationChild6 = State()
+    # Supplement_A_SuppAL13_CheckBox_0 = State()  # Is this child in the U_S_ ? Yes
+    # Supplement_A_SuppAL13_CheckBox_1 = State()  # Is this child in the U_S_ ? No
+
+    Supplement_A_SuppLALine13_Specify2_0 = State()  # 317  # Specify location
+    Supplement_A_ChildEntry6_0 = State()  # 318 Place of last entry into the U_S_
+    Supplement_A_ChildExp6_0 = State()  # 319 Date of last entry into the U_S_
+    Supplement_A_ChildINum6_0 = State()  # 320 I-94  # Number
+    Supplement_A_ChildStatus6_0 = State()  # 321 Status when last admitted (Visa type if any)
+    Supplement_A_ChildCurrent6_0 = State()  # 322 What is your child s current status?
+    Supplement_A_ChildExpAuth6_0 = State()  # 323 What is the expiration date of his/her authorized stay if any? (mm/dd/yyyy)
+
+    Supplement_A_IsImmigrationCourtProceedingsChild6 = State()
+    # Supplement_A_SuppALine20_CheckBox2_0 = State()  # Is your child in Immigration Court proceedings? Yes
+    # Supplement_A_SuppALine20_CheckBox2_1 = State()  # Is your child in Immigration Court proceedings? No
+
+    Supplement_A_IsIncludedInApplicationChild6 = State()
+    # Supplement_A_SuppALine21_CheckBox_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) Yes
+    # Supplement_A_SuppALine21_CheckBox_1 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
+
     # A III
     # Address Where Don't Fear Persecution
     A_III_TextField13_0 = State()  # 148 Number and Street (Provide if available)
@@ -442,178 +520,212 @@ class Form_I_589(StatesGroup):
     B_Family_Experienced_Harm_Choice = State()
     # B_ckboxyn1a_1 = State()  # Have you your family or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone? No
     # B_ckboxyn1a_0 = State()  # Have you your family or close friends or colleagues ever experienced harm or mistreatment or threats in the past by anyone? Yes
-    # B_TextField14_0 = State()  # 243 If \Yes\ explain in detail = State()
+    B_TextField14_0 = State()  # 243 If \Yes\ explain in detail = State()
 
-    B_ckboxyn1b_1 = State()  # Do you fear harm or mistreatment if you return to your home country? No
-    B_ckboxyn1b_0 = State()  # Do you fear harm or mistreatment if you return to your home country? Yes
+    B_You_Fear_Harm_Or_Mistreatment_Choice = State()
+    # B_ckboxyn1b_1 = State()  # Do you fear harm or mistreatment if you return to your home country? No
+    # B_ckboxyn1b_0 = State()  # Do you fear harm or mistreatment if you return to your home country? Yes
     B_TextField15_0 = State()  # 244  # If \Yes\ explain in detail = State()
 
-    B_ckboxyn2_1 = State()  # Have you or your family members ever been accused charged arrested detained interrogated convicted and sentenced or imprisoned in any country other than the United States (including for an immigration law violation)? No
-    B_ckboxyn2_0 = State()  # Have you or your family members ever been accused charged arrested detained interrogated convicted and sentenced or imprisoned in any country other than the United States (including for an immigration law violation)? Yes
+    B_You_Or_Family_Accused_Charged_Arrested_Detained_Choice = State()
+    # B_ckboxyn2_1 = State()  # Have you or your family members ever been accused charged arrested detained interrogated convicted and sentenced or imprisoned in any country other than the United States (including for an immigration law violation)? No
+    # B_ckboxyn2_0 = State()  # Have you or your family members ever been accused charged arrested detained interrogated convicted and sentenced or imprisoned in any country other than the United States (including for an immigration law violation)? Yes
     B_PBL2_TextField_0 = State()  # 245  # If \Yes\ explain the circumstances and reasons for the action_
 
-    B_ckboxyn3a_1 = State()  # Have you or your family members ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media? No
-    B_ckboxyn3a_0 = State()  # Have you or your family members ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media? Yes
+    B_Been_Associated_With_Any_Organizations_Choice = State()
+    # B_ckboxyn3a_1 = State()  # Have you or your family members ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media? No
+    # B_ckboxyn3a_0 = State()  # Have you or your family members ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media? Yes
     B_PBL3A_TextField_0 = State()  # 246  # If \Yes\ describe for each person the level of participation any leadership or other positions held and the length of time you or your family members were involved in each organization or activity_
 
-    B_ckboxyn3b_1 = State()  # Do you or your family members continue to participate in any way in these organizations or groups? No
-    B_ckboxyn3b_0 = State()  # Do you or your family members continue to participate in any way in these organizations or groups? Yes
+    B_Continue_To_Participate_In_Organizations_Choice = State()
+    # B_ckboxyn3b_1 = State()  # Do you or your family members continue to participate in any way in these organizations or groups? No
+    # B_ckboxyn3b_0 = State()  # Do you or your family members continue to participate in any way in these organizations or groups? Yes
     B_PBL3B_TextField_0 = State()  # 247  # If \Yes\ describe for each person your or your family members  current level of participation any leadership or other positions currently held and the length of time you or your family members have been involved in each organization or group_
 
-    B_ckboxyn4_1 = State()  # Are you afraid of being subjected to torture in your home country or any other country to which you may be returned? No
-    B_ckboxyn4_0 = State()  # Are you afraid of being subjected to torture in your home country or any other country to which you may be returned? Yes
+    B_Afraid_Of_Being_Subjected_To_Torture_Choice = State()
+    # B_ckboxyn4_1 = State()  # Are you afraid of being subjected to torture in your home country or any other country to which you may be returned? No
+    # B_ckboxyn4_0 = State()  # Are you afraid of being subjected to torture in your home country or any other country to which you may be returned? Yes
     B_PB4_TextField_0 = State()  # 248 If \Yes\ explain why you are afraid and describe the nature of torture you fear by whom and why it would be inflicted_
 
-    C_ckboxync1_0 = State()  # Have you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal? Yes
-    C_ckboxync1_1 = State()  # Have you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal? No
+    C_Family_Applied_For_USRefugee_Status_Choice = State()
+    # C_ckboxync1_0 = State()  # Have you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal? Yes
+    # C_ckboxync1_1 = State()  # Have you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal? No
     C_PCL1_TextField_0 = State()  # 249 If \Yes\ explain the decision and what happened
 
-    C_ckboxync2a_0 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? Yes
-    C_ckboxync2a_1 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? No
+    C_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice = State()
+    # C_ckboxync2a_0 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? Yes
+    # C_ckboxync2a_1 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? No
 
-    C_ckboxync2b_0 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? Yes
-    C_ckboxync2b_1 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? No
+    C_Family_Recieved_Any_Lawful_Status_Choice = State()
+    # C_ckboxync2b_0 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? Yes
+    # C_ckboxync2b_1 = State()  # After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States? No
     C_PCL2B_TextField_0 = State()  # 250 If \Yes\
 
-    C_ckboxync3_0 = State()  # Have you your spouse or your child(ren) ever ordered incited assisted or otherwise participated in causing harm or suffering to any person because of his or her race religion nationality membership in a particular social group or belief in a particular political opinion? Yes
-    C_ckboxync3_1 = State()  # Have you your spouse or your child(ren) ever ordered incited assisted or otherwise participated in causing harm or suffering to any person because of his or her race religion nationality membership in a particular social group or belief in a particular political opinion? No
+    C_You_Or_Family_Caused_Harm_Or_Suffering_Choice = State()
+    # C_ckboxync3_0 = State()  # Have you your spouse or your child(ren) ever ordered incited assisted or otherwise participated in causing harm or suffering to any person because of his or her race religion nationality membership in a particular social group or belief in a particular political opinion? Yes
+    # C_ckboxync3_1 = State()  # Have you your spouse or your child(ren) ever ordered incited assisted or otherwise participated in causing harm or suffering to any person because of his or her race religion nationality membership in a particular social group or belief in a particular political opinion? No
     C_PCL3_TextField_0 = State()  # 251 If \Yes\
 
-    C_PCckboxyn4_0 = State()  # After you left the country where you were harmed or fear harm did you return to that country? Yes
-    C_PCckboxyn4_1 = State()  # After you left the country where you were harmed or fear harm did you return to that country? No
+    C_Returned_To_Bad_Country_Choice = State()
+    # C_PCckboxyn4_0 = State()  # After you left the country where you were harmed or fear harm did you return to that country? Yes
+    # C_PCckboxyn4_1 = State()  # After you left the country where you were harmed or fear harm did you return to that country? No
     C_PCL4_TextField_0 = State()  # 252 If \Yes\ describe in detail the circumstances of your visit(s)
 
-    C_ckboxync5_0 = State()  # Are you filing this application more than 1 year after your last arrival in the United States? Yes
-    C_ckboxync5_1 = State()  # Are you filing this application more than 1 year after your last arrival in the United States? No
+    C_Last_Arrival_To_US_More_Than_1_Year_Choice = State()
+    # C_ckboxync5_0 = State()  # Are you filing this application more than 1 year after your last arrival in the United States? Yes
+    # C_ckboxync5_1 = State()  # Are you filing this application more than 1 year after your last arrival in the United States? No
     C_PCL5_TextField_0 = State()  # 253 If \Yes\ explain why you did not file within the first year after you arrived
 
-    C_ckboxync6_0 = State()  # Have you or any member of your family included in the application ever committed any crime and/or been arrested charged convicted or sentenced for any crimes in the United States (including for an immigration law violation)? Yes
-    C_ckboxync6_1 = State()  # Have you or any member of your family included in the application ever committed any crime and/or been arrested charged convicted or sentenced for any crimes in the United States (including for an immigration law violation)? No
+    C_You_Or_Family_Did_Crime_Choice = State()
+    # C_ckboxync6_0 = State()  # Have you or any member of your family included in the application ever committed any crime and/or been arrested charged convicted or sentenced for any crimes in the United States (including for an immigration law violation)? Yes
+    # C_ckboxync6_1 = State()  # Have you or any member of your family included in the application ever committed any crime and/or been arrested charged convicted or sentenced for any crimes in the United States (including for an immigration law violation)? No
     C_PCL6_TextField_0 = State()  # 254  # If \Yes\ for each instance specify in your response = State()  # what occurred and the circumstances
+
 
     D_TextField20_0 = State()  # 255  # Print your complete name_
     D_TextField20_1 = State()  # 256  # Write your name in your native alphabet
 
-    D_PtD_ckboxynd1_0 = State()  # Did your spouse parent or child(ren) assist you in completing this application? Yes (If \Yes\ list the name and relationship_)
-    D_PtD_ckboxynd1_1 = State()  # Did your spouse parent or child(ren) assist you in completing this application? No
+    D_Family_Helped_Complete_Application = State()
+    # D_PtD_ckboxynd1_0 = State()  # Did your spouse parent or child(ren) assist you in completing this application? Yes (If \Yes\ list the name and relationship_)
+    # D_PtD_ckboxynd1_1 = State()  # Did your spouse parent or child(ren) assist you in completing this application? No
 
     D_PtD_ChildName1_0 = State()  # 257  # Name
     D_PtD_RelationshipOfChild1_0 = State()  # 258 Relationship
     D_PtD_ChildName2_0 = State()  # 259 Name
     D_PtD_RelationshipOfChild2_0 = State()  # 260 Relationship
 
-    D_ckboxynd2_0 = State()  # Did someone other than your spouse parent or child(ren) prepare this application? Yes (If \Yes\complete Part E_)
-    D_ckboxynd2_1 = State()  # Did someone other than your spouse parent or child(ren) prepare this application? No
+    D_Not_Family_Helped_Complete_Application = State()
+    # D_ckboxynd2_0 = State()  # Did someone other than your spouse parent or child(ren) prepare this application? Yes (If \Yes\complete Part E_)
+    # D_ckboxynd2_1 = State()  # Did someone other than your spouse parent or child(ren) prepare this application? No
 
-    D_ckboxynd3_0 = State()  # Asylum applicants may be represented by counsel_ Have you been provided with a list of persons who may be available to assist you at little or no cost with your asylum claim? Yes
-    D_ckboxynd3_1 = State()  # Asylum applicants may be represented by counsel_ Have you been provided with a list of persons who may be available to assist you at little or no cost with your asylum claim? No
+    D_Provided_With_List_Of_Persons_Who_May_Assist_Choice = State()
+    # D_ckboxynd3_0 = State()  # Asylum applicants may be represented by counsel_ Have you been provided with a list of persons who may be available to assist you at little or no cost with your asylum claim? Yes
+    # D_ckboxynd3_1 = State()  # Asylum applicants may be represented by counsel_ Have you been provided with a list of persons who may be available to assist you at little or no cost with your asylum claim? No
 
     D_TextField22_0 = State()  # 261 Signature
     D_DateTimeField48_0 = State()  # 262 Date of Signature
 
-    D_PtE_PreparerSignature_0 = State()  # 263 Signature of Preparer
-    D_PtE_PreparerName_0 = State()  # 264  # Print Complete Name of Preparer
-    D_TextField25_1 = State()  # 265  # Daytime Telephone Number
-    D_TextField25_0 = State()  # 266  # Daytime Telephone Number
-    D_PtE_StreetNumAndName_0 = State()  # 267  # Address of Preparer = State()  # Street Number and Name
-    D_PtE_AptNumber_0 = State()  # 268 Apt_ Number
-    D_PtE_City_0 = State()  # 269 City
-    D_PtE_State_0 = State()  # 270 State
-    D_PtE_ZipCode_0 = State()  # 271 Zip Code
-    D_CheckBox1_0 = State()  # Select this box if Form G-28 is attached_
-    D_AttorneyStateBarNumber_0 = State()  # 272 Attorney State Bar Number
-    D_USCISOnlineAcctNumber_0 = State()  # 273
+    E_PtE_PreparerSignature_0 = State()  # 263 Signature of Preparer
+    E_PtE_PreparerName_0 = State()  # 264  # Print Complete Name of Preparer
+    E_TextField25_1 = State()  # 265  # Daytime Telephone Number
+    E_TextField25_0 = State()  # 266  # Daytime Telephone Number
+    E_PtE_StreetNumAndName_0 = State()  # 267  # Address of Preparer = State()  # Street Number and Name
+    E_PtE_AptNumber_0 = State()  # 268 Apt_ Number
+    E_PtE_City_0 = State()  # 269 City
+    E_PtE_State_0 = State()  # 270 State
+    E_PtE_ZipCode_0 = State()  # 271 Zip Code
+    E_Form_G_28_Attached_Choice = State()
+    # E_CheckBox1_0 = State()  # Select this box if Form G-28 is attached_
+    E_AttorneyStateBarNumber_0 = State()  # 272 Attorney State Bar Number
+    E_USCISOnlineAcctNumber_0 = State()  # 273
 
-    F_CheckBox32_0 = State()  # All True
-    F_CheckBox32_1 = State()  # Not All True
-    F_TextField26_0 = State()  # 274  #
-    F_TextField26_1 = State()  # 275  #
+    F_All_True_Or_Not_True_Application = State()
+    # F_CheckBox32_0 = State()  # All True
+    # F_CheckBox32_1 = State()  # Not All True
+    F_TextField26_0 = State()  # 274 Correction Number
+    F_TextField26_1 = State()  # 275 Correction Number
     F_TextField27_2 = State()  # 276  # Signature of applicant
     F_DateTimeField49_0 = State()  # 277  # Date (mm/dd/yyyy)
     F_TextField27_1 = State()  # 278 Write Your Name in Your Native Alphabet
-    F_TextField27_0 = State()  # Signature of Asylum Officer
+    # F_TextField27_0 = State()  # Signature of Asylum Officer
 
-    G_PG_CheckBox_0 = State()  # All True
-    G_PG_CheckBox_1 = State()  # Not All True
-    G_TextField26_2 = State()  # 279
-    G_TextField26_3 = State()  # 280
+    G_All_True_Or_Not_True_Application = State()
+    # G_PG_CheckBox_0 = State()  # All True
+    # G_PG_CheckBox_1 = State()  # Not All True
+    G_TextField26_2 = State()  # 279 Correction Number
+    G_TextField26_3 = State()  # 280 Correction Number
 
     G_TextField27_5 = State()  # 281 Signature of Applicant
     G_DateTimeField50_0 = State()  # 282 Date (mm/dd/yyyy)
     G_TextField27_4 = State()  # 283 Write Your Name in Your Native Alphabet
-    G_TextField27_3 = State()  # Signature of Immigration Judge
+    # G_TextField27_3 = State()  # Signature of Immigration Judge
 
     Supplement_A_PtAILine1_ANumber_1 = State()  # 284  # A-Number (If available)
     Supplement_A_DateTimeField57_0 = State()  # 285  # Date
     Supplement_A_ApplicantName_0 = State()  # 286  # Applicant s Name
     Supplement_A_TextField28_0 = State()  # 287  # Applicant s Signature
 
-    Supplement_A_TextField12_6 = State()  # 288 A-Number
-    Supplement_A_TextField12_7 = State()  # 289 Passport/ID Card Number
-    Supplement_A_TextField12_8 = State()  # 290 Marital Status
-    Supplement_A_TextField12_9 = State()  # 291 U_S_ Social Security Number
-
-    Supplement_A_TextField12_0 = State()  # 292 Complete Last Name
-    Supplement_A_TextField12_2 = State()  # 293 First Name
-    Supplement_A_TextField12_3 = State()  # 294  # Middle Name
-    Supplement_A_DateTimeField14_0 = State()  # 295  # Date of Birth (mm/dd/yyyy)
-
-    Supplement_A_TextField12_1 = State()  # 296  # City and Country of Birth
-    Supplement_A_TextField12_4 = State()  # 297  # Nationality (Citizenship)
-    Supplement_A_TextField12_5 = State()  # 298 Race Ethnic or Tribal Group
-    Supplement_A_CheckBox12_Gender_0 = State()  # Gender Male
-    Supplement_A_CheckBox12_Gender_1 = State()  # Gender Female
-    Supplement_A_CheckBox57_0 = State()  # Is this child in the U_S_ ? Yes
-    Supplement_A_CheckBox57_1 = State()  # Is this child in the U_S_ ? No specify location = State()  # {Supplement_A_SuppLALine13_Specify_0}
-    Supplement_A_SuppLALine13_Specify_0 = State()  # 299 Specify location
-    Supplement_A_ChildEntry5_0 = State()  # 300 Place of last entry into the U_S_
-    Supplement_A_ChildExp5_0 = State()  # 301 Date of last entry into the U_S
-    Supplement_A_ChildINum5_0 = State()  # 302 I-94  # Number
-    Supplement_A_ChildStatus5_0 = State()  # 303 Status when last admitted
-    Supplement_A_ChildCurrent5_0 = State()  # 304  # What is your child s current status?
-    Supplement_A_ChildExpAuth5_0 = State()  # 305  # What is the expiration date of his/her authorized stay
-    Supplement_A_SuppA_CheckBox20_0 = State()  # Is your child in Immigration Court proceedings? Yes
-    Supplement_A_SuppA_CheckBox20_1 = State()  # Is your child in Immigration Court proceedings? No
-
-    Supplement_A_SuppA_CheckBox21_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) yes
-    Supplement_A_SuppA_CheckBox21_1 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) no
-
-    Supplement_A_TextField12_16 = State()  # 306  # A-Number (If available)
-    Supplement_A_TextField12_17 = State()  # 307  # Passport/ID Card Number
-    Supplement_A_TextField12_18 = State()  # 308 Marital Status
-    Supplement_A_TextField12_19 = State()  # 309 U_S_ Social Security Number
-
-    Supplement_A_TextField12_10 = State()  # 310 Complete Last Name
-    Supplement_A_TextField12_12 = State()  # 311 First Name
-    Supplement_A_TextField12_13 = State()  # 312 Middle Name
-    Supplement_A_DateTimeField14_1 = State()  # 313 Date of Birth
-
-    Supplement_A_TextField12_11 = State()  # 314  # City and Country of Birth
-    Supplement_A_TextField12_14 = State()  # 315  # Nationality
-    Supplement_A_TextField12_15 = State()  # 316  # Race Ethnic or Tribal Group
-    Supplement_A_SuppAL12_CheckBox_0 = State()  # Gender Male
-    Supplement_A_SuppAL12_CheckBox_1 = State()  # Gender Female
-    Supplement_A_SuppAL13_CheckBox_0 = State()  # Is this child in the U_S_ ? Yes
-    Supplement_A_SuppAL13_CheckBox_1 = State()  # Is this child in the U_S_ ? No
-    Supplement_A_SuppLALine13_Specify2_0 = State()  # 317  # Specify location
-
-    Supplement_A_ChildEntry6_0 = State()  # 318 Place of last entry into the U_S_
-    Supplement_A_ChildExp6_0 = State()  # 319 Date of last entry into the U_S_
-    Supplement_A_ChildINum6_0 = State()  # 320 I-94  # Number
-    Supplement_A_ChildStatus6_0 = State()  # 321 Status when last admitted (Visa type if any)
-    Supplement_A_ChildCurrent6_0 = State()  # 322 What is your child s current status?
-    Supplement_A_ChildExpAuth6_0 = State()  # 323 What is the expiration date of his/her authorized stay if any? (mm/dd/yyyy)
-
-    Supplement_A_SuppALine20_CheckBox2_0 = State()  # Is your child in Immigration Court proceedings? Yes
-    Supplement_A_SuppALine20_CheckBox2_1 = State()  # Is your child in Immigration Court proceedings? No
-
-    Supplement_A_SuppALine21_CheckBox_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) Yes
-    Supplement_A_SuppALine21_CheckBox_1 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
+    # Supplement_A_IsFillChild5 = State()
+    # # Child 5
+    # Supplement_A_TextField12_6 = State()  # 288 A-Number
+    # Supplement_A_TextField12_7 = State()  # 289 Passport/ID Card Number
+    # Supplement_A_TextField12_8 = State()  # 290 Marital Status
+    # Supplement_A_TextField12_9 = State()  # 291 U_S_ Social Security Number
+    # Supplement_A_TextField12_0 = State()  # 292 Complete Last Name
+    # Supplement_A_TextField12_2 = State()  # 293 First Name
+    # Supplement_A_TextField12_3 = State()  # 294  # Middle Name
+    # Supplement_A_DateTimeField14_0 = State()  # 295  # Date of Birth (mm/dd/yyyy)
+    # Supplement_A_TextField12_1 = State()  # 296  # City and Country of Birth
+    # Supplement_A_TextField12_4 = State()  # 297  # Nationality (Citizenship)
+    # Supplement_A_TextField12_5 = State()  # 298 Race Ethnic or Tribal Group
+    #
+    # Supplement_A_ChooseGenderChild5 = State()
+    # # Supplement_A_CheckBox12_Gender_0 = State()  # Gender Male
+    # # Supplement_A_CheckBox12_Gender_1 = State()  # Gender Female
+    #
+    # Supplement_A_ChooseLocationChild5 = State()
+    # # Supplement_A_CheckBox57_0 = State()  # Is this child in the U_S_ ? Yes
+    # # Supplement_A_CheckBox57_1 = State()  # Is this child in the U_S_ ? No specify location = State()  # {Supplement_A_SuppLALine13_Specify_0}
+    #
+    # Supplement_A_SuppLALine13_Specify_0 = State()  # 299 Specify location
+    # Supplement_A_ChildEntry5_0 = State()  # 300 Place of last entry into the U_S_
+    # Supplement_A_ChildExp5_0 = State()  # 301 Date of last entry into the U_S
+    # Supplement_A_ChildINum5_0 = State()  # 302 I-94  # Number
+    # Supplement_A_ChildStatus5_0 = State()  # 303 Status when last admitted
+    # Supplement_A_ChildCurrent5_0 = State()  # 304  # What is your child s current status?
+    # Supplement_A_ChildExpAuth5_0 = State()  # 305  # What is the expiration date of his/her authorized stay
+    #
+    # Supplement_A_IsImmigrationCourtProceedingsChild5 = State()
+    # # Supplement_A_SuppA_CheckBox20_0 = State()  # Is your child in Immigration Court proceedings? Yes
+    # # Supplement_A_SuppA_CheckBox20_1 = State()  # Is your child in Immigration Court proceedings? No
+    #
+    # Supplement_A_IsIncludedInApplicationChild5 = State()
+    # # Supplement_A_SuppA_CheckBox21_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) yes
+    # # Supplement_A_SuppA_CheckBox21_1 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) no
+    #
+    # # Child 6
+    # Supplement_A_TextField12_16 = State()  # 306  # A-Number (If available)
+    # Supplement_A_TextField12_17 = State()  # 307  # Passport/ID Card Number
+    # Supplement_A_TextField12_18 = State()  # 308 Marital Status
+    # Supplement_A_TextField12_19 = State()  # 309 U_S_ Social Security Number
+    # Supplement_A_TextField12_10 = State()  # 310 Complete Last Name
+    # Supplement_A_TextField12_12 = State()  # 311 First Name
+    # Supplement_A_TextField12_13 = State()  # 312 Middle Name
+    # Supplement_A_DateTimeField14_1 = State()  # 313 Date of Birth
+    # Supplement_A_TextField12_11 = State()  # 314  # City and Country of Birth
+    # Supplement_A_TextField12_14 = State()  # 315  # Nationality
+    # Supplement_A_TextField12_15 = State()  # 316  # Race Ethnic or Tribal Group
+    #
+    # Supplement_A_ChooseGenderChild6 = State()
+    # # Supplement_A_SuppAL12_CheckBox_0 = State()  # Gender Male
+    # # Supplement_A_SuppAL12_CheckBox_1 = State()  # Gender Female
+    #
+    # Supplement_A_ChooseLocationChild6 = State()
+    # # Supplement_A_SuppAL13_CheckBox_0 = State()  # Is this child in the U_S_ ? Yes
+    # # Supplement_A_SuppAL13_CheckBox_1 = State()  # Is this child in the U_S_ ? No
+    #
+    # Supplement_A_SuppLALine13_Specify2_0 = State()  # 317  # Specify location
+    # Supplement_A_ChildEntry6_0 = State()  # 318 Place of last entry into the U_S_
+    # Supplement_A_ChildExp6_0 = State()  # 319 Date of last entry into the U_S_
+    # Supplement_A_ChildINum6_0 = State()  # 320 I-94  # Number
+    # Supplement_A_ChildStatus6_0 = State()  # 321 Status when last admitted (Visa type if any)
+    # Supplement_A_ChildCurrent6_0 = State()  # 322 What is your child s current status?
+    # Supplement_A_ChildExpAuth6_0 = State()  # 323 What is the expiration date of his/her authorized stay if any? (mm/dd/yyyy)
+    #
+    # Supplement_A_IsImmigrationCourtProceedingsChild6 = State()
+    # Supplement_A_SuppALine20_CheckBox2_0 = State()  # Is your child in Immigration Court proceedings? Yes
+    # Supplement_A_SuppALine20_CheckBox2_1 = State()  # Is your child in Immigration Court proceedings? No
+    #
+    # Supplement_A_IsIncludedInApplicationChild6 = State()
+    # Supplement_A_SuppALine21_CheckBox_0 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) Yes
+    # Supplement_A_SuppALine21_CheckBox_1 = State()  # If in the U_S_ is this child to be included in this application? (Check the appropriate box_) No
 
     Supplement_B_PtAILine1_ANumber_2 = State()  # 324  # A-Number (if available)
     Supplement_B_DateTimeField58_0 = State()  # 325  # Date
     Supplement_B_SupBApplicantName_0 = State()  # 326  # Applicant s Name
     Supplement_B_TextField30_0 = State()  # 327  # Applicant s Signature
+
+    Supplement_B_Fill_Choice = State()
 
     Supplement_B_TextField31_0 = State()  # 328  # Part
     Supplement_B_TextField31_1 = State()  # 329  # Question
