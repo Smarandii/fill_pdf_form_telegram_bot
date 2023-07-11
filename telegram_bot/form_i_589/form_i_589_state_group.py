@@ -576,7 +576,6 @@ class Form_I_589(StatesGroup):
     # C_ckboxync6_1 = State()  # Have you or any member of your family included in the application ever committed any crime and/or been arrested charged convicted or sentenced for any crimes in the United States (including for an immigration law violation)? No
     C_PCL6_TextField_0 = State()  # 254  # If \Yes\ for each instance specify in your response = State()  # what occurred and the circumstances
 
-
     D_TextField20_0 = State()  # 255  # Print your complete name_
     D_TextField20_1 = State()  # 256  # Write your name in your native alphabet
 

@@ -20,7 +20,12 @@ from telegram_bot.form_i_589.f_i_589_keyboards import \
     Form_I_589_2Sibling_Deceased_Choice, \
     Form_I_589_3Sibling_Deceased_Choice, \
     Form_I_589_Asylum_Reason_Choice, \
-    Form_I_589_Family_Experienced_Harm_Choice
+    Form_I_589_Family_Experienced_Harm_Choice, Form_I_589_You_Been_Associated_With_Any_Organizations_Choice, \
+    Form_I_589_You_Continue_To_Participate_In_Organizations_Choice, \
+    Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice, Form_I_589_Family_Applied_For_USRefugee_Status_Choice, \
+    Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice, \
+    Form_I_589_Family_Recieved_Any_Lawful_Status_Choice, Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice, \
+    Form_I_589_Returned_To_Bad_Country_Choice
 
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 
@@ -3692,6 +3697,17 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Why you believe the harm or mistreatment or threats occurred")
 
 
+@dp.message_handler(state=Form_I_589.B_TextField14_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[5].#subform[6].TextField14[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Do you fear harm or mistreatment if you return to your home country?",
+                           reply_markup=keyboard.markup)
+
+
 @dp.callback_query_handler(text="no_family_harm",
                            state=Form_I_589.B_Family_Experienced_Harm_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
@@ -3712,11 +3728,23 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].ckboxyn1b[0]'] = callback_query.data
         data['[5].#subform[6].ckboxyn1b[1]'] = ""
-    await Form_I_589.next()
+    await Form_I_589.B_TextField15_0.set()
     await bot.send_message(callback_query.from_user.id, "You indicated that you fear harm or mistreatment if you return to your home country")
-    keyboard = Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Have you or your family members ever been accused, charged, arrested, detained, interrogated, convicted and sentenced, or imprisoned in any country other than the United States (including for an immigration law violation)?",
+                           "If Yes, explain in detail:\n"
+                           "1. What harm or mistreatment you fear;\n"
+                           "2. Who you believe would harm or mistreat you; and\n"
+                           "3. Why you believe you would or could be harmed or mistreated.")
+
+
+@dp.message_handler(state=Form_I_589.B_TextField15_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[5].#subform[6].TextField14[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Do you fear harm or mistreatment if you return to your home country?",
                            reply_markup=keyboard.markup)
 
 
@@ -3734,6 +3762,305 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            reply_markup=keyboard.markup)
 
 
+@dp.callback_query_handler(text="yes_violated_law",
+                           state=Form_I_589.B_You_Or_Family_Accused_Charged_Arrested_Detained_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn2[0]'] = callback_query.data
+        data['[7].ckboxyn2[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you or your family members have been accused, charged, arrested, detained, interrogated, convicted and sentenced, or imprisoned in any country other than the United States")
+    await bot.send_message(callback_query.from_user.id,
+                           "If Yes, explain the circumstances and reasons for the action.")
 
 
+@dp.message_handler(state=Form_I_589.B_PBL2_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].PBL2_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Been_Associated_With_Any_Organizations_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Have you or your family members ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media?",
+                           reply_markup=keyboard.markup)
 
+
+@dp.callback_query_handler(text="no_violated_law",
+                           state=Form_I_589.B_You_Or_Family_Accused_Charged_Arrested_Detained_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn2[1]'] = callback_query.data
+        data['[7].ckboxyn2[0]'] = ""
+    await Form_I_589.B_Been_Associated_With_Any_Organizations_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you or your family members have never been accused, charged, arrested, detained, interrogated, convicted and sentenced, or imprisoned in any country other than the United States")
+    keyboard = Form_I_589_You_Been_Associated_With_Any_Organizations_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Have you or your family members ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_You_Been_Associated_With_Any_Organizations",
+                           state=Form_I_589.B_Been_Associated_With_Any_Organizations_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn3a[0]'] = callback_query.data
+        data['[7].ckboxyn3a[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you or your family members have ever belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media?")
+    await bot.send_message(callback_query.from_user.id,
+                           "Describe for each person the level of participation, any leadership or other positions held, and the length of time you or your family members were involved in each organization or activity.")
+
+
+@dp.message_handler(state=Form_I_589.B_PBL3A_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].PBL3A_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Continue_To_Participate_In_Organizations_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Do you or your family members continue to participate in any way in these organizations or groups?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_You_Been_Associated_With_Any_Organizations",
+                           state=Form_I_589.B_Been_Associated_With_Any_Organizations_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn3a[1]'] = callback_query.data
+        data['[7].ckboxyn3a[0]'] = ""
+    await Form_I_589.B_Continue_To_Participate_In_Organizations_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you or your family members have never belonged to or been associated with any organizations or groups in your home country such as but not limited to a political party student group labor union religious organization military or paramilitary group civil patrol guerrilla organization ethnic group human rights group or the press or media?")
+    keyboard = Form_I_589_You_Continue_To_Participate_In_Organizations_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Do you or your family members continue to participate in any way in these organizations or groups?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_You_Continue_To_Participate_In_Organizations",
+                           state=Form_I_589.B_Been_Associated_With_Any_Organizations_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn3b[0]'] = callback_query.data
+        data['[7].ckboxyn3b[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you or your family members continue to participate in any way in these organizations or groups")
+    await bot.send_message(callback_query.from_user.id,
+                           "Describe for each person your or your family members' current level of participation, any leadership or other positions currently held, and the length of time you or your family members have been involved in each organization or group.")
+
+
+@dp.message_handler(state=Form_I_589.B_PBL3B_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].PBL3B_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Are you afraid of being subjected to torture in your home country or any other country to which you may be returned?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_You_Continue_To_Participate_In_Organizations",
+                           state=Form_I_589.B_Been_Associated_With_Any_Organizations_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn3b[1]'] = callback_query.data
+        data['[7].ckboxyn3b[0]'] = ""
+    await Form_I_589.B_Afraid_Of_Being_Subjected_To_Torture_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you or your family members don't continue to participate in any way in these organizations or groups")
+    keyboard = Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Are you afraid of being subjected to torture in your home country or any other country to which you may be returned?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_You_Afraid_Of_Being_Subjected_To_Torture",
+                           state=Form_I_589.B_Afraid_Of_Being_Subjected_To_Torture_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn4[0]'] = callback_query.data
+        data['[7].ckboxyn4[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you afraid of being subjected to torture in your home country or any other country to which you may be returned?")
+    await bot.send_message(callback_query.from_user.id,
+                           "Explain why you are afraid and describe the nature of torture you fear, by whom, and why it would be inflicted.")
+
+
+@dp.message_handler(state=Form_I_589.B_PB4_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].PBL3B_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Family_Applied_For_USRefugee_Status_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Have you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_You_Afraid_Of_Being_Subjected_To_Torture",
+                           state=Form_I_589.B_Afraid_Of_Being_Subjected_To_Torture_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].ckboxyn4[1]'] = callback_query.data
+        data['[7].ckboxyn4[0]'] = ""
+    await Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you don't afraid of being subjected to torture in your home country or any other country to which you may be returned?")
+    keyboard = Form_I_589_Family_Applied_For_USRefugee_Status_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Have you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Family_Applied_For_USRefugee_Status",
+                           state=Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync1[0]'] = callback_query.data
+        data['[8].ckboxync1[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you your spouse your child(ren) your parents or your siblings ever applied to the U_S_ Government for refugee status asylum or withholding of removal")
+    await bot.send_message(callback_query.from_user.id,
+                           "Explain the decision and what happened to any status you, your spouse, your child(ren), your parents, or your siblings received as a result of that decision. Indicate whether or not you were included in a parent or spouse's application. If so, include your parent or spouse's A-number in your response. If you have been denied asylum by an immigration judge or the Board of Immigration Appeals, describe any change(s) in conditions in your country or your own personal circumstances since the date of the denial that may affect your eligibility for asylum.")
+
+
+@dp.message_handler(state=Form_I_589.C_PCL1_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[7].PBL3B_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice()
+    await bot.send_message(message.from_user.id,
+                           "After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Family_Applied_For_USRefugee_Status",
+                           state=Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync1[1]'] = callback_query.data
+        data['[8].ckboxync1[0]'] = ""
+    await Form_I_589.C_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you your spouse your child(ren) your parents or your siblings have never applied to the U_S_ Government for refugee status asylum or withholding of removal")
+    keyboard = Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Family_Travel_Or_Reside_In_Other_Countries_Before_US",
+                           state=Form_I_589.C_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync2a[0]'] = callback_query.data
+        data['[8].ckboxync2a[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you or your spouse or child(ren) who are now in the United States have traveled through or reside in any other country before entering the United States")
+    keyboard = Form_I_589_Family_Recieved_Any_Lawful_Status_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Family_Travel_Or_Reside_In_Other_Countries_Before_US",
+                           state=Form_I_589.C_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync2a[1]'] = callback_query.data
+        data['[8].ckboxync2a[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you or your spouse or child(ren) who are now in the United States have not traveled through or reside in any other country before entering the United States")
+    keyboard = Form_I_589_Family_Recieved_Any_Lawful_Status_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "After leaving the country from which you are claiming asylum did you or your spouse or child(ren) who are now in the United States travel through or reside in any other country before entering the United States?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Family_Recieved_Any_Lawful_Status",
+                           state=Form_I_589.C_Family_Recieved_Any_Lawful_Status_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync2b[0]'] = callback_query.data
+        data['[8].ckboxync2b[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you, your spouse, your child(ren), or other family members, such as your parents or siblings, ever applied for or received any lawful status in any country other than the one from which you are now claiming asylum")
+    await bot.send_message(callback_query.from_user.id,
+                           """Provide for each person the following: the name of each country and the length of stay, the
+person's status while there, the reasons for leaving, whether or not the person is entitled to return for lawful residence purposes, and whether the
+person applied for refugee status or for asylum while there, and if not, why he or she did not do so""")
+
+
+@dp.callback_query_handler(text="no_Family_Recieved_Any_Lawful_Status",
+                           state=Form_I_589.C_Family_Recieved_Any_Lawful_Status_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync2b[1]'] = callback_query.data
+        data['[8].ckboxync2b[0]'] = ""
+        answered_yes_in_previous_question = data['[8].ckboxync2a[0]']
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you, your spouse, your child(ren), or other family members, such as your parents or siblings, ever applied for or received any lawful status in any country other than the one from which you are now claiming asylum")
+    if answered_yes_in_previous_question:
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id,
+                               """Provide for each person the following: the name of each country and the length of stay, the
+    person's status while there, the reasons for leaving, whether or not the person is entitled to return for lawful residence purposes, and whether the
+    person applied for refugee status or for asylum while there, and if not, why he or she did not do so""")
+    else:
+        keyboard = Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "Have you, your spouse or your child(ren) ever ordered, incited, assisted or otherwise participated in causing harm or suffering to any person because of his or her race, religion, nationality, membership in a particular social group or belief in a particular political opinion?",
+                               reply_markup=keyboard.markup)
+
+
+@dp.message_handler(state=Form_I_589.C_PCL2B_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].PCL2B_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Have you, your spouse or your child(ren) ever ordered, incited, assisted or otherwise participated in causing harm or suffering to any person because of his or her race, religion, nationality, membership in a particular social group or belief in a particular political opinion?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_You_Or_Family_Caused_Harm_Or_Suffering",
+                           state=Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync3[0]'] = callback_query.data
+        data['[8].ckboxync3[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you, your spouse or your child(ren) ever ordered, incited, assisted or otherwise participated in causing harm or suffering to any person because of his or her race, religion, nationality, membership in a particular social group or belief in a particular political opinion")
+    await bot.send_message(callback_query.from_user.id,
+                           "Explain the decision and what happened to any status you, your spouse, your child(ren), your parents, or your siblings received as a result of that decision. Indicate whether or not you were included in a parent or spouse's application. If so, include your parent or spouse's A-number in your response. If you have been denied asylum by an immigration judge or the Board of Immigration Appeals, describe any change(s) in conditions in your country or your own personal circumstances since the date of the denial that may affect your eligibility for asylum.")
+
+
+@dp.message_handler(state=Form_I_589.C_PCL3_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].PCL3_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Returned_To_Bad_Country_Choice()
+    await bot.send_message(message.from_user.id,
+                           "After you left the country where you were harmed or fear harm, did you return to that country?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_You_Or_Family_Caused_Harm_Or_Suffering",
+                           state=Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[8].ckboxync1[1]'] = callback_query.data
+        data['[8].ckboxync1[0]'] = ""
+    await Form_I_589.C_Returned_To_Bad_Country_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you, your spouse or your child(ren) have never ordered, incited, assisted or otherwise participated in causing harm or suffering to any person because of his or her race, religion, nationality, membership in a particular social group or belief in a particular political opinion")
+    keyboard = Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "After you left the country where you were harmed or fear harm, did you return to that country?",
+                           reply_markup=keyboard.markup)
