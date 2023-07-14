@@ -608,10 +608,10 @@ class Form_I_589(StatesGroup):
     E_PtE_City_0 = State()  # 269 City
     E_PtE_State_0 = State()  # 270 State
     E_PtE_ZipCode_0 = State()  # 271 Zip Code
-    E_Form_G_28_Attached_Choice = State()
-    # E_CheckBox1_0 = State()  # Select this box if Form G-28 is attached_
-    E_AttorneyStateBarNumber_0 = State()  # 272 Attorney State Bar Number
-    E_USCISOnlineAcctNumber_0 = State()  # 273
+    # E_Form_G_28_Attached_Choice = State()
+    # # E_CheckBox1_0 = State()  # Select this box if Form G-28 is attached_
+    # E_AttorneyStateBarNumber_0 = State()  # 272 Attorney State Bar Number
+    # E_USCISOnlineAcctNumber_0 = State()  # 273
 
     F_All_True_Or_Not_True_Application = State()
     # F_CheckBox32_0 = State()  # All True

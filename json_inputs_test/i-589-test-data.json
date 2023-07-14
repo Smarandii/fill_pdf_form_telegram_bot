@@ -503,27 +503,27 @@
     "[10].PtE_City[0]": "269 City",
     "[10].PtE_State[0]": "270 State",
     "[10].PtE_ZipCode[0]": "271 Zip Code",
-    "[10].CheckBox1[0]": "Select this box if Form G-28 is attached.",
-    "[10].AttorneyStateBarNumber[0]": "272 Attorney State Bar Number",
-    "[10].USCISOnlineAcctNumber[0]": "273 ",
+    "[10].CheckBox1[0]": "",
+    "[10].AttorneyStateBarNumber[0]": "",
+    "[10].USCISOnlineAcctNumber[0]": "",
 
-    "[11].CheckBox32[0]": "All True",
-    "[11].CheckBox32[1]": "Not All True",
-    "[11].TextField26[0]": "274 ",
-    "[11].TextField26[1]": "275 ",
-    "[11].TextField27[2]": "276 Signature of applicant",
-    "[11].DateTimeField49[0]": "277 Date (mm/dd/yyyy)",
-    "[11].TextField27[1]": "278 Write Your Name in Your Native Alphabet",
+    "[11].CheckBox32[0]": "",
+    "[11].CheckBox32[1]": "",
+    "[11].TextField26[0]": "",
+    "[11].TextField26[1]": "",
+    "[11].TextField27[2]": "",
+    "[11].DateTimeField49[0]": "",
+    "[11].TextField27[1]": "",
     "[11].TextField27[0]": "",
 
-    "[11].PG_CheckBox[0]": "All True",
-    "[11].PG_CheckBox[1]": "Not All True",
-    "[11].TextField26[2]": "279",
-    "[11].TextField26[3]": "280",
+    "[11].PG_CheckBox[0]": "",
+    "[11].PG_CheckBox[1]": "",
+    "[11].TextField26[2]": "",
+    "[11].TextField26[3]": "",
 
-    "[11].TextField27[5]": "281 Signature of Applicant",
-    "[11].DateTimeField50[0]": "282 Date (mm/dd/yyyy)",
-    "[11].TextField27[4]": "283 Write Your Name in Your Native Alphabet",
+    "[11].TextField27[5]": "",
+    "[11].DateTimeField50[0]": "",
+    "[11].TextField27[4]": "",
     "[11].TextField27[3]": "",
 
 
@@ -533,14 +533,13 @@
     "[12].ApplicantName[0]": "286 Applicant's Name",
     "[12].TextField28[0]": "287 Applicant's Signature",
 
-    "[13].PtAILine1_ANumber[2]": "324 A-Number (if available)",
-    "[13].DateTimeField58[0]": "325 Date",
-    "[13].SupBApplicantName[0]": "326 Applicant's Name",
-    "[13].TextField30[0]": "327 Applicant's Signature",
 
+    "[13].PtAILine1_ANumber[2]": "",
+    "[13].DateTimeField58[0]": "",
+    "[13].SupBApplicantName[0]": "",
+    "[13].TextField30[0]": "",
 
-
-    "[13].TextField31[0]": "Part 328",
-    "[13].TextField31[1]": "Question 329",
-    "[13].TextField32[0]": "330 "
+    "[13].TextField31[0]": "",
+    "[13].TextField31[1]": "",
+    "[13].TextField32[0]": ""
 }

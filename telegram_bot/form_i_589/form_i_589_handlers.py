@@ -25,7 +25,10 @@ from telegram_bot.form_i_589.f_i_589_keyboards import \
     Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice, Form_I_589_Family_Applied_For_USRefugee_Status_Choice, \
     Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice, \
     Form_I_589_Family_Recieved_Any_Lawful_Status_Choice, Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice, \
-    Form_I_589_Returned_To_Bad_Country_Choice
+    Form_I_589_Returned_To_Bad_Country_Choice, Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice, \
+    Form_I_589_You_Or_Family_Did_Crime_Choice, Form_I_589_Family_Helped_Complete_Application_Choice, \
+    Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice, Form_I_589_Not_Family_Helped_Complete_Application_Choice, \
+    Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice
 
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 
@@ -4060,7 +4063,387 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.C_Returned_To_Bad_Country_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that you, your spouse or your child(ren) have never ordered, incited, assisted or otherwise participated in causing harm or suffering to any person because of his or her race, religion, nationality, membership in a particular social group or belief in a particular political opinion")
-    keyboard = Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice()
+    keyboard = Form_I_589_Returned_To_Bad_Country_Choice()
     await bot.send_message(callback_query.from_user.id,
                            "After you left the country where you were harmed or fear harm, did you return to that country?",
                            reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Returned_To_Bad_Country",
+                           state=Form_I_589.C_Returned_To_Bad_Country_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].PCckboxyn4[0]'] = callback_query.data
+        data['[9].PCckboxyn4[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you have had returned to country where you have had feared to be mistreated or harmed")
+    await bot.send_message(callback_query.from_user.id,
+                           "Describe in detail the circumstances of your visit(s) (for example, the date(s) of the trip(s), the purpose(s) of the trip(s), and the length of time you remained in that country for the visit(s).)")
+
+
+@dp.message_handler(state=Form_I_589.C_PCL4_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].PCL4_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Are you filing this application more than 1 year after your last arrival in the United States?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Returned_To_Bad_Country",
+                           state=Form_I_589.C_Returned_To_Bad_Country_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].PCckboxyn4[1]'] = callback_query.data
+        data['[9].PCckboxyn4[0]'] = ""
+    await Form_I_589.C_Last_Arrival_To_US_More_Than_1_Year_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you did not return to country where you have had feared to be mistreated or harmed")
+    keyboard = Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Are you filing this application more than 1 year after your last arrival in the United States?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Last_Arrival_To_US_More_Than_1_Year",
+                           state=Form_I_589.C_Last_Arrival_To_US_More_Than_1_Year_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].ckboxync5[0]'] = callback_query.data
+        data['[9].ckboxync5[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you filing this application more than 1 year after your last arrival in the United States")
+    await bot.send_message(callback_query.from_user.id,
+                           "Explain why you did not file within the first year after you arrived. You must be prepared to explain at your interview or hearing why you did not file your asylum application within the first year after you arrived. For guidance in answering this question, see Instructions, Part 1: Filing Instructions, Section V.")
+
+
+@dp.message_handler(state=Form_I_589.C_PCL5_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].PCL5_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_You_Or_Family_Did_Crime_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Have you or any member of your family included in the application ever committed any crime and/or been arrested, charged, convicted, or sentenced for any crimes in the United States (including for an immigration law violation)?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Last_Arrival_To_US_More_Than_1_Year",
+                           state=Form_I_589.C_Last_Arrival_To_US_More_Than_1_Year_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].ckboxync5[1]'] = callback_query.data
+        data['[9].ckboxync5[0]'] = ""
+    await Form_I_589.C_You_Or_Family_Did_Crime_Choice.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you not filing this application more than 1 year after your last arrival in the United States")
+    keyboard = Form_I_589_You_Or_Family_Did_Crime_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Have you or any member of your family included in the application ever committed any crime and/or been arrested, charged, convicted, or sentenced for any crimes in the United States (including for an immigration law violation)?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_You_Or_Family_Did_Crime",
+                           state=Form_I_589.C_You_Or_Family_Did_Crime_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].ckboxync6[0]'] = callback_query.data
+        data['[9].ckboxync6[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that you or any member of your family included in the application ever committed any crime and/or been arrested, charged, convicted, or sentenced for any crimes in the United States (including for an immigration law violation)")
+    await bot.send_message(callback_query.from_user.id,
+                           """For each instance, specify in your response: what occurred and the circumstances, dates, length of sentence received, location, the
+duration of the detention or imprisonment, reason(s) for the detention or conviction, any formal charges that were lodged against you or your
+relatives included in your application, and the reason(s) for release. Attach documents referring to these incidents, if they are available, or an
+explanation of why documents are not available.""")
+
+
+@dp.message_handler(state=Form_I_589.C_PCL6_TextField_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].PCL5_TextField[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Family_Helped_Complete_Application_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Print your complete name.",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_You_Or_Family_Did_Crime",
+                           state=Form_I_589.C_You_Or_Family_Did_Crime_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[9].ckboxync6[1]'] = callback_query.data
+        data['[9].ckboxync6[0]'] = ""
+    await Form_I_589.D_TextField20_0.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "You indicated that you or any member of your family included in the application never committed any crime and/or been arrested, charged, convicted, or sentenced for any crimes in the United States (including for an immigration law violation)")
+    await bot.send_message(callback_query.from_user.id,
+                           "Print your complete name.")
+
+
+@dp.message_handler(state=Form_I_589.D_TextField20_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].TextField20[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Write your name in your native alphabet")
+
+
+@dp.message_handler(state=Form_I_589.D_TextField20_1)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].TextField20[1]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Family_Helped_Complete_Application_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Did your spouse, parent, or child(ren) assist you in completing this application?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Family_Helped_Complete_Application",
+                           state=Form_I_589.D_Family_Helped_Complete_Application)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtD_ckboxynd1[0]'] = callback_query.data
+        data['[10].PtD_ckboxynd1[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You indicated that your spouse, parent, or child(ren) assist you in completing this application")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Name.")
+
+
+@dp.message_handler(state=Form_I_589.D_PtD_ChildName1_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtD_ChildName1[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Relationship.")
+
+
+@dp.message_handler(state=Form_I_589.D_PtD_RelationshipOfChild1_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtD_ChildName1[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Do you wish to list another assistant?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Family_Helped_Complete_Fill_Next_Member_Choice",
+                           state=Form_I_589.D_PtD_ChildName2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id, "You indicated that you had second family member help you to fill application")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter name.")
+
+
+@dp.message_handler(state=Form_I_589.D_PtD_ChildName2_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtD_ChildName2[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Enter Relationship.")
+
+
+@dp.message_handler(state=Form_I_589.D_PtD_RelationshipOfChild2_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtD_RelationshipOfChild2[0]'] = message.text
+    await Form_I_589.next()
+    keyboard = Form_I_589_Not_Family_Helped_Complete_Application_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Did someone other than your spouse, parent, or child(ren) prepare this application?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Family_Helped_Complete_Fill_Next_Member_Choice",
+                           state=Form_I_589.C_You_Or_Family_Did_Crime_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.D_Not_Family_Helped_Complete_Application.set()
+    keyboard = Form_I_589_Not_Family_Helped_Complete_Application_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Did someone other than your spouse, parent, or child(ren) prepare this application?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Family_Helped_Complete_Application",
+                           state=Form_I_589.D_Family_Helped_Complete_Application)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtD_ckboxynd1[1]'] = callback_query.data
+        data['[10].PtD_ckboxynd1[0]'] = ""
+    await Form_I_589.D_Not_Family_Helped_Complete_Application.set()
+    keyboard = Form_I_589_Not_Family_Helped_Complete_Application_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Did someone other than your spouse, parent, or child(ren) prepare this application?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Not_Family_Helped_Complete_Application",
+                           state=Form_I_589.D_Not_Family_Helped_Complete_Application)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].ckboxynd2[0]'] = callback_query.data
+        data['[10].ckboxynd2[1]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Asylum applicants may be represented by counsel. Have you been provided with a list of persons who may be available to assist you, at little or no cost, with your asylum claim?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="no_Not_Family_Helped_Complete_Application",
+                           state=Form_I_589.D_Not_Family_Helped_Complete_Application)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].ckboxynd2[1]'] = callback_query.data
+        data['[10].ckboxynd2[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Asylum applicants may be represented by counsel. Have you been provided with a list of persons who may be available to assist you, at little or no cost, with your asylum claim?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="yes_Provided_With_List_Of_Persons_Who_May_Assist",
+                           state=Form_I_589.D_Not_Family_Helped_Complete_Application)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].ckboxynd3[0]'] = callback_query.data
+        data['[10].ckboxynd3[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Signature of Applicant (The person in Part. A.I.)")
+
+
+@dp.callback_query_handler(text="no_Provided_With_List_Of_Persons_Who_May_Assist",
+                           state=Form_I_589.D_Not_Family_Helped_Complete_Application)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].ckboxynd3[1]'] = callback_query.data
+        data['[10].ckboxynd3[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Signature of Applicant (The person in Part. A.I.)")
+
+
+@dp.message_handler(state=Form_I_589.D_TextField22_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].TextField22[0]'] = message.text
+        data['[10].DateTimeField48[0]'] = datetime.datetime.now().strftime("%d/%m/%Y")
+        is_preparer = data['[10].ckboxynd2[0]']
+    if is_preparer:
+        await Form_I_589.next()
+        await bot.send_message(message.from_user.id,
+                               "Enter Signature of Preparer")
+    else:
+        async with state.proxy() as data:
+            adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
+                                             user_id=message.from_user.id,
+                                             timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
+            adapter.save_json(data)
+            await bot.send_message(message.chat.id,
+                                   "Your data for Form-I-589 form was successfully saved! Wait for pdf file.")
+            await bot.send_chat_action(message.chat.id, "typing")
+            pdf_file_path = adapter.fill_pdf()
+            with open(pdf_file_path, 'rb') as file:
+                await bot.send_document(message.chat.id, file)
+        await state.finish()
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_PreparerSignature_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_PreparerSignature[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Print Complete Name of Preparer")
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_PreparerName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_PreparerName[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Daytime Telephone Number Code")
+
+
+@dp.message_handler(state=Form_I_589.E_TextField25_1)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].TextField25[1]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Daytime Telephone Number")
+
+
+@dp.message_handler(state=Form_I_589.E_TextField25_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].TextField25[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Address of Preparer: Street Number and Name")
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_StreetNumAndName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_StreetNumAndName[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Address of Preparer: Apt. Number")
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_AptNumber_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_AptNumber[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Address of Preparer: City")
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_City_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_City[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Address of Preparer: State")
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_State_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_State[0]'] = message.text
+    await Form_I_589.next()
+    await bot.send_message(message.from_user.id,
+                           "Address of Preparer: Zip Code")
+
+
+@dp.message_handler(state=Form_I_589.E_PtE_ZipCode_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['[10].PtE_ZipCode[0]'] = message.text
+
+        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
+                                         user_id=message.from_user.id,
+                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
+        adapter.save_json(data)
+        await bot.send_message(message.chat.id, "Your data for Form-I-589 form was successfully saved! Wait for pdf file.")
+        await bot.send_chat_action(message.chat.id, "typing")
+        pdf_file_path = adapter.fill_pdf()
+        with open(pdf_file_path, 'rb') as file:
+            await bot.send_document(message.chat.id, file)
+    await state.finish()

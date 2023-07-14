@@ -327,9 +327,9 @@ class Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice:
 class Form_I_589_You_Or_Family_Did_Crime_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Last_Arrival_To_US_More_Than_1_Year")
+        button = InlineKeyboardButton("Yes", callback_data="yes_You_Or_Family_Did_Crime")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Last_Arrival_To_US_More_Than_1_Year")
+        button = InlineKeyboardButton("No", callback_data="no_You_Or_Family_Did_Crime")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -340,6 +340,16 @@ class Form_I_589_Family_Helped_Complete_Application_Choice:
         button = InlineKeyboardButton("Yes", callback_data="yes_Family_Helped_Complete_Application")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("No", callback_data="no_Family_Helped_Complete_Application")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Yes", callback_data="yes_Family_Helped_Complete_Fill_Next_Member_Choice")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("No", callback_data="no_Family_Helped_Complete_Fill_Next_Member_Choice")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -357,9 +367,9 @@ class Form_I_589_Not_Family_Helped_Complete_Application_Choice:
 class Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Not_Family_Helped_Complete_Application")
+        button = InlineKeyboardButton("Yes", callback_data="yes_Provided_With_List_Of_Persons_Who_May_Assist")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Not_Family_Helped_Complete_Application")
+        button = InlineKeyboardButton("No", callback_data="no_Provided_With_List_Of_Persons_Who_May_Assist")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 

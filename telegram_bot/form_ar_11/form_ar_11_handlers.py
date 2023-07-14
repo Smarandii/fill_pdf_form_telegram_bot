@@ -339,11 +339,11 @@ async def callback_query_handler_mailing_empty(callback_query: types.CallbackQue
 async def process_s3_signature_applicant(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].S3_SignatureApplicant[0]'] = message.text
-        data['[0].S3_DateofSignature[0]'] = datetime.now().strftime("%d/%m/%Y")
+        data['[0].S3_DateofSignature[0]'] = datetime.datetime.now().strftime("%d/%m/%Y")
 
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
-                                         timestamp=datetime.now().strftime('%Y%m%d%H%M%S'))
+                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
         adapter.save_json(data)
         await bot.send_message(message.chat.id, "Your data for AR-11 form was successfully saved! Wait for pdf file.")
         await bot.send_chat_action(message.chat.id, "typing")
