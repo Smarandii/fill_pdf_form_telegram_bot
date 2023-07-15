@@ -4867,10 +4867,9 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[9].PCL5_TextField[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Family_Helped_Complete_Application_Choice()
     await bot.send_message(message.from_user.id,
                            "Print your complete name.",
-                           reply_markup=keyboard.markup)
+                           )
 
 
 @dp.callback_query_handler(text="no_You_Or_Family_Did_Crime",
@@ -4967,7 +4966,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="no_Family_Helped_Complete_Fill_Next_Member_Choice",
-                           state=Form_I_589.C_You_Or_Family_Did_Crime_Choice)
+                           state=Form_I_589.D_PtD_ChildName2_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.D_Not_Family_Helped_Complete_Application.set()
     keyboard = Form_I_589_Not_Family_Helped_Complete_Application_Choice()
@@ -5016,7 +5015,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="yes_Provided_With_List_Of_Persons_Who_May_Assist",
-                           state=Form_I_589.D_Not_Family_Helped_Complete_Application)
+                           state=Form_I_589.D_Provided_With_List_Of_Persons_Who_May_Assist_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].ckboxynd3[0]'] = callback_query.data
@@ -5027,7 +5026,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="no_Provided_With_List_Of_Persons_Who_May_Assist",
-                           state=Form_I_589.D_Not_Family_Helped_Complete_Application)
+                           state=Form_I_589.D_Provided_With_List_Of_Persons_Who_May_Assist_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].ckboxynd3[1]'] = callback_query.data
