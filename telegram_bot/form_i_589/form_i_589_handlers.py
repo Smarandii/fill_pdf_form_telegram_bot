@@ -4445,11 +4445,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.message_handler(state=Form_I_589.B_TextField15_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[5].#subform[6].TextField14[0]'] = message.text
+        data['[5].#subform[6].TextField15[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice()
+    keyboard = Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice()
     await bot.send_message(message.from_user.id,
-                           "Do you fear harm or mistreatment if you return to your home country?",
+                           "Have you or your family members ever been accused, charged, arrested, detained, interrogated, convicted and sentenced, or imprisoned in any country other than the United States (including for an immigration law violation)?",
                            reply_markup=keyboard.markup)
 
 
@@ -4544,7 +4544,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="yes_You_Continue_To_Participate_In_Organizations",
-                           state=Form_I_589.B_Been_Associated_With_Any_Organizations_Choice)
+                           state=Form_I_589.B_Continue_To_Participate_In_Organizations_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn3b[0]'] = callback_query.data
@@ -4567,7 +4567,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="no_You_Continue_To_Participate_In_Organizations",
-                           state=Form_I_589.B_Been_Associated_With_Any_Organizations_Choice)
+                           state=Form_I_589.B_Continue_To_Participate_In_Organizations_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn3b[1]'] = callback_query.data
@@ -4734,7 +4734,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="yes_You_Or_Family_Caused_Harm_Or_Suffering",
-                           state=Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice)
+                           state=Form_I_589.C_You_Or_Family_Caused_Harm_Or_Suffering_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync3[0]'] = callback_query.data
@@ -4757,7 +4757,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="no_You_Or_Family_Caused_Harm_Or_Suffering",
-                           state=Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice)
+                           state=Form_I_589.C_You_Or_Family_Caused_Harm_Or_Suffering_Choice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync1[1]'] = callback_query.data
