@@ -1760,8 +1760,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus2[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter What is the expiration date of your second child authorized stay, if any? (mm/dd/yyyy)")
+                           "Enter What is the expiration date of your second child authorized stay, if any? (mm/dd/yyyy)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your second child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
@@ -2144,8 +2158,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus3[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter What is the expiration date of your third child authorized stay, if any? (mm/dd/yyyy)")
+                           "Enter What is the expiration date of your third child authorized stay, if any? (mm/dd/yyyy)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay3[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your third child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay3_0)
@@ -2510,8 +2538,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus4[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter What is the expiration date of your fourth child authorized stay, if any? (mm/dd/yyyy)")
+                           "Enter What is the expiration date of your fourth child authorized stay, if any? (mm/dd/yyyy)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay4_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay4[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your fourth child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay4_0)
