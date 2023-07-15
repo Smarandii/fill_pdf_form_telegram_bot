@@ -2989,8 +2989,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsIncludedInApplicationChild5)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[12].SuppA_CheckBox20[0]'] = callback_query.data
-        data['[12].SuppA_CheckBox20[1]'] = ""
+        data['[12].SuppA_CheckBox21[0]'] = callback_query.data
+        data['[12].SuppA_CheckBox21[1]'] = ""
         total_number_of_children = int(data["[1].TotalChild[0]"])
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
@@ -3012,8 +3012,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsIncludedInApplicationChild5)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[12].SuppA_CheckBox20[1]'] = callback_query.data
-        data['[12].SuppA_CheckBox20[0]'] = ""
+        data['[12].SuppA_CheckBox21[1]'] = callback_query.data
+        data['[12].SuppA_CheckBox21[0]'] = ""
         total_number_of_children = int(data["[1].TotalChild[0]"])
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
@@ -3364,8 +3364,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsIncludedInApplicationChild6)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[12].SuppA_CheckBox20[0]'] = callback_query.data
-        data['[12].SuppA_CheckBox20[1]'] = ""
+        data['[12].SuppALine21_CheckBox[0]'] = callback_query.data
+        data['[12].SuppALine21_CheckBox[1]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your sixth child is to be included in this application")
@@ -3378,8 +3378,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsIncludedInApplicationChild6)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[12].SuppA_CheckBox20[1]'] = callback_query.data
-        data['[12].SuppA_CheckBox20[0]'] = ""
+        data['[12].SuppALine21_CheckBox[1]'] = callback_query.data
+        data['[12].SuppALine21_CheckBox[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your sixth child is to be included in this application")
@@ -4093,7 +4093,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=Form_I_589.A_III_CheckBoxAIII5_m_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[4].CheckBoxAIII5\\\\.m[0]"] = callback_query.data
+        data["""[4].CheckBoxAIII5\\.m[0]"""] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Mother is deceased")
 
