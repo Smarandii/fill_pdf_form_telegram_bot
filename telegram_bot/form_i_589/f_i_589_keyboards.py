@@ -14,7 +14,15 @@ class Form_I_589_Gender_Choice:
 class Form_I_589_If_Any_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("I don't have it", callback_data="don't_have_it")
+        button = InlineKeyboardButton("Don't have it", callback_data="don't_have_it")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_If_Previously_In_US:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("Was not previously in the US", callback_data="not_previously_in_us")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
