@@ -28,7 +28,8 @@ from telegram_bot.form_i_589.f_i_589_keyboards import \
     Form_I_589_Returned_To_Bad_Country_Choice, Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice, \
     Form_I_589_You_Or_Family_Did_Crime_Choice, Form_I_589_Family_Helped_Complete_Application_Choice, \
     Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice, Form_I_589_Not_Family_Helped_Complete_Application_Choice, \
-    Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice
+    Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice, Form_I_589_If_Any_Choice, \
+    Form_I_589_Mailing_Address_Choice_Keyboard, Form_I_589_If_Applicable, Form_I_589_Child_Immigration_Court_Choice
 
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 
@@ -44,8 +45,23 @@ async def i_589_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
     async with state.proxy() as data:
         data['form_identifier'] = "I-589"
     await bot.send_message(callback_query.from_user.id, "You've chosen the I-589 form. Let's start filling it")
-    await bot.send_message(callback_query.from_user.id, "Enter your Alien Registration Number(s) (A-Number) (if any):")
+    await bot.send_message(callback_query.from_user.id, "Part A.I. Information About You")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id, "Enter your Alien Registration Number(s) (A-Number) (if any)",
+                           reply_markup=keyboard.markup)
     await Form_I_589.A_I_PtAILine1_ANumber_0.set()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_I_PtAILine1_ANumber_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].PtAILine1_ANumber[0]'] = ""
+    await bot.send_message(callback_query.from_user.id, "You chose to leave Alien Registration Number(s) (A-Number) blank")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id, "Enter U.S. Social Security Number (if any)",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.A_I_TextField1_0.set()
 
 
 @dp.message_handler(state=Form_I_589.A_I_PtAILine1_ANumber_0)
@@ -53,7 +69,19 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine1_ANumber[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Enter your U.S. Social Security Number (if any):")
+    await bot.send_message(message.from_user.id, "Enter your U.S. Social Security Number (if any)")
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_I_TextField1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField1[0]'] = ""
+    await bot.send_message(callback_query.from_user.id, "You chose to leave U.S. Social Security Number blank")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id, "Enter USCIS Online Account Number (if any)",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.A_I_TextField1_8.set()
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField1_0)
@@ -62,6 +90,16 @@ async def process(message: types.Message, state: FSMContext):
         data['[0].TextField1[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "USCIS Online Account Number (if any)")
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_I_TextField1_8)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField1[8]'] = ""
+    await bot.send_message(callback_query.from_user.id, "You chose to leave USCIS Online Account Number blank")
+    await bot.send_message(callback_query.from_user.id, "Enter Complete Last Name")
+    await Form_I_589.A_I_PtAILine4_LastName_0.set()
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField1_8)
@@ -101,7 +139,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[1]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Enter your Street Number and Name:")
+    await bot.send_message(message.from_user.id, "Residence in the U.S. (where you physically reside). "
+                                                 "Enter your Street Number and Name:")
 
 
 # 8. Residence in the U.S. (where you physically reside)
@@ -159,7 +198,41 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_TelephoneNumber[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Enter In Care Of (if applicable):")
+    keyboard = Form_I_589_Mailing_Address_Choice_Keyboard()
+    await bot.send_message(message.from_user.id, "Is your mailing address different than the address of residence in the US?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="MailingSameAsResidence_Yes",
+                           state=Form_I_589.A_I_Mailing_Address_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = Form_I_589_Gender_Choice()
+    await bot.send_message(callback_query.from_user.id, "Choose your Gender",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.A_I_ChooseGender.set()
+
+
+@dp.callback_query_handler(text="MailingSameAsResidence_No",
+                           state=Form_I_589.A_I_Mailing_Address_Choice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = Form_I_589_If_Applicable()
+    await bot.send_message(callback_query.from_user.id, "Enter In Care Of (if applicable)",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.next()
+
+
+@dp.callback_query_handler(text="not_applicable",
+                           state=Form_I_589.A_I_PtAILine9_InCareOf_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id, "Enter Telephone Area Code")
+    await Form_I_589.A_I_PtAILine9_AreaCode_0.set()
+
+# @dp.message_handler(state=Form_I_589.A_I_PtAILine8_TelephoneNumber_0)
+# async def process(message: types.Message, state: FSMContext):
+#     async with state.proxy() as data:
+#         data['[0].PtAILine8_TelephoneNumber[0]'] = message.text
+#     await Form_I_589.next()
+#     await bot.send_message(message.from_user.id, "Enter In Care Of (if applicable):")
 
 
 @dp.message_handler(state=Form_I_589.A_I_PtAILine9_InCareOf_0)
@@ -397,8 +470,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField6[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_94_Number_Choice()
-    await bot.send_message(message.from_user.id, "Enter What is your current I-94 Number, if any?", reply_markup=keyboard.markup)
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Enter What is your current I-94 Number, if any?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_I_TextField3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField3[0]'] = ""
+    await Form_I_589.A_I_DateTimeField2_0.set()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you don't have I-94 number")
+    await bot.send_message(callback_query.from_user.id, "List most recent entry entry into the U.S. Enter date of your most recent entry:")
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField3_0)
@@ -556,14 +641,18 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField7[1]'] = message.text
-        is_married = data['[1].CheckBox5[0]']
-        is_divorced = data['[1].CheckBox5[0]']
+        is_married = data['[0].Marital[1]']
+        is_not_married = not data['[0].Marital[1]']
+    await bot.send_message(message.from_user.id, "You filled Part A.I. Information About You completely, next is:")
+    await bot.send_message(message.from_user.id, "Part A.II. Information About Your Spouse and Children")
     if is_married:
         await Form_I_589.next()
         await bot.send_message(message.from_user.id, "You have indicated that you are married")
+        keyboard = Form_I_589_If_Any_Choice()
         await bot.send_message(message.from_user.id,
-                               "Enter your spouse's Alien Registration Number of your spouse (A-Number)\n(if any)?")
-    if is_divorced:
+                               "Enter your spouse's Alien Registration Number of your spouse (A-Number)\n(if any)?",
+                               reply_markup=keyboard.markup)
+    if is_not_married:
         await Form_I_589.A_II_HaveChildrenChoice.set()
         await bot.send_message(message.from_user.id, "You have indicated that you are not married")
         keyboard = Form_I_589_Have_Children_Choice()
@@ -572,12 +661,37 @@ async def process(message: types.Message, state: FSMContext):
                                reply_markup=keyboard.markup)
 
 
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_PtAIILine1_ANumber_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Passport/ID Card Number of your spouse (if any)?",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine1_ANumber_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your spouse (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your spouse (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_TextField10_1)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[1]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Date of Birth of your spouse (mm/dd/yyyy)?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_1)
@@ -593,7 +707,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].DateTimeField7[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your spouse (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your spouse (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_TextField10_2)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[2]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Complete Last Name of your spouse")
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_2)
@@ -668,13 +795,23 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "Race, Ethnic, or Tribal Group of your spouse")
 
 
-@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_0)
+@dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_6)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[6]'] = message.text
     await Form_I_589.next()
     keyboard = Form_I_589_Gender_Choice()
     await bot.send_message(message.from_user.id, "Choose Gender of your spouse", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_TextField10_2)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[2]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Complete Last Name of your spouse")
 
 
 @dp.callback_query_handler(text="female",
@@ -746,27 +883,44 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine17_DateofLastEntry[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "I-94 Number of your spouse (send 0 if you don't have I-94 number)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "I-94 Number of your spouse (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_PtAIILine18_I94Number_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status of your spouse when last admitted (Visa type if any)")
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine18_I94Number_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        if message.text != "0":
-            data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = message.text
-        else:
-            data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Status of your spouse when last admitted (Visa type, if any) (send 0 if you didn't have had Status when last admitted)")
+    await bot.send_message(message.from_user.id, "Status of your spouse when last admitted (Visa type, if any)")
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "What is your spouse's current status?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        if message.text != "0":
-            data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = message.text
-        else:
-            data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "What is your spouse's current status?")
 
@@ -779,16 +933,27 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "What is the expiration date of your spouse authorized stay, if any? (mm/dd/yyyy)")
 
 
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_PtAIILine21_ExpDateofAuthorizedStay_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Spouse_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your spouse in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine21_ExpDateofAuthorizedStay_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        if message.text != "0":
-            data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = message.text
-        else:
-            data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = ""
     await Form_I_589.next()
     keyboard = Form_I_589_Spouse_Immigration_Court_Choice()
-    await bot.send_message(message.from_user.id, "Is your spouse in Immigration Court proceedings?", reply_markup=keyboard.markup)
+    await bot.send_message(message.from_user.id,
+                           "Is your spouse in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_spouse_imc",
@@ -884,16 +1049,45 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].TotalChild[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Alien Registration Number of your first child (A-Number) (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Alien Registration Number of your first child (A-Number) (if any)",
+                           reply_markup=keyboard.markup)
 
 
 # Child 1
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildAlien1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien1[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Passport/ID Card Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_ChildAlien1_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien1[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your first child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildPassport1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport1[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Marital Status of your first child (Married Single Divorced Widowed)")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport1_0)
@@ -909,7 +1103,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your first child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildSSN1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN1[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter complete Last Name of your first child")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildSSN1_0)
@@ -1055,8 +1262,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine15_ExpirationDate[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter I-94 Number (If any)")
+                           "Enter I-94 Number (If any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine16_I94Number_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status when last admitted of your first child (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number_0)
@@ -1064,8 +1285,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Status when last admitted of your first child (Visa type, if any)")
+                           "Enter Status when last admitted of your first child (Visa type, if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine17_StatusofLastAdmission[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter What is current status of your first child?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission_0)
@@ -1082,8 +1315,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine18_CurrentStatusofChild[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter What is the expiration date of your first child authorized stay, if any? (mm/dd/yyyy)")
+                           "Enter What is the expiration date of your first child authorized stay, if any? (mm/dd/yyyy)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your first child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay_0)
@@ -1091,7 +1338,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine19_ExpDateofAuthorizedStay[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Immigration_Court_Choice()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
     await bot.send_message(message.from_user.id,
                            "Is your first child in Immigration Court proceedings?", reply_markup=keyboard.markup)
 
@@ -1168,8 +1415,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.A_II_IsFillChild2)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Enter Alien Registration Number (A-Number) (if any) of your second child")
+                           "Enter Alien Registration Number (A-Number) of your second child (if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_fill_next_child",
@@ -1181,12 +1430,37 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 # Child 2
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildAlien2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien2[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Passport/ID Card Number of your second child (if any)",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_ChildAlien2_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien2[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your second child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your second child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildPassport2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport2[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Marital Status of your second child (Married Single Divorced Widowed)")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport2_0)
@@ -1202,7 +1476,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital2[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your second child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your second child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildSSN2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN2[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter complete Last Name of your second child")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildSSN2_0)
@@ -1210,7 +1497,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN2[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Enter complete Last Name of your second child")
+    await bot.send_message(message.from_user.id,
+                           "Enter complete Last Name of your second child")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildLast2_0)
@@ -1347,8 +1635,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry2[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter I-94 Number of your second child (If any)")
+                           "Enter I-94 Number of your second child (If any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine16_I94Number2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number2[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status of your second child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number2_0)
@@ -1356,14 +1658,26 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number2[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Status of your second child when last admitted (Visa type, if any)")
+                           "Enter Status of your second child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine17_StatusofLastAdmission2[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter What is your second child's current status?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission2_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[1].PtAIILine17_StatusofLastAdmission2[0]'] = message.text
+        data['[3].PtAIILine17_StatusofLastAdmission2[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Enter What is your second child's current status?")
@@ -1378,12 +1692,23 @@ async def process(message: types.Message, state: FSMContext):
                            "Enter What is the expiration date of your second child authorized stay, if any? (mm/dd/yyyy)")
 
 
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your second child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine19_ExpDateofAuthorizedStay2_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Immigration_Court_Choice()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
     await bot.send_message(message.from_user.id,
                            "Is your second child in Immigration Court proceedings?", reply_markup=keyboard.markup)
 
@@ -1460,8 +1785,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.A_II_IsFillChild3)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Enter Alien Registration Number (A-Number) (if any) of your third child")
+                           "Enter Alien Registration Number (A-Number) (if any) of your third child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_fill_next_child",
@@ -1473,12 +1800,37 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 # Child 3
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildAlien3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien3[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Passport/ID Card Number of your third child (if any)",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_ChildAlien3_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien3[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your third child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your third child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildPassport3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport3[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Marital Status of your third child (Married Single Divorced Widowed)")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport3_0)
@@ -1494,7 +1846,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital3[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your third child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your third child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildSSN3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN3[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter complete Last Name of your third child")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildSSN3_0)
@@ -1639,8 +2004,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry3[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter I-94 Number of your third child (If any)")
+                           "Enter I-94 Number of your third child (If any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine16_I94Number3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number3[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status of your third child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number3_0)
@@ -1648,14 +2027,26 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number3[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Status of your third child when last admitted  (Visa type, if any)")
+                           "Enter Status of your third child when last admitted  (Visa type, if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission3_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine17_StatusofLastAdmission3[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter What is your ершкв child's current status?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission3_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[1].PtAIILine17_StatusofLastAdmission3[0]'] = message.text
+        data['[3].PtAIILine17_StatusofLastAdmission3[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Enter What is your third child's current status?")
@@ -1675,7 +2066,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine19_ExpDateofAuthorizedStay3[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Immigration_Court_Choice()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
     await bot.send_message(message.from_user.id,
                            "Is your third child in Immigration Court proceedings?", reply_markup=keyboard.markup)
 
@@ -1752,8 +2143,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.A_II_IsFillChild4)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Enter Alien Registration Number of your fourth child (A-Number) (if any)")
+                           "Enter Alien Registration Number (A-Number) (if any) of your fourth child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_fill_next_child",
@@ -1765,12 +2158,37 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 # Child 4
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildAlien4_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildAlien4[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Passport/ID Card Number of your fourth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.A_II_ChildAlien4_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien4[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your fourth child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your fourth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildPassport4_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildPassport4[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Marital Status of your fourth child (Married Single Divorced Widowed)")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport4_0)
@@ -1786,7 +2204,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital4[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your fourth child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your fourth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_ChildSSN4_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildSSN4[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter complete Last Name of your foruth child")
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildSSN4_0)
@@ -1922,8 +2353,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry4[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter I-94 Number of your fourth child (If any)")
+                           "Enter I-94 Number of your fourth child (If any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine16_I94Number4_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].PtAIILine16_I94Number4[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status of your fourth child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine16_I94Number4_0)
@@ -1931,14 +2376,26 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number4[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Status of your fourth child when last admitted (Visa type, if any)")
+                           "Enter Status of your fourth child when last admitted  (Visa type, if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission4_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].PtAIILine17_StatusofLastAdmission4[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter What is your fourth child's current status?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_PtAIILine17_StatusofLastAdmission4_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[1].PtAIILine17_StatusofLastAdmission4[0]'] = message.text
+        data['[3].PtAIILine17_StatusofLastAdmission4[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Enter What is your fourth child's current status?")
@@ -1958,7 +2415,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine19_ExpDateofAuthorizedStay4[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Immigration_Court_Choice()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
     await bot.send_message(message.from_user.id,
                            "Is your fourth child in Immigration Court proceedings?", reply_markup=keyboard.markup)
 
@@ -2035,8 +2492,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsFillChild5)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Enter Alien Registration Number of your fifth child (A-Number) (if any)")
+                           "Enter Alien Registration Number (A-Number) (if any) of your fifth child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_fill_next_child",
@@ -2048,12 +2507,37 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 # Child 5
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_TextField12_6)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[6]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Passport/ID Card Number of your fifth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_6)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[6]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your fifth child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your fifth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_TextField12_7)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[7]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Marital Status of your fifth child (Married Single Divorced Widowed)")
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_7)
@@ -2069,7 +2553,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[8]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your fifth child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your fifth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_TextField12_9)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[9]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter complete Last Name of your fifth child")
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_9)
@@ -2205,8 +2702,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExp5[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter I-94 Number of your fifth child (If any)")
+                           "Enter I-94 Number of your fifth child (If any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_ChildINum5_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].ChildINum5[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status of your fifth child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_ChildINum5_0)
@@ -2214,8 +2725,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum5[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Status of your fifth child when last admitted (Visa type, if any)")
+                           "Enter Status of your fifth child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_ChildStatus5_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].ChildStatus5[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter What is your fifth child's current status?")
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_ChildStatus5_0)
@@ -2232,8 +2755,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildCurrent5[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter What is the expiration date of your fifth child authorized stay, if any? (mm/dd/yyyy)")
+                           "Enter What is the expiration date of your fifth child authorized stay, if any? (mm/dd/yyyy)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_ChildExpAuth5_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].ChildExpAuth5[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your fifth child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_ChildExpAuth5_0)
@@ -2241,9 +2778,10 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExpAuth5[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Immigration_Court_Choice()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
     await bot.send_message(message.from_user.id,
-                           "Is your fifth child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+                           "Is your fifth child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_child_imc",
@@ -2322,8 +2860,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsFillChild6)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Enter Alien Registration Number of your sixth child (A-Number) (if any)")
+                           "Enter Alien Registration Number (A-Number) (if any) of your sixth child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_fill_next_child",
@@ -2335,12 +2875,37 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 # Child 6
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_TextField12_16)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[16]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Passport/ID Card Number of your sixth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_16)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[16]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Passport/ID Card Number of your sixth child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Passport/ID Card Number of your sixth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_TextField12_17)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[17]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Marital Status of your sixth child (Married Single Divorced Widowed)")
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_17)
@@ -2356,7 +2921,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[18]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "U.S. Social Security Number of your sixth child (if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "U.S. Social Security Number of your sixth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_TextField12_19)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[19]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter complete Last Name of your sixth child")
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_19)
@@ -2492,8 +3070,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExp6[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter I-94 Number of your sixth child (If any)")
+                           "Enter I-94 Number of your sixth child (If any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_ChildINum6_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].ChildINum6[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Status of your sixth child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_ChildINum6_0)
@@ -2501,8 +3093,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum6[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Status of your sixth child when last admitted (Visa type, if any")
+                           "Enter Status of your sixth child when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_ChildStatus6_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].ChildStatus6[0]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter What is your sixth child's current status?")
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_ChildStatus6_0)
@@ -2523,14 +3127,27 @@ async def process(message: types.Message, state: FSMContext):
                            "Enter What is the expiration date of your sixth child authorized stay, if any? (mm/dd/yyyy)")
 
 
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.Supplement_A_ChildExpAuth6_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].ChildExpAuth6[0]'] = ""
+    await Form_I_589.next()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Is your sixth child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
+
+
 @dp.message_handler(state=Form_I_589.Supplement_A_ChildExpAuth6_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExpAuth6[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_Immigration_Court_Choice()
+    keyboard = Form_I_589_Child_Immigration_Court_Choice()
     await bot.send_message(message.from_user.id,
-                           "Is your sixth child in Immigration Court proceedings?", reply_markup=keyboard.markup)
+                           "Is your sixth child in Immigration Court proceedings?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_child_imc",

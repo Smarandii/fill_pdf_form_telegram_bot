@@ -19,6 +19,7 @@ class Form_I_589(StatesGroup):
     A_I_PtAILine8_AreaCode_0 = State()  # 13 Telephone Area Code
     A_I_PtAILine8_TelephoneNumber_0 = State()  # 14  # Telephone Number
 
+    A_I_Mailing_Address_Choice = State()
     A_I_PtAILine9_InCareOf_0 = State()  # 15  # In Care Of (if applicable)
     A_I_PtAILine9_AreaCode_0 = State()  # 16  # Telephone Area Code
     A_I_PtAILine9_TelephoneNumber_0 = State()  # 17  # Telephone Number
@@ -52,6 +53,7 @@ class Form_I_589(StatesGroup):
 
     A_I_DateTimeField6_0 = State()  # 29 When did you last leave your country? (mm/dd/yyyy)
     A_I_TextField3_0 = State()  # 30 What is your current I-94  # Number if any?
+
 
     A_I_DateTimeField2_0 = State()  # 31 Date
     A_I_TextField4_0 = State()  # 32 Place
@@ -135,7 +137,7 @@ class Form_I_589(StatesGroup):
 
     # Child 1
     A_II_ChildAlien1_0 = State()  # 75  # Alien Registration Number (A-Number) (if any)
-    A_II_ChildPassport1_0 = State()  # 76  # Passport/ID Card Number (if any
+    A_II_ChildPassport1_0 = State()  # 76  # Passport/ID Card Number (if any)
     A_II_ChildMarital1_0 = State()  # 77  # Marital Status (Married Single Divorced Widowed)
     A_II_ChildSSN1_0 = State()  # 78 U_S_ Social Security Number (if any
     A_II_ChildLast1_0 = State()  # 80 Complete Last Name

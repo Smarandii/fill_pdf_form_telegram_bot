@@ -11,6 +11,32 @@ class Form_I_589_Gender_Choice:
         self.markup = keyboard_markup
 
 
+class Form_I_589_If_Any_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("I don't have it", callback_data="don't_have_it")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_If_Applicable:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("Not applicable", callback_data="not_applicable")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Mailing_Address_Choice_Keyboard:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button_yes = InlineKeyboardButton("Mailing address same", callback_data="MailingSameAsResidence_Yes")
+        keyboard_markup.add(button_yes)
+        button_no = InlineKeyboardButton("Mailing address different", callback_data="MailingSameAsResidence_No")
+        keyboard_markup.add(button_no)
+        self.markup = keyboard_markup
+
+
 class Form_I_589_Marital_Status_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=4)
