@@ -599,7 +599,7 @@ class Form_I_589(StatesGroup):
     # D_ckboxynd3_1 = State()  # Asylum applicants may be represented by counsel_ Have you been provided with a list of persons who may be available to assist you at little or no cost with your asylum claim? No
 
     D_TextField22_0 = State()  # 261 Signature
-    D_DateTimeField48_0 = State()  # 262 Date of Signature
+    # D_DateTimeField48_0 = State()  # 262 Date of Signature
 
     E_PtE_PreparerSignature_0 = State()  # 263 Signature of Preparer
     E_PtE_PreparerName_0 = State()  # 264  # Print Complete Name of Preparer

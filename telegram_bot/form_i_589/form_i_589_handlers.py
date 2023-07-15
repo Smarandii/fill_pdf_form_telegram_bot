@@ -3301,8 +3301,10 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildCurrent6[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter What is the expiration date of your sixth child authorized stay, if any? (mm/dd/yyyy)")
+                           "Enter What is the expiration date of your sixth child authorized stay, if any? (mm/dd/yyyy)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
