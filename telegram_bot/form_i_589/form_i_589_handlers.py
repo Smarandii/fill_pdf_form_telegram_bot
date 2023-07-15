@@ -1,5 +1,5 @@
 from aiogram import types
-from aiogram.dispatcher import FSMContext
+from aiogram.dispatcher import FSMContext, filters
 
 from telegram_bot.form_i_589.f_i_589_keyboards import \
     Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice, \
@@ -39,6 +39,22 @@ from telegram_bot import \
     dp, \
     FillPdfFromJsonAdapter, \
     datetime
+
+
+@dp.message_handler(filters.Command("end"), state='*')
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
+                                         user_id=message.from_user.id,
+                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
+        adapter.save_json(data)
+        await bot.send_message(message.chat.id,
+                               "Your data for Form-I-589 form was successfully saved! Wait for pdf file.")
+        await bot.send_chat_action(message.chat.id, "typing")
+        pdf_file_path = adapter.fill_pdf()
+        with open(pdf_file_path, 'rb') as file:
+            await bot.send_document(message.chat.id, file)
+    await state.finish()
 
 
 @dp.callback_query_handler(text="I-589")

@@ -1,4 +1,4 @@
-from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard
+from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard, logging
 from form_ar_11 import form_ar_11_handlers
 from form_i_589 import form_i_589_handlers
 
@@ -19,4 +19,10 @@ async def on_shutdown(dp):
 
 if __name__ == '__main__':
     from aiogram import executor
-    executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
+    while True:
+        try:
+            executor.start_polling(dp, on_startup=on_startup, on_shutdown=on_shutdown)
+        except Exception as e:
+            logging.log(1, e.args[0], e.args)
+
+
