@@ -1808,8 +1808,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your first child is in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_child_imc",
@@ -1821,8 +1823,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your second child is not in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_include_child",
@@ -2195,8 +2199,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your third child is in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_child_imc",
@@ -2208,8 +2214,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your third child is not in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_include_child",
@@ -2575,8 +2583,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your fourth child is in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_child_imc",
@@ -2588,8 +2598,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your fourth child is not in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_include_child",
@@ -2952,8 +2964,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your fifth child is in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_child_imc",
@@ -2965,8 +2979,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your fifth child is not in Immigration Court proceedings")
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_include_child",
@@ -3319,10 +3335,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].SuppALine20_CheckBox2[0]'] = callback_query.data
         data['[12].SuppALine20_CheckBox2[1]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your sixth child is in Immigration Court proceedings")
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="no_child_imc",
@@ -3332,10 +3350,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].SuppALine20_CheckBox2[1]'] = callback_query.data
         data['[12].SuppALine20_CheckBox2[0]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Include_Child_Choice()
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your sixth child is not in Immigration Court proceedings")
     await bot.send_message(callback_query.from_user.id,
-                           "If in the U.S., is this child to be included in this application?")
+                           "If in the U.S., is this child to be included in this application?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="yes_include_child",
