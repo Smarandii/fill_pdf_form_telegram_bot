@@ -895,8 +895,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Enter Status of your spouse when last admitted (Visa type if any)")
+                           "Enter Status of your spouse when last admitted (Visa type if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine18_I94Number_0)
@@ -904,17 +906,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Status of your spouse when last admitted (Visa type, if any)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Status of your spouse when last admitted (Visa type, if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
+        data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
-                           "What is your spouse's current status?")
+                           "What is your spouse s current status?")
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_PtAIILine19_StatusofLastAdmission_0)
