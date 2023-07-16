@@ -20,17 +20,27 @@ from telegram_bot.form_i_589.f_i_589_keyboards import \
     Form_I_589_2Sibling_Deceased_Choice, \
     Form_I_589_3Sibling_Deceased_Choice, \
     Form_I_589_Asylum_Reason_Choice, \
-    Form_I_589_Family_Experienced_Harm_Choice, Form_I_589_You_Been_Associated_With_Any_Organizations_Choice, \
+    Form_I_589_Family_Experienced_Harm_Choice, \
+    Form_I_589_You_Been_Associated_With_Any_Organizations_Choice, \
     Form_I_589_You_Continue_To_Participate_In_Organizations_Choice, \
-    Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice, Form_I_589_Family_Applied_For_USRefugee_Status_Choice, \
+    Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice, \
+    Form_I_589_Family_Applied_For_USRefugee_Status_Choice, \
     Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice, \
-    Form_I_589_Family_Recieved_Any_Lawful_Status_Choice, Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice, \
-    Form_I_589_Returned_To_Bad_Country_Choice, Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice, \
-    Form_I_589_You_Or_Family_Did_Crime_Choice, Form_I_589_Family_Helped_Complete_Application_Choice, \
-    Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice, Form_I_589_Not_Family_Helped_Complete_Application_Choice, \
-    Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice, Form_I_589_If_Any_Choice, \
-    Form_I_589_Mailing_Address_Choice_Keyboard, Form_I_589_If_Applicable, Form_I_589_Child_Immigration_Court_Choice, \
-    Form_I_589_If_Previously_In_US, Form_I_589_Include_Child_Choice, Form_I_589_4Sibling_Deceased_Choice
+    Form_I_589_Family_Recieved_Any_Lawful_Status_Choice, \
+    Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice, \
+    Form_I_589_Returned_To_Bad_Country_Choice, \
+    Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice, \
+    Form_I_589_You_Or_Family_Did_Crime_Choice, \
+    Form_I_589_Family_Helped_Complete_Application_Choice, \
+    Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice, \
+    Form_I_589_Not_Family_Helped_Complete_Application_Choice, \
+    Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice, \
+    Form_I_589_If_Any_Choice, \
+    Form_I_589_Mailing_Address_Choice_Keyboard, \
+    Form_I_589_If_Applicable, \
+    Form_I_589_Child_Immigration_Court_Choice, \
+    Form_I_589_If_Previously_In_US, Form_I_589_Include_Child_Choice, \
+    Form_I_589_4Sibling_Deceased_Choice
 
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 
@@ -4109,7 +4119,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=Form_I_589.A_III_CheckBoxAIII5_m_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["""[4].CheckBoxAIII5\\.m[0]"""] = callback_query.data
+        data["[4].CheckBoxAIII5\\.m[0]"] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Mother is deceased")
 

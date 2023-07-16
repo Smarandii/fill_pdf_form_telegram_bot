@@ -11,7 +11,7 @@ class FillPdfFromJsonAdapter:
         import json
         serializable_data = {key: value for key, value in data.items()}
         with open(self.json_input_file_path, 'w', encoding="utf-8") as f:
-            json.dump(serializable_data, f)
+            json.dump(serializable_data, f, ensure_ascii=False)
 
     def fill_pdf(self):
         import subprocess
