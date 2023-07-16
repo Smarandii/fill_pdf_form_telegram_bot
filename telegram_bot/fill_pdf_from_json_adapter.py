@@ -9,9 +9,16 @@ class FillPdfFromJsonAdapter:
 
     def save_json(self, data):
         import json
+
         serializable_data = {key: value for key, value in data.items()}
+        json_str = json.dumps(serializable_data, ensure_ascii=False, indent=4)
+
+        # Now, replace '\\\\' with '\\' in the json_str
+        json_str = json_str.replace('\\\\', '\\')
+
+        # Write the modified string to the file
         with open(self.json_input_file_path, 'w', encoding="utf-8") as f:
-            json.dump(serializable_data, f, ensure_ascii=False)
+            f.write(json_str)
 
     def fill_pdf(self):
         import subprocess
