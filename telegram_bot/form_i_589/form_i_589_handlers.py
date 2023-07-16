@@ -4119,7 +4119,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=Form_I_589.A_III_CheckBoxAIII5_m_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[4].CheckBoxAIII5\\.m[0]"] = callback_query.data
+        data["[4].CheckBoxAIII5\\\\.m[0]"] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Mother is deceased")
 
