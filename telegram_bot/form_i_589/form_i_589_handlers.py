@@ -159,7 +159,20 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine6_MiddleName[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "What other names have you used (include maiden name and aliases)?")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id, "What other names have you used (include maiden name and aliases)?",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_I_TextField1_1)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField1[1]'] = ""
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you don't have used other names (include maiden name and aliases)")
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Residence in the U.S. (where you physically reside). "
+                                                 "Enter your Street Number and Name:")
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField1_1)
@@ -447,7 +460,19 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[6]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Enter Religion:")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id, "Enter Religion:", reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_I_TextField1_7)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[0].TextField1[7]'] = ""
+    await bot.send_message(callback_query.from_user.id, "You have indicated that you don't have religion")
+    keyboard = Form_I_589_Immigration_Court_Choice()
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Check the button, that applies", reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField1_7)
@@ -544,7 +569,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[0].TextField4[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List most recent entry entry into the U.S. Enter status of your most recent entry:")
+                           "List most recent entry entry into the U.S. Enter status for your most recent entry:")
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField4_1)
@@ -553,7 +578,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[0].TextField4[1]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List most recent entry entry into the U.S. Enter date status of your most recent entry expires :")
+                           "List most recent entry entry into the U.S. Enter expiration date of your status of most recent entry:")
 
 
 @dp.message_handler(state=Form_I_589.A_I_DateTimeField2_1)
@@ -569,7 +594,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField3[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "List second most recent entry entry into the U.S. Enter place:")
+    await bot.send_message(message.from_user.id, "List second most recent entry into the U.S. Enter place:")
 
 
 @dp.message_handler(state=Form_I_589.A_I_TextField4_2)
@@ -633,7 +658,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField5[2]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Expiration Date (mm/dd/yyyy)")
+    await bot.send_message(message.from_user.id, "Expiration Date of Travel Document (mm/dd/yyyy)")
 
 
 @dp.message_handler(state=Form_I_589.A_I_DateTimeField2_2)
@@ -790,7 +815,19 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine7_MiddleName[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Other names of your spouse used (include maiden name and aliases)")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Other names of your spouse used (include maiden name and aliases)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_II_NotMarried_0_TextField10_3)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].NotMarried[0].TextField10[3]'] = ""
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Date of Marriage with your spouse (mm/dd/yyyy)")
 
 
 @dp.message_handler(state=Form_I_589.A_II_NotMarried_0_TextField10_3)
@@ -1154,8 +1191,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport1[0]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Marital Status of your first child (Married Single Divorced Widowed)")
+                           "Marital Status of your first child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport1_0)
@@ -1163,7 +1202,62 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport1[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Marital Status of your first child (Married Single Divorced Widowed)")
+    keyboard = Form_I_589_Marital_Status_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Marital Status of your first child",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_single",
+                           state=Form_I_589.A_II_ChildMarital1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital1[0]'] = "Single"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your first child is single")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_married",
+                           state=Form_I_589.A_II_ChildMarital1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital1[0]'] = "Married"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your first child is married")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_divorced",
+                           state=Form_I_589.A_II_ChildMarital1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital1[0]'] = "Divorced"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your first child is divorced")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_widowed",
+                           state=Form_I_589.A_II_ChildMarital1_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[1].ChildMarital1[0]'] = "Widowed"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your first child is widowed")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your first child (if any)",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildMarital1_0)
@@ -1544,8 +1638,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildPassport2[0]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Marital Status of your second child (Married Single Divorced Widowed)")
+                           "Marital Status of your second child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport2_0)
@@ -1553,17 +1649,60 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildPassport2[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(message.from_user.id,
-                           "Marital Status of your second child (Married Single Divorced Widowed)")
+                           "Marital Status of your second child",
+                           reply_markup=keyboard.markup)
 
 
-@dp.message_handler(state=Form_I_589.A_II_ChildMarital2_0)
-async def process(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="ms_single",
+                           state=Form_I_589.A_II_ChildMarital2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[3].ChildMarital2[0]'] = message.text
+        data['[3].ChildMarital2[0]'] = "Single"
     await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your second child is single")
     keyboard = Form_I_589_If_Any_Choice()
-    await bot.send_message(message.from_user.id,
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your second child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_married",
+                           state=Form_I_589.A_II_ChildMarital2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildMarital2[0]'] = "Married"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your second child is married")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your second child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_divorced",
+                           state=Form_I_589.A_II_ChildMarital2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildMarital2[0]'] = "Divorced"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your second child is divorced")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your second child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_widowed",
+                           state=Form_I_589.A_II_ChildMarital2_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].ChildMarital2[0]'] = "Widowed"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your second child is widowed")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
                            "U.S. Social Security Number of your second child (if any)",
                            reply_markup=keyboard.markup)
 
@@ -1948,28 +2087,69 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport3[0]'] = ""
-    await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Marital Status of your third child (Married Single Divorced Widowed)")
+                           "Marital Status of your third child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport3_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport3[0]'] = message.text
-    await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Marital Status of your third child (Married Single Divorced Widowed)")
+        await Form_I_589.next()
+        keyboard = Form_I_589_Marital_Status_Choice()
+        await bot.send_message(message.from_user.id,
+                               "Marital Status of your third child",
+                               reply_markup=keyboard.markup)
 
+    @dp.callback_query_handler(text="ms_single",
+                               state=Form_I_589.A_II_ChildMarital3_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital3[0]'] = "Single"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your third child is single")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your third child (if any)",
+                               reply_markup=keyboard.markup)
 
-@dp.message_handler(state=Form_I_589.A_II_ChildMarital3_0)
-async def process(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        data['[1].ChildMarital3[0]'] = message.text
-    await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
-    await bot.send_message(message.from_user.id,
-                           "U.S. Social Security Number of your third child (if any)",
-                           reply_markup=keyboard.markup)
+    @dp.callback_query_handler(text="ms_married",
+                               state=Form_I_589.A_II_ChildMarital3_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital3[0]'] = "Married"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your third child is married")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your third child (if any)",
+                               reply_markup=keyboard.markup)
+
+    @dp.callback_query_handler(text="ms_divorced",
+                               state=Form_I_589.A_II_ChildMarital3_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital3[0]'] = "Divorced"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your third child is divorced")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your third child (if any)",
+                               reply_markup=keyboard.markup)
+
+    @dp.callback_query_handler(text="ms_widowed",
+                               state=Form_I_589.A_II_ChildMarital3_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital3[0]'] = "Widowed"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your third child is widowed")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your third child (if any)",
+                               reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
@@ -2340,28 +2520,69 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildPassport4[0]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Marital Status of your fourth child (Married Single Divorced Widowed)")
+                           "Marital Status of your fourth child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.A_II_ChildPassport4_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[3].ChildPassport4[0]'] = message.text
-    await Form_I_589.next()
-    await bot.send_message(message.from_user.id,
-                           "Marital Status of your fourth child (Married Single Divorced Widowed)")
+        data['[1].ChildPassport4[0]'] = message.text
+        await Form_I_589.next()
+        keyboard = Form_I_589_Marital_Status_Choice()
+        await bot.send_message(message.from_user.id,
+                               "Marital Status of your fourth child",
+                               reply_markup=keyboard.markup)
 
+    @dp.callback_query_handler(text="ms_single",
+                               state=Form_I_589.A_II_ChildMarital4_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital4[0]'] = "Single"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your fourth child is single")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your fourth child (if any)",
+                               reply_markup=keyboard.markup)
 
-@dp.message_handler(state=Form_I_589.A_II_ChildMarital4_0)
-async def process(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        data['[3].ChildMarital4[0]'] = message.text
-    await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
-    await bot.send_message(message.from_user.id,
-                           "U.S. Social Security Number of your fourth child (if any)",
-                           reply_markup=keyboard.markup)
+    @dp.callback_query_handler(text="ms_married",
+                               state=Form_I_589.A_II_ChildMarital4_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital4[0]'] = "Married"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your fourth child is married")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your fourth child (if any)",
+                               reply_markup=keyboard.markup)
+
+    @dp.callback_query_handler(text="ms_divorced",
+                               state=Form_I_589.A_II_ChildMarital4_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital4[0]'] = "Divorced"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your fourth child is divorced")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your fourth child (if any)",
+                               reply_markup=keyboard.markup)
+
+    @dp.callback_query_handler(text="ms_widowed",
+                               state=Form_I_589.A_II_ChildMarital4_0)
+    async def process(callback_query: types.CallbackQuery, state: FSMContext):
+        async with state.proxy() as data:
+            data['[3].ChildMarital4[0]'] = "Widowed"
+        await Form_I_589.next()
+        await bot.send_message(callback_query.from_user.id, "You have indicated that your fourth child is widowed")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(callback_query.from_user.id,
+                               "U.S. Social Security Number of your fourth child (if any)",
+                               reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
@@ -2722,25 +2943,71 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[7]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Marital Status of your fifth child (Married Single Divorced Widowed)")
+                           "Marital Status of your fifth child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_7)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[7]'] = message.text
-    await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Marital Status of your fifth child (Married Single Divorced Widowed)")
+        await Form_I_589.next()
+        keyboard = Form_I_589_Marital_Status_Choice()
+        await bot.send_message(message.from_user.id,
+                               "Marital Status of your fifth child",
+                               reply_markup=keyboard.markup)
 
 
-@dp.message_handler(state=Form_I_589.Supplement_A_TextField12_8)
-async def process(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="ms_single",
+                           state=Form_I_589.Supplement_A_TextField12_8)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[12].TextField12[8]'] = message.text
+        data['[12].TextField12[8]'] = "Single"
     await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your fifth child is single")
     keyboard = Form_I_589_If_Any_Choice()
-    await bot.send_message(message.from_user.id,
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your fifth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_married",
+                           state=Form_I_589.Supplement_A_TextField12_8)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[8]'] = "Married"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your fifth child is married")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your fifth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_divorced",
+                           state=Form_I_589.Supplement_A_TextField12_8)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[8]'] = "Divorced"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your fifth child is divorced")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your fifth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_widowed",
+                           state=Form_I_589.Supplement_A_TextField12_8)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[8]'] = "Widowed"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your fifth child is widowed")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
                            "U.S. Social Security Number of your fifth child (if any)",
                            reply_markup=keyboard.markup)
 
@@ -3105,25 +3372,71 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[17]'] = ""
     await Form_I_589.next()
+    keyboard = Form_I_589_Marital_Status_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Marital Status of your sixth child (Married Single Divorced Widowed)")
+                           "Marital Status of your sixth child",
+                           reply_markup=keyboard.markup)
 
 
 @dp.message_handler(state=Form_I_589.Supplement_A_TextField12_17)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[17]'] = message.text
-    await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Marital Status of your sixth child (Married Single Divorced Widowed)")
+        await Form_I_589.next()
+        keyboard = Form_I_589_Marital_Status_Choice()
+        await bot.send_message(message.from_user.id,
+                               "Marital Status of your sixth child",
+                               reply_markup=keyboard.markup)
 
 
-@dp.message_handler(state=Form_I_589.Supplement_A_TextField12_18)
-async def process(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="ms_single",
+                           state=Form_I_589.Supplement_A_TextField12_18)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[12].TextField12[18]'] = message.text
+        data['[12].TextField12[18]'] = "Single"
     await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your sixth child is single")
     keyboard = Form_I_589_If_Any_Choice()
-    await bot.send_message(message.from_user.id,
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your sixth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_married",
+                           state=Form_I_589.Supplement_A_TextField12_18)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[18]'] = "Married"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your sixth child is married")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your sixth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_divorced",
+                           state=Form_I_589.Supplement_A_TextField12_18)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[18]'] = "Divorced"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your sixth child is divorced")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "U.S. Social Security Number of your sixth child (if any)",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="ms_widowed",
+                           state=Form_I_589.Supplement_A_TextField12_18)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[12].TextField12[18]'] = "Widowed"
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "You have indicated that your sixth child is widowed")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(callback_query.from_user.id,
                            "U.S. Social Security Number of your sixth child (if any)",
                            reply_markup=keyboard.markup)
 
@@ -3256,7 +3569,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppLALine13_Specify2[0]'] = message.text
     await bot.send_message(message.from_user.id,
-                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street")
+                           "List your last address where you lived before coming to the United States where you don't fear persecution. First enter Number and Street")
     await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3410,7 +3723,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "You indicated that your sixth child is to be included in this application")
     await bot.send_message(callback_query.from_user.id,
-                           "List your last address where you lived before coming to the United States where don't you fear persecution. First enter Number and Street")
+                           "List your last address where you lived before coming to the United States where you don't fear persecution. First enter Number and Street")
 
 
 # Last address with no fear of persecution
@@ -3420,7 +3733,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter City/Town of your last address where you lived before coming to the United States where you DON'T FEAR persecution")
+                           "Enter City/Town of your last address where you lived before coming to the United States where you don't fear persecution")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_2)
@@ -3447,7 +3760,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[6]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Date From (Mo/Yr) you were living on your last address where you lived before coming to the United States where you don't fear persecution")
+                           "Enter Date From (MM/YYYY) you were living on your last address where you lived before coming to the United States where you don't fear persecution")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField21_0)
@@ -3456,7 +3769,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField21[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Last Date (Mo/Yr) when you were living on your last address where you lived before coming to the United States where you don't fear persecution")
+                           "Enter Last Date (MM/YYYY) when you were living on your last address where you lived before coming to the United States where you don't fear persecution")
 
 
 # Address Where Fear Persecution
@@ -3465,8 +3778,9 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField20[0]'] = message.text
     await Form_I_589.next()
+
     await bot.send_message(message.from_user.id,
-                           "List your last address where you lived before coming to the United States where you FEAR persecution. First enter Number and Street")
+                           "List your last address where you lived before coming to the United States where you fear persecution. First enter Number and Street")
 
 
 # Last address with fear of persecution
@@ -3476,7 +3790,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[1]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter City/Town of your last address where you lived before coming to the United States where you FEAR persecution")
+                           "Enter City/Town of your last address where you lived before coming to the United States where you fear persecution")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_3)
@@ -3503,7 +3817,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[7]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Date From (Mo/Yr) you were living on your last address where you lived before coming to the United States where you fear persecution")
+                           "Enter Date From (MM/YYYY) you were living on your last address where you lived before coming to the United States where you fear persecution")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField22_0)
@@ -3512,7 +3826,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField22[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Last Date (Mo/Yr) when you were living on your last address where you lived before coming to the United States where you don't fear persecution")
+                           "Enter Last Date (MM/YYYY) when you were living on your last address where you lived before coming to the United States where you don't fear persecution")
 
 
 # Present Address
@@ -3522,7 +3836,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField23[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List your present address. First Enter Number and Street")
+                           "List your present address.")
+    await bot.send_message(message.from_user.id, "First Enter Number and Street")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_8)
@@ -3531,7 +3846,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[8]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List your present address. Enter City/Town")
+                           "List your present address.")
+    await bot.send_message(message.from_user.id, "Enter City/Town")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_10)
@@ -3540,7 +3856,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[10]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List your present address. Enter Department, Province, or State")
+                           "List your present address.")
+    await bot.send_message(message.from_user.id, "Enter Department, Province, or State")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_12)
@@ -3549,7 +3866,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[12]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List your present address. Enter Country")
+                           "List your present address.")
+    await bot.send_message(message.from_user.id, "Enter Country")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_14)
@@ -3558,7 +3876,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[14]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List your present address. Enter Date when you moved in")
+                           "List your present address.")
+    await bot.send_message(message.from_user.id, "Enter Date when you moved in (mm/dd/yyyy)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField24_0)
@@ -3567,7 +3886,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField24[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "List your present address. Enter Date when you planning to move out")
+                           "List your present address.")
+    await bot.send_message(message.from_user.id, "Enter Date when you planning to move out (mm/dd/yyyy)")
 
 
 # First Residence
@@ -3577,7 +3897,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField26[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your residences during the past 5 years. Enter Number and Street of first residence")
+                           "Provide the following information about your residences during the past 5 years.")
+    await bot.send_message(message.from_user.id, "Enter Number and Street of first residence")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_9)
@@ -3631,7 +3952,21 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField27[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your residences during the past 5 years. Enter Number and Street of second residence")
+                           "Provide the following information about your residences during the past 5 years.")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Enter Number and Street of second residence",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_16)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_28.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your education, beginning with the most recent school that you attended.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Name of School")
 
 
 # Second Residence
@@ -3641,7 +3976,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[16]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your residences during the past 5 years. Enter City/Town of second residence")
+                           "Provide the following information about your residences during the past 5 years.")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town of second residence")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_17)
@@ -3686,7 +4023,21 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField29[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your residences during the past 5 years. Enter Number and Street of third residence")
+                           "Provide the following information about your residences during the past 5 years.")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id,
+                           "Enter Number and Street of third residence",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_20)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_28.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your education, beginning with the most recent school that you attended.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Name of School")
 
 
 # Third Residence
@@ -3739,9 +4090,23 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField31[0]'] = message.text
-    await Form_I_589.next()
-    await bot.send_message(message.from_user.id,
-                           "Provide the following information about your residences during the past 5 years. Enter Number and Street of fourth residence")
+        await Form_I_589.next()
+        await bot.send_message(message.from_user.id,
+                               "Provide the following information about your residences during the past 5 years.")
+        keyboard = Form_I_589_If_Any_Choice()
+        await bot.send_message(message.from_user.id,
+                               "Enter Number and Street of third residence",
+                               reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_24)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_28.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your education, beginning with the most recent school that you attended.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Name of School")
 
 
 # Fourth Residence
@@ -3796,7 +4161,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField33[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your education, beginning with the most recent school that you attended. Enter Name of School")
+                           "Provide the following information about your education, beginning with the most recent school that you attended.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Name of School")
 
 
 # First School
@@ -3806,7 +4173,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[28]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Type of School")
+                           "Enter Type of your first School")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_30)
@@ -3815,7 +4182,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[30]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Location (Address)")
+                           "Enter Address of your first School")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_32)
@@ -3824,7 +4191,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[32]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended From (Mo/Yr)")
+                           "Attended From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField41_0)
@@ -3833,7 +4200,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField41[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended To (Mo/Yr)")
+                           "Attended To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField40_0)
@@ -3841,8 +4208,21 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField40[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Enter Second Name of School")
+                           "Provide the following information about your education.")
+    await bot.send_message(message.from_user.id,
+                           "Enter name of second school that you attended",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_29)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_40.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(callback_query.from_user.id, "Enter Name and Address of Employer")
 
 
 # Second School
@@ -3852,7 +4232,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[29]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Type of School")
+                           "Enter type of second school that you attended")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_31)
@@ -3861,7 +4241,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[31]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Location (Address)")
+                           "Enter Address of second school that you attended")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_33)
@@ -3870,7 +4250,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[33]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended From (Mo/Yr)")
+                           "Attended From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField38_0)
@@ -3879,7 +4259,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField38[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended To (Mo/Yr)")
+                           "Attended To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField39_0)
@@ -3887,8 +4267,21 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField39[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your education, beginning with the third school that you attended. Enter Name of School")
+                           "Provide the following information about your education.")
+    await bot.send_message(message.from_user.id,
+                           "Enter name of third school that you attended",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_34)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_40.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(callback_query.from_user.id, "Enter Name and Address of Employer")
 
 
 # Third School
@@ -3898,7 +4291,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[34]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Type of School")
+                           "Enter type of third school that you attended")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_35)
@@ -3907,7 +4300,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[35]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Location (Address)")
+                           "Enter Address of third school that you attended")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_36)
@@ -3916,7 +4309,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[36]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended From (Mo/Yr)")
+                           "Attended From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField37_0)
@@ -3925,16 +4318,30 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField37[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended To (Mo/Yr)")
+                           "Attended To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField36_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField36[0]'] = message.text
+
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your education, beginning with the fourth school that you attended. Enter Name of School")
+                           "Provide the following information about your education.")
+    await bot.send_message(message.from_user.id,
+                           "Enter name of fourth school that you attended",
+                           reply_markup=keyboard.markup)
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_34)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_40.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(callback_query.from_user.id, "Enter Name and Address of Employer")
 
 
 # Fourth School
@@ -3944,7 +4351,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[37]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Enter Type of School")
+                           "Enter type of fourth school that you attended")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_38)
@@ -3962,7 +4369,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[39]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended From (Mo/Yr)")
+                           "Attended From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField34_0)
@@ -3971,7 +4378,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField34[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Attended To (Mo/Yr)")
+                           "Attended To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField35_0)
@@ -3980,7 +4387,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField35[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Name and Address of Employer")
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(message.from_user.id, "Enter Name and Address of Employer")
 
 
 # First Employer
@@ -3990,7 +4398,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[40]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Your Occupation")
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(message.from_user.id, "Enter Your Occupation")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_42)
@@ -3999,7 +4408,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[42]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Dates From (Mo/Yr)")
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Dates From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField42_0)
@@ -4008,7 +4419,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField42[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Dates To (Mo/Yr)")
+                           "Provide the following information about your employment during the past 5 years. List your present employment first.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Dates To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField44_0)
@@ -4016,8 +4429,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField44[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. Enter Name and Address of Employer")
+                           "Provide the following information about your employment during the past 5 years. List your second employment.",
+                           reply_markup=keyboard.markup)
+    await bot.send_message(message.from_user.id,
+                           "Enter Name and Address of Employer")
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_41)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_46.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of Mother")
 
 
 # Second Employer
@@ -4027,7 +4454,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[41]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Your Occupation")
+                           "Provide the following information about your employment during the past 5 years. List your second employment.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Your Occupation")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_43)
@@ -4036,7 +4465,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[43]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Dates From (Mo/Yr)")
+                           "Provide the following information about your employment during the past 5 years. List your second employment.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Dates From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField43_0)
@@ -4045,7 +4476,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField43[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Dates To (Mo/Yr)")
+                           "Provide the following information about your employment during the past 5 years. List your second employment.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Dates To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField45_0)
@@ -4053,8 +4486,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField45[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. Enter Name and Address of Employer")
+                           "Provide the following information about your employment during the past 5 years. List your third employment.",
+                           reply_markup=keyboard.markup)
+    await bot.send_message(message.from_user.id,
+                           "Enter Name and Address of Employer")
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_41)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_46.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of Mother")
 
 
 # Third Employer
@@ -4064,7 +4511,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[44]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Your Occupation")
+                           "Provide the following information about your employment during the past 5 years. List your third employment.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Your Occupation")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_45)
@@ -4073,7 +4522,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[45]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Dates From (Mo/Yr)")
+                           "Provide the following information about your employment during the past 5 years. List your third employment.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Dates From (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField46_0)
@@ -4082,7 +4533,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField46[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your employment during the past 5 years. List your present employment first. Enter Dates To (Mo/Yr)")
+                           "Provide the following information about your employment during the past 5 years. List your third employment.")
+    await bot.send_message(message.from_user.id,
+                           "Enter Dates To (MM/YYYY)")
 
 
 @dp.message_handler(state=Form_I_589.A_III_DateTimeField47_0)
@@ -4090,8 +4543,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField47[0]'] = message.text
     await Form_I_589.next()
+    keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of Mother")
+                           "Provide the following information about your parents and siblings (brothers and sisters).",
+                           reply_markup=keyboard.markup)
+    await bot.send_message(message.from_user.id,
+                           "Enter Full Name of Mother")
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=Form_I_589.A_III_TextField13_46)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.A_III_TextField13_47.set()
+    await bot.send_message(callback_query.from_user.id,
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of Father")
 
 
 # Mother
@@ -4101,7 +4568,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[46]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter City/Town and Country of Birth of Mother")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town and Country of Birth of Mother")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_49)
@@ -4111,7 +4580,9 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_Mother_Deceased_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Is your mother Deceased?",
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Is your mother Deceased?",
                            reply_markup=keyboard.markup)
 
 
@@ -4122,9 +4593,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[4].CheckBoxAIII5\\\\.m[0]"] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Mother is deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of Father")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of Father")
     await Form_I_589.A_III_TextField13_47.set()
 
 
@@ -4135,9 +4607,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.m[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Mother is not deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Current Location of Mother")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Current Location of Mother")
     await Form_I_589.A_III_TextField35_0.set()
 
 
@@ -4147,7 +4620,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField35[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of Father")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter Full Name of Father")
 
 
 # Father
@@ -4157,7 +4632,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[47]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter City/Town and Country of Birth of Father")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town and Country of Birth of Father")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_50)
@@ -4167,7 +4644,9 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_Father_Deceased_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Is your father Deceased?",
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Is your father Deceased?",
                            reply_markup=keyboard.markup)
 
 
@@ -4178,9 +4657,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.f[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Father is deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 1 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of 1 Sibling")
     await Form_I_589.A_III_TextField13_48.set()
 
 
@@ -4191,9 +4671,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.f[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your Father is not deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Current Location of Father")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Current Location of Father")
     await Form_I_589.A_III_TextField35_1.set()
 
 
@@ -4203,7 +4684,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField35[1]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 1 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter Full Name of 1 Sibling")
 
 
 # Sibling 1
@@ -4213,7 +4696,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[48]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter City/Town and Country of Birth of 1 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town and Country of Birth of 1 Sibling")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_51)
@@ -4223,7 +4708,9 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_1Sibling_Deceased_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Is your 1 sibling deceased?",
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Is your 1 sibling deceased?",
                            reply_markup=keyboard.markup)
 
 
@@ -4234,9 +4721,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s1[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 1 sibling is deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 2 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of 2 sibling")
     await Form_I_589.A_III_TextField13_52.set()
 
 
@@ -4247,9 +4735,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s1[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 1 sibling is not deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Current Location of 1 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Current Location of 1 sibling")
     await Form_I_589.A_III_TextField35_2.set()
 
 
@@ -4259,7 +4748,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField35[2]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 2 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter Full Name of 2 Sibling")
 
 
 # Sibling 2
@@ -4269,7 +4760,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[52]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter City/Town and Country of Birth of 2 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town and Country of Birth of 2 Sibling")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_53)
@@ -4279,7 +4772,9 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_2Sibling_Deceased_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Is your 2 sibling deceased?",
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Is your 2 sibling deceased?",
                            reply_markup=keyboard.markup)
 
 
@@ -4290,9 +4785,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s2[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 2 sibling is deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 3 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of 3 sibling")
     await Form_I_589.A_III_TextField13_54.set()
 
 
@@ -4303,9 +4799,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s2[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 2 sibling is not deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Current Location of 2 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Current Location of 2 sibling")
     await Form_I_589.A_III_TextField35_3.set()
 
 
@@ -4315,7 +4812,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField35[3]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 3 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter Full Name of 3 Sibling")
 
 
 # Sibling 3
@@ -4325,7 +4824,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[54]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter City/Town and Country of Birth of 3 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town and Country of Birth of 3 Sibling")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_55)
@@ -4335,7 +4836,9 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_3Sibling_Deceased_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Is your 3 sibling deceased?",
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Is your 3 sibling deceased?",
                            reply_markup=keyboard.markup)
 
 
@@ -4346,9 +4849,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s3[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 3 sibling is deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 4 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Full Name of 4 sibling")
     await Form_I_589.A_III_TextField13_56.set()
 
 
@@ -4359,9 +4863,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s3[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 3 sibling is not deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Current Location of 3 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Current Location of 3 sibling")
     await Form_I_589.A_III_TextField35_4.set()
 
 
@@ -4371,7 +4876,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField35[4]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Full Name of 4 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter Full Name of 4 Sibling")
 
 
 # Sibling 4
@@ -4381,7 +4888,9 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].TextField13[56]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter City/Town and Country of Birth of 4 Sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Enter City/Town and Country of Birth of 4 Sibling")
 
 
 @dp.message_handler(state=Form_I_589.A_III_TextField13_57)
@@ -4391,7 +4900,9 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_4Sibling_Deceased_Choice()
     await bot.send_message(message.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Is your 4 sibling deceased?",
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(message.from_user.id,
+                           "Is your 4 sibling deceased?",
                            reply_markup=keyboard.markup)
 
 
@@ -4416,9 +4927,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s4[0]'] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "You indicated that your 4 sibling is not deceased")
-
     await bot.send_message(callback_query.from_user.id,
-                           "Provide the following information about your parents and siblings (brothers and sisters). Enter Current Location of 4 sibling")
+                           "Provide the following information about your parents and siblings (brothers and sisters).")
+    await bot.send_message(callback_query.from_user.id,
+                           "Enter Current Location of 4 sibling")
     await Form_I_589.A_III_TextField35_5.set()
 
 
@@ -5201,7 +5713,7 @@ async def process(message: types.Message, state: FSMContext):
                                              timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
             adapter.save_json(data)
             await bot.send_message(message.chat.id,
-                                   "Your data for Form-I-589 form was successfully saved! Wait for pdf file.")
+                                   f"Your data for Form {data['form_identifier']} form was successfully saved! Wait for pdf file.")
             await bot.send_chat_action(message.chat.id, "typing")
             pdf_file_path = adapter.fill_pdf()
             with open(pdf_file_path, 'rb') as file:
@@ -5291,7 +5803,7 @@ async def process(message: types.Message, state: FSMContext):
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
         adapter.save_json(data)
         await bot.send_message(message.chat.id,
-                               "Your data for Form-I-589 form was successfully saved! Wait for pdf file.")
+                               f"Your data for Form {data['form_identifier']} form was successfully saved! Wait for pdf file.")
         await bot.send_chat_action(message.chat.id, "typing")
         pdf_file_path = adapter.fill_pdf()
         with open(pdf_file_path, 'rb') as file:
