@@ -4,9 +4,9 @@ from telegram_bot import InlineKeyboardMarkup, InlineKeyboardButton
 class Form_I_589_Gender_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Female", callback_data="female")
+        button = InlineKeyboardButton("Женский", callback_data="female")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Male", callback_data="male")
+        button = InlineKeyboardButton("Мужской", callback_data="male")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -14,7 +14,7 @@ class Form_I_589_Gender_Choice:
 class Form_I_589_If_Any_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("Don't have it", callback_data="don't_have_it")
+        button = InlineKeyboardButton("У меня этого нет", callback_data="don't_have_it")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -22,7 +22,7 @@ class Form_I_589_If_Any_Choice:
 class Form_I_589_If_Previously_In_US:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("Was not previously in the US", callback_data="not_previously_in_us")
+        button = InlineKeyboardButton("Ранее не был в США", callback_data="not_previously_in_us")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -30,7 +30,7 @@ class Form_I_589_If_Previously_In_US:
 class Form_I_589_If_Applicable:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("Not applicable", callback_data="not_applicable")
+        button = InlineKeyboardButton("Не применимо", callback_data="not_applicable")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -38,9 +38,9 @@ class Form_I_589_If_Applicable:
 class Form_I_589_Mailing_Address_Choice_Keyboard:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button_yes = InlineKeyboardButton("Mailing address same", callback_data="MailingSameAsResidence_Yes")
+        button_yes = InlineKeyboardButton("Почтовый адрес тот же", callback_data="MailingSameAsResidence_Yes")
         keyboard_markup.add(button_yes)
-        button_no = InlineKeyboardButton("Mailing address different", callback_data="MailingSameAsResidence_No")
+        button_no = InlineKeyboardButton("Почтовый адрес другой", callback_data="MailingSameAsResidence_No")
         keyboard_markup.add(button_no)
         self.markup = keyboard_markup
 
@@ -48,13 +48,13 @@ class Form_I_589_Mailing_Address_Choice_Keyboard:
 class Form_I_589_Marital_Status_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=4)
-        button = InlineKeyboardButton("Marital Status Single", callback_data="ms_single")
+        button = InlineKeyboardButton("Не в браке", callback_data="ms_single")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Marital Status Married", callback_data="ms_married")
+        button = InlineKeyboardButton("В браке", callback_data="ms_married")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Marital Status Divorced", callback_data="ms_divorced")
+        button = InlineKeyboardButton("В разводе", callback_data="ms_divorced")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Marital Status Widowed", callback_data="ms_widowed")
+        button = InlineKeyboardButton("Вдова(-ец)", callback_data="ms_widowed")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -62,11 +62,11 @@ class Form_I_589_Marital_Status_Choice:
 class Form_I_589_Immigration_Court_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=3)
-        button = InlineKeyboardButton("I have never been in Immigration Court proceedings.", callback_data="never_been_imc")
+        button = InlineKeyboardButton("Я никогда не участвовал в разбирательствах в иммиграционном суде.", callback_data="never_been_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("I am now in Immigration Court proceedings.", callback_data=f"now_in_imc")
+        button = InlineKeyboardButton("Сейчас я нахожусь на рассмотрении иммиграционного суда.", callback_data=f"now_in_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("I have been in Immigration Court proceedings in the past.", callback_data="not_now_but_been_in_imc")
+        button = InlineKeyboardButton("В прошлом я участвовал в разбирательствах в иммиграционном суде.", callback_data="not_now_but_been_in_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -74,9 +74,9 @@ class Form_I_589_Immigration_Court_Choice:
 class Form_I_589_Spouse_Immigration_Court_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_spouse_imc")
+        button = InlineKeyboardButton("Да", callback_data="yes_spouse_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_spouse_imc")
+        button = InlineKeyboardButton("Нет", callback_data="no_spouse_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -84,9 +84,9 @@ class Form_I_589_Spouse_Immigration_Court_Choice:
 class Form_I_589_Child_Immigration_Court_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_child_imc")
+        button = InlineKeyboardButton("Да", callback_data="yes_child_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_child_imc")
+        button = InlineKeyboardButton("Нет", callback_data="no_child_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -94,9 +94,9 @@ class Form_I_589_Child_Immigration_Court_Choice:
 class Form_I_589_Include_Spouse_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_include_spouse")
+        button = InlineKeyboardButton("Да", callback_data="yes_include_spouse")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_include_spouse")
+        button = InlineKeyboardButton("Нет", callback_data="no_include_spouse")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -104,9 +104,9 @@ class Form_I_589_Include_Spouse_Choice:
 class Form_I_589_Include_Child_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_include_child")
+        button = InlineKeyboardButton("Да", callback_data="yes_include_child")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_include_child")
+        button = InlineKeyboardButton("Нет", callback_data="no_include_child")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -114,9 +114,9 @@ class Form_I_589_Include_Child_Choice:
 class Form_I_589_Fill_Next_Child_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_fill_next_child")
+        button = InlineKeyboardButton("Да", callback_data="yes_fill_next_child")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_fill_next_child")
+        button = InlineKeyboardButton("Нет", callback_data="no_fill_next_child")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -124,10 +124,10 @@ class Form_I_589_Fill_Next_Child_Choice:
 class Form_I_589_Have_Children_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("I do not have any children. (Skip to Part A.III., Information about your background.)",
+        button = InlineKeyboardButton("У меня нет детей. (Перейдите к части A.III. «Информация о вашем прошлом».)",
                                       callback_data="dont_have_children")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("I have children.", callback_data="have_children")
+        button = InlineKeyboardButton("У меня есть дети", callback_data="have_children")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -135,7 +135,7 @@ class Form_I_589_Have_Children_Choice:
 class Form_I_94_Number_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("I don't have an I-94 number", callback_data="blank_i_94")
+        button = InlineKeyboardButton("У меня нет номера I-94", callback_data="blank_i_94")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -143,9 +143,9 @@ class Form_I_94_Number_Choice:
 class Form_I_589_English_Fluency_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_eng_fluent")
+        button = InlineKeyboardButton("Да", callback_data="yes_eng_fluent")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_eng_fluent")
+        button = InlineKeyboardButton("Нет", callback_data="no_eng_fluent")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -153,9 +153,9 @@ class Form_I_589_English_Fluency_Choice:
 class Form_I_589_Location_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_location")
+        button = InlineKeyboardButton("Да", callback_data="yes_location")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_location")
+        button = InlineKeyboardButton("Нет", callback_data="no_location")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -163,9 +163,9 @@ class Form_I_589_Location_Choice:
 class Form_I_589_Mother_Deceased_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_mother_deceased")
+        button = InlineKeyboardButton("Да", callback_data="yes_mother_deceased")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_mother_deceased")
+        button = InlineKeyboardButton("Нет", callback_data="no_mother_deceased")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -173,9 +173,9 @@ class Form_I_589_Mother_Deceased_Choice:
 class Form_I_589_Father_Deceased_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_father_deceased")
+        button = InlineKeyboardButton("Да", callback_data="yes_father_deceased")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_father_deceased")
+        button = InlineKeyboardButton("Нет", callback_data="no_father_deceased")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -183,9 +183,9 @@ class Form_I_589_Father_Deceased_Choice:
 class Form_I_589_1Sibling_Deceased_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_1sibling_deceased")
+        button = InlineKeyboardButton("Да", callback_data="yes_1sibling_deceased")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_1sibling_deceased")
+        button = InlineKeyboardButton("Нет", callback_data="no_1sibling_deceased")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -193,9 +193,9 @@ class Form_I_589_1Sibling_Deceased_Choice:
 class Form_I_589_2Sibling_Deceased_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_2sibling_deceased")
+        button = InlineKeyboardButton("Да", callback_data="yes_2sibling_deceased")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_2sibling_deceased")
+        button = InlineKeyboardButton("Нет", callback_data="no_2sibling_deceased")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -203,9 +203,9 @@ class Form_I_589_2Sibling_Deceased_Choice:
 class Form_I_589_3Sibling_Deceased_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_3sibling_deceased")
+        button = InlineKeyboardButton("Да", callback_data="yes_3sibling_deceased")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_3sibling_deceased")
+        button = InlineKeyboardButton("Нет", callback_data="no_3sibling_deceased")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -213,9 +213,9 @@ class Form_I_589_3Sibling_Deceased_Choice:
 class Form_I_589_4Sibling_Deceased_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_4sibling_deceased")
+        button = InlineKeyboardButton("Да", callback_data="yes_4sibling_deceased")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_4sibling_deceased")
+        button = InlineKeyboardButton("Нет", callback_data="no_4sibling_deceased")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -223,17 +223,17 @@ class Form_I_589_4Sibling_Deceased_Choice:
 class Form_I_589_Asylum_Reason_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Race", callback_data="race_asylum_reason")
+        button = InlineKeyboardButton("Расы", callback_data="race_asylum_reason")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Religion", callback_data="religion_asylum_reason")
+        button = InlineKeyboardButton("Религии", callback_data="religion_asylum_reason")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Nationality", callback_data="nationality_asylum_reason")
+        button = InlineKeyboardButton("Национальности", callback_data="nationality_asylum_reason")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Political opinion", callback_data="political_asylum_reason")
+        button = InlineKeyboardButton("Политического мнения", callback_data="political_asylum_reason")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Membership in a particular social group", callback_data="membership_asylum_reason")
+        button = InlineKeyboardButton("Принадлежности к определенной социальной группе", callback_data="membership_asylum_reason")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Torture Convention", callback_data="torture_asylum_reason")
+        button = InlineKeyboardButton("Конвенции против пыток", callback_data="torture_asylum_reason")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -241,9 +241,9 @@ class Form_I_589_Asylum_Reason_Choice:
 class Form_I_589_Family_Experienced_Harm_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_family_harm")
+        button = InlineKeyboardButton("Да", callback_data="yes_family_harm")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_family_harm")
+        button = InlineKeyboardButton("Нет", callback_data="no_family_harm")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -251,9 +251,9 @@ class Form_I_589_Family_Experienced_Harm_Choice:
 class Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_you_fear_harm")
+        button = InlineKeyboardButton("Да", callback_data="yes_you_fear_harm")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_you_fear_harm")
+        button = InlineKeyboardButton("Нет", callback_data="no_you_fear_harm")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -261,9 +261,9 @@ class Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice:
 class Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_violated_law")
+        button = InlineKeyboardButton("Да", callback_data="yes_violated_law")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_violated_law")
+        button = InlineKeyboardButton("Нет", callback_data="no_violated_law")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -271,9 +271,9 @@ class Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice:
 class Form_I_589_You_Been_Associated_With_Any_Organizations_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_You_Been_Associated_With_Any_Organizations")
+        button = InlineKeyboardButton("Да", callback_data="yes_You_Been_Associated_With_Any_Organizations")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_You_Been_Associated_With_Any_Organizations")
+        button = InlineKeyboardButton("Нет", callback_data="no_You_Been_Associated_With_Any_Organizations")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -281,9 +281,9 @@ class Form_I_589_You_Been_Associated_With_Any_Organizations_Choice:
 class Form_I_589_You_Continue_To_Participate_In_Organizations_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_You_Continue_To_Participate_In_Organizations")
+        button = InlineKeyboardButton("Да", callback_data="yes_You_Continue_To_Participate_In_Organizations")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_You_Continue_To_Participate_In_Organizations")
+        button = InlineKeyboardButton("Нет", callback_data="no_You_Continue_To_Participate_In_Organizations")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -291,9 +291,9 @@ class Form_I_589_You_Continue_To_Participate_In_Organizations_Choice:
 class Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_You_Afraid_Of_Being_Subjected_To_Torture")
+        button = InlineKeyboardButton("Да", callback_data="yes_You_Afraid_Of_Being_Subjected_To_Torture")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_You_Afraid_Of_Being_Subjected_To_Torture")
+        button = InlineKeyboardButton("Нет", callback_data="no_You_Afraid_Of_Being_Subjected_To_Torture")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -301,9 +301,9 @@ class Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice:
 class Form_I_589_Family_Applied_For_USRefugee_Status_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Family_Applied_For_USRefugee_Status")
+        button = InlineKeyboardButton("Да", callback_data="yes_Family_Applied_For_USRefugee_Status")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Family_Applied_For_USRefugee_Status")
+        button = InlineKeyboardButton("Нет", callback_data="no_Family_Applied_For_USRefugee_Status")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -311,9 +311,9 @@ class Form_I_589_Family_Applied_For_USRefugee_Status_Choice:
 class Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Family_Travel_Or_Reside_In_Other_Countries_Before_US")
+        button = InlineKeyboardButton("Да", callback_data="yes_Family_Travel_Or_Reside_In_Other_Countries_Before_US")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Family_Travel_Or_Reside_In_Other_Countries_Before_US")
+        button = InlineKeyboardButton("Нет", callback_data="no_Family_Travel_Or_Reside_In_Other_Countries_Before_US")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -321,9 +321,9 @@ class Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice:
 class Form_I_589_Family_Recieved_Any_Lawful_Status_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Family_Recieved_Any_Lawful_Status")
+        button = InlineKeyboardButton("Да", callback_data="yes_Family_Recieved_Any_Lawful_Status")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Family_Recieved_Any_Lawful_Status")
+        button = InlineKeyboardButton("Нет", callback_data="no_Family_Recieved_Any_Lawful_Status")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -331,9 +331,9 @@ class Form_I_589_Family_Recieved_Any_Lawful_Status_Choice:
 class Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_You_Or_Family_Caused_Harm_Or_Suffering")
+        button = InlineKeyboardButton("Да", callback_data="yes_You_Or_Family_Caused_Harm_Or_Suffering")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_You_Or_Family_Caused_Harm_Or_Suffering")
+        button = InlineKeyboardButton("Нет", callback_data="no_You_Or_Family_Caused_Harm_Or_Suffering")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -341,9 +341,9 @@ class Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice:
 class Form_I_589_Returned_To_Bad_Country_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Returned_To_Bad_Country")
+        button = InlineKeyboardButton("Да", callback_data="yes_Returned_To_Bad_Country")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Returned_To_Bad_Country")
+        button = InlineKeyboardButton("Нет", callback_data="no_Returned_To_Bad_Country")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -351,9 +351,9 @@ class Form_I_589_Returned_To_Bad_Country_Choice:
 class Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Last_Arrival_To_US_More_Than_1_Year")
+        button = InlineKeyboardButton("Да", callback_data="yes_Last_Arrival_To_US_More_Than_1_Year")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Last_Arrival_To_US_More_Than_1_Year")
+        button = InlineKeyboardButton("Нет", callback_data="no_Last_Arrival_To_US_More_Than_1_Year")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -361,9 +361,9 @@ class Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice:
 class Form_I_589_You_Or_Family_Did_Crime_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_You_Or_Family_Did_Crime")
+        button = InlineKeyboardButton("Да", callback_data="yes_You_Or_Family_Did_Crime")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_You_Or_Family_Did_Crime")
+        button = InlineKeyboardButton("Нет", callback_data="no_You_Or_Family_Did_Crime")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -371,9 +371,9 @@ class Form_I_589_You_Or_Family_Did_Crime_Choice:
 class Form_I_589_Family_Helped_Complete_Application_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Family_Helped_Complete_Application")
+        button = InlineKeyboardButton("Да", callback_data="yes_Family_Helped_Complete_Application")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Family_Helped_Complete_Application")
+        button = InlineKeyboardButton("Нет", callback_data="no_Family_Helped_Complete_Application")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -381,9 +381,9 @@ class Form_I_589_Family_Helped_Complete_Application_Choice:
 class Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Family_Helped_Complete_Fill_Next_Member_Choice")
+        button = InlineKeyboardButton("Да", callback_data="yes_Family_Helped_Complete_Fill_Next_Member_Choice")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Family_Helped_Complete_Fill_Next_Member_Choice")
+        button = InlineKeyboardButton("Нет", callback_data="no_Family_Helped_Complete_Fill_Next_Member_Choice")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -391,9 +391,9 @@ class Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice:
 class Form_I_589_Not_Family_Helped_Complete_Application_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Not_Family_Helped_Complete_Application")
+        button = InlineKeyboardButton("Да", callback_data="yes_Not_Family_Helped_Complete_Application")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Not_Family_Helped_Complete_Application")
+        button = InlineKeyboardButton("Нет", callback_data="no_Not_Family_Helped_Complete_Application")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -401,9 +401,9 @@ class Form_I_589_Not_Family_Helped_Complete_Application_Choice:
 class Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Provided_With_List_Of_Persons_Who_May_Assist")
+        button = InlineKeyboardButton("Да", callback_data="yes_Provided_With_List_Of_Persons_Who_May_Assist")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Provided_With_List_Of_Persons_Who_May_Assist")
+        button = InlineKeyboardButton("Нет", callback_data="no_Provided_With_List_Of_Persons_Who_May_Assist")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -411,9 +411,9 @@ class Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice:
 class Form_I_589_Form_G_28_Attached_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_Form_G_28_Attached")
+        button = InlineKeyboardButton("Да", callback_data="yes_Form_G_28_Attached")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_Form_G_28_Attached")
+        button = InlineKeyboardButton("Нет", callback_data="no_Form_G_28_Attached")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -421,8 +421,8 @@ class Form_I_589_Form_G_28_Attached_Choice:
 class Form_I_589_All_True_Or_Not_True_Application:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("Yes", callback_data="yes_All_True_Or_Not_True_Application")
+        button = InlineKeyboardButton("Да", callback_data="yes_All_True_Or_Not_True_Application")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("No", callback_data="no_All_True_Or_Not_True_Application")
+        button = InlineKeyboardButton("Нет", callback_data="no_All_True_Or_Not_True_Application")
         keyboard_markup.add(button)
         self.markup = keyboard_markup

@@ -3,20 +3,20 @@ class FillPdfFromJsonAdapter:
                                              "I-589": "../pdf_inputs/i-589-unlocked.pdf"}
 
     def __init__(self, data, form_identifier, user_id, timestamp):
+        self.data = data
         self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[form_identifier]
         self.json_input_file_path = rf"../json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
         self.pdf_output_file_path = rf"../pdf_outputs/{form_identifier}-{user_id}.pdf"
 
-    def save_json(self, data):
+    def save_json(self):
         import json
 
-        serializable_data = {key: value for key, value in data.items()}
+        serializable_data = {key: value for key, value in self.data.items()}
         json_str = json.dumps(serializable_data, ensure_ascii=False, indent=4)
 
-        # Now, replace '\\\\' with '\\' in the json_str
-        json_str = json_str.replace('\\\\', '\\')
+        json_str = json_str.replace('/', '//')
+        json_str = json_str.replace('\\', '//')
 
-        # Write the modified string to the file
         with open(self.json_input_file_path, 'w', encoding="utf-8") as f:
             f.write(json_str)
 

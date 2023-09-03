@@ -11,9 +11,9 @@ async def process(message: types.Message, state: FSMContext):
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json(data)
+        adapter.save_json()
         await bot.send_message(message.chat.id,
-                               f"Your data for Form {data['form_identifier']} form was successfully saved! Wait for pdf file. ")
+                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла.")
         await bot.send_chat_action(message.chat.id, "typing")
         pdf_file_path = adapter.fill_pdf()
         with open(pdf_file_path, 'rb') as file:
@@ -360,7 +360,7 @@ async def process_s3_signature_applicant(message: types.Message, state: FSMConte
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json(data)
+        adapter.save_json()
         await state.finish()
         await bot.send_message(message.chat.id, f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла. ")
         await bot.send_chat_action(message.chat.id, "typing")
