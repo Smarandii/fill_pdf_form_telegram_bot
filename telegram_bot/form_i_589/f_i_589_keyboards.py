@@ -14,7 +14,7 @@ class Form_I_589_Gender_Choice:
 class Form_I_589_If_Any_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("У меня этого нет", callback_data="don't_have_it")
+        button = InlineKeyboardButton("Отсутствуют запрашиваемые сведения", callback_data="don't_have_it")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -38,9 +38,9 @@ class Form_I_589_If_Applicable:
 class Form_I_589_Mailing_Address_Choice_Keyboard:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button_yes = InlineKeyboardButton("Почтовый адрес тот же", callback_data="MailingSameAsResidence_Yes")
+        button_yes = InlineKeyboardButton("Не отличается", callback_data="MailingSameAsResidence_Yes")
         keyboard_markup.add(button_yes)
-        button_no = InlineKeyboardButton("Почтовый адрес другой", callback_data="MailingSameAsResidence_No")
+        button_no = InlineKeyboardButton("Отличается", callback_data="MailingSameAsResidence_No")
         keyboard_markup.add(button_no)
         self.markup = keyboard_markup
 
@@ -48,7 +48,7 @@ class Form_I_589_Mailing_Address_Choice_Keyboard:
 class Form_I_589_Marital_Status_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=4)
-        button = InlineKeyboardButton("Не в браке", callback_data="ms_single")
+        button = InlineKeyboardButton("Не состою в браке", callback_data="ms_single")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("В браке", callback_data="ms_married")
         keyboard_markup.add(button)
@@ -62,9 +62,9 @@ class Form_I_589_Marital_Status_Choice:
 class Form_I_589_Immigration_Court_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=3)
-        button = InlineKeyboardButton("Я никогда не участвовал в разбирательствах в иммиграционном суде.", callback_data="never_been_imc")
+        button = InlineKeyboardButton("Я никогда не был участником судебных разбирательств в иммиграционном суде.", callback_data="never_been_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Сейчас я нахожусь на рассмотрении иммиграционного суда.", callback_data=f"now_in_imc")
+        button = InlineKeyboardButton("Я сейчас нахожусь в процессе судебного разбирательства в иммиграционном суде.", callback_data=f"now_in_imc")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("В прошлом я участвовал в разбирательствах в иммиграционном суде.", callback_data="not_now_but_been_in_imc")
         keyboard_markup.add(button)
