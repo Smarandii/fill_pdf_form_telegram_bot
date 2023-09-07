@@ -310,7 +310,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_InCareOf[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Укажите код номера телефона, имеющего "
+    await bot.send_message(message.from_user.id, "Укажите код номера телефона лица, имеющего "
                                                  "возможность принять корреспонденцию по данному адресу:")
 
 
@@ -1025,7 +1025,9 @@ async def process(message: types.Message, state: FSMContext):
     keyboard = Form_I_589_Have_Children_Choice()
     await Form_I_589.A_II_HaveChildrenChoice.set()
     await bot.send_message(message.from_user.id,
-                           "У вас есть дети?",
+                           "У вас есть дети?\n"
+                           "1) У меня нет детей\n"
+                           "2) У меня есть дети",
                            reply_markup=keyboard.markup)
 
 
@@ -1058,7 +1060,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите законный статус вашего супруга, "
+                           "Укажите законный статус вашего супруга "
                            "при последнем въезде (тип визы, если имеется):",
                            reply_markup=keyboard.markup)
 
@@ -1071,7 +1073,7 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
-                           "Укажите законный статус вашего супруга, "
+                           "Укажите законный статус вашего супруга "
                            "при последнем въезде (тип визы, если имеется):",
                            reply_markup=keyboard.markup)
 
@@ -1197,7 +1199,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш супруг должен быть включен в это завяление.")
     await bot.send_message(callback_query.from_user.id,
-                           "У вас есть дети?",
+                           "У вас есть дети?\n"
+                           "1) У меня нет детей\n"
+                           "2) У меня есть дети",
                            reply_markup=keyboard.markup)
 
 
@@ -1213,7 +1217,9 @@ async def process(callback_query: types.CallbackQuery,
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш супруг не должен быть включен в это завяление.")
     await bot.send_message(callback_query.from_user.id,
-                           "У вас есть дети?",
+                           "У вас есть дети?\n"
+                           "1) У меня нет детей\n"
+                           "2) У меня есть дети",
                            reply_markup=keyboard.markup)
 
 
