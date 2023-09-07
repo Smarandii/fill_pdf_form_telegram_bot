@@ -62,11 +62,11 @@ class Form_I_589_Marital_Status_Choice:
 class Form_I_589_Immigration_Court_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=3)
-        button = InlineKeyboardButton("Я никогда не был участником судебных разбирательств в иммиграционном суде.", callback_data="never_been_imc")
+        button = InlineKeyboardButton("1.", callback_data="never_been_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("Я сейчас нахожусь в процессе судебного разбирательства в иммиграционном суде.", callback_data=f"now_in_imc")
+        button = InlineKeyboardButton("2.", callback_data=f"now_in_imc")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("В прошлом я участвовал в разбирательствах в иммиграционном суде.", callback_data="not_now_but_been_in_imc")
+        button = InlineKeyboardButton("3.", callback_data="not_now_but_been_in_imc")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -124,10 +124,10 @@ class Form_I_589_Fill_Next_Child_Choice:
 class Form_I_589_Have_Children_Choice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
-        button = InlineKeyboardButton("У меня нет детей. (Перейдите к части A.III. «Информация о вашем прошлом».)",
+        button = InlineKeyboardButton("1.",
                                       callback_data="dont_have_children")
         keyboard_markup.add(button)
-        button = InlineKeyboardButton("У меня есть дети", callback_data="have_children")
+        button = InlineKeyboardButton("2.", callback_data="have_children")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -424,5 +424,13 @@ class Form_I_589_All_True_Or_Not_True_Application:
         button = InlineKeyboardButton("Да", callback_data="yes_All_True_Or_Not_True_Application")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("Нет", callback_data="no_All_True_Or_Not_True_Application")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class Form_I_589_Have_Siblings_Choice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("братья/сестры отсутствуют", callback_data="have_no_siblings")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
