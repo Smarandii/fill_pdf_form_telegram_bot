@@ -109,7 +109,9 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine1_ANumber[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Укажите номер социального страхования США (SSN) (если имеется):")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id, "Укажите номер социального страхования США (SSN) (если имеется):",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
@@ -131,7 +133,9 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[0]'] = message.text
     await Form_I_589.next()
-    await bot.send_message(message.from_user.id, "Укажите номер онлайн-аккаунта USCIS (если имеется):")
+    keyboard = Form_I_589_If_Any_Choice()
+    await bot.send_message(message.from_user.id, "Укажите номер онлайн-аккаунта USCIS (если имеется):",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="don't_have_it",
@@ -1254,7 +1258,11 @@ async def process(callback_query: types.CallbackQuery,
 @dp.message_handler(state=Form_I_589.A_II_TotalChild_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[1].TotalChild[0]'] = message.text
+        try:
+            data['[1].TotalChild[0]'] = int(message.text)
+        except:
+            await bot.send_message(message.from_user.id, "Укажите количество ваших детей (цифрами):")
+            return
     await Form_I_589.next()
     keyboard = Form_I_589_If_Any_Choice()
     await bot.send_message(message.from_user.id,
@@ -1505,10 +1513,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].CheckBox17[1]'] = callback_query.data
         data['[1].CheckBox17[0]'] = ""
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок не находится в США.")
-    try:
-        total_number_of_children = int(data["[1].TotalChild[0]"])
-    except ValueError:
-        total_number_of_children = 1
+    total_number_of_children = int(data["[1].TotalChild[0]"])
 
     if total_number_of_children > 1:
         keyboard = Form_I_589_Fill_Next_Child_Choice()
@@ -4931,6 +4936,19 @@ async def process(callback_query: types.CallbackQuery):
                            reply_markup=keyboard.markup)
 
 
+@dp.callback_query_handler(text="have_no_siblings",
+                           state=Form_I_589.A_III_TextField13_48)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет братьев\сестер.")
+    keyboard = Form_I_589_Asylum_Reason_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите верное:\n"
+                           "Я прошу убежища или приостановления депортации на основании:",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.B_Asylum_Reason_Choice.set()
+
+
 # Mother
 @escape_json_special_chars
 @dp.message_handler(state=Form_I_589.A_III_TextField13_46)
@@ -5022,9 +5040,24 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.f[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш отец скончался.")
+    keyboard = Form_I_589_Have_Siblings_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите полное имя брата или сестры:")
+                           "Укажите полное имя брата или сестры:",
+                           reply_markup=keyboard.markup)
     await Form_I_589.A_III_TextField13_48.set()
+
+
+@dp.callback_query_handler(text="have_no_siblings",
+                           state=Form_I_589.A_III_TextField35_1)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет братьев\сестер.")
+    keyboard = Form_I_589_Asylum_Reason_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите верное:\n"
+                           "Я прошу убежища или приостановления депортации на основании:",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
 @dp.callback_query_handler(text="no_father_deceased",
@@ -5056,27 +5089,6 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField13_48)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    async with state.proxy() as data:
-        data['[4].CheckBoxAIII5\\\\.f[0]'] = ""
-        data["[4].TextField13[48]"] = ""
-        data["[4].TextField13[51]"] = ""
-        data["[4].CheckBoxAIII5\\.s1[0]"] = ""
-        data["[4].TextField35[2]"] = ""
-
-        data["[4].TextField13[52]"] = ""
-        data["[4].TextField13[53]"] = ""
-        data["[4].CheckBoxAIII5\\.s2[0]"] = ""
-        data["[4].TextField35[3]"] = ""
-
-        data["[4].TextField13[54]"] = ""
-        data["[4].TextField13[55]"] = ""
-        data["[4].CheckBoxAIII5\\.s3[0]"] = ""
-        data["[4].TextField35[4]"] = ""
-
-        data["[4].TextField13[56]"] = ""
-        data["[4].TextField13[57]"] = ""
-        data["[4].CheckBoxAIII5\\.s4[0]"] = ""
-        data["[4].TextField35[5]"] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет братьев\сестер.")
     keyboard = Form_I_589_Asylum_Reason_Choice()
@@ -5119,9 +5131,24 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
+    keyboard = Form_I_589_Have_Siblings_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите полное имя брата или сестры:")
+                           "Укажите полное имя брата или сестры:",
+                           reply_markup=keyboard.markup)
     await Form_I_589.A_III_TextField13_52.set()
+
+
+@dp.callback_query_handler(text="have_no_siblings",
+                           state=Form_I_589.A_III_TextField35_2)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет второго(-ой) брата\сестры.")
+    keyboard = Form_I_589_Asylum_Reason_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите верное:\n"
+                           "Я прошу убежища или приостановления депортации на основании:",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
 @dp.callback_query_handler(text="no_1sibling_deceased",
@@ -5151,23 +5178,8 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="have_no_siblings",
-                           state=Form_I_589.A_III_TextField13_48)
+                           state=Form_I_589.A_III_TextField13_52)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    async with state.proxy() as data:
-        data["[4].TextField13[52]"] = ""
-        data["[4].TextField13[53]"] = ""
-        data["[4].CheckBoxAIII5\\.s2[0]"] = ""
-        data["[4].TextField35[3]"] = ""
-
-        data["[4].TextField13[54]"] = ""
-        data["[4].TextField13[55]"] = ""
-        data["[4].CheckBoxAIII5\\.s3[0]"] = ""
-        data["[4].TextField35[4]"] = ""
-
-        data["[4].TextField13[56]"] = ""
-        data["[4].TextField13[57]"] = ""
-        data["[4].CheckBoxAIII5\\.s4[0]"] = ""
-        data["[4].TextField35[5]"] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет второго(-ой) брата\сестры.")
     keyboard = Form_I_589_Asylum_Reason_Choice()
@@ -5208,9 +5220,24 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s2[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
+    keyboard = Form_I_589_Have_Siblings_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите полное имя брата или сестры:")
+                           "Укажите полное имя брата или сестры:",
+                           reply_markup=keyboard.markup)
     await Form_I_589.A_III_TextField13_54.set()
+
+
+@dp.callback_query_handler(text="have_no_siblings",
+                           state=Form_I_589.A_III_TextField35_3)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет третьего(-ей) брата\сестры.")
+    keyboard = Form_I_589_Asylum_Reason_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите верное:\n"
+                           "Я прошу убежища или приостановления депортации на основании:",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
 @dp.callback_query_handler(text="no_2sibling_deceased",
@@ -5240,18 +5267,8 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="have_no_siblings",
-                           state=Form_I_589.A_III_TextField13_48)
+                           state=Form_I_589.A_III_TextField13_54)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    async with state.proxy() as data:
-        data["[4].TextField13[54]"] = ""
-        data["[4].TextField13[55]"] = ""
-        data["[4].CheckBoxAIII5\\.s3[0]"] = ""
-        data["[4].TextField35[4]"] = ""
-
-        data["[4].TextField13[56]"] = ""
-        data["[4].TextField13[57]"] = ""
-        data["[4].CheckBoxAIII5\\.s4[0]"] = ""
-        data["[4].TextField35[5]"] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет третьего(-ей) брата\сестры.")
     keyboard = Form_I_589_Asylum_Reason_Choice()
@@ -5292,9 +5309,24 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[4].CheckBoxAIII5\\\\.s3[0]'] = callback_query.data
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
+    keyboard = Form_I_589_Have_Siblings_Choice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите полное имя брата или сестры:")
+                           "Укажите полное имя брата или сестры:",
+                           reply_markup=keyboard.markup)
     await Form_I_589.A_III_TextField13_56.set()
+
+
+@dp.callback_query_handler(text="have_no_siblings",
+                           state=Form_I_589.A_III_TextField35_4)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await Form_I_589.next()
+    await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет четвертого(-ой) брата\сестры.")
+    keyboard = Form_I_589_Asylum_Reason_Choice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите верное:\n"
+                           "Я прошу убежища или приостановления депортации на основании:",
+                           reply_markup=keyboard.markup)
+    await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
 @dp.callback_query_handler(text="no_3sibling_deceased",
@@ -5324,13 +5356,8 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="have_no_siblings",
-                           state=Form_I_589.A_III_TextField13_48)
+                           state=Form_I_589.A_III_TextField13_56)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    async with state.proxy() as data:
-        data["[4].TextField13[56]"] = ""
-        data["[4].TextField13[57]"] = ""
-        data["[4].CheckBoxAIII5\\.s4[0]"] = ""
-        data["[4].TextField35[5]"] = ""
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет четвертого(-ой) брата\сестры.")
     keyboard = Form_I_589_Asylum_Reason_Choice()
