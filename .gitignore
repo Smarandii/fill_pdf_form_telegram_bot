@@ -3,6 +3,7 @@ env/
 fill_pdf_from_json/.vs/
 fill_pdf_from_json/bin/
 fill_pdf_from_json/obj/
+*/__pycache__/*
 json_inputs
 pdf_outputs
 pdf_inputs
