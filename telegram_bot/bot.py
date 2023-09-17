@@ -1,6 +1,7 @@
 from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard, logging
 from form_ar_11 import form_ar_11_handlers
 from form_i_589 import form_i_589_handlers
+from form_i_765 import form_i_765_handlers
 from phrases import START_PHRASE
 
 

@@ -11,7 +11,7 @@ class Form_I_589_Gender_Choice:
         self.markup = keyboard_markup
 
 
-class Form_I_589_If_Any_Choice:
+class FormI589IfAnyChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
         button = InlineKeyboardButton("Отсутствуют запрашиваемые сведения", callback_data="don't_have_it")

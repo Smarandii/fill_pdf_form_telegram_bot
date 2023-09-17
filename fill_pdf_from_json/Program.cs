@@ -15,7 +15,7 @@ class PdfFormFiller
     private static string PdfFilePathInput = @"";
     private static string JsonFileInput = @"";
     private static string PdfFilePathOutput = @"";
-    
+
     static void Main(string[] args)
     {
         if (args.Length == 1)
@@ -24,8 +24,9 @@ class PdfFormFiller
             PdfFilePathInput = args[0];
             PrintAllPdfFields();
         }
-        else {
-            Console.WriteLine("pdf_input: " + args[0] + " json_input " + args[1] + " pdf_output " + args[2]);
+        else
+        {
+            Console.WriteLine("pdf_input: " + args[0] + "\n json_input: " + args[1] + "\n pdf_output: " + args[2]);
             PdfFilePathInput = args[0];
             JsonFileInput = args[1];
             PdfFilePathOutput = args[2];
@@ -43,15 +44,9 @@ class PdfFormFiller
             return "";
     }
 
-    static string SanitizeJsonString(string originalJson)
-    {
-        return originalJson.Replace("/", "\\/");
-    }
-
     public static JObject getInputJsonValues()
     {
         string jsonString = File.ReadAllText(JsonFileInput);
-        string sanitizedJsonString = SanitizeJsonString(jsonString);
         JObject inputJsonValues = JObject.Parse(jsonString);
         return inputJsonValues;
     }
@@ -71,7 +66,8 @@ class PdfFormFiller
         return cnt;
     }
 
-    public static void PrintAllPdfFields() {
+    public static void PrintAllPdfFields()
+    {
 
         using (PdfReader reader = new PdfReader(PdfFilePathInput))
         using (PdfDocument pdfDoc = new PdfDocument(reader))
@@ -79,11 +75,12 @@ class PdfFormFiller
             PdfAcroForm form = PdfAcroForm.GetAcroForm(pdfDoc, true);
             IDictionary<String, PdfFormField> fieldsDictionary = form.GetAllFormFields();
 
-            foreach (KeyValuePair<string, PdfFormField> pdfField in fieldsDictionary) { 
-            
+            foreach (KeyValuePair<string, PdfFormField> pdfField in fieldsDictionary)
+            {
+
                 Console.WriteLine(generateJsonKeyForPdfFieldKey(pdfField.Key.ToString()));
             }
-        
+
         }
 
 
@@ -99,9 +96,10 @@ class PdfFormFiller
             IDictionary<String, PdfFormField> fieldsDictionary = form.GetAllFormFields();
 
             JObject inputJsonValues = getInputJsonValues();
+
             foreach (KeyValuePair<string, PdfFormField> pdfField in fieldsDictionary)
             {
-
+                string value = "";
                 string jsonKey = generateJsonKeyForPdfFieldKey(pdfField.Key);
                 if (jsonKey != "")
                 {
@@ -114,11 +112,11 @@ class PdfFormFiller
                     }
                     else
                     {
-                        string value = Convert.ToString(inputJsonValues[jsonKey]);
+                        value = Convert.ToString(inputJsonValues[jsonKey]);
                         value = value.Replace("//", "/");
                         pdfField.Value.SetValue(value);
                     }
-                    Console.WriteLine("Field: " + jsonKey);
+                    Console.WriteLine("FIELD: [" + jsonKey + "] FILLED WITH VALUE: [" + value + "]");
                 }
             }
             pdfDoc.Close();

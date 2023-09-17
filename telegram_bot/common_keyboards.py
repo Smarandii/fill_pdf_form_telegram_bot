@@ -8,4 +8,6 @@ class AvailableFormsKeyboard:
         keyboard_markup.add(button)
         button = InlineKeyboardButton("I-589", callback_data="I-589")
         keyboard_markup.add(button)
+        button = InlineKeyboardButton("I-765", callback_data="I-765")
+        keyboard_markup.add(button)
         self.keyboard_markup = keyboard_markup

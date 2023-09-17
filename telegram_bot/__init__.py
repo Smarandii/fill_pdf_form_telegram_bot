@@ -48,7 +48,7 @@ from telegram_bot.form_i_589.f_i_589_keyboards import \
     Form_I_589_4Sibling_Deceased_Choice, \
     Form_I_589_Asylum_Reason_Choice, \
     Form_I_589_Family_Experienced_Harm_Choice, \
-    Form_I_589_If_Any_Choice
+    FormI589IfAnyChoice
 
 
 load_dotenv()

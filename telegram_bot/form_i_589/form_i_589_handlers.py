@@ -3,43 +3,43 @@ from aiogram.dispatcher import FSMContext, filters
 
 from telegram_bot.form_i_589.f_i_589_keyboards import \
     (Form_I_589_You_Fear_Harm_Or_Mistreatment_Choice, \
-    Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice, \
-    Form_I_589_Gender_Choice, \
-    Form_I_589_Marital_Status_Choice, \
-    Form_I_589_Immigration_Court_Choice, \
-    Form_I_589_English_Fluency_Choice, \
-    Form_I_589_Location_Choice, \
-    Form_I_589_Spouse_Immigration_Court_Choice, \
-    Form_I_589_Include_Spouse_Choice, \
-    Form_I_589_Have_Children_Choice, \
-    Form_I_589_Fill_Next_Child_Choice, \
-    Form_I_589_Mother_Deceased_Choice, \
-    Form_I_589_Father_Deceased_Choice, \
-    Form_I_589_1Sibling_Deceased_Choice, \
-    Form_I_589_2Sibling_Deceased_Choice, \
-    Form_I_589_3Sibling_Deceased_Choice, \
-    Form_I_589_Asylum_Reason_Choice, \
-    Form_I_589_Family_Experienced_Harm_Choice, \
-    Form_I_589_You_Been_Associated_With_Any_Organizations_Choice, \
-    Form_I_589_You_Continue_To_Participate_In_Organizations_Choice, \
-    Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice, \
-    Form_I_589_Family_Applied_For_USRefugee_Status_Choice, \
-    Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice, \
-    Form_I_589_Family_Recieved_Any_Lawful_Status_Choice, \
-    Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice, \
-    Form_I_589_Returned_To_Bad_Country_Choice, \
-    Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice, \
-    Form_I_589_You_Or_Family_Did_Crime_Choice, \
-    Form_I_589_Family_Helped_Complete_Application_Choice, \
-    Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice, \
-    Form_I_589_Not_Family_Helped_Complete_Application_Choice, \
-    Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice, \
-    Form_I_589_If_Any_Choice, \
-    Form_I_589_Mailing_Address_Choice_Keyboard, \
-    Form_I_589_If_Applicable, \
-    Form_I_589_Child_Immigration_Court_Choice, \
-    Form_I_589_If_Previously_In_US, Form_I_589_Include_Child_Choice, \
-    Form_I_589_4Sibling_Deceased_Choice,
+     Form_I_589_You_Or_Family_Accused_Charged_Arrested_Detained_Choice, \
+     Form_I_589_Gender_Choice, \
+     Form_I_589_Marital_Status_Choice, \
+     Form_I_589_Immigration_Court_Choice, \
+     Form_I_589_English_Fluency_Choice, \
+     Form_I_589_Location_Choice, \
+     Form_I_589_Spouse_Immigration_Court_Choice, \
+     Form_I_589_Include_Spouse_Choice, \
+     Form_I_589_Have_Children_Choice, \
+     Form_I_589_Fill_Next_Child_Choice, \
+     Form_I_589_Mother_Deceased_Choice, \
+     Form_I_589_Father_Deceased_Choice, \
+     Form_I_589_1Sibling_Deceased_Choice, \
+     Form_I_589_2Sibling_Deceased_Choice, \
+     Form_I_589_3Sibling_Deceased_Choice, \
+     Form_I_589_Asylum_Reason_Choice, \
+     Form_I_589_Family_Experienced_Harm_Choice, \
+     Form_I_589_You_Been_Associated_With_Any_Organizations_Choice, \
+     Form_I_589_You_Continue_To_Participate_In_Organizations_Choice, \
+     Form_I_589_You_Afraid_Of_Being_Subjected_To_Torture_Choice, \
+     Form_I_589_Family_Applied_For_USRefugee_Status_Choice, \
+     Form_I_589_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice, \
+     Form_I_589_Family_Recieved_Any_Lawful_Status_Choice, \
+     Form_I_589_You_Or_Family_Caused_Harm_Or_Suffering_Choice, \
+     Form_I_589_Returned_To_Bad_Country_Choice, \
+     Form_I_589_Last_Arrival_To_US_More_Than_1_Year_Choice, \
+     Form_I_589_You_Or_Family_Did_Crime_Choice, \
+     Form_I_589_Family_Helped_Complete_Application_Choice, \
+     Form_I_589_Family_Helped_Complete_Fill_Next_Member_Choice, \
+     Form_I_589_Not_Family_Helped_Complete_Application_Choice, \
+     Form_I_589_Provided_With_List_Of_Persons_Who_May_Assist_Choice, \
+     FormI589IfAnyChoice, \
+     Form_I_589_Mailing_Address_Choice_Keyboard, \
+     Form_I_589_If_Applicable, \
+     Form_I_589_Child_Immigration_Court_Choice, \
+     Form_I_589_If_Previously_In_US, Form_I_589_Include_Child_Choice, \
+     Form_I_589_4Sibling_Deceased_Choice,
      Form_I_589_Have_Siblings_Choice)
 
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
@@ -82,7 +82,7 @@ async def i_589_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
         data['form_identifier'] = "I-589"
     await bot.send_message(callback_query.from_user.id, "Вы выбрали форму I-589. Давайте приступим к ее заполнению.")
     await bot.send_message(callback_query.from_user.id, "Часть A.I. «Информация о вас.»")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ваш регистрационный номер иностранца (A-number) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -96,7 +96,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].PtAILine1_ANumber[0]'] = ""
     await bot.send_message(callback_query.from_user.id,
                            "Вы решили оставить поле регистрационного номера иностранца (A-Number) пустым.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США (SSN) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -109,7 +109,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine1_ANumber[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Укажите номер социального страхования США (SSN) (если имеется):",
                            reply_markup=keyboard.markup)
 
@@ -121,7 +121,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].TextField1[0]'] = ""
     await bot.send_message(callback_query.from_user.id,
                            "Вы решили оставить поле номера социального страхования (SSN) пустым.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id, "Укажите номер онлайн-аккаунта USCIS (если имеется):",
                            reply_markup=keyboard.markup)
     await Form_I_589.A_I_TextField1_8.set()
@@ -133,7 +133,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Укажите номер онлайн-аккаунта USCIS (если имеется):",
                            reply_markup=keyboard.markup)
 
@@ -181,7 +181,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine6_MiddleName[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Какие еще имена вы использовали (включая девичью фамилию и псевдонимы)?",
                            reply_markup=keyboard.markup)
@@ -576,7 +576,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField6[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите ваш текущий номер I-94, если имеется:",
                            reply_markup=keyboard.markup)
@@ -782,7 +782,7 @@ async def process(message: types.Message, state: FSMContext):
     if is_married:
         await Form_I_589.next()
         await bot.send_message(message.from_user.id, "Вы указали, что состоите в браке.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(message.from_user.id,
                                "Укажите Alien Registration Number вашего супруга (A-Number) (если имеется):",
                                reply_markup=keyboard.markup)
@@ -803,7 +803,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего супруга (если имеется):",
                            reply_markup=keyboard.markup)
@@ -815,7 +815,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего супруга (если имеется):",
                            reply_markup=keyboard.markup)
@@ -846,7 +846,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].DateTimeField7[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер социального страхования (SSN) вашего супруга (если имеется):",
                            reply_markup=keyboard.markup)
@@ -895,7 +895,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine7_MiddleName[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите другие используемые имена вашего супруга (включая девичью фамилию и псевдонимы):",
                            reply_markup=keyboard.markup)
@@ -1050,7 +1050,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine17_DateofLastEntry[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите I-94 номер вашего супруга (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1062,7 +1062,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего супруга "
                            "при последнем въезде (тип визы, если имеется):",
@@ -1075,7 +1075,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего супруга "
                            "при последнем въезде (тип визы, если имеется):",
@@ -1107,7 +1107,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine20_SpouseCurrentStatus[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания разрешенного пребывания "
                            "в США вашего супруга, если таковая имеется? (мм/дд/гггг):",
@@ -1264,7 +1264,7 @@ async def process(message: types.Message, state: FSMContext):
             await bot.send_message(message.from_user.id, "Укажите количество ваших детей (цифрами):")
             return
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите регистрационный номер иностранца вашего первого ребенка (A-Number) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1278,7 +1278,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien1[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1290,7 +1290,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien1[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1327,7 +1327,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].ChildMarital1[0]'] = "Single"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок не состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1340,7 +1340,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].ChildMarital1[0]'] = "Married"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1353,7 +1353,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].ChildMarital1[0]'] = "Divorced"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок разведен.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1366,7 +1366,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].ChildMarital1[0]'] = "Widowed"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок вдова(-ец).")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1378,7 +1378,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер социального страхования США вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1564,7 +1564,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine15_ExpirationDate[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер I-94 вашего первого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1576,7 +1576,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего первого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -1589,7 +1589,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего первого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -1622,7 +1622,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine18_CurrentStatusofChild[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите, когда заканчивается срок законного пребывания "
                            "вашего ребенка в стране (мм/дд/гггг):",
@@ -1735,7 +1735,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.A_II_IsFillChild2)
 async def process(callback_query: types.CallbackQuery):
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите регистрационный номер иностранца вашего второго ребенка (номер A) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1757,7 +1757,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien2[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1769,7 +1769,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien2[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1806,7 +1806,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].ChildMarital2[0]'] = "Single"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок не состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1819,7 +1819,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].ChildMarital2[0]'] = "Married"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1832,7 +1832,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].ChildMarital2[0]'] = "Divorced"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок разведен.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -1845,7 +1845,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].ChildMarital2[0]'] = "Widowed"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок вдова(-ец).")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2032,7 +2032,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry2[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер I-94 вашего второго ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2044,7 +2044,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number2[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего второго ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -2057,7 +2057,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number2[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего второго ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -2090,7 +2090,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus2[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите, когда заканчивается срок законного пребывания "
                            "вашего второго ребенка в стране (мм/дд/гггг):",
@@ -2217,7 +2217,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.A_II_IsFillChild3)
 async def process(callback_query: types.CallbackQuery):
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите регистрационный номер иностранца вашего третьего ребенка (номер A) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2239,7 +2239,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien3[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего третьего ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2251,7 +2251,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien3[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего третьего ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2286,7 +2286,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital3[0]'] = "Single"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок не состоит в браке.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего третьего ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2298,7 +2298,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital3[0]'] = "Married"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок состоит в браке.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего третьего ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2310,7 +2310,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital3[0]'] = "Divorced"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок разведен.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего третьего ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2322,7 +2322,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital3[0]'] = "Widowed"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок вдова(-ец).")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего третьего ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2505,7 +2505,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry3[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер I-94 вашего третьего ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2517,7 +2517,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number3[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего третьего ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -2530,7 +2530,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number3[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего третьего ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -2563,7 +2563,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus3[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите, когда заканчивается срок законного пребывания "
                            "вашего третьего ребенка в стране (мм/дд/гггг):",
@@ -2678,7 +2678,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.A_II_IsFillChild4)
 async def process(callback_query: types.CallbackQuery):
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите регистрационный номер иностранца "
                            "вашего четвертого ребенка (номер A) (если имеется):",
@@ -2701,7 +2701,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien4[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего четвертого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2713,7 +2713,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien4[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего четвертого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2749,7 +2749,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital4[0]'] = "Single"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок не состоит в браке.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего четвертого ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2761,7 +2761,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital4[0]'] = "Married"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок состоит в браке.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего четвертого ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2773,7 +2773,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital4[0]'] = "Divorced"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок разведен.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего четвертого ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2785,7 +2785,7 @@ async def process(message: types.Message, state: FSMContext):
             data['[3].ChildMarital4[0]'] = "Widowed"
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок вдова(-ец).")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Укажите номер социального страхования США вашего четвертого ребенка (если имеется):",
                                reply_markup=keyboard.markup)
@@ -2960,7 +2960,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry4[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер I-94 вашего четвертого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -2972,7 +2972,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number4[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего четвертого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -2985,7 +2985,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number4[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего четвертого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -3018,7 +3018,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus4[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите, когда заканчивается срок законного пребывания "
                            "вашего четвертого ребенка в стране (мм/дд/гггг):",
@@ -3133,7 +3133,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsFillChild5)
 async def process(callback_query: types.CallbackQuery):
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите регистрационный номер иностранца вашего пятого ребенка (номер A) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3155,7 +3155,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[6]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3167,7 +3167,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[6]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3204,7 +3204,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[8]'] = "Single"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок не состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3217,7 +3217,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[8]'] = "Married"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3230,7 +3230,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[8]'] = "Divorced"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок разведен.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3243,7 +3243,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[8]'] = "Widowed"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок вдова(-ец).")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3416,7 +3416,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExp5[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер I-94 вашего пятого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3428,7 +3428,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum5[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего пятого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -3441,7 +3441,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum5[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего пятого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -3474,7 +3474,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildCurrent5[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите, когда заканчивается срок законного "
                            "пребывания вашего пятого ребенка в стране (мм/дд/гггг):",
@@ -3589,7 +3589,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=Form_I_589.Supplement_A_IsFillChild6)
 async def process(callback_query: types.CallbackQuery):
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите регистрационный номер иностранца вашего шестого ребенка (номер A) (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3611,7 +3611,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[16]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего шестого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3623,7 +3623,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[16]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер паспорта/удостоверения личности вашего шестого (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3660,7 +3660,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[18]'] = "Single"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок не состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего шестого (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3673,7 +3673,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[18]'] = "Married"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок состоит в браке.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего шестого (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3686,7 +3686,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[18]'] = "Divorced"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок разведен.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего шестого (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3699,7 +3699,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].TextField12[18]'] = "Widowed"
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок вдова(-ец).")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США вашего шестого (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3867,7 +3867,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExp6[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер I-94 вашего шестого ребенка (если имеется):",
                            reply_markup=keyboard.markup)
@@ -3879,7 +3879,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum6[0]'] = ""
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите законный статус вашего шестого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -3892,7 +3892,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum6[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите законный статус вашего шестого ребенка "
                            "при последнем въезде (тип визы, если имеется):",
@@ -3925,7 +3925,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildCurrent6[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите, когда заканчивается срок законного "
                            "пребывания вашего шестого в стране (мм/дд/гггг):",
@@ -4265,7 +4265,7 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер и название улицы второго места жительства:",
                            reply_markup=keyboard.markup)
@@ -4341,7 +4341,7 @@ async def process(message: types.Message, state: FSMContext):
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер и название улицы третьего места жительства:",
                            reply_markup=keyboard.markup)
@@ -4417,7 +4417,7 @@ async def process(message: types.Message, state: FSMContext):
         await Form_I_589.next()
         await bot.send_message(message.from_user.id,
                                "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
-        keyboard = Form_I_589_If_Any_Choice()
+        keyboard = FormI589IfAnyChoice()
         await bot.send_message(message.from_user.id,
                                "Укажите номер и название улицы четвертого места жительства:",
                                reply_markup=keyboard.markup)
@@ -4545,7 +4545,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField40[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о своем образовании.")
     await bot.send_message(message.from_user.id,
@@ -4610,7 +4610,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField39[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о своем образовании")
     await bot.send_message(message.from_user.id,
@@ -4676,7 +4676,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].DateTimeField36[0]'] = message.text
 
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о своем образовании")
     await bot.send_message(message.from_user.id,
@@ -4784,7 +4784,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField44[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашей занятости за последние 5 лет.\n"
                            "Укажите вашу вторую работу.",
@@ -4839,7 +4839,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField45[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите наименование и адрес работодателя:")
 
@@ -4861,7 +4861,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[44]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашей занятости за последние 5 лет.\n"
                            "Укажите вашу третью работу.",
@@ -4905,7 +4905,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField47[0]'] = message.text
     await Form_I_589.next()
-    keyboard = Form_I_589_If_Any_Choice()
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
     await bot.send_message(message.from_user.id,
