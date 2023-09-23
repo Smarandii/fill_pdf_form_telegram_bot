@@ -12,7 +12,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import (
     FormI765AppliedEarlierChoice, FormI765SSACardWasIssuedChoice, FormI765WantSSACardToBeIssuedChoice,
     FormI765WantToShareInformationWithSSAChoice, FormI765EligibilityCategoryChoice,
     FormI765EligibilityCategoryArrestedChoice, FormI765ApplicantStatementChoice, FormI765OnlyTrueInformationChoice,
-    FormI765SalvadorOrGwatemalaResidentChoice)
+    FormI765SalvadorOrGwatemalaResidentChoice, FormI765TranslatorHelpedChoice, FormI765PreparerHelpedChoice)
 
 
 @escape_json_special_chars
@@ -94,7 +94,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line1a_FamilyName[0]'] = message.text
     await FormI765.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
+    await bot.send_message(message.from_user.id, "Укажите ваше имя:")
 
 
 @escape_json_special_chars
@@ -103,7 +103,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line1b_GivenName[0]'] = message.text
     await FormI765.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
+    await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
 
 
 @escape_json_special_chars
@@ -121,10 +121,10 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="UsedOtherNames_Yes", state=FormI765.Used_Other_Names)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что использовали иные имена (например, девичья фамилия и псевдоним).")
+                           "Вы указали, что использовали иные имена.")
     await FormI765.Line2a_FamilyName_0.set()
     await bot.send_message(callback_query.from_user.id, "Раздел «Иные имена.» Далее укажите информацию "
-                                                        "об иных используемых вами именах. ")
+                                                        "о иных используемых вами именах. ")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
 
 
@@ -161,7 +161,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="UsedOtherNames_No", state=FormI765.Used_Other_Names)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что не использовали иные имена (например, девичья фамилия и псевдоним).")
+                           "Вы указали, что использовали иные имена.")
     await FormI765.Line4a_InCareofName_0.set()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -174,7 +174,7 @@ async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.Callba
 @dp.callback_query_handler(text="UsedOtherNames_Yes", state=FormI765.Used_Other_Names_1)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что использовали еще какие-либо иные имена.")
+                           "Вы указали, что использовали иные имена.")
     await bot.send_message(callback_query.from_user.id, "Раздел «Иные имена.» Далее укажите информацию "
                                                         "об следующем ином используемом вами имени. ")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
@@ -214,7 +214,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="UsedOtherNames_No", state=FormI765.Used_Other_Names_1)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что не использовали иные имена (например, девичья фамилия и псевдоним).")
+                           "Вы указали, что использовали иные имена.")
     await FormI765.Line4a_InCareofName_0.set()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -227,7 +227,7 @@ async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.Callba
 @dp.callback_query_handler(text="UsedOtherNames_Yes", state=FormI765.Used_Other_Names_2)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что использовали еще какие-либо иные имена.")
+                           "Вы указали, что использовали иные имена.")
     await bot.send_message(callback_query.from_user.id, "Раздел «Иные имена.» Далее укажите информацию "
                                                         "об следующем ином используемом вами имени. ")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
@@ -365,7 +365,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_State[0]'] = message.text
     await bot.send_message(message.from_user.id,
-                           "Введите почтовый индекс (например, 123456).\n"
+                           "Укажите почтовый индекс (например, 123456).\n"
                            "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI765.next()
 
@@ -388,8 +388,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Part2Line5_Checkbox[1]'] = "x"
     keyboard = FormI589IfAnyChoice()
+    await bot.send_message(callback_query.from_user.id, "Раздел «Иная информация.»")
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите Ваш регистрационный номер иностранца (A-number) (если имеется):",
+                           "Укажите ваш регистрационный номер иностранца (A-number) (если имеется):",
                            reply_markup=keyboard.markup)
     await FormI765.Line7_AlienNumber_0.set()
 
@@ -473,7 +474,7 @@ async def process(message: types.Message, state: FSMContext):
         data['form1[0].Page2[0].Pt2Line7_State[0]'] = message.text
     await FormI765.next()
     await bot.send_message(message.from_user.id,
-                           "Введите почтовый индекс (например, 123456).\n"
+                           "Укажите почтовый индекс (например, 123456).\n"
                            "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
 
 
@@ -484,8 +485,9 @@ async def process(message: types.Message, state: FSMContext):
         data['form1[0].Page2[0].Pt2Line7_ZipCode[0]'] = message.text
     await FormI765.next()
     keyboard = FormI589IfAnyChoice()
+    await bot.send_message(message.from_user.id, "Раздел «Иная информация.»")
     await bot.send_message(message.from_user.id,
-                           "Укажите Ваш регистрационный номер иностранца (A-number) (если имеется):",
+                           "Укажите ваш регистрационный номер иностранца (A-number) (если имеется):",
                            reply_markup=keyboard.markup)
 
 
@@ -569,7 +571,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['form1[0].Page2[0].Line10_Checkbox[2]'] = "x"
     keyboard = FormI765AppliedEarlierChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что вы не находитесь в браке.")
+                           "Вы указали, что не состоите в браке.")
     await bot.send_message(callback_query.from_user.id,
                            "Вы ранее подавали форму I-765?",
                            reply_markup=keyboard.markup)
@@ -583,7 +585,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['form1[0].Page2[0].Line10_Checkbox[3]'] = "x"
     keyboard = FormI765AppliedEarlierChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что вы находитесь в браке.")
+                           "Вы указали, что состоите в браке.")
     await bot.send_message(callback_query.from_user.id,
                            "Вы ранее подавали форму I-765?",
                            reply_markup=keyboard.markup)
@@ -686,7 +688,19 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Раздел «Ваша страна или страны гражданства.» Далее перечислите все страны, гражданином "
                            "которых вы в настоящее время являетесь.")
-    await bot.send_message(callback_query.from_user.id,
+    await bot.send_message(callback_query.from_user.id, "Укажите количество стран, гражданином которых вы являетесь:")
+    await FormI765.NumberOfCountriesInWhichUserIsCitizent.set()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.NumberOfCountriesInWhichUserIsCitizent)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        try:
+            data['number_of_countries'] = int(message.text)
+        except Exception:
+            data['number_of_countries'] = 1
+    await bot.send_message(message.from_user.id,
                            "Укажите страну:")
     await FormI765.Line17a_CountryOfBirth_0.set()
 
@@ -727,9 +741,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Раздел «Ваша страна или страны гражданства.» Далее перечислите все страны, гражданином "
                            "которых вы в настоящее время являетесь.")
-    await bot.send_message(callback_query.from_user.id,
-                           "Укажите страну:")
-    await FormI765.Line17a_CountryOfBirth_0.set()
+    await bot.send_message(callback_query.from_user.id, "Укажите количество стран, гражданином которых вы являетесь:")
+    await FormI765.NumberOfCountriesInWhichUserIsCitizent.set()
 
 
 @dp.callback_query_handler(text="WantToShareInformationWithSSA_Yes",
@@ -758,9 +771,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Раздел «Ваша страна или страны гражданства.» Далее перечислите все страны, гражданином "
                            "которых вы в настоящее время являетесь.")
-    await bot.send_message(callback_query.from_user.id,
-                           "Укажите страну:")
-    await FormI765.Line17a_CountryOfBirth_0.set()
+    await bot.send_message(callback_query.from_user.id, "Укажите количество стран, гражданином которых вы являетесь:")
+    await FormI765.NumberOfCountriesInWhichUserIsCitizent.set()
 
 
 @escape_json_special_chars
@@ -803,9 +815,8 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Раздел «Ваша страна или страны гражданства.» Далее перечислите все страны, гражданином "
                            "которых вы в настоящее время являетесь.")
-    await bot.send_message(message.from_user.id,
-                           "Укажите страну:")
-    await FormI765.next()
+    await bot.send_message(message.from_user.id, "Укажите количество стран, гражданином которых вы являетесь:")
+    await FormI765.NumberOfCountriesInWhichUserIsCitizent.set()
 
 
 @escape_json_special_chars
@@ -813,9 +824,18 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line17a_CountryOfBirth[0]'] = message.text
-    await bot.send_message(message.from_user.id,
-                           "Укажите страну:")
-    await FormI765.next()
+        number_of_countries = data["number_of_countries"]
+    if number_of_countries > 1:
+        await bot.send_message(message.from_user.id,
+                               "Укажите страну:")
+        await FormI765.next()
+    else:
+        await bot.send_message(message.from_user.id,
+                               "Раздел «Место рождения.» Далее укажите город/поселок/деревню, штат/провинцию и страну, "
+                               "где вы родились.")
+        await bot.send_message(message.from_user.id,
+                               "Укажите город или деревню, где вы родились:")
+        await FormI765.Line18a_CityTownOfBirth_0.set()
 
 
 @escape_json_special_chars
@@ -1047,7 +1067,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Вы указали, что не указывали категорию (с)(3)(С).")
     keyboard = FormI765EligibilityCategoryChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Если вы указали категорию соответствия (с)(26), укажите номер квитанции последнего "
+                           "Если вы указали категорию соответствия (с)(26), укажите номер последнего "
                            "уведомления по форме I-797 вашего супруга по форме Н-1В для формы І-129 «Петиция для "
                            "работника-неиммигранта»:",
                            reply_markup=keyboard.markup)
@@ -1121,7 +1141,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].PtLine29_YesNo[0]'] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что вы когда-либо были арестованы и/или осуждены за какое-либо преступление.")
+                           "Вы указали, что вы были арестованы и/или осуждены за какое-либо преступление.")
     keyboard = FormI765EligibilityCategoryChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Если вы указали категорию соответствия (с)(35), укажите номер квитанции вашего уведомления "
@@ -1183,7 +1203,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].PtLine30b_YesNo[0]'] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что вы когда-либо были арестованы и/или осуждены за какое-либо преступление.")
+                           "Вы указали, что вы были арестованы и/или осуждены за какое-либо преступление.")
     keyboard = FormI765ApplicantStatementChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Часть 3. Заверения заявителя, контактная информация, декларация, сертификация и подпись")
@@ -1398,7 +1418,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['form1[0].Page4[0].Pt4Line6_Checkbox[0]'] = ""
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что являетесь гражданином Сальвадора или Гватемалы и имеете право на получение "
-                           "льгот по мировому соглашению АВС")
+                           "льгот по мировому соглашению АВС.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу подпись:")
     await FormI765.Pt3Line7a_Signature_0.set()
@@ -1409,7 +1429,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что не являетесь гражданином Сальвадора или Гватемалы и имеете право на "
-                           "получение льгот по мировому соглашению АВС")
+                           "получение льгот по мировому соглашению АВС.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу подпись:")
     await FormI765.Pt3Line7a_Signature_0.set()
@@ -1422,17 +1442,519 @@ async def process(message: types.Message, state: FSMContext):
         data['form1[0].Page4[0].Pt3Line7a_Signature[0]'] = message.text
         data['form1[0].Page4[0].Pt3Line7b_DateofSignature[0]'] = datetime.datetime.now().strftime("%d/%m/%Y")
 
+    keyboard = FormI765TranslatorHelpedChoice()
+    await bot.send_message(message.from_user.id,
+                           "Вам помогал переводчик при заполнении этого заявления?",
+                           reply_markup=keyboard.markup)
+    await FormI765.TranslatorHelpedChoice.set()
+
+
+@dp.callback_query_handler(text="TranslatorHelped_Yes",
+                           state=FormI765.Pt4Line6_Checkbox_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы указали, что переводчик помогал вам при заполнении этого заявления.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Часть 4. «Контактная информация, сертификация и подпись переводчика.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Раздел «Имя переводчика.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите фамилию переводчика:")
+    await FormI765.Pt4Line1a_InterpreterFamilyName_0.set()
+
+
+@dp.callback_query_handler(text="TranslatorHelped_No",
+                           state=FormI765.Pt4Line6_Checkbox_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы указали, что переводчик не помогал вам при заполнении этого заявления.")
+    async with state.proxy() as data:
+        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
+                                         user_id=callback_query.from_user.id,
+                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
+        adapter.save_json()
+        await state.finish()
+        await bot.send_message(callback_query.from_user.id,
+                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
+                               f"Дождитесь pdf-файла.")
+        await bot.send_chat_action(callback_query.from_user.id, "typing")
+        pdf_file_path = adapter.fill_pdf()
+        with open(pdf_file_path, 'rb') as file:
+            await bot.send_document(callback_query.from_user.id, file)
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line1a_InterpreterFamilyName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page4[0].Pt4Line1a_InterpreterFamilyName[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Укажите имя переводчика:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line1b_InterpreterGivenName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page4[0].Pt4Line1b_InterpreterGivenName[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Укажите название компании или организации, где работает переводчик (если имеется):")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line2_InterpreterBusinessorOrg_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page4[0].Pt4Line2_InterpreterBusinessorOrg[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Раздел «Почтовый адрес переводчика.»")
+    await bot.send_message(message.from_user.id,
+                           "Укажите название и номер улицы:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3a_StreetNumberName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3a_StreetNumberName[0]'] = message.text
+
+    keyboard = FormI765TypeOfBuildingChoice()
+    await bot.send_message(message.from_user.id,
+                           "Укажите тип помещения:",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="Apt",
+                           state=FormI765.AptSteFlr_Choice_Mailing_Translator)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3b_Unit[1]'] = "x"
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер апартаментов:")
+    await FormI765.Pt5Line3b_AptSteFlrNumber_0.set()
+
+
+@dp.callback_query_handler(text="Ste",
+                           state=FormI765.AptSteFlr_Choice_Mailing_Translator)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3b_Unit[2]'] = "x"
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер квартиры:")
+    await FormI765.Pt5Line3b_AptSteFlrNumber_0.set()
+
+
+@dp.callback_query_handler(text="Flr",
+                           state=FormI765.AptSteFlr_Choice_Mailing_Translator)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3b_Unit[0]'] = "x"
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер этажа:")
+    await FormI765.Pt5Line3b_AptSteFlrNumber_0.set()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3b_AptSteFlrNumber_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3b_AptSteFlrNumber[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите город:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3c_CityOrTown_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3c_CityOrTown[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите штат (например, CA, NY, AZ и т. д.):")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3d_State_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3d_State[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите почтовый индекс (например, 123456).\n"
+                           "Найти почтовый индекс можно по ссылке:\n"
+                           "https://tools.usps.com/go/ZipLookupAction_input")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3e_ZipCode_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3e_ZipCode[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите провинцию:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3f_Province_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3f_Province[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите почтовый индекс (postal code) (например, 12345-1234):")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3g_PostalCode_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3g_PostalCode[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите страну:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3h_Country_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line3h_Country[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Раздел «Контактная информация переводчика.»")
+    await bot.send_message(message.from_user.id,
+                           "Укажите дневной номер телефона переводчика:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line4_InterpreterDaytimeTelephone_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt4Line4_InterpreterDaytimeTelephone[0]'] = message.text
+    keyboard = FormI589IfAnyChoice()
+    await bot.send_message(message.from_user.id,
+                           "Укажите номер мобильного телефона переводчика (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI765.Pt4Line5_MobileNumber_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI589IfAnyChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите адрес электронной почты переводчика (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line5_MobileNumber_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt4Line5_MobileNumber[0]'] = message.text
+    keyboard = FormI589IfAnyChoice()
+    await bot.send_message(message.from_user.id,
+                           "Укажите адрес электронной почты переводчика (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI765.Pt4Line6_Email_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите подпись переводчика:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line6_Email_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt4Line6_Email[0]'] = message.text
+        data['form1[0].Page5[0].Part4_NameofLanguage[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Укажите подпись переводчика:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt4Line6a_Signature_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt4Line6a_Signature[0]'] = message.text
+        data['form1[0].Page5[0].Pt4Line6b_DateofSignature[0]'] = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    keyboard = FormI765PreparerHelpedChoice()
+    await bot.send_message(message.from_user.id,
+                           "Вам помогал какое-либо третье лицо (составитель) в заполнении этого заявления?",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="PreparerHelped_Yes",
+                           state=FormI765.PreparerHelpedChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Часть 5. «Контактная информация, сертификация и подпись составителя.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Раздел «Имя составителя.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите фамилию составителя:")
+    await FormI765.Pt5Line1a_PreparerFamilyName_0.set()
+
+
+@dp.callback_query_handler(text="PreparerHelped_No",
+                           state=FormI765.PreparerHelpedChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы указали, что составитель не помогал вам при заполнении этого заявления.")
+    async with state.proxy() as data:
+        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
+                                         user_id=callback_query.from_user.id,
+                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
+        adapter.save_json()
+        await state.finish()
+        await bot.send_message(callback_query.from_user.id,
+                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
+                               f"Дождитесь pdf-файла.")
+        await bot.send_chat_action(callback_query.from_user.id, "typing")
+        pdf_file_path = adapter.fill_pdf()
+        with open(pdf_file_path, 'rb') as file:
+            await bot.send_document(callback_query.from_user.id, file)
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line1a_PreparerFamilyName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line1a_PreparerFamilyName[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Укажите имя составителя:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line1b_PreparerGivenName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line1b_PreparerGivenName[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Укажите название компании или организации, где работает составитель (если имеется):")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line2_BusinessName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line2_BusinessName[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Раздел «Почтовый адрес составителя.»")
+    await bot.send_message(message.from_user.id,
+                           "Укажите название и номер улицы:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3a_StreetNumberName_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3a_StreetNumberName[0]'] = message.text
+
+    keyboard = FormI765TypeOfBuildingChoice()
+    await bot.send_message(message.from_user.id,
+                           "Укажите тип помещения:",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="Apt",
+                           state=FormI765.AptSteFlr_Choice_Mailing_Preparer)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3b_Unit[1]'] = "x"
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер апартаментов:")
+    await FormI765.Pt6Line3b_AptSteFlrNumber_0.set()
+
+
+@dp.callback_query_handler(text="Ste",
+                           state=FormI765.AptSteFlr_Choice_Mailing_Preparer)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3b_Unit[0]'] = "x"
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер квартиры:")
+    await FormI765.Pt6Line3b_AptSteFlrNumber_0.set()
+
+
+@dp.callback_query_handler(text="Flr",
+                           state=FormI765.AptSteFlr_Choice_Mailing_Preparer)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3b_Unit[2]'] = "x"
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер этажа:")
+    await FormI765.Pt6Line3b_AptSteFlrNumber_0.set()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line3b_AptSteFlrNumber_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3b_AptSteFlrNumber[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите город:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3c_CityOrTown_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3c_CityOrTown[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите штат (например, CA, NY, AZ и т. д.):")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3d_State_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3d_State[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите почтовый индекс (например, 123456).\n"
+                           "Найти почтовый индекс можно по ссылке:\n"
+                           "https://tools.usps.com/go/ZipLookupAction_input")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3e_ZipCode_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3e_ZipCode[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите провинцию:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3f_Province_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3f_Province[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите почтовый индекс (postal code) (например, 12345-1234):")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3g_PostalCode_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3g_PostalCode[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Укажите страну:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt6Line3h_Country_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt6Line3h_Country[0]'] = message.text
+    await bot.send_message(message.from_user.id,
+                           "Раздел «Контактная информация составителя.»")
+    await bot.send_message(message.from_user.id,
+                           "Укажите дневной номер телефона составителя:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line4_DaytimePhoneNumber1_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line4_DaytimePhoneNumber1[0]'] = message.text
+    keyboard = FormI589IfAnyChoice()
+    await bot.send_message(message.from_user.id,
+                           "Укажите номер мобильного телефона составителя (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI765.Pt5Line5_PreparerFaxNumber_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI589IfAnyChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите адрес электронной почты составителя (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line5_PreparerFaxNumber_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line5_PreparerFaxNumber[0]'] = message.text
+    keyboard = FormI589IfAnyChoice()
+    await bot.send_message(message.from_user.id,
+                           "Укажите адрес электронной почты составителя (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI765.Pt5Line6_Email_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите подпись составителя:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line6_Email_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page5[0].Pt5Line6_Email[0]'] = message.text
+
+    await bot.send_message(message.from_user.id,
+                           "Укажите подпись составителя:")
+    await FormI765.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI765.Pt5Line8a_Signature_0)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['form1[0].Page6[0].Pt5Line8a_Signature[0]'] = message.text
+        data['form1[0].Page6[0].Pt5Line8b_DateofSignature[0]'] = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+    async with state.proxy() as data:
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
         adapter.save_json()
         await state.finish()
-        await bot.send_message(message.chat.id,
+        await bot.send_message(message.from_user.id,
                                f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
                                f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.chat.id, "typing")
+        await bot.send_chat_action(message.from_user.id, "typing")
         pdf_file_path = adapter.fill_pdf()
         with open(pdf_file_path, 'rb') as file:
-            await bot.send_document(message.chat.id, file)
-
-
+            await bot.send_document(message.from_user.id, file)

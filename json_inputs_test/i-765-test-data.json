@@ -122,6 +122,7 @@
 
   "form1[0].Page4[0].Pt3Line7a_Signature[0]": "61",
   "form1[0].Page4[0].Pt3Line7b_DateofSignature[0]": "62",
+
   "form1[0].Page4[0].Pt4Line1a_InterpreterFamilyName[0]": "63",
   "form1[0].Page4[0].Pt4Line1b_InterpreterGivenName[0]": "64",
   "form1[0].Page4[0].Pt4Line2_InterpreterBusinessorOrg[0]": "65",
@@ -147,11 +148,6 @@
   "form1[0].Page5[0].Pt4Line6a_Signature[0]": "78",
   "form1[0].Page5[0].Pt4Line6b_DateofSignature[0]": "79",
 
-  "form1[0].Page6[0].Part5Line7_Checkbox[0]": "7.a I am not an attorney",
-  "form1[0].Page6[0].Part5Line7_Checkbox[1]": "7b. I am an attorney",
-  "form1[0].Page6[0].Part5Line7b_Checkbox[0]": "7b. extends",
-  "form1[0].Page6[0].Part5Line7b_Checkbox[1]": "7b. does not extend beyond the preparation of this application",
-
   "form1[0].Page5[0].Pt5Line1a_PreparerFamilyName[0]": "80",
   "form1[0].Page5[0].Pt5Line1b_PreparerGivenName[0]": "81",
   "form1[0].Page5[0].Pt5Line2_BusinessName[0]": "82",
@@ -171,6 +167,11 @@
   "form1[0].Page5[0].Pt5Line4_DaytimePhoneNumber1[0]": "91",
   "form1[0].Page5[0].Pt5Line5_PreparerFaxNumber[0]": "92",
   "form1[0].Page5[0].Pt5Line6_Email[0]": "93",
+
+  "form1[0].Page6[0].Part5Line7_Checkbox[0]": "7.a I am not an attorney",
+  "form1[0].Page6[0].Part5Line7_Checkbox[1]": "7b. I am an attorney",
+  "form1[0].Page6[0].Part5Line7b_Checkbox[0]": "7b. extends",
+  "form1[0].Page6[0].Part5Line7b_Checkbox[1]": "7b. does not extend beyond the preparation of this application",
 
   "form1[0].Page6[0].Pt5Line8a_Signature[0]": "94",
   "form1[0].Page6[0].Pt5Line8b_DateofSignature[0]": "95",

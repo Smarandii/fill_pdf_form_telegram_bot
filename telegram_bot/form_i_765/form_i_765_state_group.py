@@ -94,6 +94,9 @@ class FormI765(StatesGroup):
     Line15b_GivenName_0 = State()
     Line16a_FamilyName_0 = State()
     Line16b_GivenName_0 = State()
+
+    NumberOfCountriesInWhichUserIsCitizent = State()
+
     Line17a_CountryOfBirth_0 = State()
     Line17b_CountryOfBirth_0 = State()
 
@@ -147,14 +150,19 @@ class FormI765(StatesGroup):
 
     Pt3Line7a_Signature_0 = State()
     Pt3Line7b_DateofSignature_0 = State()
+
+    TranslatorHelpedChoice = State()
+
     Pt4Line1a_InterpreterFamilyName_0 = State()
     Pt4Line1b_InterpreterGivenName_0 = State()
     Pt4Line2_InterpreterBusinessorOrg_0 = State()
     Pt5Line3a_StreetNumberName_0 = State()
 
-    Pt5Line3b_Unit_1 = State()
-    Pt5Line3b_Unit_2 = State()
-    Pt5Line3b_Unit_0 = State()
+    AptSteFlr_Choice_Mailing_Translator = State()
+
+    # Pt5Line3b_Unit_1 = State()
+    # Pt5Line3b_Unit_2 = State()
+    # Pt5Line3b_Unit_0 = State()
 
     Pt5Line3b_AptSteFlrNumber_0 = State()
     Pt5Line3c_CityOrTown_0 = State()
@@ -167,9 +175,9 @@ class FormI765(StatesGroup):
     Pt4Line4_InterpreterDaytimeTelephone_0 = State()
     Pt4Line5_MobileNumber_0 = State()
     Pt4Line6_Email_0 = State()
-    Part4_NameofLanguage_0 = State()
     Pt4Line6a_Signature_0 = State()
-    Pt4Line6b_DateofSignature_0 = State()
+
+    PreparerHelpedChoice = State()
 
     Part5Line7_Checkbox_0 = State()
     Part5Line7_Checkbox_1 = State()
@@ -181,9 +189,11 @@ class FormI765(StatesGroup):
     Pt5Line2_BusinessName_0 = State()
     Pt6Line3a_StreetNumberName_0 = State()
 
-    Pt6Line3b_Unit_1 = State()
-    Pt6Line3b_Unit_0 = State()
-    Pt6Line3b_Unit_2 = State()
+    AptSteFlr_Choice_Mailing_Preparer = State()
+
+    # Pt6Line3b_Unit_1 = State()
+    # Pt6Line3b_Unit_0 = State()
+    # Pt6Line3b_Unit_2 = State()
 
     Pt6Line3b_AptSteFlrNumber_0 = State()
     Pt6Line3c_CityOrTown_0 = State()

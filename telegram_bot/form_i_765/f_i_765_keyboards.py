@@ -74,6 +74,26 @@ class FormI765UsedOtherNamesChoice:
         self.markup = keyboard_markup
 
 
+class FormI765TranslatorHelpedChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="TranslatorHelped_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="TranslatorHelped_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI765PreparerHelpedChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="PreparerHelped_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="PreparerHelped_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI765AppliedEarlierChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
