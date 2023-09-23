@@ -1500,8 +1500,22 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt4Line1b_InterpreterGivenName[0]'] = message.text
 
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Укажите название компании или организации, где работает переводчик (если имеется):")
+                           "Укажите название компании или организации, где работает переводчик (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI765.Pt4Line2_InterpreterBusinessorOrg_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы указали, что не знаете название компании или организации, где работает переводчик.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Раздел «Почтовый адрес переводчик.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите название и номер улицы:")
     await FormI765.next()
 
 
@@ -1750,9 +1764,22 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line1b_PreparerGivenName[0]'] = message.text
-
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Укажите название компании или организации, где работает составитель (если имеется):")
+                           "Укажите название компании или организации, где работает составитель (если имеется):",
+                           reply_markup=keyboard.markup)
+    await FormI765.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI765.Pt5Line2_BusinessName_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы указали, что не знаете название компании или организации, где работает составитель.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Раздел «Почтовый адрес составителя.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите название и номер улицы:")
     await FormI765.next()
 
 
