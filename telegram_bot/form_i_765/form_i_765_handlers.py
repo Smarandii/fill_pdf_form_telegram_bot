@@ -1440,7 +1440,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line7a_Signature[0]'] = message.text
-        data['form1[0].Page4[0].Pt3Line7b_DateofSignature[0]'] = datetime.datetime.now().strftime("%d/%m/%Y")
+        data['form1[0].Page4[0].Pt3Line7b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
 
     keyboard = FormI765TranslatorHelpedChoice()
     await bot.send_message(message.from_user.id,
@@ -1450,7 +1450,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="TranslatorHelped_Yes",
-                           state=FormI765.Pt4Line6_Checkbox_0)
+                           state=FormI765.TranslatorHelpedChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что переводчик помогал вам при заполнении этого заявления.")
@@ -1464,7 +1464,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="TranslatorHelped_No",
-                           state=FormI765.Pt4Line6_Checkbox_0)
+                           state=FormI765.TranslatorHelpedChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что переводчик не помогал вам при заполнении этого заявления.")
@@ -1542,7 +1542,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите тип помещения:",
                            reply_markup=keyboard.markup)
-    await FormI765.next()
+    await FormI765.AptSteFlr_Choice_Mailing_Translator.set()
 
 
 @dp.callback_query_handler(text="Apt",
@@ -1708,7 +1708,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt4Line6a_Signature[0]'] = message.text
-        data['form1[0].Page5[0].Pt4Line6b_DateofSignature[0]'] = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+        data['form1[0].Page5[0].Pt4Line6b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
     keyboard = FormI765PreparerHelpedChoice()
     await bot.send_message(message.from_user.id,
                            "Вам помогал какое-либо третье лицо (составитель) в заполнении этого заявления?",
@@ -1806,7 +1806,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите тип помещения:",
                            reply_markup=keyboard.markup)
-    await FormI765.next()
+    await FormI765.AptSteFlr_Choice_Mailing_Preparer.set()
 
 
 @dp.callback_query_handler(text="Apt",
@@ -1840,7 +1840,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @escape_json_special_chars
-@dp.message_handler(state=FormI765.Pt5Line3b_AptSteFlrNumber_0)
+@dp.message_handler(state=FormI765.Pt6Line3b_AptSteFlrNumber_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3b_AptSteFlrNumber[0]'] = message.text
@@ -1971,7 +1971,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page6[0].Pt5Line8a_Signature[0]'] = message.text
-        data['form1[0].Page6[0].Pt5Line8b_DateofSignature[0]'] = datetime.datetime.now().strftime('%Y%m%d%H%M%S')
+        data['form1[0].Page6[0].Pt5Line8b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
     async with state.proxy() as data:
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
