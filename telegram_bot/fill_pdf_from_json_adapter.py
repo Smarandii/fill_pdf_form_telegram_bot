@@ -1,7 +1,8 @@
 class FillPdfFromJsonAdapter:
     forms_identifier_to_pdf_files_mapping = {"AR-11": "../pdf_inputs/ar-11-unlocked.pdf",
                                              "I-589": "../pdf_inputs/i-589-unlocked.pdf",
-                                             "I-765": "../pdf_inputs/i-765-unlocked.pdf"}
+                                             "I-765": "../pdf_inputs/i-765-unlocked.pdf",
+                                             "I-485": "../pdf_inputs/i-485-unlocked.pdf"}
 
     def __init__(self, data, form_identifier, user_id, timestamp):
         self.data = data

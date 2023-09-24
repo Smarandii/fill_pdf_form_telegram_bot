@@ -29,25 +29,25 @@ from telegram_bot.form_ar_11.f_ar_11_keyboards import \
     Form_AR_11_Mailing_Address_Choice_Keyboard
 
 from telegram_bot.form_i_589.f_i_589_keyboards import \
-    Form_I_589_Gender_Choice, \
-    Form_I_589_Marital_Status_Choice, \
-    Form_I_589_Immigration_Court_Choice, \
-    Form_I_94_Number_Choice, \
-    Form_I_589_English_Fluency_Choice, \
-    Form_I_589_Location_Choice, \
-    Form_I_589_Spouse_Immigration_Court_Choice, \
-    Form_I_589_Include_Spouse_Choice,\
-    Form_I_589_Have_Children_Choice, \
-    Form_I_589_Child_Immigration_Court_Choice, \
-    Form_I_589_Fill_Next_Child_Choice, \
-    Form_I_589_Mother_Deceased_Choice, \
-    Form_I_589_Father_Deceased_Choice, \
-    Form_I_589_1Sibling_Deceased_Choice, \
-    Form_I_589_2Sibling_Deceased_Choice, \
-    Form_I_589_3Sibling_Deceased_Choice, \
-    Form_I_589_4Sibling_Deceased_Choice, \
-    Form_I_589_Asylum_Reason_Choice, \
-    Form_I_589_Family_Experienced_Harm_Choice, \
+    FormI589GenderChoice, \
+    FormI589MaritalStatusChoice, \
+    FormI589ImmigrationCourtChoice, \
+    FormI94NumberChoice, \
+    FormI589EnglishFluencyChoice, \
+    FormI589LocationChoice, \
+    FormI589SpouseImmigrationCourtChoice, \
+    FormI589IncludeSpouseChoice,\
+    FormI589HaveChildrenChoice, \
+    FormI589ChildImmigrationCourtChoice, \
+    FormI589FillNextChildChoice, \
+    FormI589MotherDeceasedChoice, \
+    FormI589FatherDeceasedChoice, \
+    FormI5891siblingDeceasedChoice, \
+    FormI5892siblingDeceasedChoice, \
+    FormI5893siblingDeceasedChoice, \
+    FormI5894siblingDeceasedChoice, \
+    FormI589AsylumReasonChoice, \
+    FormI589FamilyExperiencedHarmChoice, \
     FormI589IfAnyChoice
 
 

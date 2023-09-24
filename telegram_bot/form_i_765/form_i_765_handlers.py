@@ -3,8 +3,8 @@ from aiogram.dispatcher import FSMContext, filters
 
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
-from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, Form_I_589_Gender_Choice, \
-    Form_I_589_Marital_Status_Choice
+from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, FormI589GenderChoice, \
+    FormI589MaritalStatusChoice
 
 from telegram_bot.form_i_765.f_i_765_keyboards import (
     FormI765ApplyingForChoiceKeyboard,
@@ -161,7 +161,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="UsedOtherNames_No", state=FormI765.Used_Other_Names)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что использовали иные имена.")
+                           "Вы указали, что не использовали иные имена.")
     await FormI765.Line4a_InCareofName_0.set()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -214,7 +214,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="UsedOtherNames_No", state=FormI765.Used_Other_Names_1)
 async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что использовали иные имена.")
+                           "Вы указали, что не использовали иные имена.")
     await FormI765.Line4a_InCareofName_0.set()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -269,7 +269,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="UsedOtherNames_No", state=FormI765.Used_Other_Names_2)
 async def callback_query_handler_UsedOtherNames_No(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что не использовали иные имена (например, девичья фамилия и псевдоним).")
+                           "Вы указали, что не использовали иные имена.")
     await FormI765.Line4a_InCareofName_0.set()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -504,7 +504,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=FormI765.Line8_ElisAccountNumber_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    keyboard = Form_I_589_Gender_Choice()
+    keyboard = FormI589GenderChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Выберите свой пол:",
                            reply_markup=keyboard.markup)
@@ -529,7 +529,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line8_ElisAccountNumber[0]'] = message.text
     await FormI765.next()
-    keyboard = Form_I_589_Gender_Choice()
+    keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id,
                            "Выберите свой пол:",
                            reply_markup=keyboard.markup)
@@ -541,7 +541,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line9_Checkbox[0]'] = "x"
-    keyboard = Form_I_589_Marital_Status_Choice()
+    keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы женщина.")
     await bot.send_message(callback_query.from_user.id,
@@ -555,7 +555,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line9_Checkbox[1]'] = "x"
-    keyboard = Form_I_589_Marital_Status_Choice()
+    keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы мужчина.")
     await bot.send_message(callback_query.from_user.id,
