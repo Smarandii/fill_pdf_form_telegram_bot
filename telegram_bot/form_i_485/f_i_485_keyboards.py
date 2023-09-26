@@ -163,6 +163,52 @@ class FormI485CameIntoUSWithoutAdmissionOrParoleChoice:
         self.markup = keyboard_markup
 
 
+class FormI485ApplicationByWorkingCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ApplicationByWorkingCategory_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ApplicationByWorkingCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ImmigrationAndNationalityActChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ImmigrationAndNationalityAct_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ImmigrationAndNationalityAct_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485PrincipalApplicantChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="PrincipalApplicant_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="PrincipalApplicant_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485TypeOfFamilyCategoryApplicationChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=5)
+        button = InlineKeyboardButton("1.", callback_data="TypeOfFamilyCategoryApplication_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.", callback_data="TypeOfFamilyCategoryApplication_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.", callback_data="TypeOfFamilyCategoryApplication_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.", callback_data="TypeOfFamilyCategoryApplication_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("5.", callback_data="TypeOfFamilyCategoryApplication_5")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI485ApplicationByFamilyCategoryChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)

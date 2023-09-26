@@ -5,7 +5,9 @@ from telegram_bot.form_i_485.f_i_485_keyboards import \
     FormI485DontNeedAlternateMailingAddressChoice, FormI485SSAChoice, FormI485SSACouldUseInformationChoice, \
     FormI485WasInspectedAtPortOfEntryChoice, FormI485SpecialCategoryEntryGrantedChoice, \
     FormI485CameIntoUSWithoutAdmissionOrParoleChoice, FormI485I94WasIssuedChoice, \
-    FormI485ImmigrationStatusDontChangedChoice, FormI485ApplicationByFamilyCategoryChoice
+    FormI485ImmigrationStatusDontChangedChoice, FormI485ApplicationByFamilyCategoryChoice, \
+    FormI485TypeOfFamilyCategoryApplicationChoice, FormI485ApplicationByWorkingCategoryChoice, \
+    FormI485ImmigrationAndNationalityActChoice, FormI485PrincipalApplicantChoice
 from telegram_bot.form_i_765.f_i_765_keyboards import FormI765TypeOfBuildingChoice
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_485.form_i_485_state_group import FormI485
@@ -981,11 +983,118 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="ApplicationByFamilyCategory_Yes",
-                           state=FormI485.S_2_Pt2Line1_CB_0)
+                           state=FormI485.ApplicationByFamilyCategory)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI485TypeOfFamilyCategoryApplicationChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что ваш иммиграционный статус не изменился.")
+                           "Укажите тип вашей семейной категории:\n"
+                           "1. Ближайший родственник гражданина США, форма I-130\n"
+                           "2. Иной родственник гражданина США или законного постоянного жителя, форма I-130.\n"
+                           "3. Лицо, допущенное в Соединенные Штаты в качестве невесты (невесты) или ребенка невесты "
+                           "гражданина США, форма I-129F (K-1 / K-2, неиммиграция)\n"
+                           "4. Вдова или вдовец гражданина США, форма I-360\n"
+                           "5. заявитель VAWA, форма I-360",
+                           reply_markup=keyboard.markup)
+    await FormI485.TypeOfFamilyCategoryApplication.set()
+
+
+@dp.callback_query_handler(text="TypeOfFamilyCategoryApplication_1",
+                           state=FormI485.TypeOfFamilyCategoryApplication)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[2].Pt2Line1_CB[0]'] = 'x'
+    keyboard = FormI485ImmigrationAndNationalityActChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите свое ФИО так, как оно указано в вашей форме I-94.\n"
-                           "Укажите фамилию:")
-    await FormI485.next()
+                           "Вы подаете заявку на корректировку статуса на основании раздела 245(i) Закона об "
+                           "иммиграции и гражданстве (INA)?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+
+
+@dp.callback_query_handler(text="TypeOfFamilyCategoryApplication_2",
+                           state=FormI485.TypeOfFamilyCategoryApplication)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[2].Pt2Line1_CB[1]'] = 'x'
+    keyboard = FormI485ImmigrationAndNationalityActChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы подаете заявку на корректировку статуса на основании раздела 245(i) Закона об "
+                           "иммиграции и гражданстве (INA)?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+
+
+@dp.callback_query_handler(text="TypeOfFamilyCategoryApplication_3",
+                           state=FormI485.TypeOfFamilyCategoryApplication)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[2].Pt2Line1_CB[2]'] = 'x'
+    keyboard = FormI485ImmigrationAndNationalityActChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы подаете заявку на корректировку статуса на основании раздела 245(i) Закона об "
+                           "иммиграции и гражданстве (INA)?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+
+
+@dp.callback_query_handler(text="TypeOfFamilyCategoryApplication_4",
+                           state=FormI485.TypeOfFamilyCategoryApplication)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[2].Pt2Line1_CB[3]'] = 'x'
+    keyboard = FormI485ImmigrationAndNationalityActChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы подаете заявку на корректировку статуса на основании раздела 245(i) Закона об "
+                           "иммиграции и гражданстве (INA)?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+
+
+@dp.callback_query_handler(text="TypeOfFamilyCategoryApplication_5",
+                           state=FormI485.TypeOfFamilyCategoryApplication)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[2].Pt2Line1_CB[4]'] = 'x'
+    keyboard = FormI485ImmigrationAndNationalityActChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы подаете заявку на корректировку статуса на основании раздела 245(i) Закона об "
+                           "иммиграции и гражданстве (INA)?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+
+
+@dp.callback_query_handler(text="ApplicationByFamilyCategory_No",
+                           state=FormI485.ApplicationByFamilyCategory)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI485ApplicationByWorkingCategoryChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы подаете заявление на основании трудовой занятости?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ApplicationByEmploymentBasedCategory.set()
+
+
+@dp.callback_query_handler(text="ApplicationByWorkingCategory_Yes",
+                           state=FormI485.ApplicationByEmploymentBasedCategory)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI485ImmigrationAndNationalityActChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы подаете заявку на корректировку статуса на основании раздела 245(i) Закона об "
+                           "иммиграции и гражданстве (INA)?",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+
+
+@dp.callback_query_handler(text="ImmigrationAndNationalityAct_Yes",
+                           state=FormI485.ImmigrationAndNationalityActChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data['[3].Pt2Line2_CB[1]'] = 'x'
+    keyboard = FormI485PrincipalApplicantChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Раздел «Информация о вашей иммиграционной категории.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы являетесь основным заявителем (не производным, то есть не супругом(-й) или не состоящим "
+                           "в браке ребенком в возрасте до 21 года основного заявителя)? ",
+                           reply_markup=keyboard.markup)
+    await FormI485.ImmigrationAndNationalityActChoice.set()
+

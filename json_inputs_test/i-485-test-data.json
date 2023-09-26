@@ -108,8 +108,8 @@
     "[2].Pt2Line1_CB[1]": "71",
     "[2].Pt2Line1_CB[2]": "72",
     "[2].Pt2Line1_CB[3]": "73",
-
     "[2].Pt2Line1_CB[4]": "74",
+
     "[2].Pt2Line1_CB[5]": "75",
     "[2].Pt2Line1_CB[6]": "76",
     "[2].Pt2Line1_CB[7]": "77",
@@ -141,8 +141,8 @@
 
     "[3].Pt2Line1g_OtherEligibility[0]": "99",
 
-    "[3].Pt2Line2_CB[0]": "100",
-    "[3].Pt2Line2_CB[1]": "101",
+    "[3].Pt2Line2_CB[0]": "No",
+    "[3].Pt2Line2_CB[1]": "Yes",
 
     "[3].Pt2Line3_Receipt[0]": "102",
 

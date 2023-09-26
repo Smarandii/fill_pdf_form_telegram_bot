@@ -126,45 +126,67 @@ class FormI485(StatesGroup):
     S_2_Pt1Line28b_GivenName_0 = State()
     S_2_Pt1Line28c_MiddleName_0 = State()
 
-    S_2_Pt2Line1_CB_0 = State()
-    S_2_Pt2Line1_CB_1 = State()
-    S_2_Pt2Line1_CB_2 = State()
-    S_2_Pt2Line1_CB_3 = State()
+    ApplicationByFamilyCategory = State()
+    TypeOfFamilyCategoryApplication = State()
 
-    S_2_Pt2Line1_CB_4 = State()
-    S_2_Pt2Line1_CB_5 = State()
-    S_2_Pt2Line1_CB_6 = State()
-    S_2_Pt2Line1_CB_7 = State()
+    # S_2_Pt2Line1_CB_0 = State()
+    # S_2_Pt2Line1_CB_1 = State()
+    # S_2_Pt2Line1_CB_2 = State()
+    # S_2_Pt2Line1_CB_3 = State()
+    # S_2_Pt2Line1_CB_4 = State()
 
-    S_2_Pt2Line1_CB_8 = State()
-    S_2_Pt2Line1_CB_9 = State()
-    S_2_Pt2Line1_CB_10 = State()
-    S_2_Pt2Line1_CB_11 = State()
+    ApplicationByEmploymentBasedCategory = State()
+    TypeOfEmploymentBasedCategoryApplication = State()
 
-    S_2_Pt2Line1_CB_12 = State()
-    S_2_Pt2Line1_CB_13 = State()
-    S_2_Pt2Line1_CB_14 = State()
-    S_2_Pt2Line1_CB_15 = State()
+    # S_2_Pt2Line1_CB_5 = State()
+    # S_2_Pt2Line1_CB_6 = State()
 
-    S_3_Pt1Line10_AlienNumber_4 = State()
+    ApplicationBySpecialImmigrantCategory = State()
+    TypeOfSpecialImmigrantCategoryApplication = State()
 
-    S_3_Pt2Line1_CB_16 = State()
-    S_3_Pt2Line1_CB_17 = State()
-    S_3_Pt2Line1_CB_18 = State()
-    S_3_Pt2Line1_CB_19 = State()
-    S_3_Pt2Line1_CB_20 = State()
-    S_3_Pt2Line1_CB_21 = State()
-    S_3_Pt2Line1_CB_22 = State()
+    # S_2_Pt2Line1_CB_7 = State()
+    # S_2_Pt2Line1_CB_8 = State()
+    # S_2_Pt2Line1_CB_9 = State()
+    # S_2_Pt2Line1_CB_10 = State()
+    # S_2_Pt2Line1_CB_11 = State()
 
-    S_3_Pt2Line1_CB_23 = State()
-    S_3_Pt2Line1_CB_24 = State()
-    S_3_Pt2Line1_CB_25 = State()
-    S_3_Pt2Line1_CB_26 = State()
+    ApplicationByAsyleeOrRefugeeCategory = State()
+    TypeOfAsyleeOrRefugeeCategoryApplication = State()
+
+    # S_2_Pt2Line1_CB_12 = State()
+    # S_2_Pt2Line1_CB_13 = State()
+
+    ApplicationByHumanTraffickingVictimCategory = State()
+    TypeOfHumanTraffickingVictimCategoryApplication = State()
+
+    # S_2_Pt2Line1_CB_14 = State()
+    # S_2_Pt2Line1_CB_15 = State()
+
+    ApplicationBySpecialProgramsCategory = State()
+    TypeOfSpecialProgramsCategoryApplication = State()
+
+    # S_3_Pt2Line1_CB_16 = State()
+    # S_3_Pt2Line1_CB_17 = State()
+    # S_3_Pt2Line1_CB_18 = State()
+    # S_3_Pt2Line1_CB_19 = State()
+    # S_3_Pt2Line1_CB_20 = State()
+    # S_3_Pt2Line1_CB_21 = State()
+    # S_3_Pt2Line1_CB_22 = State()
+
+    ApplicationByAdditionalOptionsCategory = State()
+    TypeOfAdditionalOptionsCategoryApplication = State()
+
+    # S_3_Pt2Line1_CB_23 = State()
+    # S_3_Pt2Line1_CB_24 = State()
+    # S_3_Pt2Line1_CB_25 = State()
+    # S_3_Pt2Line1_CB_26 = State()
 
     S_3_Pt2Line1g_OtherEligibility_0 = State()
 
-    S_3_Pt2Line2_CB_0 = State()
-    S_3_Pt2Line2_CB_1 = State()
+    ImmigrationAndNationalityActChoice = State()
+
+    # S_3_Pt2Line2_CB_0 = State()
+    # S_3_Pt2Line2_CB_1 = State()
 
     S_3_Pt2Line3_Receipt_0 = State()
 
