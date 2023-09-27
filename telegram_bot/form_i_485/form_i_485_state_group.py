@@ -188,23 +188,28 @@ class FormI485(StatesGroup):
     # S_3_Pt2Line2_CB_0 = State()
     # S_3_Pt2Line2_CB_1 = State()
 
+    PrincipalApplicatnChoice = State()
+
     S_3_Pt2Line3_Receipt_0 = State()
 
     S_3_Pt2Line4_Date_0 = State()
+
+    DerivativeApplicatnChoice = State()
 
     S_3_Pt2Line5a_FamilyName_0 = State()
     S_3_Pt2Line5b_GivenName_0 = State()
     S_3_Pt2Line5c_MiddleName_0 = State()
 
     S_3_Pt1Line8_AlienNumber_0 = State()
-
     S_3_Pt2Line7_Date_0 = State()
+    S_3_Pt2Line8_ReceiptNumber_0 = State()
     S_3_Pt2Line9_Date_0 = State()
 
-    S_3_Pt3Line1_YN_0 = State()
-    S_3_Pt3Line1_YN_1 = State()
+    AppliedForImmigrantVisaChoice = State()
+    # S_3_Pt3Line1_YN_0 = State()
+    # S_3_Pt3Line1_YN_1 = State()
 
-    S_3_Pt2Line8_ReceiptNumber_0 = State()
+
 
     S_3_Pt3Line2a_City_0 = State()
     S_3_Pt3Line2b_Country_0 = State()

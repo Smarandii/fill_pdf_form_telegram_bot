@@ -112,8 +112,8 @@
 
     "[2].Pt2Line1_CB[5]": "75",
     "[2].Pt2Line1_CB[6]": "76",
-    "[2].Pt2Line1_CB[7]": "77",
 
+    "[2].Pt2Line1_CB[7]": "77",
     "[2].Pt2Line1_CB[8]": "78",
     "[2].Pt2Line1_CB[9]": "79",
     "[2].Pt2Line1_CB[10]": "80",
@@ -121,6 +121,7 @@
 
     "[2].Pt2Line1_CB[12]": "83",
     "[2].Pt2Line1_CB[13]": "84",
+
     "[2].Pt2Line1_CB[14]": "85",
     "[2].Pt2Line1_CB[15]": "86",
 
@@ -155,12 +156,13 @@
     "[3].Pt1Line8_AlienNumber[0]": "5xxxxxxxx",
 
     "[3].Pt2Line7_Date[0]": "108",
+    "[3].Pt2Line8_ReceiptNumber[0]": "110",
     "[3].Pt2Line9_Date[0]": "109",
 
     "[3].Pt3Line1_YN[0]": "X",
     "[3].Pt3Line1_YN[1]": "X",
 
-    "[3].Pt2Line8_ReceiptNumber[0]": "110",
+
 
     "[3].Pt3Line2a_City[0]": "113",
     "[3].Pt3Line2b_Country[0]": "114",

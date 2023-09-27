@@ -163,6 +163,158 @@ class FormI485CameIntoUSWithoutAdmissionOrParoleChoice:
         self.markup = keyboard_markup
 
 
+class FormI485TypeOfEmploymentBasedCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Иностранный наемный работник, форма I-140",
+                                      callback_data="TypeOfEmploymentBasedCategory_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Иностранный предприниматель, форма I-526",
+                                      callback_data="TypeOfEmploymentBasedCategory_2")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ApplicationBySpecialImmigrantCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ApplicationBySpecialImmigrantCategory_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ApplicationBySpecialImmigrantCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ApplicationByAsyleeOrRefugeeCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ApplicationByAsyleeOrRefugeeCategory_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ApplicationByAsyleeOrRefugeeCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ApplicationByHumanTraffickingVictimCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ApplicationByHumanTraffickingVictimCategory_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ApplicationByHumanTraffickingVictimCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ApplicationBySpecialProgramsBasedCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ApplicationBySpecialProgramsBasedCategory_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ApplicationBySpecialProgramsBasedCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ApplicationByOtherCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ApplicationByOtherCategory_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ApplicationByOtherCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485TypeOfSpecialImmigrantCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=5)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="TypeOfSpecialImmigrantCategory_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="TypeOfSpecialImmigrantCategory_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.",
+                                      callback_data="TypeOfSpecialImmigrantCategory_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.",
+                                      callback_data="TypeOfSpecialImmigrantCategory_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("5.",
+                                      callback_data="TypeOfSpecialImmigrantCategory_5")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485TypeOfOtherCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=5)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="TypeOfOtherCategory_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="TypeOfOtherCategory_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.",
+                                      callback_data="TypeOfOtherCategory_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.",
+                                      callback_data="TypeOfOtherCategory_4")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485TypeOfSpecialProgramsCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=7)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="TypeOfSpecialProgramsCategory_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="TypeOfSpecialProgramsCategory_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.",
+                                      callback_data="TypeOfSpecialProgramsCategory_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.",
+                                      callback_data="TypeOfSpecialProgramsCategory_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("5.",
+                                      callback_data="TypeOfSpecialProgramsCategory_5")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("6.",
+                                      callback_data="TypeOfSpecialProgramsCategory_6")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("7.",
+                                      callback_data="TypeOfSpecialProgramsCategory_7")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485TypeOfAsyleeOrRefugeeCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="TypeOfAsyleeOrRefugeeCategory_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="TypeOfAsyleeOrRefugeeCategory_2")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485TypeOfHumanTraffickingVictimCategoryChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="TypeOfHumanTraffickingVictimCategory_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="TypeOfHumanTraffickingVictimCategory_2")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI485ApplicationByWorkingCategoryChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
@@ -189,6 +341,26 @@ class FormI485PrincipalApplicantChoice:
         button = InlineKeyboardButton("Да", callback_data="PrincipalApplicant_Yes")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("Нет", callback_data="PrincipalApplicant_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485DerivativeApplicantChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="DerivativeApplicant_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="DerivativeApplicant_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485AppliedForImmigrationVisaInOtherCountriesChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="AppliedForImmigrationVisaInOtherCountries_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="AppliedForImmigrationVisaInOtherCountries_No")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
