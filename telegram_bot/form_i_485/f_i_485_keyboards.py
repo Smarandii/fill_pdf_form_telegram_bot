@@ -144,6 +144,24 @@ class FormI485I94WasIssuedChoice:
         self.markup = keyboard_markup
 
 
+class FormI485ParentHasDifferentName:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ParentHasDifferentName_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ParentHasDifferentName_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ParentNotAlive:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("Родитель 1 скончался(лась)", callback_data="ParentNotAlive_Yes")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI485ImmigrationStatusDontChangedChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
@@ -225,6 +243,140 @@ class FormI485ApplicationByOtherCategoryChoice:
         self.markup = keyboard_markup
 
 
+class Form485SpouceApllyingTooChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="SpouceApllyingToo_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="SpouceApllyingToo_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485BeenMarriedBeforeChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="BeenMarriedBefore_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="BeenMarriedBefore_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485HaveKidsChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="HaveKids_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="HaveKids_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ChildApplyingTooChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="ChildApplyingToo_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="ChildApplyingToo_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485EthnicityChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("1.", callback_data="Ethnicity_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.", callback_data="Ethnicity_2")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485IChooseAllOfMyRaces:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("Продолжить заполнение формы", callback_data="continue")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485RaceChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=5)
+        button = InlineKeyboardButton("1.", callback_data="Race_Euro")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.", callback_data="Race_Asia")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.", callback_data="Race_Negro")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.", callback_data="Race_AmericanIndian")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("5.", callback_data="Race_HawaiiOrPacificOcean")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485EyeColorChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=9)
+        button = InlineKeyboardButton("Черный", callback_data="Black")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Серый ", callback_data="Gray")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Темно-бордовый", callback_data="Maroon")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Синий", callback_data="Blue")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Зеленый", callback_data="Green")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Розовый", callback_data="Pink")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Коричневый", callback_data="Brown")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Светло-коричневый", callback_data="Hazel")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Иное", callback_data="Unknown/Other")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485IHairColorChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=9)
+        button = InlineKeyboardButton("Лысый", callback_data="Bald (No hair)")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Черный", callback_data="Black")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Блонд", callback_data="Blond")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Коричневый", callback_data="Brown")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Серый", callback_data="Gray")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Рыжий", callback_data="Red")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Золотистый", callback_data="Sandy")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Белый", callback_data="White")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Иное", callback_data="Unknown/Other")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485IsYourSpouceInArmyChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="IsYourSpouceInArmy_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="IsYourSpouceInArmy_No")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Не обладаю информацией", callback_data="IsYourSpouceInArmy_DoNotKnow")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI485TypeOfSpecialImmigrantCategoryChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=5)
@@ -242,6 +394,30 @@ class FormI485TypeOfSpecialImmigrantCategoryChoice:
         keyboard_markup.add(button)
         button = InlineKeyboardButton("5.",
                                       callback_data="TypeOfSpecialImmigrantCategory_5")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485MaritalStatusChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=5)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="MaritalStatus_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="MaritalStatus_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.",
+                                      callback_data="MaritalStatus_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.",
+                                      callback_data="MaritalStatus_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("5.",
+                                      callback_data="MaritalStatus_5")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("6.",
+                                      callback_data="MaritalStatus_6")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 
@@ -315,12 +491,75 @@ class FormI485TypeOfHumanTraffickingVictimCategoryChoice:
         self.markup = keyboard_markup
 
 
+class FormI485AddressWasProvidedAbove:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("Адрес был указан выше",
+                                      callback_data="AddressWasProvidedAbove")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485RecentEmploymentListedAbove:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=1)
+        button = InlineKeyboardButton("Место работы было указано выше",
+                                      callback_data="AddressWasProvidedAbove")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485ImmigrantVisaDecisionStatusChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=4)
+        button = InlineKeyboardButton("Заявление утверждено",
+                                      callback_data="ImmigrantVisaDecisionStatus_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Заявление отклонено",
+                                      callback_data="ImmigrantVisaDecisionStatus_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Заявление отозвано",
+                                      callback_data="ImmigrantVisaDecisionStatus_3")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI485ApplicationByWorkingCategoryChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
         button = InlineKeyboardButton("Да", callback_data="ApplicationByWorkingCategory_Yes")
         keyboard_markup.add(button)
         button = InlineKeyboardButton("Нет", callback_data="ApplicationByWorkingCategory_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485IGeneralEligibilityChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="GeneralEligibility_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="GeneralEligibility_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485WasEverRefusedToEnterUSAChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="WasEverRefusedToEnterUSA_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="WasEverRefusedToEnterUSA_No")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485SimpleYesOrNoChoice:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button = InlineKeyboardButton("Да", callback_data="SimpleYesOrNo_Yes")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Нет", callback_data="SimpleYesOrNo_No")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 

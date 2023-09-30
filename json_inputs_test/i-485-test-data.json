@@ -61,11 +61,11 @@
 
     "[1].Pt1Line15_SSN[0]": "43",
 
-    "[1].Pt1Line14_YN[0]": "No",
-    "[1].Pt1Line14_YN[1]": "Yes",
+    "[1].Pt1Line14_YN[0]": "Xo",
+    "[1].Pt1Line14_YN[1]": "Xes",
 
-    "[1].Pt1Line16_YN[0]": "No",
-    "[1].Pt1Line16_YN[1]": "Yes",
+    "[1].Pt1Line16_YN[0]": "Xo",
+    "[1].Pt1Line16_YN[1]": "Xes",
 
     "[1].Pt1Line17_YN[0]": "X",
     "[1].Pt1Line17_YN[1]": "X",
@@ -81,15 +81,15 @@
 
     "[2].Pt1Line10_AlienNumber[3]": "3xxxxxxxx",
 
-    "[2].Pt1Line25a_CB[0]": "58",
+    "[2].Pt1Line25a_CB[0]": "X",
     "[2].Pt1Line25a_AdmissionEntry[0]": "65",
 
-    "[2].Pt1Line25b_CB[0]": "59",
+    "[2].Pt1Line25b_CB[0]": "X",
     "[2].Pt1Line25b_ParoleEntrance[0]": "57",
 
-    "[2].Pt1Line25c_CB[0]": "60",
+    "[2].Pt1Line25c_CB[0]": "X",
 
-    "[2].Pt1Line25d_CB[0]": "61",
+    "[2].Pt1Line25d_CB[0]": "X",
     "[2].Pt2Line25d_other[0]": "66",
 
     "[2].P2Line26a_I94[0]": "64",
@@ -104,46 +104,46 @@
     "[2].Pt1Line28b_GivenName[0]": "68",
     "[2].Pt1Line28c_MiddleName[0]": "69",
 
-    "[2].Pt2Line1_CB[0]": "70",
-    "[2].Pt2Line1_CB[1]": "71",
-    "[2].Pt2Line1_CB[2]": "72",
-    "[2].Pt2Line1_CB[3]": "73",
-    "[2].Pt2Line1_CB[4]": "74",
+    "[2].Pt2Line1_CB[0]": "X",
+    "[2].Pt2Line1_CB[1]": "X",
+    "[2].Pt2Line1_CB[2]": "X",
+    "[2].Pt2Line1_CB[3]": "X",
+    "[2].Pt2Line1_CB[4]": "X",
 
-    "[2].Pt2Line1_CB[5]": "75",
-    "[2].Pt2Line1_CB[6]": "76",
+    "[2].Pt2Line1_CB[5]": "X",
+    "[2].Pt2Line1_CB[6]": "X",
 
-    "[2].Pt2Line1_CB[7]": "77",
-    "[2].Pt2Line1_CB[8]": "78",
-    "[2].Pt2Line1_CB[9]": "79",
-    "[2].Pt2Line1_CB[10]": "80",
-    "[2].Pt2Line1_CB[11]": "81",
+    "[2].Pt2Line1_CB[7]": "X",
+    "[2].Pt2Line1_CB[8]": "X",
+    "[2].Pt2Line1_CB[9]": "X",
+    "[2].Pt2Line1_CB[10]": "X",
+    "[2].Pt2Line1_CB[11]": "X",
 
-    "[2].Pt2Line1_CB[12]": "83",
-    "[2].Pt2Line1_CB[13]": "84",
+    "[2].Pt2Line1_CB[12]": "X",
+    "[2].Pt2Line1_CB[13]": "X",
 
-    "[2].Pt2Line1_CB[14]": "85",
-    "[2].Pt2Line1_CB[15]": "86",
+    "[2].Pt2Line1_CB[14]": "X",
+    "[2].Pt2Line1_CB[15]": "X",
 
     "[3].Pt1Line10_AlienNumber[4]": "4xxxxxxxx",
 
-    "[3].Pt2Line1_CB[16]": "88",
-    "[3].Pt2Line1_CB[17]": "89",
-    "[3].Pt2Line1_CB[18]": "90",
-    "[3].Pt2Line1_CB[19]": "91",
-    "[3].Pt2Line1_CB[20]": "92",
-    "[3].Pt2Line1_CB[21]": "93",
-    "[3].Pt2Line1_CB[22]": "94",
+    "[3].Pt2Line1_CB[16]": "X",
+    "[3].Pt2Line1_CB[17]": "X",
+    "[3].Pt2Line1_CB[18]": "X",
+    "[3].Pt2Line1_CB[19]": "X",
+    "[3].Pt2Line1_CB[20]": "X",
+    "[3].Pt2Line1_CB[21]": "X",
+    "[3].Pt2Line1_CB[22]": "X",
 
-    "[3].Pt2Line1_CB[23]": "95",
-    "[3].Pt2Line1_CB[24]": "96",
-    "[3].Pt2Line1_CB[25]": "97",
-    "[3].Pt2Line1_CB[26]": "98",
+    "[3].Pt2Line1_CB[23]": "X",
+    "[3].Pt2Line1_CB[24]": "X",
+    "[3].Pt2Line1_CB[25]": "X",
+    "[3].Pt2Line1_CB[26]": "X",
 
     "[3].Pt2Line1g_OtherEligibility[0]": "99",
 
-    "[3].Pt2Line2_CB[0]": "No",
-    "[3].Pt2Line2_CB[1]": "Yes",
+    "[3].Pt2Line2_CB[0]": "X",
+    "[3].Pt2Line2_CB[1]": "X",
 
     "[3].Pt2Line3_Receipt[0]": "102",
 
@@ -162,8 +162,6 @@
     "[3].Pt3Line1_YN[0]": "X",
     "[3].Pt3Line1_YN[1]": "X",
 
-
-
     "[3].Pt3Line2a_City[0]": "113",
     "[3].Pt3Line2b_Country[0]": "114",
     "[3].Pt3Line3_Decision[0]": "116",
@@ -179,15 +177,16 @@
 
     "[4].Pt3Line5_AptSteFlrNumber[0]": "121",
     "[4].Pt3Line5_CityOrTown[0]": "123",
+    "[4].Pt3Line5_State[0]": "127",
+    "[4].Pt3Line5_ZipCode[0]": "126",
     "[4].Pt3Line5_Province[0]": "124",
     "[4].Pt3Line5_PostalCode[0]": "125",
 
-    "[4].Pt3Line5_ZipCode[0]": "126",
-    "[4].Pt3Line5_State[0]": "127",
 
     "[4].Pt3Line5_Country[0]": "128",
     "[4].Pt3Line6a_Date[0]": "129",
     "[4].Pt3Line6b_Date[0]": "130",
+
     "[4].Pt3Line7_StreetNumberName[0]": "131",
 
     "[4].Pt3Line7_Unit[0]": "X",
@@ -239,7 +238,6 @@
     "[4].Pt3Line12_Province[0]": "164",
     "[4].Pt3Line12_PostalCode[0]": "165",
 
-
     "[4].Pt3Line12_Country[0]": "168",
     "[4].Pt3Line13_EmployerName[0]": "169",
 
@@ -247,8 +245,11 @@
 
     "[5].Pt3Line14a_DateFrom[0]": "171",
     "[5].Pt3Line14b_DateTo[0]": "172",
+
     "[5].Pt3Line4a_EmployerName[0]": "173",
+
     "[5].Pt3Line16_StreetNumberName[0]": "174",
+
     "[5].Pt3Line16_Unit[0]": "X",
     "[5].Pt3Line16_Unit[1]": "X",
     "[5].Pt3Line16_Unit[2]": "X",
@@ -266,6 +267,7 @@
     "[5].Pt3Line17_EmployerName[0]": "185",
     "[5].Pt3Line18a_DateFrom[0]": "186",
     "[5].Pt3Line18a_DateTo[0]": "187",
+
     "[5].Pt3Line19_EmployerName[0]": "188",
     "[5].Pt3Line20_StreetNumberName[0]": "189",
 
@@ -296,7 +298,7 @@
     "[5].Pt4Line2c_MiddleName[0]": "208",
     "[5].Pt4Line3_DateofBirth[0]": "209",
 
-    "[5].Pt4Line4_Gender[0]": "210",
+    "[5].Pt4Line4_Gender[0]": "",
     "[5].Pt4Line4_Gender[1]": "211",
 
     "[5].Pt4Line5_CityTown[0]": "212",
@@ -337,7 +339,7 @@
 
     "[6].Pt5Line2_YNNA[0]": "X",
     "[6].Pt5Line2_YNNA[1]": "X",
-    "[6].Pt5Line2_YNNA[2]": "X",
+    "[6].Pt5Line2_YNNA[2]": "",
 
     "[6].Pt5Line3_TimesMarried[0]": "239"
     ,
@@ -360,7 +362,7 @@
 
     "[6].Pt5Line9c_Country[0]": "249",
 
-    "[6].Pt5Line10_YN[0]": "X",
+    "[6].Pt5Line10_YN[0]": "",
     "[6].Pt5Line10_YN[1]": "X",
 
     "[7].Pt1Line10_AlienNumber[8]": "10xxxxxxxx",
@@ -376,6 +378,7 @@
     "[7].Pt5Line14c_Country[0]": "260",
 
     "[7].Pt5Line15_Date[0]": "263",
+
     "[7].Pt5Line16a_CityTown[0]": "264",
     "[7].Pt5Line16b_State[0]": "265",
     "[7].Pt5Line16c_Country[0]": "266",
@@ -390,7 +393,7 @@
     "[7].Pt6Line4_DateofBirth[0]": "271",
     "[7].Pt6Line6_Country[0]": "272",
 
-    "[7].Pt6Line6_YesNo[0]": "X",
+    "[7].Pt6Line6_YesNo[0]": "",
     "[7].Pt6Line6_YesNo[1]": "X",
 
     "[7].Pt6Line7a_FamilyName[0]": "276",
@@ -419,8 +422,8 @@
     "[8].Pt6Line16_YesNo[0]": "X",
     "[8].Pt6Line16_YesNo[1]": "X",
 
-    "[8].Pt7Line1_Ethnicity[0]": "292",
-    "[8].Pt7Line1_Ethnicity[1]": "293",
+    "[8].Pt7Line1_Ethnicity[0]": "x",
+    "[8].Pt7Line1_Ethnicity[1]": "x",
 
     "[8].Pt7Line2_Race[0]": "294",
     "[8].Pt7Line2_Race[1]": "295",
@@ -435,27 +438,29 @@
     "[8].Pt7Line4_Weight2[0]": "303",
     "[8].Pt7Line4_Weight3[0]": "304",
 
-    "[8].Pt7Line5_Eyecolor[0]": "305",
-    "[8].Pt7Line5_Eyecolor[1]": "306",
-    "[8].Pt7Line5_Eyecolor[2]": "307",
-    "[8].Pt7Line5_Eyecolor[3]": "308",
-    "[8].Pt7Line5_Eyecolor[4]": "309",
-    "[8].Pt7Line5_Eyecolor[5]": "310",
-    "[8].Pt7Line5_Eyecolor[6]": "311",
-    "[8].Pt7Line5_Eyecolor[7]": "312",
-    "[8].Pt7Line5_Eyecolor[8]": "313",
+    "[8].Pt7Line5_Eyecolor[1]": "x",
+    "[8].Pt7Line5_Eyecolor[0]": "x",
+    "[8].Pt7Line5_Eyecolor[2]": "x",
 
-    "[8].Pt7Line6_Haircolor[0]": "314",
-    "[8].Pt7Line6_Haircolor[1]": "315",
-    "[8].Pt7Line6_Haircolor[2]": "316",
-    "[8].Pt7Line6_Haircolor[3]": "317",
+    "[8].Pt7Line5_Eyecolor[3]": "x",
+    "[8].Pt7Line5_Eyecolor[4]": "x",
+    "[8].Pt7Line5_Eyecolor[5]": "x",
+
+    "[8].Pt7Line5_Eyecolor[6]": "",
+    "[8].Pt7Line5_Eyecolor[7]": "x",
+    "[8].Pt7Line5_Eyecolor[8]": "x",
+
+    "[8].Pt7Line6_Haircolor[0]": "x",
+    "[8].Pt7Line6_Haircolor[1]": "x",
+    "[8].Pt7Line6_Haircolor[2]": "x",
+    "[8].Pt7Line6_Haircolor[3]": "",
     "[8].Pt7Line6_Haircolor[4]": "318",
     "[8].Pt7Line6_Haircolor[5]": "319",
     "[8].Pt7Line6_Haircolor[6]": "320",
     "[8].Pt7Line6_Haircolor[7]": "321",
     "[8].Pt7Line6_Haircolor[8]": "322",
 
-    "[8].Pt8Line1_YesNo[0]": "X",
+    "[8].Pt8Line1_YesNo[0]": "",
     "[8].Pt8Line1_YesNo[1]": "X",
 
     "[8].Pt8Line2_OrgName[0]": "325",
@@ -471,27 +476,29 @@
     "[8].Pt8Line8a_CityTown[0]": "335",
     "[8].Pt8Line7b_State[0]": "334",
     "[8].Pt8Line7c_Country[0]": "333",
-
-
     "[8].Pt8Line8_Group[0]": "336",
+
     "[9].Pt1Line10_AlienNumber[10]": "15xxxxxxxx",
+
     "[9].Pt8Line9a_DateFrom[0]": "338",
     "[9].Pt8Line9b_DateTo[0]": "339",
+
     "[9].Pt8Line10_OrgName[0]": "340",
     "[9].Pt8Line11a_CityTown[0]": "341",
+    "[9].Pt8Line11b_State[0]": "344",
     "[9].Pt8Line11c_Country[0]": "342",
     "[9].Pt8Line12_Group[0]": "343",
-    "[9].Pt8Line11b_State[0]": "344",
+
     "[9].Pt8Line13a_DateFrom[0]": "345",
     "[9].Pt8Line13b_DateTo[0]": "346",
 
-    "[9].Pt8Line14_YesNo[0]": "X",
+    "[9].Pt8Line14_YesNo[0]": "",
     "[9].Pt8Line14_YesNo[1]": "X",
 
     "[9].Pt8Line15_YesNo[0]": "X",
     "[9].Pt8Line15_YesNo[1]": "X",
 
-    "[9].Pt8Line16_YesNo[0]": "X",
+    "[9].Pt8Line16_YesNo[0]": "",
     "[9].Pt8Line16_YesNo[1]": "X",
 
     "[9].Pt8Line17_YesNo[0]": "X",
@@ -544,14 +551,15 @@
     "[10].Pt8Line30_YesNo[0]": "X",
     "[10].Pt8Line30_YesNo[1]": "X",
 
+    "[10].Pt8Line31_YesNo[0]": "X",
+    "[10].Pt8Line31_YesNo[1]": "X",
+
     "[10].Pt8Line32_YesNo[0]": "X",
     "[10].Pt8Line32_YesNo[1]": "X",
 
     "[10].Pt8Line33_YesNo[0]": "X",
     "[10].Pt8Line33_YesNo[1]": "X",
 
-    "[10].Pt8Line31_YesNo[0]": "X",
-    "[10].Pt8Line31_YesNo[1]": "X",
 
     "[10].Pt8Line34_YesNo[0]": "X",
     "[10].Pt8Line34_YesNo[1]": "X",
@@ -601,22 +609,27 @@
     "[11].Pt8Line46d_YesNo[1]": "X",
     "[11].Pt8Line46e_YesNo[0]": "X",
     "[11].Pt8Line46e_YesNo[1]": "X",
+
     "[11].Pt8Line47_YesNo[0]": "X",
     "[11].Pt8Line47_YesNo[1]": "X",
+
     "[11].Pt8Line48a_YesNo[0]": "X",
     "[11].Pt8Line48a_YesNo[1]": "X",
     "[11].Pt8Line48b_YesNo[0]": "X",
     "[11].Pt8Line48b_YesNo[1]": "X",
-    "[11].Pt8Line49_YesNo[0]": "X",
-    "[11].Pt8Line49_YesNo[1]": "X",
     "[11].Pt8Line48c_YesNo[0]": "X",
     "[11].Pt8Line48c_YesNo[1]": "X",
     "[11].Pt8Line48d_YesNo[0]": "X",
     "[11].Pt8Line48d_YesNo[1]": "X",
-    "[11].Pt8Line50_YesNo[0]": "X",
-    "[11].Pt8Line50_YesNo[1]": "X",
     "[11].Pt8Line48e_YesNo[0]": "X",
     "[11].Pt8Line48e_YesNo[1]": "X",
+
+    "[11].Pt8Line49_YesNo[0]": "X",
+    "[11].Pt8Line49_YesNo[1]": "X",
+
+    "[11].Pt8Line50_YesNo[0]": "X",
+    "[11].Pt8Line50_YesNo[1]": "X",
+
     "[11].Pt8Line51a_YesNo[0]": "X",
     "[11].Pt8Line51a_YesNo[1]": "X",
     "[11].Pt8Line51b_YesNo[0]": "X",
@@ -629,6 +642,7 @@
     "[11].Pt8Line51e_YesNo[1]": "X",
     "[11].Pt8Line51f_YesNo[0]": "X",
     "[11].Pt8Line51f_YesNo[1]": "X",
+
     "[11].Pt8Line52_YesNo[0]": "X",
     "[11].Pt8Line52_YesNo[1]": "X",
 
@@ -636,18 +650,19 @@
 
     "[12].Pt8Line53_YesNo[0]": "X",
     "[12].Pt8Line53_YesNo[1]": "X",
+
     "[12].Pt8Line54_YesNo[0]": "X",
     "[12].Pt8Line54_YesNo[1]": "X",
+
     "[12].Pt8Line55_YesNo[0]": "X",
     "[12].Pt8Line55_YesNo[1]": "X",
+
     "[12].Pt8Line56_YesNo[0]": "X",
     "[12].Pt8Line56_YesNo[1]": "X",
+
     "[12].Pt8Line57_YesNo[0]": "X",
     "[12].Pt8Line57_YesNo[1]": "X",
-    "[12].Pt8Line60_YesNo[0]": "X",
-    "[12].Pt8Line60_YesNo[1]": "X",
-    "[12].Pt8Line58e_YesNo[0]": "X",
-    "[12].Pt8Line58e_YesNo[1]": "X",
+
     "[12].Pt8Line58a_YesNo[0]": "X",
     "[12].Pt8Line58a_YesNo[1]": "X",
     "[12].Pt8Line58b_YesNo[0]": "X",
@@ -656,44 +671,47 @@
     "[12].Pt8Line58c_YesNo[1]": "X",
     "[12].Pt8Line58d_YesNo[0]": "X",
     "[12].Pt8Line58d_YesNo[1]": "X",
+    "[12].Pt8Line58e_YesNo[0]": "X",
+    "[12].Pt8Line58e_YesNo[1]": "X",
+
     "[12].Pt8Line59_YesNo[0]": "X",
     "[12].Pt8Line59_YesNo[1]": "X",
 
-    "[12].Pt8Line62_FamilyStatus[0]": "482",
+    "[12].Pt8Line60_YesNo[0]": "X",
+    "[12].Pt8Line60_YesNo[1]": "X",
 
     "[12].Pt8Line61_YesNo[0]": "X",
     "[12].Pt8Line61_YesNo[1]": "X",
 
-    "[12].Pt8Line63_CB[0]": "485",
-    "[12].Pt8Line63_CB[1]": "486",
-    "[12].Pt8Line63_CB[2]": "487",
-    "[12].Pt8Line63_CB[3]": "488",
-    "[12].Pt8Line63_CB[4]": "489",
+    "[12].Pt8Line62_FamilyStatus[0]": "482",
 
-    "[12].Pt8Line64_CB[0]": "490",
-    "[12].Pt8Line64_CB[1]": "491",
-    "[12].Pt8Line64_CB[2]": "492",
-    "[12].Pt8Line64_CB[3]": "493",
-    "[12].Pt8Line64_CB[4]": "494",
+    "[12].Pt8Line63_CB[0]": "X",
+    "[12].Pt8Line63_CB[1]": "X",
+    "[12].Pt8Line63_CB[2]": "X",
+    "[12].Pt8Line63_CB[3]": "X",
+    "[12].Pt8Line63_CB[4]": "X",
 
-    "[13].Pt8Line68a_YesNo[0]": "X",
-    "[13].Pt8Line68a_YesNo[1]": "X",
+    "[12].Pt8Line64_CB[0]": "X",
+    "[12].Pt8Line64_CB[1]": "X",
+    "[12].Pt8Line64_CB[2]": "X",
+    "[12].Pt8Line64_CB[3]": "X",
+    "[12].Pt8Line64_CB[4]": "X",
 
-    "[13].Pt8Line65_CB[0]": "497",
-    "[13].Pt8Line65_CB[1]": "498",
-    "[13].Pt8Line65_CB[2]": "499",
-    "[13].Pt8Line65_CB[3]": "500",
-    "[13].Pt8Line65_CB[4]": "501",
+    "[13].Pt8Line65_CB[0]": "X",
+    "[13].Pt8Line65_CB[1]": "X",
+    "[13].Pt8Line65_CB[2]": "X",
+    "[13].Pt8Line65_CB[3]": "X",
+    "[13].Pt8Line65_CB[4]": "X",
 
-    "[13].Pt8Line66_CB[0]": "502",
-    "[13].Pt8Line66_CB[1]": "503",
-    "[13].Pt8Line66_CB[2]": "504",
-    "[13].Pt8Line66_CB[3]": "505",
-    "[13].Pt8Line66_CB[4]": "506",
-    "[13].Pt8Line66_CB[5]": "507",
-    "[13].Pt8Line66_CB[6]": "508",
-    "[13].Pt8Line66_CB[7]": "509",
-    "[13].Pt8Line66_CB[8]": "510",
+    "[13].Pt8Line66_CB[0]": "X",
+    "[13].Pt8Line66_CB[1]": "X",
+    "[13].Pt8Line66_CB[2]": "X",
+    "[13].Pt8Line66_CB[3]": "X",
+    "[13].Pt8Line66_CB[4]": "X",
+    "[13].Pt8Line66_CB[5]": "X",
+    "[13].Pt8Line66_CB[6]": "X",
+    "[13].Pt8Line66_CB[7]": "X",
+    "[13].Pt8Line66_CB[8]": "X",
 
     "[13].Pt8Line67_Row1[0]": "520",
     "[13].Pt8Line67_Row2[0]": "511",
@@ -704,9 +722,11 @@
     "[13].Pt8Line67_Row7[0]": "516",
     "[13].Pt8Line67_Row8[0]": "517",
 
+    "[13].Pt8Line68a_YesNo[0]": "X",
+    "[13].Pt8Line68a_YesNo[1]": "X",
+
     "[13].Pt8Line68b_YesNo[0]": "X",
     "[13].Pt8Line68b_YesNo[1]": "X",
-
 
     "[13].Pt8Line68d_Column1Row1[0]": "521",
     "[13].Pt8Line68d_Column2Row1[0]": "529",

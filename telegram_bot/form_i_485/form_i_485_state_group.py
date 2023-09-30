@@ -209,38 +209,37 @@ class FormI485(StatesGroup):
     # S_3_Pt3Line1_YN_0 = State()
     # S_3_Pt3Line1_YN_1 = State()
 
-
-
     S_3_Pt3Line2a_City_0 = State()
     S_3_Pt3Line2b_Country_0 = State()
     S_3_Pt3Line3_Decision_0 = State()
     S_3_Pt3Line4_Date_0 = State()
 
-    S_4_Pt1Line10_AlienNumber_5 = State()
-
     S_4_Pt3Line5_StreetNumberName_0 = State()
 
-    S_4_Pt3Line5_Unit_0 = State()
-    S_4_Pt3Line5_Unit_1 = State()
-    S_4_Pt3Line5_Unit_2 = State()
+    TypeOfBuildingChoice_3 = State()
+
+    # S_4_Pt3Line5_Unit_0 = State()
+    # S_4_Pt3Line5_Unit_1 = State()
+    # S_4_Pt3Line5_Unit_2 = State()
 
     S_4_Pt3Line5_AptSteFlrNumber_0 = State()
     S_4_Pt3Line5_CityOrTown_0 = State()
+    S_4_Pt3Line5_State_0 = State()
+    S_4_Pt3Line5_ZipCode_0 = State()
     S_4_Pt3Line5_Province_0 = State()
     S_4_Pt3Line5_PostalCode_0 = State()
-
-    S_4_Pt3Line5_ZipCode_0 = State()
-    S_4_Pt3Line5_State_0 = State()
 
     S_4_Pt3Line5_Country_0 = State()
     S_4_Pt3Line6a_Date_0 = State()
     S_4_Pt3Line6b_Date_0 = State()
+
     S_4_Pt3Line7_StreetNumberName_0 = State()
 
-    S_4_Pt3Line7_Unit_0 = State()
-    S_4_Pt3Line7_Unit_1 = State()
+    TypeOfBuildingChoice_4 = State()
 
-    S_4_Pt3Line7_Unit_2 = State()
+    # S_4_Pt3Line7_Unit_0 = State()
+    # S_4_Pt3Line7_Unit_1 = State()
+    # S_4_Pt3Line7_Unit_2 = State()
 
     S_4_Pt3Line7_AptSteFlrNumber_0 = State()
     S_4_Pt3Line7_CityOrTown_0 = State()
@@ -255,11 +254,13 @@ class FormI485(StatesGroup):
     S_4_Pt3Line8a_DateFrom_0 = State()
     S_4_Pt3Line8b_DateTo_0 = State()
 
-    S_4_Pt3Line9_StreetNumberName_0 = State()
+    AddressWasProvidedAboveChoice = State()
 
-    S_4_Pt3Line9_Unit_0 = State()
-    S_4_Pt3Line9_Unit_1 = State()
-    S_4_Pt3Line9_Unit_2 = State()
+    TypeOfBuildingChoice_5 = State()
+
+    # S_4_Pt3Line9_Unit_0 = State()
+    # S_4_Pt3Line9_Unit_1 = State()
+    # S_4_Pt3Line9_Unit_2 = State()
 
     S_4_Pt3Line9_AptSteFlrNumber_0 = State()
 
@@ -275,9 +276,11 @@ class FormI485(StatesGroup):
     S_4_Pt3Line11_EmployerName_0 = State()
     S_4_Pt3Line12_StreetNumberName_0 = State()
 
-    S_4_Pt3Line12_Unit_0 = State()
-    S_4_Pt3Line12_Unit_1 = State()
-    S_4_Pt3Line12_Unit_2 = State()
+    TypeOfBuildingChoice_6 = State()
+
+    # S_4_Pt3Line12_Unit_0 = State()
+    # S_4_Pt3Line12_Unit_1 = State()
+    # S_4_Pt3Line12_Unit_2 = State()
 
     S_4_Pt3Line12_AptSteFlrNumber_0 = State()
     S_4_Pt3Line12_CityOrTown_0 = State()
@@ -286,19 +289,21 @@ class FormI485(StatesGroup):
     S_4_Pt3Line12_Province_0 = State()
     S_4_Pt3Line12_PostalCode_0 = State()
 
-
     S_4_Pt3Line12_Country_0 = State()
     S_4_Pt3Line13_EmployerName_0 = State()
 
-    S_5_Pt1Line10_AlienNumber_6 = State()
-
     S_5_Pt3Line14a_DateFrom_0 = State()
     S_5_Pt3Line14b_DateTo_0 = State()
+
     S_5_Pt3Line4a_EmployerName_0 = State()
+
     S_5_Pt3Line16_StreetNumberName_0 = State()
-    S_5_Pt3Line16_Unit_0 = State()
-    S_5_Pt3Line16_Unit_1 = State()
-    S_5_Pt3Line16_Unit_2 = State()
+
+    TypeOfBuildingChoice_7 = State()
+
+    # S_5_Pt3Line16_Unit_0 = State()
+    # S_5_Pt3Line16_Unit_1 = State()
+    # S_5_Pt3Line16_Unit_2 = State()
 
     S_5_Pt3Line16_AptSteFlrNumber_0 = State()
 
@@ -313,12 +318,15 @@ class FormI485(StatesGroup):
     S_5_Pt3Line17_EmployerName_0 = State()
     S_5_Pt3Line18a_DateFrom_0 = State()
     S_5_Pt3Line18a_DateTo_0 = State()
+
     S_5_Pt3Line19_EmployerName_0 = State()
     S_5_Pt3Line20_StreetNumberName_0 = State()
 
-    S_5_Pt3Line20_Unit_0 = State()
-    S_5_Pt3Line20_Unit_1 = State()
-    S_5_Pt3Line20_Unit_2 = State()
+    TypeOfBuildingChoice_8 = State()
+
+    # S_5_Pt3Line20_Unit_0 = State()
+    # S_5_Pt3Line20_Unit_1 = State()
+    # S_5_Pt3Line20_Unit_2 = State()
 
     S_5_Pt3Line20_AptSteFlrNumber_0 = State()
 
@@ -328,28 +336,29 @@ class FormI485(StatesGroup):
     S_5_Pt3Line20_Province_0 = State()
     S_5_Pt3Line20_PostalCode_0 = State()
 
-
     S_5_Pt3Line20_Country_0 = State()
     S_5_Pt3Line20_EmployerName_0 = State()
     S_5_Pt3Line22a_DateFrom_0 = State()
     S_5_Pt3Line22a_DateTo_0 = State()
 
-
     S_5_Pt4Line1a_FamilyName_0 = State()
     S_5_Pt4Line1b_GivenName_0 = State()
     S_5_Pt4Line1c_MiddleName_0 = State()
+
+    ParentHasDifferentNameChoice = State()
+
     S_5_Pt4Line2a_FamilyName_0 = State()
     S_5_Pt4Line2b_GivenName_0 = State()
     S_5_Pt4Line2c_MiddleName_0 = State()
+
     S_5_Pt4Line3_DateofBirth_0 = State()
 
-    S_5_Pt4Line4_Gender_0 = State()
-    S_5_Pt4Line4_Gender_1 = State()
+    Parent1_Gender_Choice = State()
+    # S_5_Pt4Line4_Gender_0 = State()
+    # S_5_Pt4Line4_Gender_1 = State()
 
     S_5_Pt4Line5_CityTown_0 = State()
     S_5_Pt4Line6_Country_0 = State()
-
-    S_6_Pt1Line10_AlienNumber_7 = State()
 
     S_6_Pt4Line7_CityTown_0 = State()
     S_6_Pt4Line8_Country_0 = State()
@@ -358,6 +367,7 @@ class FormI485(StatesGroup):
     S_6_Pt4Line9b_GivenName_0 = State()
     S_6_Pt4Line9c_MiddleName_0 = State()
 
+    ParentHasDifferentNameChoice_2 = State()
 
     S_6_Pt4Line10a_FamilyName_0 = State()
     S_6_Pt4Line10b_GivenName_0 = State()
@@ -365,8 +375,9 @@ class FormI485(StatesGroup):
 
     S_6_Pt4Line11_DateofBirth_0 = State()
 
-    S_6_Pt4Line12_Gender_0 = State()
-    S_6_Pt4Line12_Gender_1 = State()
+    Parent2_Gender_Choice = State()
+    # S_6_Pt4Line12_Gender_0 = State()
+    # S_6_Pt4Line12_Gender_1 = State()
 
     S_6_Pt4Line13_CityTown_0 = State()
 
@@ -374,23 +385,24 @@ class FormI485(StatesGroup):
     S_6_Pt4Line15_CityTown_0 = State()
     S_6_Pt4Line16_Country_0 = State()
 
+    MaritalStatusChoice = State()
 
-    S_6_Pt5Line1_MaritalStatus_0 = State()
-    S_6_Pt5Line1_MaritalStatus_1 = State()
-    S_6_Pt5Line1_MaritalStatus_2 = State()
-    S_6_Pt5Line1_MaritalStatus_3 = State()
-    S_6_Pt5Line1_MaritalStatus_4 = State()
-    S_6_Pt5Line1_MaritalStatus_5 = State()
+    # S_6_Pt5Line1_MaritalStatus_0 = State()
+    # S_6_Pt5Line1_MaritalStatus_1 = State()
+    # S_6_Pt5Line1_MaritalStatus_2 = State()
+    # S_6_Pt5Line1_MaritalStatus_3 = State()
+    # S_6_Pt5Line1_MaritalStatus_4 = State()
+    # S_6_Pt5Line1_MaritalStatus_5 = State()
 
-    S_6_Pt5Line2_YNNA_0 = State()
-    S_6_Pt5Line2_YNNA_1 = State()
-    S_6_Pt5Line2_YNNA_2 = State()
+    IsYourSpouceInArmyChoice = State()
+    # S_6_Pt5Line2_YNNA_0 = State()
+    # S_6_Pt5Line2_YNNA_1 = State()
+    # S_6_Pt5Line2_YNNA_2 = State()
 
-    S_6_Pt5Line3_TimesMarried_0 = State()    ,
+    S_6_Pt5Line3_TimesMarried_0 = State(),
     S_6_Pt5Line4a_FamilyName_0 = State()
     S_6_Pt5Line4b_GivenName_0 = State()
     S_6_Pt5Line4c_MiddleName_0 = State()
-
 
     S_6_Pt5Line5_AlienNumber_0 = State()
 
@@ -403,13 +415,13 @@ class FormI485(StatesGroup):
 
     S_6_Pt5Line9a_CityTown_0 = State()
     S_6_Pt5Line9b_State_0 = State()
-
     S_6_Pt5Line9c_Country_0 = State()
 
-    S_6_Pt5Line10_YN_0 = State()
-    S_6_Pt5Line10_YN_1 = State()
+    SpouceApplyingTooChoice = State()
+    # S_6_Pt5Line10_YN_0 = State()
+    # S_6_Pt5Line10_YN_1 = State()
 
-    S_7_Pt1Line10_AlienNumber_8 = State()
+    BeenMarriedBeforeChoice = State()
 
     S_7_Pt511a_FamilyName_0 = State()
     S_7_Pt5Line11b_GivenName_0 = State()
@@ -426,6 +438,7 @@ class FormI485(StatesGroup):
     S_7_Pt5Line16b_State_0 = State()
     S_7_Pt5Line16c_Country_0 = State()
 
+    HaveKidsChoice = State()
     S_7_Pt6Line1_TotalChildren_0 = State()
     S_7_Pt6Line2a_FamilyName_0 = State()
     S_7_Pt6Line2b_GivenName_0 = State()
@@ -436,8 +449,9 @@ class FormI485(StatesGroup):
     S_7_Pt6Line4_DateofBirth_0 = State()
     S_7_Pt6Line6_Country_0 = State()
 
-    S_7_Pt6Line6_YesNo_0 = State()
-    S_7_Pt6Line6_YesNo_1 = State()
+    Child1ApplyingTooChoice = State()
+    # S_7_Pt6Line6_YesNo_0 = State()
+    # S_7_Pt6Line6_YesNo_1 = State()
 
     S_7_Pt6Line7a_FamilyName_0 = State()
     S_7_Pt6Line7b_GivenName_0 = State()
@@ -448,10 +462,9 @@ class FormI485(StatesGroup):
     S_7_Pt6Line9_DateofBirth_0 = State()
     S_7_Pt6Line10_Country_0 = State()
 
-    S_7_Pt6Line11_YesNo_0 = State()
-    S_7_Pt6Line11_YesNo_1 = State()
-
-    S_8_Pt1Line10_AlienNumber_9 = State()
+    Child1ApplyingTooChoice_2 = State()
+    # S_7_Pt6Line11_YesNo_0 = State()
+    # S_7_Pt6Line11_YesNo_1 = State()
 
     S_8_Pt6Line12a_FamilyName_0 = State()
     S_8_Pt6Line12b_GivenName_0 = State()
@@ -462,54 +475,59 @@ class FormI485(StatesGroup):
     S_8_Pt6Line14_DateofBirth_0 = State()
     S_8_Pt6Line15_Country_0 = State()
 
-    S_8_Pt6Line16_YesNo_0 = State()
-    S_8_Pt6Line16_YesNo_1 = State()
+    Child1ApplyingTooChoice_3 = State()
+    # S_8_Pt6Line16_YesNo_0 = State()
+    # S_8_Pt6Line16_YesNo_1 = State()
 
-    S_8_Pt7Line1_Ethnicity_0 = State()
-    S_8_Pt7Line1_Ethnicity_1 = State()
+    EthicityChoice = State()
+    # S_8_Pt7Line1_Ethnicity_0 = State()
+    # S_8_Pt7Line1_Ethnicity_1 = State()
 
-    S_8_Pt7Line2_Race_0 = State()
-    S_8_Pt7Line2_Race_1 = State()
-    S_8_Pt7Line2_Race_2 = State()
-    S_8_Pt7Line2_Race_3 = State()
-    S_8_Pt7Line2_Race_4 = State()
+    RaceChoice = State()
+    # S_8_Pt7Line2_Race_0 = State()
+    # S_8_Pt7Line2_Race_1 = State()
+    # S_8_Pt7Line2_Race_2 = State()
+    # S_8_Pt7Line2_Race_3 = State()
+    # S_8_Pt7Line2_Race_4 = State()
 
-    S_8_Pt7Line3_HeightFeet_0 = State()
-    S_8_Pt7Line3_HeightInches_0 = State()
+    S_8_Pt7Line3_HeightFeetAndInches = State()
 
-    S_8_Pt7Line4_Weight1_0 = State()
-    S_8_Pt7Line4_Weight2_0 = State()
-    S_8_Pt7Line4_Weight3_0 = State()
+    WeightField = State()
+    # S_8_Pt7Line4_Weight1_0 = State()
+    # S_8_Pt7Line4_Weight2_0 = State()
+    # S_8_Pt7Line4_Weight3_0 = State()
 
-    S_8_Pt7Line5_Eyecolor_0 = State()
-    S_8_Pt7Line5_Eyecolor_1 = State()
-    S_8_Pt7Line5_Eyecolor_2 = State()
-    S_8_Pt7Line5_Eyecolor_3 = State()
-    S_8_Pt7Line5_Eyecolor_4 = State()
-    S_8_Pt7Line5_Eyecolor_5 = State()
-    S_8_Pt7Line5_Eyecolor_6 = State()
-    S_8_Pt7Line5_Eyecolor_7 = State()
-    S_8_Pt7Line5_Eyecolor_8 = State()
+    EyeColorChoice = State()
+    # S_8_Pt7Line5_Eyecolor_0 = State()
+    # S_8_Pt7Line5_Eyecolor_1 = State()
+    # S_8_Pt7Line5_Eyecolor_2 = State()
+    # S_8_Pt7Line5_Eyecolor_3 = State()
+    # S_8_Pt7Line5_Eyecolor_4 = State()
+    # S_8_Pt7Line5_Eyecolor_5 = State()
+    # S_8_Pt7Line5_Eyecolor_6 = State()
+    # S_8_Pt7Line5_Eyecolor_7 = State()
+    # S_8_Pt7Line5_Eyecolor_8 = State()
 
-    S_8_Pt7Line6_Haircolor_0 = State()
-    S_8_Pt7Line6_Haircolor_1 = State()
-    S_8_Pt7Line6_Haircolor_2 = State()
-    S_8_Pt7Line6_Haircolor_3 = State()
-    S_8_Pt7Line6_Haircolor_4 = State()
-    S_8_Pt7Line6_Haircolor_5 = State()
-    S_8_Pt7Line6_Haircolor_6 = State()
-    S_8_Pt7Line6_Haircolor_7 = State()
-    S_8_Pt7Line6_Haircolor_8 = State()
+    HairColorChoice = State()
+    # S_8_Pt7Line6_Haircolor_0 = State()
+    # S_8_Pt7Line6_Haircolor_1 = State()
+    # S_8_Pt7Line6_Haircolor_2 = State()
+    # S_8_Pt7Line6_Haircolor_3 = State()
+    # S_8_Pt7Line6_Haircolor_4 = State()
+    # S_8_Pt7Line6_Haircolor_5 = State()
+    # S_8_Pt7Line6_Haircolor_6 = State()
+    # S_8_Pt7Line6_Haircolor_7 = State()
+    # S_8_Pt7Line6_Haircolor_8 = State()
 
-    S_8_Pt8Line1_YesNo_0 = State()
-    S_8_Pt8Line1_YesNo_1 = State()
+    WasOrIsMemberOfAnyOrganization = State()
+    # S_8_Pt8Line1_YesNo_0 = State()
+    # S_8_Pt8Line1_YesNo_1 = State()
 
     S_8_Pt8Line2_OrgName_0 = State()
     S_8_Pt8Line3a_CityTown_0 = State()
     S_8_Pt8Line3b_State_0 = State()
     S_8_Pt8Line3c_Country_0 = State()
     S_8_Pt8Line4_Group_0 = State()
-
     S_8_Pt8Line5a_DateFrom_0 = State()
     S_8_Pt8Line5b_DateTo_0 = State()
 
@@ -517,210 +535,303 @@ class FormI485(StatesGroup):
     S_8_Pt8Line8a_CityTown_0 = State()
     S_8_Pt8Line7b_State_0 = State()
     S_8_Pt8Line7c_Country_0 = State()
-
-
     S_8_Pt8Line8_Group_0 = State()
-    S_9_Pt1Line10_AlienNumber_1 = State()
+
     S_9_Pt8Line9a_DateFrom_0 = State()
     S_9_Pt8Line9b_DateTo_0 = State()
+
     S_9_Pt8Line10_OrgName_0 = State()
     S_9_Pt8Line11a_CityTown_0 = State()
+    S_9_Pt8Line11b_State_0 = State()
     S_9_Pt8Line11c_Country_0 = State()
     S_9_Pt8Line12_Group_0 = State()
-    S_9_Pt8Line11b_State_0 = State()
+
     S_9_Pt8Line13a_DateFrom_0 = State()
     S_9_Pt8Line13b_DateTo_0 = State()
 
-    S_9_Pt8Line14_YesNo_0 = State()
-    S_9_Pt8Line14_YesNo_1 = State()
+    WasEverRefusedToEnterUSAChoice = State()
+    # S_9_Pt8Line14_YesNo_0 = State()
+    # S_9_Pt8Line14_YesNo_1 = State()
 
-    S_9_Pt8Line15_YesNo_0 = State()
-    S_9_Pt8Line15_YesNo_1 = State()
+    HaveEverBeenDeniedVisaToTheUSA = State()
+    # S_9_Pt8Line15_YesNo_0 = State()
+    # S_9_Pt8Line15_YesNo_1 = State()
 
-    S_9_Pt8Line16_YesNo_0 = State()
-    S_9_Pt8Line16_YesNo_1 = State()
+    HaveEverWorkedWithoutAuthorization = State()
+    # S_9_Pt8Line16_YesNo_0 = State()
+    # S_9_Pt8Line16_YesNo_1 = State()
 
-    S_9_Pt8Line17_YesNo_0 = State()
-    S_9_Pt8Line17_YesNo_1 = State()
+    HaveEverViolatedConditionsOfNonimmigrantStatus = State()
+    # S_9_Pt8Line17_YesNo_0 = State()
+    # S_9_Pt8Line17_YesNo_1 = State()
 
-    S_9_Pt8Line18_YesNo_0 = State()
-    S_9_Pt8Line18_YesNo_1 = State()
+    HaveEverBeenInRemoval = State()
+    # S_9_Pt8Line18_YesNo_0 = State()
+    # S_9_Pt8Line18_YesNo_1 = State()
 
-    S_9_Pt8Line20_YesNo_0 = State()
-    S_9_Pt8Line20_YesNo_1 = State()
+    HaveEverBeenIssuedAFinalOrder = State()
+    # S_9_Pt8Line19_YesNo_0 = State()
+    # S_9_Pt8Line19_YesNo_1 = State()
 
-    S_9_Pt8Line21_YesNo_0 = State()
-    S_9_Pt8Line21_YesNo_1 = State()
+    HaveEverHadPriorFinalOrder = State()
+    # S_9_Pt8Line20_YesNo_0 = State()
+    # S_9_Pt8Line20_YesNo_1 = State()
 
-    S_9_Pt8Line22_YesNo_0 = State()
-    S_9_Pt8Line22_YesNo_1 = State()
+    HaveEverHeldLawfulPermanentResidentStatus = State()
+    # S_9_Pt8Line21_YesNo_0 = State()
+    # S_9_Pt8Line21_YesNo_1 = State()
 
-    S_9_Pt8Line23_YesNo_0 = State()
-    S_9_Pt8Line23_YesNo_1 = State()
+    HaveEverFailedToDepart = State()
+    # S_9_Pt8Line22_YesNo_0 = State()
+    # S_9_Pt8Line22_YesNo_1 = State()
 
-    S_9_Pt8Line24a_YesNo_0 = State()
-    S_9_Pt8Line24a_YesNo_1 = State()
+    HaveEverAppliedForProtection = State()
+    # S_9_Pt8Line23_YesNo_0 = State()
+    # S_9_Pt8Line23_YesNo_1 = State()
 
-    S_9_Pt8Line24b_YesNo_0 = State()
-    S_9_Pt8Line24b_YesNo_1 = State()
+    HaveEverBeenAJNonImmigrantExchange = State()
+    # S_9_Pt8Line24a_YesNo_0 = State()
+    # S_9_Pt8Line24a_YesNo_1 = State()
 
-    S_9_Pt8Line19_YesNo_0 = State()
-    S_9_Pt8Line19_YesNo_1 = State()
+    HaveEverCompliedWithForeignResidenceRequirement = State()
+    # S_9_Pt8Line24b_YesNo_0 = State()
+    # S_9_Pt8Line24b_YesNo_1 = State()
 
-    S_9_Pt8Line24c_YesNo_0 = State()
-    S_9_Pt8Line24c_YesNo_1 = State()
+    HaveBeenGrantedAWaiver = State()
+    # S_9_Pt8Line24c_YesNo_0 = State()
+    # S_9_Pt8Line24c_YesNo_1 = State()
 
-    S_9_Pt8Line25_YesNo_0 = State()
-    S_9_Pt8Line25_YesNo_1 = State()
+    HaveEverBeenArrested = State()
+    # S_9_Pt8Line25_YesNo_0 = State()
+    # S_9_Pt8Line25_YesNo_1 = State()
 
-    S_9_Pt8Line26_YesNo_0 = State()
-    S_9_Pt8Line26_YesNo_1 = State()
+    HaveEverCommitedACrime = State()
+    # S_9_Pt8Line26_YesNo_0 = State()
+    # S_9_Pt8Line26_YesNo_1 = State()
 
-    S_10_Pt1Line10_AlienNumber_1 = State()
+    HaveEverPledGuilty = State()
+    # S_10_Pt8Line27_YesNo_0 = State()
+    # S_10_Pt8Line27_YesNo_1 = State()
 
-    S_10_Pt8Line27_YesNo_0 = State()
-    S_10_Pt8Line27_YesNo_1 = State()
+    HaveEverBeenOrderedPunishedByAJudge = State()
+    # S_10_Pt8Line28_YesNo_0 = State()
+    # S_10_Pt8Line28_YesNo_1 = State()
 
-    S_10_Pt8Line28_YesNo_0 = State()
-    S_10_Pt8Line28_YesNo_1 = State()
+    HaveEverBeenDefendantOrTheAccused = State()
+    # S_10_Pt8Line29_YesNo_0 = State()
+    # S_10_Pt8Line29_YesNo_1 = State()
 
-    S_10_Pt8Line29_YesNo_0 = State()
-    S_10_Pt8Line29_YesNo_1 = State()
+    HaveEverViolatedAnyControlledSubstanceLaw = State()
+    # S_10_Pt8Line30_YesNo_0 = State()
+    # S_10_Pt8Line30_YesNo_1 = State()
 
-    S_10_Pt8Line30_YesNo_0 = State()
-    S_10_Pt8Line30_YesNo_1 = State()
+    HaveEverBeenConvictedOfTwoOrMoreOffenses = State()
+    # S_10_Pt8Line31_YesNo_0 = State()
+    # S_10_Pt8Line31_YesNo_1 = State()
 
-    S_10_Pt8Line32_YesNo_0 = State()
-    S_10_Pt8Line32_YesNo_1 = State()
+    HaveEverIllicitlyTraffickedOrBenefitedFromNarcotics = State()
+    # S_10_Pt8Line32_YesNo_0 = State()
+    # S_10_Pt8Line32_YesNo_1 = State()
 
-    S_10_Pt8Line33_YesNo_0 = State()
-    S_10_Pt8Line33_YesNo_1 = State()
+    HaveEverAssistedInTraffickingSubstances = State()
+    # S_10_Pt8Line33_YesNo_0 = State()
+    # S_10_Pt8Line33_YesNo_1 = State()
 
-    S_10_Pt8Line31_YesNo_0 = State()
-    S_10_Pt8Line31_YesNo_1 = State()
+    YourFamilyIllicitlyTrafickedSubstances = State()
+    # S_10_Pt8Line34_YesNo_0 = State()
+    # S_10_Pt8Line34_YesNo_1 = State()
 
-    S_10_Pt8Line34_YesNo_0 = State()
-    S_10_Pt8Line34_YesNo_1 = State()
+    HaveEverEngagedInProstitution = State()
+    # S_10_Pt8Line35_YesNo_0 = State()
+    # S_10_Pt8Line35_YesNo_1 = State()
 
-    S_10_Pt8Line35_YesNo_0 = State()
-    S_10_Pt8Line35_YesNo_1 = State()
-    S_10_Pt8Line36_YesNo_0 = State()
+    HaveEverProcuredProstitutes = State()
+    # S_10_Pt8Line36_YesNo_0 = State()
+    # S_10_Pt8Line36_YesNo_1 = State()
 
-    S_10_Pt8Line36_YesNo_1 = State()
-    S_10_Pt8Line37_YesNo_0 = State()
+    HaveEverReceivedMoneyFromProstitution = State()
+    # S_10_Pt8Line37_YesNo_0 = State()
+    # S_10_Pt8Line37_YesNo_1 = State()
 
-    S_10_Pt8Line37_YesNo_1 = State()
-    S_10_Pt8Line38_YesNo_0 = State()
+    IllegalGambling = State()
+    # S_10_Pt8Line38_YesNo_0 = State()
+    # S_10_Pt8Line38_YesNo_1 = State()
 
-    S_10_Pt8Line38_YesNo_1 = State()
-    S_10_Pt8Line39_YesNo_0 = State()
+    HaveEverExercisedImmunityForCriminalOffense = State()
+    # S_10_Pt8Line39_YesNo_0 = State()
+    # S_10_Pt8Line39_YesNo_1 = State()
 
-    S_10_Pt8Line39_YesNo_1 = State()
-    S_10_Pt8Line40_YesNo_0 = State()
+    HaveEverServingForeignGovernment = State()
+    # S_10_Pt8Line40_YesNo_0 = State()
+    # S_10_Pt8Line40_YesNo_1 = State()
 
-    S_10_Pt8Line40_YesNo_1 = State()
-    S_10_Pt8Line41_YesNo_0 = State()
+    HaveEverInductedByForce = State()
+    # S_10_Pt8Line41_YesNo_0 = State()
+    # S_10_Pt8Line41_YesNo_1 = State()
 
-    S_10_Pt8Line41_YesNo_1 = State()
-    S_10_Pt8Line42_YesNo_0 = State()
+    HaveEverTraffickedPersonInvoluntary = State()
+    # S_10_Pt8Line42_YesNo_0 = State()
+    # S_10_Pt8Line42_YesNo_1 = State()
 
-    S_10_Pt8Line43_YesNo_0 = State()
-    S_10_Pt8Line43_YesNo_1 = State()
+    HaveEverKnowinglyAidedTraffickingPersonInvoluntary = State()
+    # S_10_Pt8Line43_YesNo_0 = State()
+    # S_10_Pt8Line43_YesNo_1 = State()
 
-    S_10_Pt8Line42_YesNo_1 = State()
-    S_10_Pt8Line44_YesNo_0 = State()
+    FamilyEngagedInTraffickingPersonInvoluntary = State()
+    # S_10_Pt8Line44_YesNo_0 = State()
+    # S_10_Pt8Line44_YesNo_1 = State()
 
-    S_10_Pt8Line44_YesNo_1 = State()
-    S_10_Pt8Line45_YesNo_0 = State()
+    HaveEverEngagedInMoneyLaundering = State()
+    # S_10_Pt8Line45_YesNo_0 = State()
+    # S_10_Pt8Line45_YesNo_1 = State()
 
-    S_10_Pt8Line45_YesNo_1 = State()
-    S_11_Pt8Line46a_YesNo_0 = State()
+    IntendToEngageInEspionage = State()
+    # S_11_Pt8Line46a_YesNo_0 = State()
+    # S_11_Pt8Line46a_YesNo_1 = State()
 
-    S_11_Pt1Line10_AlienNumber_1 = State()
+    IntendToEngageInProhibitedExport = State()
+    # S_11_Pt8Line46b_YesNo_0 = State()
+    # S_11_Pt8Line46b_YesNo_1 = State()
 
-    S_11_Pt8Line46a_YesNo_1 = State()
-    S_11_Pt8Line46b_YesNo_0 = State()
-    S_11_Pt8Line46b_YesNo_1 = State()
-    S_11_Pt8Line46c_YesNo_0 = State()
-    S_11_Pt8Line46c_YesNo_1 = State()
-    S_11_Pt8Line46d_YesNo_0 = State()
-    S_11_Pt8Line46d_YesNo_1 = State()
-    S_11_Pt8Line46e_YesNo_0 = State()
-    S_11_Pt8Line46e_YesNo_1 = State()
-    S_11_Pt8Line47_YesNo_0 = State()
-    S_11_Pt8Line47_YesNo_1 = State()
-    S_11_Pt8Line48a_YesNo_0 = State()
-    S_11_Pt8Line48a_YesNo_1 = State()
-    S_11_Pt8Line48b_YesNo_0 = State()
-    S_11_Pt8Line48b_YesNo_1 = State()
-    S_11_Pt8Line49_YesNo_0 = State()
-    S_11_Pt8Line49_YesNo_1 = State()
-    S_11_Pt8Line48c_YesNo_0 = State()
-    S_11_Pt8Line48c_YesNo_1 = State()
-    S_11_Pt8Line48d_YesNo_0 = State()
-    S_11_Pt8Line48d_YesNo_1 = State()
-    S_11_Pt8Line50_YesNo_0 = State()
-    S_11_Pt8Line50_YesNo_1 = State()
-    S_11_Pt8Line48e_YesNo_0 = State()
-    S_11_Pt8Line48e_YesNo_1 = State()
-    S_11_Pt8Line51a_YesNo_0 = State()
-    S_11_Pt8Line51a_YesNo_1 = State()
-    S_11_Pt8Line51b_YesNo_0 = State()
-    S_11_Pt8Line51b_YesNo_1 = State()
-    S_11_Pt8Line51c_YesNo_0 = State()
-    S_11_Pt8Line51c_YesNo_1 = State()
-    S_11_Pt8Line51d_YesNo_0 = State()
-    S_11_Pt8Line51d_YesNo_1 = State()
-    S_11_Pt8Line51e_YesNo_0 = State()
-    S_11_Pt8Line51e_YesNo_1 = State()
-    S_11_Pt8Line51f_YesNo_0 = State()
-    S_11_Pt8Line51f_YesNo_1 = State()
-    S_11_Pt8Line52_YesNo_0 = State()
-    S_11_Pt8Line52_YesNo_1 = State()
+    IntendToOwerthrowUSGovernment = State()
+    # S_11_Pt8Line46c_YesNo_0 = State()
+    # S_11_Pt8Line46c_YesNo_1 = State()
 
-    S_12_Pt1Line10_AlienNumber_1 = State()
+    IntendToEndangerWelfare = State()
+    # S_11_Pt8Line46d_YesNo_0 = State()
+    # S_11_Pt8Line46d_YesNo_1 = State()
 
-    S_12_Pt8Line53_YesNo_0 = State()
-    S_12_Pt8Line53_YesNo_1 = State()
-    S_12_Pt8Line54_YesNo_0 = State()
-    S_12_Pt8Line54_YesNo_1 = State()
-    S_12_Pt8Line55_YesNo_0 = State()
-    S_12_Pt8Line55_YesNo_1 = State()
-    S_12_Pt8Line56_YesNo_0 = State()
-    S_12_Pt8Line56_YesNo_1 = State()
-    S_12_Pt8Line57_YesNo_0 = State()
-    S_12_Pt8Line57_YesNo_1 = State()
-    S_12_Pt8Line60_YesNo_0 = State()
-    S_12_Pt8Line60_YesNo_1 = State()
-    S_12_Pt8Line58e_YesNo_0 = State()
-    S_12_Pt8Line58e_YesNo_1 = State()
-    S_12_Pt8Line58a_YesNo_0 = State()
-    S_12_Pt8Line58a_YesNo_1 = State()
-    S_12_Pt8Line58b_YesNo_0 = State()
-    S_12_Pt8Line58b_YesNo_1 = State()
-    S_12_Pt8Line58c_YesNo_0 = State()
-    S_12_Pt8Line58c_YesNo_1 = State()
-    S_12_Pt8Line58d_YesNo_0 = State()
-    S_12_Pt8Line58d_YesNo_1 = State()
-    S_12_Pt8Line59_YesNo_0 = State()
-    S_12_Pt8Line59_YesNo_1 = State()
+    IntendToEngageInAnyUnlawfulActivity = State()
+    # S_11_Pt8Line46e_YesNo_0 = State()
+    # S_11_Pt8Line46e_YesNo_1 = State()
+
+    IntendToAdverseForeignPolicy = State()
+    # S_11_Pt8Line47_YesNo_0 = State()
+    # S_11_Pt8Line47_YesNo_1 = State()
+
+    HaveEverCommitedACrime_2 = State()
+    # S_11_Pt8Line48a_YesNo_0 = State()
+    # S_11_Pt8Line48a_YesNo_1 = State()
+
+    HaveEverBeenInOrganizationThatCommitedACrime = State()
+    # S_11_Pt8Line48b_YesNo_0 = State()
+    # S_11_Pt8Line48b_YesNo_1 = State()
+
+    HaveEverDoneServiceToOrganizationThatCommitedACrime = State()
+    # S_11_Pt8Line48c_YesNo_0 = State()
+    # S_11_Pt8Line48c_YesNo_1 = State()
+
+    HaveEverProvidedToOrganizationThatCommitedACrime = State()
+    # S_11_Pt8Line48d_YesNo_0 = State()
+    # S_11_Pt8Line48d_YesNo_1 = State()
+
+    HaveEverProvidedToOrganizationThatCommitedACrime_2 = State()
+    # S_11_Pt8Line48e_YesNo_0 = State()
+    # S_11_Pt8Line48e_YesNo_1 = State()
+
+    HaveEverReceivedMilitaryTraining = State()
+    # S_11_Pt8Line49_YesNo_0 = State()
+    # S_11_Pt8Line49_YesNo_1 = State()
+
+    IntendToEngageInCommitingACrime = State()
+    # S_11_Pt8Line50_YesNo_0 = State()
+    # S_11_Pt8Line50_YesNo_1 = State()
+
+    SpouceOfCriminalChoice = State()
+    # S_11_Pt8Line51a_YesNo_0 = State()
+    # S_11_Pt8Line51a_YesNo_1 = State()
+
+    SpouceOfCriminalChoice_2 = State()
+    # S_11_Pt8Line51b_YesNo_0 = State()
+    # S_11_Pt8Line51b_YesNo_1 = State()
+
+    SpouceOfCriminalChoice_3 = State()
+    # S_11_Pt8Line51c_YesNo_0 = State()
+    # S_11_Pt8Line51c_YesNo_1 = State()
+
+    SpouceOfCriminalChoice_4 = State()
+    # S_11_Pt8Line51d_YesNo_0 = State()
+    # S_11_Pt8Line51d_YesNo_1 = State()
+
+    SpouceOfCriminalChoice_5 = State()
+    # S_11_Pt8Line51e_YesNo_0 = State()
+    # S_11_Pt8Line51e_YesNo_1 = State()
+
+    SpouceOfCriminalChoice_6 = State()
+    # S_11_Pt8Line51f_YesNo_0 = State()
+    # S_11_Pt8Line51f_YesNo_1 = State()
+
+    HaveEverTradedWeaponOfHarm = State()
+    # S_11_Pt8Line52_YesNo_0 = State()
+    # S_11_Pt8Line52_YesNo_1 = State()
+
+    HaveEverWorkedInPrison = State()
+    # S_12_Pt8Line53_YesNo_0 = State()
+    # S_12_Pt8Line53_YesNo_1 = State()
+
+    HaveEverUsedWeaponAgainstPeople = State()
+    # S_12_Pt8Line54_YesNo_0 = State()
+    # S_12_Pt8Line54_YesNo_1 = State()
+
+    HaveEverServedInMilitary = State()
+    # S_12_Pt8Line55_YesNo_0 = State()
+    # S_12_Pt8Line55_YesNo_1 = State()
+
+    HaveEverBeenInCommunistParty = State()
+    # S_12_Pt8Line56_YesNo_0 = State()
+    # S_12_Pt8Line56_YesNo_1 = State()
+
+    ParticipatedInWW2AsNazi = State()
+    # S_12_Pt8Line57_YesNo_0 = State()
+    # S_12_Pt8Line57_YesNo_1 = State()
+
+    HaveEverOrderedActsGenocide = State()
+    # S_12_Pt8Line58a_YesNo_0 = State()
+    # S_12_Pt8Line58a_YesNo_1 = State()
+
+    HaveEverKilledAnyBody = State()
+    # S_12_Pt8Line58b_YesNo_0 = State()
+    # S_12_Pt8Line58b_YesNo_1 = State()
+
+    HaveEverIntentionalyInjuredAnyBody = State()
+    # S_12_Pt8Line58c_YesNo_0 = State()
+    # S_12_Pt8Line58c_YesNo_1 = State()
+
+    HaveEverHadSexWithoutConsentOfPartner = State()
+    # S_12_Pt8Line58d_YesNo_0 = State()
+    # S_12_Pt8Line58d_YesNo_1 = State()
+
+    HaveEverTriedToStopReligiousPerson = State()
+    # S_12_Pt8Line58e_YesNo_0 = State()
+    # S_12_Pt8Line58e_YesNo_1 = State()
+
+    HaveEverRecrutedTeensAsMercenaries = State()
+    # S_12_Pt8Line59_YesNo_0 = State()
+    # S_12_Pt8Line59_YesNo_1 = State()
+
+    HaveEverUsedTeensAsServantsInCombat = State()
+    # S_12_Pt8Line60_YesNo_0 = State()
+    # S_12_Pt8Line60_YesNo_1 = State()
+
+    AreYouSubjectToThePublicHargeGround = State()
+    # S_12_Pt8Line61_YesNo_0 = State()
+    # S_12_Pt8Line61_YesNo_1 = State()
 
     S_12_Pt8Line62_FamilyStatus_0 = State()
 
-    S_12_Pt8Line61_YesNo_0 = State()
-    S_12_Pt8Line61_YesNo_1 = State()
+    IndicateAnnualHouseHoldIncome = State()
+    # S_12_Pt8Line63_CB_0 = State()
+    # S_12_Pt8Line63_CB_1 = State()
+    # S_12_Pt8Line63_CB_2 = State()
+    # S_12_Pt8Line63_CB_3 = State()
+    # S_12_Pt8Line63_CB_4 = State()
 
-    S_12_Pt8Line63_CB_0 = State()
-    S_12_Pt8Line63_CB_1 = State()
-    S_12_Pt8Line63_CB_2 = State()
-    S_12_Pt8Line63_CB_3 = State()
-    S_12_Pt8Line63_CB_4 = State()
-
-    S_12_Pt8Line64_CB_0 = State()
-    S_12_Pt8Line64_CB_1 = State()
-    S_12_Pt8Line64_CB_2 = State()
-    S_12_Pt8Line64_CB_3 = State()
-    S_12_Pt8Line64_CB_4 = State()
+    IndentifyTotalValueOfYourAssets = State()
+    # S_12_Pt8Line64_CB_0 = State()
+    # S_12_Pt8Line64_CB_1 = State()
+    # S_12_Pt8Line64_CB_2 = State()
+    # S_12_Pt8Line64_CB_3 = State()
+    # S_12_Pt8Line64_CB_4 = State()
 
     S_13_Pt8Line68a_YesNo_0 = State()
     S_13_Pt8Line68a_YesNo_1 = State()
@@ -753,7 +864,6 @@ class FormI485(StatesGroup):
     S_13_Pt8Line68b_YesNo_0 = State()
     S_13_Pt8Line68b_YesNo_1 = State()
 
-
     S_13_Pt8Line68d_Column1Row1_0 = State()
     S_13_Pt8Line68d_Column2Row1_0 = State()
     S_13_Pt8Line68d_Column3Row1_0 = State()
@@ -773,7 +883,6 @@ class FormI485(StatesGroup):
     S_13_Pt8Line68d_Column2Row4_0 = State()
     S_13_Pt8Line68d_Column3Row4_0 = State()
     S_13_Pt8Line68d_Column4Row4_0 = State()
-
 
     S_13_Pt8Line68c_Column1Row1_0 = State()
     S_13_Pt8Line68c_Column1Row2_0 = State()
@@ -860,7 +969,6 @@ class FormI485(StatesGroup):
 
     S_15_Pt9Line1_YesNo_0 = State()
     S_15_Pt9Line1_YesNo_1 = State()
-
 
     S_15_Pt10Line1_English_0 = State()
     S_15_Pt10Line1b_Language_0 = State()
