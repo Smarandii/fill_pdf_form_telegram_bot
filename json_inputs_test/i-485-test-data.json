@@ -685,7 +685,7 @@
 
     "[12].Pt8Line62_FamilyStatus[0]": "482",
 
-    "[12].Pt8Line63_CB[0]": "X",
+    "[12].Pt8Line63_CB[0]": "",
     "[12].Pt8Line63_CB[1]": "X",
     "[12].Pt8Line63_CB[2]": "X",
     "[12].Pt8Line63_CB[3]": "X",
@@ -697,7 +697,7 @@
     "[12].Pt8Line64_CB[3]": "X",
     "[12].Pt8Line64_CB[4]": "X",
 
-    "[13].Pt8Line65_CB[0]": "X",
+    "[13].Pt8Line65_CB[0]": "",
     "[13].Pt8Line65_CB[1]": "X",
     "[13].Pt8Line65_CB[2]": "X",
     "[13].Pt8Line65_CB[3]": "X",
@@ -728,6 +728,28 @@
     "[13].Pt8Line68b_YesNo[0]": "X",
     "[13].Pt8Line68b_YesNo[1]": "X",
 
+
+    "[13].Pt8Line68c_Column1Row1[0]": "537",
+    "[13].Pt8Line68c_Column2Row1[0]": "545",
+    "[13].Pt8Line68c_Column3Row1[0]": "549",
+    "[13].Pt8Line68c_Column4Row1[0]": "540",
+
+    "[13].Pt8Line68c_Column1Row2[0]": "538",
+    "[13].Pt8Line68c_Column2Row2[0]": "546",
+    "[13].Pt8Line68c_Column3Row2[0]": "550",
+    "[13].Pt8Line68c_Column4Row2[0]": "541",
+
+    "[13].Pt8Line68c_Column1Row3[0]": "539",
+    "[13].Pt8Line68c_Column2Row3[0]": "547",
+    "[13].Pt8Line68c_Column3Row3[0]": "551",
+    "[13].Pt8Line68c_Column4Row3[0]": "542",
+
+    "[13].Pt8Line68c_Column1Row4[0]": "544",
+    "[13].Pt8Line68c_Column2Row4[0]": "548",
+    "[13].Pt8Line68c_Column3Row4[0]": "552",
+    "[13].Pt8Line68c_Column4Row4[0]": "543",
+
+
     "[13].Pt8Line68d_Column1Row1[0]": "521",
     "[13].Pt8Line68d_Column2Row1[0]": "529",
     "[13].Pt8Line68d_Column3Row1[0]": "533",
@@ -747,24 +769,6 @@
     "[13].Pt8Line68d_Column2Row4[0]": "532",
     "[13].Pt8Line68d_Column3Row4[0]": "536",
     "[13].Pt8Line68d_Column4Row4[0]": "528",
-
-
-    "[13].Pt8Line68c_Column1Row1[0]": "537",
-    "[13].Pt8Line68c_Column1Row2[0]": "538",
-    "[13].Pt8Line68c_Column1Row3[0]": "539",
-    "[13].Pt8Line68c_Column4Row1[0]": "540",
-    "[13].Pt8Line68c_Column4Row2[0]": "541",
-    "[13].Pt8Line68c_Column4Row3[0]": "542",
-    "[13].Pt8Line68c_Column4Row4[0]": "543",
-    "[13].Pt8Line68c_Column1Row4[0]": "544",
-    "[13].Pt8Line68c_Column2Row1[0]": "545",
-    "[13].Pt8Line68c_Column2Row2[0]": "546",
-    "[13].Pt8Line68c_Column2Row3[0]": "547",
-    "[13].Pt8Line68c_Column2Row4[0]": "548",
-    "[13].Pt8Line68c_Column3Row1[0]": "549",
-    "[13].Pt8Line68c_Column3Row2[0]": "550",
-    "[13].Pt8Line68c_Column3Row3[0]": "551",
-    "[13].Pt8Line68c_Column3Row4[0]": "552",
 
     "[13].Pt1Line10_AlienNumber[14]": "19xxxxxxx",
 
@@ -823,6 +827,10 @@
     "[15].Pt8Line86a_YesNo[0]": "X",
     "[15].Pt8Line86a_YesNo[1]": "X",
 
+    "[15].Pt9Line1_YesNo[0]": "",
+    "[15].Pt9Line1_YesNo[1]": "X",
+
+
     "[15].Pt9Line2a_Deaf[0]": "603",
     "[15].Pt9Line2a_Accommodation[0]": "604",
 
@@ -832,8 +840,7 @@
     "[15].Pt9Line2c_Other[0]": "609",
     "[15].Pt9Line2c_Accommodation[0]": "610",
 
-    "[15].Pt9Line1_YesNo[0]": "X",
-    "[15].Pt9Line1_YesNo[1]": "X",
+
 
 
     "[15].Pt10Line1_English[0]": "611",

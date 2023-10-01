@@ -467,6 +467,102 @@ class FormI485TypeOfSpecialProgramsCategoryChoice:
         self.markup = keyboard_markup
 
 
+class FormI485IndicateEducationLevel:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=9)
+        button = InlineKeyboardButton("1.",
+                                      callback_data="IndicateEducationLevel_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("2.",
+                                      callback_data="IndicateEducationLevel_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("3.",
+                                      callback_data="IndicateEducationLevel_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("4.",
+                                      callback_data="IndicateEducationLevel_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("5.",
+                                      callback_data="IndicateEducationLevel_5")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("6.",
+                                      callback_data="IndicateEducationLevel_6")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("7.",
+                                      callback_data="IndicateEducationLevel_7")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("8.",
+                                      callback_data="IndicateEducationLevel_8")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("9.",
+                                      callback_data="IndicateEducationLevel_9")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485AnnualHouseHoldIncome:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=7)
+        button = InlineKeyboardButton("$0-27,000",
+                                      callback_data="AnnualHouseHoldIncome_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$27,001-52,000",
+                                      callback_data="AnnualHouseHoldIncome_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$52,001-85,000",
+                                      callback_data="AnnualHouseHoldIncome_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$85,001-141,000",
+                                      callback_data="AnnualHouseHoldIncome_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Более $141,000",
+                                      callback_data="AnnualHouseHoldIncome_5")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485HouseHoldNetWorth:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=7)
+        button = InlineKeyboardButton("$0-18,400",
+                                      callback_data="HouseHoldNetWorth_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$18,401-136,000",
+                                      callback_data="HouseHoldNetWorth_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$136,001-321,400",
+                                      callback_data="HouseHoldNetWorth_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$321,401-707,100",
+                                      callback_data="HouseHoldNetWorth_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Более $707,100",
+                                      callback_data="HouseHoldNetWorth_5")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
+class FormI485HouseHoldDebt:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=7)
+        button = InlineKeyboardButton("$0",
+                                      callback_data="HouseHoldDebt_1")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$1-10,100",
+                                      callback_data="HouseHoldDebt_2")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$10,101-57,700",
+                                      callback_data="HouseHoldDebt_3")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("$57,701-186,800",
+                                      callback_data="HouseHoldDebt_4")
+        keyboard_markup.add(button)
+        button = InlineKeyboardButton("Более $186,800",
+                                      callback_data="HouseHoldDebt_5")
+        keyboard_markup.add(button)
+        self.markup = keyboard_markup
+
+
 class FormI485TypeOfAsyleeOrRefugeeCategoryChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
