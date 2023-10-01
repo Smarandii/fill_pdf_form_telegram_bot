@@ -89,7 +89,7 @@
 
     "[2].Pt1Line25c_CB[0]": "X",
 
-    "[2].Pt1Line25d_CB[0]": "X",
+    "[2].Pt1Line25d_CB[0]": "",
     "[2].Pt2Line25d_other[0]": "66",
 
     "[2].P2Line26a_I94[0]": "64",
@@ -841,11 +841,12 @@
     "[15].Pt9Line2c_Accommodation[0]": "610",
 
 
+    "[15].Pt10Line1_English[1]": "x",
 
-
-    "[15].Pt10Line1_English[0]": "611",
+    "[15].Pt10Line1_English[0]": "",
     "[15].Pt10Line1b_Language[0]": "612",
 
+    "[15].Pt10Line2_PreparerCB[0]": "",
     "[15].Pt10Line2_Preparer[0]": "615",
 
     "[15].Pt10Line3_DaytimePhone[0]": "616",
@@ -855,8 +856,8 @@
     "[16].Pt5Line6a_Signature[0]": "621",
     "[16].Pt10Line6b_Date[0]": "620",
 
-    "[15].Pt10Line1_English[1]": "613",
-    "[15].Pt10Line2_PreparerCB[0]": "614",
+
+
 
     "[16].Pt1Line10_AlienNumber[17]": "21xxxxxxx",
     "[16].Pt11Line1a_FamilyName[0]": "624",

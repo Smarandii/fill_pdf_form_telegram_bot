@@ -1023,10 +1023,11 @@ class FormI485(StatesGroup):
     S_15_Pt9Line2c_Other_0 = State()
     S_15_Pt9Line2c_Accommodation_0 = State()
 
+    ApplicantStatementChoice = State()
 
-    S_15_Pt10Line1_English_0 = State()
     S_15_Pt10Line1b_Language_0 = State()
 
+    S_15_Pt10Line2_PreparerCB_0 = State()
     S_15_Pt10Line2_Preparer_0 = State()
 
     S_15_Pt10Line3_DaytimePhone_0 = State()
@@ -1038,7 +1039,7 @@ class FormI485(StatesGroup):
 
     # Interpreter
     S_15_Pt10Line1_English_1 = State()
-    S_15_Pt10Line2_PreparerCB_0 = State()
+
 
     S_16_Pt1Line10_AlienNumber_1 = State()
     S_16_Pt11Line1a_FamilyName_0 = State()

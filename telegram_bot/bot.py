@@ -1,17 +1,18 @@
-from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard, logging
-from form_ar_11 import form_ar_11_handlers
-from form_i_589 import form_i_589_handlers
-from form_i_765 import form_i_765_handlers
-from form_i_485 import form_i_485_handlers
+from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard
+from main_state_group import Main
 from phrases import START_PHRASE
 
 
-@dp.message_handler(filters.Command("start"))
+@dp.message_handler(filters.Command("start"), state="*")
 async def start_cmd_handler(message: types.Message):
     keyboard = AvailableFormsKeyboard()
     keyboard = keyboard.keyboard_markup
     await message.answer(START_PHRASE, reply_markup=keyboard)
 
+from form_ar_11 import form_ar_11_handlers
+from form_i_589 import form_i_589_handlers
+from form_i_765 import form_i_765_handlers
+from form_i_485 import form_i_485_handlers
 
 async def on_startup(dp):
     await bot.send_message(chat_id=231584958, text='Bot has been started')

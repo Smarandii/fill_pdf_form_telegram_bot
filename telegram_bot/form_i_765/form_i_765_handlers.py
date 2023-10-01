@@ -18,18 +18,21 @@ from telegram_bot.form_i_765.f_i_765_keyboards import (
 @escape_json_special_chars
 @dp.message_handler(filters.Command("end"), state='*')
 async def process(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=message.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await bot.send_message(message.chat.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.chat.id, "typing")
-        pdf_file_path = adapter.fill_pdf()
-        with open(pdf_file_path, 'rb') as file:
-            await bot.send_document(message.chat.id, file)
-    await state.finish()
+    try:
+        async with state.proxy() as data:
+            adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
+                                             user_id=message.from_user.id,
+                                             timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
+            adapter.save_json()
+            await bot.send_message(message.chat.id,
+                                   f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла.")
+            await bot.send_chat_action(message.chat.id, "typing")
+            pdf_file_path = adapter.fill_pdf()
+            with open(pdf_file_path, 'rb') as file:
+                await bot.send_document(message.chat.id, file)
+        await state.finish()
+    except Exception:
+        await state.finish()
 
 
 @dp.callback_query_handler(text="I-765")

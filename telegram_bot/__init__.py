@@ -11,7 +11,7 @@ from aiogram.dispatcher import filters
 
 from aiogram.types import \
     InlineKeyboardMarkup, \
-    InlineKeyboardButton
+    InlineKeyboardButton, Message
 
 from aiogram.contrib.fsm_storage.memory import \
     MemoryStorage
