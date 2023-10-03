@@ -341,6 +341,7 @@ class FormI485(StatesGroup):
     S_5_Pt3Line22a_DateFrom_0 = State()
     S_5_Pt3Line22a_DateTo_0 = State()
 
+    # Parent 1
     S_5_Pt4Line1a_FamilyName_0 = State()
     S_5_Pt4Line1b_GivenName_0 = State()
     S_5_Pt4Line1c_MiddleName_0 = State()
@@ -363,6 +364,7 @@ class FormI485(StatesGroup):
     S_6_Pt4Line7_CityTown_0 = State()
     S_6_Pt4Line8_Country_0 = State()
 
+    # Parent 2
     S_6_Pt4Line9a_FamilyName_0 = State()
     S_6_Pt4Line9b_GivenName_0 = State()
     S_6_Pt4Line9c_MiddleName_0 = State()

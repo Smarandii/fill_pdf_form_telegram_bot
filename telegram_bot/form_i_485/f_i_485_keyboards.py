@@ -157,7 +157,7 @@ class FormI485ParentHasDifferentName:
 class FormI485ParentNotAlive:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=1)
-        button = InlineKeyboardButton("Родитель 1 скончался(лась)", callback_data="ParentNotAlive_Yes")
+        button = InlineKeyboardButton("Родитель скончался(лась)", callback_data="ParentNotAlive_Yes")
         keyboard_markup.add(button)
         self.markup = keyboard_markup
 

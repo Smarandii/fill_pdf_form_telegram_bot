@@ -2399,7 +2399,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 4. «Информация о ваших родителях.»")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ФИО в соответствии с действующим паспортом.\nУкажите фамилию:")
-    await FormI485.next()
+    await FormI485.S_5_Pt4Line1a_FamilyName_0.set()
 
 
 @escape_json_special_chars
@@ -2988,7 +2988,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[6].Pt4Line12_Gender[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что ваш 1 родитель - женщина.")
+                           "Вы указали, что ваш 2 родитель - женщина.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите город рождения:")
     await FormI485.next()
@@ -3000,7 +3000,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[6].Pt4Line12_Gender[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что ваш 1 родитель - мужчина.")
+                           "Вы указали, что ваш 2 родитель - мужчина.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите город рождения:")
     await FormI485.next()
@@ -3023,7 +3023,7 @@ async def process(message: types.Message, state: FSMContext):
         data["[6].Pt4Line14_Country[0]"] = message.text
     keyboard = FormI485ParentNotAlive()
     await bot.send_message(message.from_user.id,
-                           "Укажите текущий город или город проживания (если родитель 1 жив):",
+                           "Укажите текущий город или город проживания (если родитель 2 жив):",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
