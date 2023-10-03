@@ -120,8 +120,6 @@ class FormI485(StatesGroup):
 
     S_2_Pt1Line27_Status_0 = State()
 
-    ImmigrationStatusDontChangedChoice = State()
-
     S_2_Pt1Line28a_FamilyName_0 = State()
     S_2_Pt1Line28b_GivenName_0 = State()
     S_2_Pt1Line28c_MiddleName_0 = State()
@@ -315,11 +313,13 @@ class FormI485(StatesGroup):
     S_5_Pt3Line16_PostalCode_0 = State()
 
     S_5_Pt3Line16_Country_0 = State()
+
     S_5_Pt3Line17_EmployerName_0 = State()
     S_5_Pt3Line18a_DateFrom_0 = State()
     S_5_Pt3Line18a_DateTo_0 = State()
 
     S_5_Pt3Line19_EmployerName_0 = State()
+
     S_5_Pt3Line20_StreetNumberName_0 = State()
 
     TypeOfBuildingChoice_8 = State()
@@ -399,7 +399,7 @@ class FormI485(StatesGroup):
     # S_6_Pt5Line2_YNNA_1 = State()
     # S_6_Pt5Line2_YNNA_2 = State()
 
-    S_6_Pt5Line3_TimesMarried_0 = State(),
+    S_6_Pt5Line3_TimesMarried_0 = State()
     S_6_Pt5Line4a_FamilyName_0 = State()
     S_6_Pt5Line4b_GivenName_0 = State()
     S_6_Pt5Line4c_MiddleName_0 = State()

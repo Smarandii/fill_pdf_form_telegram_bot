@@ -55,7 +55,7 @@ async def i_485_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
     await bot.send_message(callback_query.from_user.id, "Вы выбрали форму I-485. Давайте приступим к ее заполнению.")
     await bot.send_message(callback_query.from_user.id,
                            "Часть 1. «Информация о вас.»\n"
-                           "Раздел «Ваше ФИО.»"
+                           "Раздел «Ваше ФИО.»\n"
                            "Укажите вашу фамилию:")
     await FormI485.S_0_Pt1Line1a_FamilyName_0.set()
 
@@ -95,8 +95,8 @@ async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.Callba
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что использовали иные имена.")
     await bot.send_message(callback_query.from_user.id, "Раздел «Иные имена.» Далее укажите информацию "
-                                                        "о иных используемых вами именах. ")
-    await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
+                                                        "об иных используемых вами именах. ")
+    await bot.send_message(callback_query.from_user.id, "Укажите фамилию:")
     await FormI485.S_0_Pt1Line2a_FamilyName_0.set()
 
 
@@ -106,7 +106,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[0].Pt1Line2a_FamilyName[0]"] = message.text
     await FormI485.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
+    await bot.send_message(message.from_user.id, "Укажите имя:")
 
 
 @escape_json_special_chars
@@ -115,7 +115,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[0].Pt1Line2b_GivenName[0]"] = message.text
     await FormI485.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
+    await bot.send_message(message.from_user.id, "Укажите отчество:")
 
 
 @escape_json_special_chars
@@ -157,7 +157,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[0].Pt1Line3a_FamilyName[0]"] = message.text
     await FormI485.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
+    await bot.send_message(message.from_user.id, "Укажите ваше имя:")
 
 
 @escape_json_special_chars
@@ -166,7 +166,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[0].Pt1Line3b_GivenName[0]"] = message.text
     await FormI485.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
+    await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
 
 
 @escape_json_special_chars
@@ -208,7 +208,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[0].Pt1Line4a_FamilyName[0]"] = message.text
     await FormI485.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
+    await bot.send_message(message.from_user.id, "Укажите ваше имя:")
 
 
 @escape_json_special_chars
@@ -217,7 +217,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[0].Pt1Line4b_GivenName[0]"] = message.text
     await FormI485.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
+    await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
 
 
 @escape_json_special_chars
@@ -409,7 +409,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Pt1Line12_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_1_Pt1Line12_AptSteFlrNumber_0.set()
 
 
@@ -449,8 +449,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Pt1Line12_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -467,7 +467,7 @@ async def process(message: types.Message, state: FSMContext):
                            "Если вы подаете заявление на основании Закона о насилии в отношении женщин (VAWA) или в "
                            "качестве особого несовершеннолетнего иммигранта, жертвы торговли людьми "
                            "(T для неиммигрантов) или жертвы квалифицируемого преступления (U для неиммигрантов), и вы "
-                           "не хотите, чтобы USCIS отправляла уведомления об этом заявлении к Вам домой, вы можете "
+                           "не хотите, чтобы USCIS отправляла уведомления об этом заявлении к вам домой, вы можете "
                            "предоставить альтернативный и/или безопасный почтовый адрес далее.",
                            reply_markup=keyboard.markup)
 
@@ -477,7 +477,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     keyboard = FormI485SSAChoice()
     await bot.send_message(callback_query.from_user.id, "Раздел «Карта социального обеспечения "
-                                                        "(Ssocial Security Card).»")
+                                                        "(Social Security Card).»")
     await bot.send_message(callback_query.from_user.id,
                            "Выдавало ли вам когда-либо Управление социального обеспечения (SSA) карту социального "
                            "обеспечения (social security card)?",
@@ -543,7 +543,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Pt1Line13_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_1_Pt1Line13_AptSteFlrNumber_0.set()
 
 
@@ -583,8 +583,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Pt1Line13_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -595,7 +595,7 @@ async def process(message: types.Message, state: FSMContext):
         data["[1].Pt1Line13_ZipCode[0]"] = message.text
     keyboard = FormI485SSAChoice()
     await bot.send_message(message.from_user.id,
-                           "Раздел «Карта социального обеспечения (Ssocial Security Card).»")
+                           "Раздел «Карта социального обеспечения (Social Security Card).»")
     await bot.send_message(message.from_user.id,
                            "Выдавало ли вам когда-либо Управление социального обеспечения (SSA) карту социального "
                            "обеспечения (social security card)?",
@@ -782,8 +782,8 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите верное.\n"
                            "Когда я в последний раз въехал в США:\n"
-                           "1. Я был(-а) проверен в порту въезда и допущен в общем порядке (например, посетителя по "
-                           "обмену; посетителя; временного работника; студента и тд).",
+                           "1. Я был(-а) проверен(-a) в порту въезда и допущен(-a) в общем порядке (например, "
+                           "посетителя по обмену; посетителя; временного работника; студента и тд).",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -815,7 +815,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     keyboard = FormI485SpecialCategoryEntryGrantedChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "2. Я был(-а) досмотрен в порту въезда, и мне был разрешен въезд по особой категории "
+                           "2. Я был(-а) досмотрен(-a) в порту въезда, и мне был разрешен въезд по особой категории "
                            "(например, по гуманитарному разрешению на въезд (humanitarian parole) или как гражданину "
                            "Кубы (Cuban parole)).",
                            reply_markup=keyboard.markup)
@@ -917,7 +917,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[2].P2Line26a_I94[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите номер записи о прибытии и выезде (указан в форме I-94):")
+                           "Укажите дату истечения срока разрешенного пребывания, указанную в форме I-94 (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -927,7 +927,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[2].Pt1Line26b_Date[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату истечения срока разрешенного пребывания, указанную в форме I-94 (мм/дд/гггг):")
+                           "Укажите статус в форме I-94 (например, класс допуска или вид разрешения на "
+                           "въезд (parole):")
     await FormI485.next()
 
 
@@ -936,16 +937,6 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[2].Pt1Line26c_Status[0]"] = message.text
-    await bot.send_message(message.from_user.id,
-                           "Укажите статус в форме I-94 (например, класс допуска или вид разрешения на въезд (parole):")
-    await FormI485.next()
-
-
-@escape_json_special_chars
-@dp.message_handler(state=FormI485.S_2_Pt1Line27_Status_0)
-async def process(message: types.Message, state: FSMContext):
-    async with state.proxy() as data:
-        data["[2].Pt1Line27_Status[0]"] = message.text
     keyboard = FormI485ImmigrationStatusDontChangedChoice()
     await bot.send_message(message.from_user.id,
                            "Каков ваш текущий иммиграционный статус (если он изменился с момента вашего прибытия)?",
@@ -954,7 +945,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="ImmigrationStatusDontChanged_No",
-                           state=FormI485.ImmigrationStatusDontChangedChoice)
+                           state=FormI485.S_2_Pt1Line27_Status_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш иммиграционный статус не изменился.")
@@ -965,7 +956,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @escape_json_special_chars
-@dp.message_handler(state=FormI485.ImmigrationStatusDontChangedChoice)
+@dp.message_handler(state=FormI485.S_2_Pt1Line27_Status_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[2].Pt1Line27_Status[0]"] = message.text
@@ -973,7 +964,6 @@ async def process(message: types.Message, state: FSMContext):
                            "Укажите свое ФИО так, как оно указано в вашей форме I-94.\n"
                            "Укажите фамилию:")
     await FormI485.next()
-
 
 
 @escape_json_special_chars
@@ -1021,7 +1011,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "3. Лицо, допущенное в Соединенные Штаты в качестве невесты (невесты) или ребенка невесты "
                            "гражданина США, форма I-129F (K-1 / K-2, неиммиграция)\n"
                            "4. Вдова или вдовец гражданина США, форма I-360\n"
-                           "5. заявитель VAWA, форма I-360",
+                           "5. Заявитель VAWA, форма I-360",
                            reply_markup=keyboard.markup)
     await FormI485.TypeOfFamilyCategoryApplication.set()
 
@@ -1345,11 +1335,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу категорию:\n"
                            "1.	Кубинский закон об урегулировании\n"
-                           "2.	Кубинский закон об урегулировании проблем супругов и детей, подвергшихся побоям\n"
+                           "2.	Кубинский закон об урегулировании проблем супругов и детей, подвергшихся физическому насилию\n"
                            "3.	Статус иждивенца в соответствии с Законом о справедливости гаитянских беженцев-иммигра"
                            "нтов\n"
                            "4.	Статус иждивенца в соответствии с Законом о справедливости гаитянских беженцев-иммигра"
-                           "нтов для супругов и детей, подвергшихся побоям\n"
+                           "нтов для супругов и детей, подвергшихся физическому насилию\n"
                            "5.	Программа Лаутенберга\n"
                            "6.	Дипломаты или высокопоставленные чиновники, не имеющие возможности вернуться домой "
                            "(статья 13 Закона от 11 сентября 1957 г.)\n"
@@ -1636,7 +1626,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 3. «Дополнительная информация о вас.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-нибудь обращались за иммиграционной визой для получения статуса постоянного "
-                           "жительства в посольстве или консульстве США за границей?",
+                           "жителя в посольство или консульство США за границей?",
                            reply_markup=keyboard.markup)
     await FormI485.AppliedForImmigrantVisaChoice.set()
 
@@ -1784,7 +1774,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Pt3Line3_Decision[0]"] = "Утверждено"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите дату вынесения решения мм/дд/гггг):")
+                           "Укажите дату вынесения решения (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -1794,7 +1784,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Pt3Line3_Decision[0]"] = "Отклонено"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите дату вынесения решения мм/дд/гггг):")
+                           "Укажите дату вынесения решения (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -1848,7 +1838,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line5_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_4_Pt3Line5_AptSteFlrNumber_0.set()
 
 
@@ -1888,8 +1878,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line5_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -1929,7 +1919,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line5_Country[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату, с которой Вы проживали в этом месте (мм/дд/гггг):")
+                           "Укажите дату, с которой вы проживали в этом месте (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -1948,10 +1938,21 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line6b_Date[0]"] = message.text
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Укажите ваш второй адрес.")
-    await bot.send_message(message.from_user.id, "Укажите название и номер улицы:")
+                           "Укажите ваш второй адрес.\nУкажите название и номер улицы:", reply_markup=keyboard.markup)
     await FormI485.S_4_Pt3Line7_StreetNumberName_0.set()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI485.S_4_Pt3Line7_StreetNumberName_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI485AddressWasProvidedAbove()
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите свой последний адрес за пределами США, где вы проживали более одного года "
+                           "(если он еще не указан выше).\nУкажите название и номер улицы:",
+                           reply_markup=keyboard.markup)
+    await FormI485.AddressWasProvidedAboveChoice.set()
 
 
 @escape_json_special_chars
@@ -1982,7 +1983,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line7_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_4_Pt3Line7_AptSteFlrNumber_0.set()
 
 
@@ -2022,8 +2023,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line7_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -2063,7 +2064,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line7_Country[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату, с которой Вы проживали в этом месте (мм/дд/гггг):")
+                           "Укажите дату, с которой вы проживали в этом месте (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -2128,7 +2129,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line9_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_4_Pt3Line9_AptSteFlrNumber_0.set()
 
 
@@ -2168,8 +2169,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line9_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -2209,7 +2210,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line9_Country[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату, с которой Вы проживали в этом месте (мм/дд/гггг):")
+                           "Укажите дату, с которой вы проживали в этом месте (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -2274,7 +2275,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line12_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_4_Pt3Line12_AptSteFlrNumber_0.set()
 
 
@@ -2314,8 +2315,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[4].Pt3Line12_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -2384,8 +2385,20 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt3Line14b_DateTo[0]"] = message.text
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Укажите наименование для второго работодателя:")
+                           "Укажите наименование второго работодателя:",
+                           reply_markup=keyboard.markup)
+    await FormI485.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI485.S_5_Pt3Line4a_EmployerName_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Часть 4. «Информация о ваших родителях.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите ФИО в соответствии с действующим паспортом.\nУкажите фамилию:")
     await FormI485.next()
 
 
@@ -2427,7 +2440,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt3Line16_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_5_Pt3Line16_AptSteFlrNumber_0.set()
 
 
@@ -2467,8 +2480,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt3Line16_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -2549,7 +2562,8 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI485.S_5_Pt3Line19_EmployerName_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Часть 4. «Информация о ваших родителях.»")
+                           "Часть 4. «Информация о ваших родителях.»\n"
+                           "Раздел «Информация о вашем родителе 1.» Далее заполните информацию о вашем родителе 1.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ФИО в соответствии с действующим паспортом.\nУкажите фамилию:")
     await FormI485.S_5_Pt4Line1a_FamilyName_0.set()
@@ -2593,7 +2607,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt3Line20_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите номер квартиры:")
+                           "Укажите номер апартаментов:")
     await FormI485.S_5_Pt3Line16_AptSteFlrNumber_0.set()
 
 
@@ -2633,8 +2647,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt3Line20_State[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI485.next()
 
 
@@ -2731,13 +2745,13 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @escape_json_special_chars
-@dp.message_handler(state=FormI485.S_5_Pt4Line2c_MiddleName_0)
+@dp.message_handler(state=FormI485.S_5_Pt4Line1c_MiddleName_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt4Line1c_MiddleName[0]"] = message.text
     keyboard = FormI485ParentHasDifferentName()
     await bot.send_message(message.from_user.id,
-                           "Имя, данное родителю 1 при рождении отличается от имени, "
+                           "Имя, данное родителю 1 при рождении, отличается от имени, "
                            "указанном в действующем паспорте?", reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -2776,7 +2790,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt4Line2c_MiddleName[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату рождения:")
+                           "Укажите дату рождения (мм/дд/гггг):")
     await FormI485.next()
 
 
@@ -3217,9 +3231,19 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[6].Pt5Line4c_MiddleName[0]"] = message.text
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Укажите A-number:")
+                           "Укажите A-number (если имеется):",
+                           reply_markup=keyboard.markup)
     await FormI485.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI485.S_6_Pt5Line5_AlienNumber_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите дату рождения вашего супруга (мм/дд/гггг):")
+    await FormI485.S_6_Pt5Line6_DateofBirth_0.set()
 
 
 @escape_json_special_chars
@@ -3314,7 +3338,7 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="SpouceApllyingToo_Yes",
-                           state=FormI485.IsYourSpouceInArmyChoice)
+                           state=FormI485.SpouceApplyingTooChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[6].Pt5Line10_YN[1]"] = "x"
@@ -3327,7 +3351,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="SpouceApllyingToo_No",
-                           state=FormI485.IsYourSpouceInArmyChoice)
+                           state=FormI485.SpouceApplyingTooChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[6].Pt5Line10_YN[0]"] = "x"
@@ -3342,7 +3366,6 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(text="BeenMarriedBefore_Yes",
                            state=FormI485.BeenMarriedBeforeChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    keyboard = FormI485BeenMarriedBeforeChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ранее состояли в браке.")
     await bot.send_message(callback_query.from_user.id,
@@ -3352,7 +3375,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ФИО прошлого супруга, как указано в паспорте.\n"
-                           "Укажите фамилию:", reply_markup=keyboard.markup)
+                           "Укажите фамилию:")
     await FormI485.next()
 
 
@@ -3489,15 +3512,13 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="HaveKids_Yes",
-                           state=FormI485.BeenMarriedBeforeChoice)
+                           state=FormI485.HaveKidsChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    keyboard = FormI485HaveKidsChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что у вас есть дети.")
     await bot.send_message(callback_query.from_user.id,
                            "Часть 6. Информация о ваших детях\n"
-                           "Укажите количество ваших детей (включая тех, кому больше 21 года): ",
-                           reply_markup=keyboard.markup)
+                           "Укажите количество ваших детей (включая тех, кому больше 21 года): ")
     await FormI485.next()
 
 
@@ -3850,7 +3871,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="HaveKids_No",
-                           state=FormI485.BeenMarriedBeforeChoice)
+                           state=FormI485.HaveKidsChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что у вас нет детей.")
@@ -4127,7 +4148,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4143,7 +4164,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4159,7 +4180,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4175,7 +4196,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4191,7 +4212,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4207,7 +4228,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4223,7 +4244,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4239,7 +4260,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4255,7 +4276,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4271,7 +4292,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 8. «Общие основания приемлемости и недопустимости.»")
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо были членом, вовлечены или каким-либо образом связаны с какой-либо "
-                           "организацией, ассоциацией, фондом, фондом, партией, клубом, обществом или подобной "
+                           "организацией, ассоциацией, фондом, партией, клубом, обществом или подобной "
                            "группой в Соединенных Штатах или в любом другом месте в мире, включая какую-либо "
                            "военную службу?", reply_markup=keyboard.markup)
     await FormI485.next()
@@ -4550,7 +4571,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо работали в США без разрешения на работу?",
                            reply_markup=keyboard.markup)
-    await FormI485.HaveEverBeenDeniedVisaToTheUSA.set()
+    await FormI485.HaveEverWorkedWithoutAuthorization.set()
 
 
 @dp.callback_query_handler(text="SimpleYesOrNo_No",
@@ -4562,7 +4583,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы когда-либо работали в США без разрешения на работу?",
                            reply_markup=keyboard.markup)
-    await FormI485.HaveEverBeenDeniedVisaToTheUSA.set()
+    await FormI485.HaveEverWorkedWithoutAuthorization.set()
 
 
 @dp.callback_query_handler(text="SimpleYesOrNo_Yes",
@@ -4790,8 +4811,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[9].Pt8Line24b_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Have you been granted a waiver or has Department of State issued a favorable waiver "
-                           "recommendation letter for you?",
+                           "Предоставляли ли вам право не соблюдать это условие?",
                            reply_markup=keyboard.markup)
     await FormI485.HaveBeenGrantedAWaiver.set()
 
@@ -4803,8 +4823,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[9].Pt8Line24b_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Have you been granted a waiver or has Department of State issued a favorable waiver "
-                           "recommendation letter for you?",
+                           "Предоставляли ли вам право не соблюдать это условие?",
                            reply_markup=keyboard.markup)
     await FormI485.HaveBeenGrantedAWaiver.set()
 
@@ -4914,11 +4933,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line27_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вам когда-нибудь судья выносил обвинительный приговор или к вам были применены условия, "
-                           "которые ограничивали вашу свободу (например, тюремное заключение, условный приговор, "
-                           "домашний арест, условно-досрочное освобождение, альтернативное наказание, лечение от "
-                           "наркомании или алкоголизма, реабилитационные программы или занятия, испытательный срок "
-                           "или общественные работы)?",
+                           "Судья когда-нибудь выносил в отношении вас обвинительный приговор, или к вам были "
+                           "применены условия, которые ограничивали вашу свободу (например, тюремное заключение, "
+                           "условный срок, домашний арест, альтернативное "
+                           "наказание, лечение от наркомании или алкоголизма, реабилитационные программы, "
+                           "испытательный срок или общественные работы)?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -4930,11 +4949,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line27_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вам когда-нибудь судья выносил обвинительный приговор или к вам были применены условия, "
-                           "которые ограничивали вашу свободу (например, тюремное заключение, условный приговор, "
-                           "домашний арест, условно-досрочное освобождение, альтернативное наказание, лечение от "
-                           "наркомании или алкоголизма, реабилитационные программы или занятия, испытательный срок "
-                           "или общественные работы)?",
+                           "Судья когда-нибудь выносил в отношении вас обвинительный приговор, или к вам были "
+                           "применены условия, которые ограничивали вашу свободу (например, тюремное заключение, "
+                           "условный срок, домашний арест, альтернативное "
+                           "наказание, лечение от наркомании или алкоголизма, реабилитационные программы, "
+                           "испытательный срок или общественные работы)?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5192,7 +5211,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line38_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо использовали иммунитет (дипломатический или иной), чтобы избежать судебного преследования за уголовное правонарушение в США?",
+                           "Вы когда-либо использовали иммунитет (дипломатический или иной), чтобы избежать судебного преследования за уголовное преступление в США?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5204,7 +5223,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line38_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо использовали иммунитет (дипломатический или иной), чтобы избежать судебного преследования за уголовное правонарушение в США?",
+                           "Вы когда-либо использовали иммунитет (дипломатический или иной), чтобы избежать судебного преследования за уголовное преступление в США?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5264,7 +5283,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line41_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо продавали человека в принудительное рабство, долговую кабалу? Торговля людьми включает в себя вербовку, укрывательство, перевозку, предоставление или получение человека для работы или услуг с применением силы, мошенничества или принуждения.",
+                           "Вы когда-либо продавали человека в принудительное рабство, долговую кабалу? Торговля "
+                           "людьми включает в себя вербовку, укрывательство, перевозку, предоставление или "
+                           "приобретение человека для работ или услуг с применением силы, мошенничества или "
+                           "принуждения.",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5276,7 +5298,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line41_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо продавали человека в принудительное рабство, долговую кабалу? Торговля людьми включает в себя вербовку, укрывательство, перевозку, предоставление или получение человека для работы или услуг с применением силы, мошенничества или принуждения.",
+                           "Вы когда-либо продавали человека в принудительное рабство, долговую кабалу? Торговля "
+                           "людьми включает в себя вербовку, укрывательство, перевозку, предоставление или "
+                           "приобретение человека для работ или услуг с применением силы, мошенничества или "
+                           "принуждения.",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5288,7 +5313,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line42_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо сознательно помогали, подстрекали, содействовали, вступали в сговор с другими в торговле людьми для целей коммерчциализации секса или принудительного рабства, пеонажа, долговой кабалы или рабства?",
+                           "Вы когда-либо сознательно помогали, подстрекали, содействовали, вступали в сговор с "
+                           "другими в торговле людьми для целей коммерциализации секса, рабства, пеонажа или долговой "
+                           "кабалы?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5300,7 +5327,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line42_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо сознательно помогали, подстрекали, содействовали, вступали в сговор с другими в торговле людьми для целей коммерчциализации секса или принудительного рабства, пеонажа, долговой кабалы или рабства?",
+                           "Вы когда-либо сознательно помогали, подстрекали, содействовали, вступали в сговор с "
+                           "другими в торговле людьми для целей коммерциализации секса, рабства, пеонажа или долговой "
+                           "кабалы?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5312,7 +5341,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line43_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Являетесь ли вы супругом, сыном или дочерью иностранного гражданина, который занимался торговлей людьми и получали ли Вы в течение последних пяти лет какие-либо финансовые или иные выгоды от незаконной деятельности вашего супруга или вашего родителя, хотя вы знали или разумно должны были знать, что эти денежные средства были результатом незаконной деятельности вашего супруга или родителя?",
+                           "Являетесь ли вы супругом, сыном или дочерью иностранного гражданина, который занимался "
+                           "торговлей людьми, и получали ли вы в течение последних пяти лет какие-либо финансовые или "
+                           "иные выгоды от незаконной деятельности вашего супруга или вашего родителя, хотя вы знали "
+                           "или разумно должны были знать, что эти денежные средства были результатом незаконной "
+                           "деятельности вашего супруга или родителя?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5324,7 +5357,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[10].Pt8Line43_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Являетесь ли вы супругом, сыном или дочерью иностранного гражданина, который занимался торговлей людьми и получали ли Вы в течение последних пяти лет какие-либо финансовые или иные выгоды от незаконной деятельности вашего супруга или вашего родителя, хотя вы знали или разумно должны были знать, что эти денежные средства были результатом незаконной деятельности вашего супруга или родителя?",
+                           "Являетесь ли вы супругом, сыном или дочерью иностранного гражданина, который занимался "
+                           "торговлей людьми, и получали ли вы в течение последних пяти лет какие-либо финансовые или "
+                           "иные выгоды от незаконной деятельности вашего супруга или вашего родителя, хотя вы знали "
+                           "или разумно должны были знать, что эти денежные средства были результатом незаконной "
+                           "деятельности вашего супруга или родителя?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5408,7 +5445,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line46b_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы намерены участвовать в любой деятельности, целью которой является противостояние, контроль или свержение правительства США силой, насилием или другими незаконными средствами?",
+                           "Вы намерены участвовать в любой деятельности, целью которой является противостояние, "
+                           "контроль или свержение правительства США, насилием или другими незаконными средствами?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5420,7 +5458,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line46b_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы намерены участвовать в любой деятельности, целью которой является противостояние, контроль или свержение правительства США силой, насилием или другими незаконными средствами?",
+                           "Вы намерены участвовать в любой деятельности, целью которой является противостояние, "
+                           "контроль или свержение правительства США, насилием или другими незаконными средствами?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5576,7 +5615,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line48c_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо предоставляли денежные средства, ценные вещи, услуги или труд, или любую другую помощь или поддержку для любого из видов деятельности, описанной в номере вопросе А?",
+                           "Вы когда-либо предоставляли денежные средства, ценные вещи, услуги или труд, "
+                           "или любую другую помощь или поддержку для любого из видов деятельности, описанной в "
+                           "вопросе А?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5588,7 +5629,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line48c_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо предоставляли денежные средства, ценные вещи, услуги или труд, или любую другую помощь или поддержку для любого из видов деятельности, описанной в номере вопросе А?",
+                           "Вы когда-либо предоставляли денежные средства, ценные вещи, услуги или труд, "
+                           "или любую другую помощь или поддержку для любого из видов деятельности, описанной в "
+                           "вопросе А?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5768,7 +5811,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line51d_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Являетесь ли вы супругом или ребенком лица, которое предоставляло денежные средства, ценные вещи, услуги или труд, или любую другую помощь или поддержку для любого из видов деятельности, описанной в вопросе Б?",
+                           "Являетесь ли вы супругом или ребенком лица, которое предоставляло денежные средства, ценные вещи, услуги или труд, или любую другую помощь или поддержку физическому лицу, группе лиц или организации, которые занимаются деятельностью, описанной в вопросе Б?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5780,7 +5823,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line51d_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Являетесь ли вы супругом или ребенком лица, которое предоставляло денежные средства, ценные вещи, услуги или труд, или любую другую помощь или поддержку для любого из видов деятельности, описанной в вопросе Б?",
+                           "Являетесь ли вы супругом или ребенком лица, которое предоставляло денежные средства, ценные вещи, услуги или труд, или любую другую помощь или поддержку физическому лицу, группе лиц или организации, которые занимаются деятельностью, описанной в вопросе Б?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5840,7 +5883,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line52_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо работали волонтером или иным образом служили в какой- либо тюрьме, лагере для военнопленных, следственном изоляторе, трудовом лагере или в любом другом учреждении, связанном с содержанием под стражей?",
+                           "Вы когда-либо работали, были  волонтером или иным образом служили в какой-либо тюрьме, "
+                           "лагере для военнопленных, следственном изоляторе, трудовом лагере или в любом другом "
+                           "учреждении, связанном с содержанием под стражей?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -5852,7 +5897,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[11].Pt8Line52_YesNo[0]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо работали волонтером или иным образом служили в какой- либо тюрьме, лагере для военнопленных, следственном изоляторе, трудовом лагере или в любом другом учреждении, связанном с содержанием под стражей?",
+                           "Вы когда-либо работали, были  волонтером или иным образом "
+                           "служили в какой-либо тюрьме,"
+                           "лагере для военнопленных, следственном изоляторе, трудовом лагере или в любом другом "
+                           "учреждении, связанном с содержанием под стражей?",
                            reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -6570,7 +6618,7 @@ async def process(message: types.Message, state: FSMContext):
         data["[13].Pt8Line68c_Column4Row1[0]"] = message.text
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Если вы получали помощь несколько раз, то укажите какую конкретно следующую помощь "
+                           "Если вы получали помощь несколько раз, то укажите какую конкретно иную помощь "
                            "вы получали:", reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -6599,7 +6647,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[13].Pt8Line68c_Column2Row2[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату, до которой вы начали получать такую помощь:")
+                           "Укажите дату, до которой вы получали такую помощь:")
     await FormI485.next()
 
 
@@ -6618,7 +6666,7 @@ async def process(message: types.Message, state: FSMContext):
         data["[13].Pt8Line68c_Column4Row2[0]"] = message.text
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Если вы получали помощь несколько раз, то укажите какую конкретно следующую помощь "
+                           "Если вы получали помощь несколько раз, то укажите какую конкретно иную помощь "
                            "вы получали:", reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -6647,7 +6695,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[13].Pt8Line68c_Column2Row3[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату, до которой вы начали получать такую помощь:")
+                           "Укажите дату, до которой вы получали такую помощь:")
     await FormI485.next()
 
 
@@ -6666,7 +6714,7 @@ async def process(message: types.Message, state: FSMContext):
         data["[13].Pt8Line68c_Column4Row3[0]"] = message.text
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Если вы получали помощь несколько раз, то укажите какую конкретно следующую помощь "
+                           "Если вы получали помощь несколько раз, то укажите какую конкретно иную помощь "
                            "вы получали:", reply_markup=keyboard.markup)
     await FormI485.next()
 
@@ -6695,7 +6743,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[13].Pt8Line68c_Column2Row4[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите дату, до которой вы начали получать такую помощь:")
+                           "Укажите дату, до которой вы получали такую помощь:")
     await FormI485.next()
 
 
@@ -6928,16 +6976,17 @@ async def process(message: types.Message, state: FSMContext):
 
 
 @dp.callback_query_handler(text="SimpleYesOrNo_No",
-                           state=FormI485.HaveEverRecievedLongTermInstitutionalization)
+                           state=FormI485.HaveEverFailedToAttendRemovalProceeding)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[14].Pt8Line69a_YesNo[0]"] = 'x'
+        data["[14].Pt8Line69a_YesNo[1]"] = 'x'
     keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Вы когда-либо не смогли или отказались присутствовать или оставаться на любом процессе о "
-                           "выдворении, возбужденном против вас 1 апреля 1997 г. или после этой даты?",
+                           "Вы когда-либо подавали мошеннические или поддельные документы любому должностному лицу "
+                           "правительства США для получения или попытки получения каких-либо иммиграционных льгот, "
+                           "включая визу или въезд в Соединенные Штаты?",
                            reply_markup=keyboard.markup)
-    await FormI485.next()
+    await FormI485.HaveEverSubmitedFraudilentDocumentation.set()
 
 
 @dp.callback_query_handler(text="SimpleYesOrNo_Yes",
@@ -7550,10 +7599,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[15].Pt9Line2a_Deaf[0]"] = 'x'
-    keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите, какую помощь вы запрашиваете (например, американский язык жестов):",
-                           reply_markup=keyboard.markup)
+                           "Укажите, какую помощь вы запрашиваете (например, американский язык жестов):")
     await FormI485.next()
 
 
@@ -7583,10 +7630,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[15].Pt9Line2b_Blind[0]"] = 'x'
-    keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите, какую помощь вы запрашиваете:",
-                           reply_markup=keyboard.markup)
+                           "Укажите, какую помощь вы запрашиваете:")
     await FormI485.next()
 
 
@@ -7618,10 +7663,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[15].Pt9Line2c_Other[0]"] = 'x'
-    keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите, какую помощь вы запрашиваете:",
-                           reply_markup=keyboard.markup)
+                           "Укажите, какую помощь вы запрашиваете:")
     await FormI485.next()
 
 
@@ -7786,7 +7829,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[16].Pt5Line6a_Signature[0]'] = message.text
-        data['[16].Pt10Line6b_Date[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
+        data['[16].Pt10Line6b_Date[0]'] = datetime.datetime.now().strftime('%m/%d/%Y')
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
@@ -7799,4 +7842,3 @@ async def process(message: types.Message, state: FSMContext):
         pdf_file_path = adapter.fill_pdf()
         with open(pdf_file_path, 'rb') as file:
             await bot.send_document(message.from_user.id, file)
-

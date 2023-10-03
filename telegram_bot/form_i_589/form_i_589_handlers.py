@@ -372,7 +372,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[0].PtAILine9_State[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
+                           "Укажите Zipcode (например, 123456).\n"
                            "Найти почтовый индекс можно по ссылке:\n"
                            "https://tools.usps.com/go/ZipLookupAction_input")
 
@@ -6385,8 +6385,8 @@ async def process(message: types.Message, state: FSMContext):
         data['[10].PtE_State[0]'] = message.text
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке:\n"
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке:\n"
                            "https://tools.usps.com/go/ZipLookupAction_input")
 
 

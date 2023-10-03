@@ -368,8 +368,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_State[0]'] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
     await FormI765.next()
 
 
@@ -477,8 +477,8 @@ async def process(message: types.Message, state: FSMContext):
         data['form1[0].Page2[0].Pt2Line7_State[0]'] = message.text
     await FormI765.next()
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode индекс можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
 
 
 @escape_json_special_chars
@@ -1604,8 +1604,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3d_State[0]'] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
-                           "Найти почтовый индекс можно по ссылке:\n"
+                           "Укажите Zipcode (например, 123456).\n"
+                           "Найти Zipcode можно по ссылке:\n"
                            "https://tools.usps.com/go/ZipLookupAction_input")
     await FormI765.next()
 
@@ -1626,7 +1626,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3f_Province[0]'] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (postal code) (например, 12345-1234):")
+                           "Укажите Zipcode (postal code) (например, 12345-1234):")
     await FormI765.next()
 
 
@@ -1868,7 +1868,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3d_State[0]'] = message.text
     await bot.send_message(message.from_user.id,
-                           "Укажите почтовый индекс (например, 123456).\n"
+                           "Укажите Zipcode (например, 123456).\n"
                            "Найти почтовый индекс можно по ссылке:\n"
                            "https://tools.usps.com/go/ZipLookupAction_input")
     await FormI765.next()
