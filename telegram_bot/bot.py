@@ -1,7 +1,6 @@
 from aiogram.dispatcher import FSMContext
 
 from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard
-from main_state_group import Main
 from phrases import START_PHRASE
 from telegram_bot.form_i_485.form_i_485_state_group import FormI485
 

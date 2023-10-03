@@ -3031,11 +3031,19 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="ParentNotAlive_Yes",
                            state=FormI485.S_6_Pt4Line15_CityTown_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI485MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Раздел «Информация о вашем родителе 2.» Далее заполните информацию о вашем родителе 2.")
+                           "Часть 5. «Информация о вашем браке.»")
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите ФИО в соответствии с действующим паспортом.\nУкажите фамилию:")
-    await FormI485.S_6_Pt4Line9a_FamilyName_0.set()
+                           "Выберите семейное положение:\n"
+                           "1. Не состою в браке\n"
+                           "2. В браке\n"
+                           "3. В разводе\n"
+                           "4. Вдова (-ец)\n"
+                           "5. Брак аннулирован\n"
+                           "6. Юридически установленное раздельное проживание\n",
+                           reply_markup=keyboard.markup)
+    await FormI485.MaritalStatusChoice.set()
 
 
 @escape_json_special_chars
@@ -4375,11 +4383,23 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[8].Pt8Line5b_DateTo[0]"] = message.text
+    keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Далее укажите информацию об организации 2.")
+                           "Далее укажите информацию об организации 2.",
+                           reply_markup=keyboard.markup)
     await bot.send_message(message.from_user.id,
                            "Укажите название организации:")
     await FormI485.next()
+
+
+@dp.callback_query_handler(text="don't_have_it",
+                           state=FormI485.S_8_Pt8Line6_OrgName_0)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = FormI485WasEverRefusedToEnterUSAChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вам когда-либо было отказано во въезде в США?",
+                           reply_markup=keyboard.markup)
+    await FormI485.WasEverRefusedToEnterUSAChoice.set()
 
 
 @escape_json_special_chars
@@ -7548,12 +7568,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[15].Pt8Line85c_YesNo[0]"] = 'x'
-    keyboard = FormI485SimpleYesOrNoChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Какое у вас было гражданство или иммиграционный статус непосредственно перед отъездом "
                            "(например, гражданин или подданный США, законный постоянный житель, неиммигрант, без "
-                           "допуска или разрешения на въезд или любой другой статус)?\nУкажите:",
-                           reply_markup=keyboard.markup)
+                           "допуска или разрешения на въезд или любой другой статус)?\nУкажите:")
     await FormI485.next()
 
 
@@ -7707,9 +7725,13 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[15].Pt10Line1_English[1]'] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Вы указали, что вы можете читать и понимать по-английски, я прочитал и понял каждый вопрос "
-                           "и инструкцию к этому заявлению, а также свои ответы на все вопросы.")
-    await FormI485.next()
+                           "Вы указали, что вы можете читать и понимать по-английски, вы прочитали и поняли каждый "
+                           "вопрос и инструкцию к этому заявлению, а также ваши ответы на все вопросы.")
+    await bot.send_message(callback_query.from_user.id,
+                           "Раздел «Контактная информация заявителя.»")
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите дневной номер телефона заявителя:")
+    await FormI485.S_15_Pt10Line3_DaytimePhone_0.set()
 
 
 @dp.callback_query_handler(text="ApplicantStatement_2",

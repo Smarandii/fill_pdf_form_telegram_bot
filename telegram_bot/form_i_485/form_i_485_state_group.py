@@ -382,8 +382,8 @@ class FormI485(StatesGroup):
     # S_6_Pt4Line12_Gender_1 = State()
 
     S_6_Pt4Line13_CityTown_0 = State()
-
     S_6_Pt4Line14_Country_0 = State()
+
     S_6_Pt4Line15_CityTown_0 = State()
     S_6_Pt4Line16_Country_0 = State()
 
