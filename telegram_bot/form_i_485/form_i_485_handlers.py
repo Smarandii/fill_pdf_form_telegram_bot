@@ -2396,7 +2396,8 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI485.S_5_Pt3Line4a_EmployerName_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
-                           "Часть 4. «Информация о ваших родителях.»")
+                           "Часть 4. «Информация о ваших родителях.»\n"
+                           "Раздел «Информация о вашем родителе 1.» Далее заполните информацию о вашем родителе 1.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ФИО в соответствии с действующим паспортом.\nУкажите фамилию:")
     await FormI485.S_5_Pt4Line1a_FamilyName_0.set()
@@ -2718,7 +2719,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data["[5].Pt3Line22a_DateTo[0]"] = message.text
     await bot.send_message(message.from_user.id,
-                           "Часть 4. «Информация о ваших родителях.»")
+                           "Часть 4. «Информация о ваших родителях.»\n"
+                           "Раздел «Информация о вашем родителе 1.» Далее заполните информацию о вашем родителе 1.")
     await bot.send_message(message.from_user.id,
                            "Укажите ФИО в соответствии с действующим паспортом.\nУкажите фамилию:")
     await FormI485.next()
@@ -3123,13 +3125,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[6].Pt5Line1_MaritalStatus[3]"] = "x"
-    keyboard = FormI485IsYourSpouceInArmyChoice()
+    keyboard = FormI485BeenMarriedBeforeChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что являетесь вдовой(цом).")
     await bot.send_message(callback_query.from_user.id,
-                           "Ваш супруг является действующим лицом вооруженных сил США или береговой охраны США?",
-                           reply_markup=keyboard.markup)
-    await FormI485.IsYourSpouceInArmyChoice.set()
+                           "Вы ранее состояли в браке?", reply_markup=keyboard.markup)
+    await FormI485.BeenMarriedBeforeChoice.set()
 
 
 @dp.callback_query_handler(text="MaritalStatus_5",
@@ -4009,9 +4010,13 @@ def cm_to_feet_inches(cm):
 @dp.message_handler(state=FormI485.S_8_Pt7Line3_HeightFeetAndInches)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        feet, inches = cm_to_feet_inches(int(message.text))
-        data["[8].Pt7Line3_HeightFeet[0]"] = feet
-        data["[8].Pt7Line3_HeightInches[0]"] = inches
+        try:
+            feet, inches = cm_to_feet_inches(int(message.text))
+            data["[8].Pt7Line3_HeightFeet[0]"] = feet
+            data["[8].Pt7Line3_HeightInches[0]"] = inches
+        except ValueError:
+            bot.send_message(message.from_user.id, "Укажите ваш рост ЦИФРОЙ (в сантиметрах):")
+            return
     await bot.send_message(message.from_user.id,
                            "Укажите ваш вес (в килограмах): ")
     await FormI485.next()
@@ -6807,6 +6812,19 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите наименование учреждения, в котором вы получали помощь, город и штат:")
     await FormI485.S_13_Pt8Line68d_Column1Row1_0.set()
+
+
+@dp.callback_query_handler(text="SimpleYesOrNo_No",
+                           state=FormI485.HaveEverRecievedLongTermInstitutionalization)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data["[13].Pt8Line68b_YesNo[1]"] = 'x'
+    keyboard = FormI485SimpleYesOrNoChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вы когда-либо не смогли или отказались присутствовать или оставаться на любом процессе о "
+                           "выдворении, возбужденном против вас 1 апреля 1997 г. или после этой даты?",
+                           reply_markup=keyboard.markup)
+    await FormI485.HaveEverFailedToAttendRemovalProceeding.set()
 
 
 @dp.message_handler(state=FormI485.S_13_Pt8Line68d_Column1Row1_0)
