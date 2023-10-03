@@ -11,4 +11,3 @@ pdf_inputs
 pdf_outputs/ar-11-unlocked-filled.pdf
 telegram_bot/.env
 venv
-.env
