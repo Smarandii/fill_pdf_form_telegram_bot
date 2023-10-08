@@ -86,6 +86,7 @@ async def i_589_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ваш регистрационный номер иностранца (A-number) (если имеется):",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_I_PtAILine1_ANumber_0.set()
 
 
@@ -100,6 +101,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер социального страхования США (SSN) (если имеется):",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_I_TextField1_0.set()
 
 
@@ -108,6 +110,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine1_ANumber[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Укажите номер социального страхования США (SSN) (если имеется):",
@@ -124,6 +127,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id, "Укажите номер онлайн-аккаунта USCIS (если имеется):",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_I_TextField1_8.set()
 
 
@@ -132,6 +136,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Укажите номер онлайн-аккаунта USCIS (если имеется):",
@@ -145,6 +150,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].TextField1[8]'] = ""
     await bot.send_message(callback_query.from_user.id, "Вы решили оставить поле номера онлайн-аккаунта USCIS пустым.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
+    time.sleep(0.5)
     await Form_I_589.A_I_PtAILine4_LastName_0.set()
 
 
@@ -153,6 +159,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[8]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите вашу фамилию:")
 
@@ -162,6 +169,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine4_LastName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваше имя:")
 
@@ -171,6 +179,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine5_FirstName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
 
@@ -180,6 +189,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine6_MiddleName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -195,6 +205,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что не использовали другие фамилии или имена "
                            "(включая девичью фамилию и псевдонимы).")
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите название и номер улицы в США, где вы фактически проживаете:")
@@ -205,6 +216,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите название и номер улицы в США, где вы фактически проживаете:")
 
@@ -215,6 +227,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_StreetNumandName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите номер квартиры:")
 
@@ -224,6 +237,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_AptNumber[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -233,6 +247,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
 
@@ -242,6 +257,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_State[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите ваш почтовый индекс (например, 123456).\n"
@@ -254,6 +270,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_Zipcode[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите код вашего номера телефона:")
 
@@ -263,6 +280,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_AreaCode[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваш номер телефона:")
 
@@ -273,6 +291,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_TelephoneNumber[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MailingAddressChoiceKeyboard()
     await bot.send_message(message.from_user.id, "Информация о почтовом адресе.")
@@ -287,6 +306,7 @@ async def process(callback_query: types.CallbackQuery):
     keyboard = FormI589GenderChoice()
     await bot.send_message(callback_query.from_user.id, "Выберите свой пол",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_I_ChooseGender.set()
 
 
@@ -297,6 +317,7 @@ async def process(callback_query: types.CallbackQuery):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ФИО лица, на которого зарегистрирован почтовый адрес (если применимо):",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.next()
 
 
@@ -305,6 +326,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(callback_query: types.CallbackQuery):
     await bot.send_message(callback_query.from_user.id, "Укажите код номера телефона лица, имеющего "
                                                         "возможность принять корреспонденцию по данному адресу:")
+    time.sleep(0.5)
     await Form_I_589.A_I_PtAILine9_AreaCode_0.set()
 
 
@@ -313,6 +335,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_InCareOf[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите код номера телефона лица, имеющего "
                                                  "возможность принять корреспонденцию по данному адресу:")
@@ -323,6 +346,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine8_AreaCode[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите номер телефона лица, имеющего возможность "
                                                  "принять корреспонденцию по данному адресу:")
@@ -333,6 +357,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_AreaCode[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите название и номер улицы:")
@@ -343,6 +368,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_StreetNumandName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите номер квартиры:")
 
@@ -352,6 +378,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_AptNumber[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -361,6 +388,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
 
@@ -370,6 +398,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_State[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите Zipcode (например, 123456).\n"
@@ -383,6 +412,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].PtAILine9_ZipCode[0]'] = message.text
     keyboard = FormI589GenderChoice()
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваш пол:", reply_markup=keyboard.markup)
 
@@ -394,6 +424,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].PartALine9Gender[0]'] = "Male"
         data['[0].PartALine9Gender[1]'] = ""
     keyboard = FormI589MaritalStatusChoice()
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что вы мужчина.")
     await bot.send_message(callback_query.from_user.id, "Выберите семейное положение:", reply_markup=keyboard.markup)
@@ -406,6 +437,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].PartALine9Gender[0]'] = ""
         data['[0].PartALine9Gender[1]'] = "Female"
     keyboard = FormI589MaritalStatusChoice()
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что вы женщина.")
     await bot.send_message(callback_query.from_user.id, "Выберите семейное положение:", reply_markup=keyboard.markup)
@@ -420,6 +452,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].Marital[2]'] = ""
         data['[0].Marital[3]'] = ""
         data['[1].CheckBox5[0]'] = "x"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что не состоите в браке.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу дату рождения (мм/дд/гггг):")
@@ -434,6 +467,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].Marital[2]'] = ""
         data['[0].Marital[3]'] = ""
         data['[1].CheckBox5[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что состоите в браке.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу дату рождения (мм/дд/гггг):")
@@ -448,6 +482,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].Marital[2]'] = callback_query.data
         data['[0].Marital[3]'] = ""
         data['[1].CheckBox5[0]'] = "x"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что разведены.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу дату рождения (мм/дд/гггг):")
@@ -462,6 +497,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].Marital[2]'] = ""
         data['[0].Marital[3]'] = callback_query.data
         data['[1].CheckBox5[0]'] = "x"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что овдовели.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу дату рождения (мм/дд/гггг):")
@@ -472,6 +508,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваши город и страну рождения:")
 
@@ -481,6 +518,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[4]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваше текущее гражданство:")
 
@@ -490,6 +528,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[3]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваше гражданство при рождении:")
 
@@ -499,6 +538,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[5]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите вашу расу, этническую или племенную группу:")
 
@@ -508,6 +548,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[6]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите вашу религию:")
 
@@ -518,6 +559,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField1[7]'] = message.text
     keyboard = FormI589ImmigrationCourtChoice()
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Отметьте верное:\n"
@@ -534,6 +576,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].CheckBox3[0]'] = callback_query.data
         data['[0].CheckBox3[1]'] = ""
         data['[0].CheckBox3[2]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что никогда не участвовали в разбирательствах в иммиграционном суде.")
@@ -548,6 +591,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].CheckBox3[0]'] = ""
         data['[0].CheckBox3[1]'] = callback_query.data
         data['[0].CheckBox3[2]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что сейчас учавствуете в разбирательствах в иммиграционном суде.")
@@ -562,6 +606,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[0].CheckBox3[0]'] = ""
         data['[0].CheckBox3[1]'] = ""
         data['[0].CheckBox3[2]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что сейчас не участвуете в разбирательстве в иммиграционном суде, "
@@ -575,6 +620,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -587,6 +633,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.A_I_DateTimeField2_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет номера I-94.")
     await bot.send_message(callback_query.from_user.id,
@@ -600,6 +647,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату вашего последнего въезда в США:")
@@ -610,6 +658,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите место вашего последнего въезда в США:")
@@ -620,6 +669,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите ваш законный статус при вашем последнем въезде в США:")
@@ -630,6 +680,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField4[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания вашего законного статуса при вашем последнем въезде в США:")
@@ -640,6 +691,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField2[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваш второй по времени въезд в США. Укажите дату:")
 
@@ -649,6 +701,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите место:")
 
@@ -658,6 +711,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField4[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите законный статус:")
 
@@ -667,6 +721,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField4[3]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваш третий по времени въезд в США. Укажите дату:")
 
@@ -676,6 +731,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите место:")
 
@@ -685,6 +741,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField4[4]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите законный статус:")
 
@@ -694,6 +751,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField4[5]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Какая страна выдала вам последний паспорт или проездной документ (travel document)?")
@@ -704,6 +762,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите номер паспорта:")
 
@@ -713,6 +772,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField5[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите номер проездного документа:")
 
@@ -722,6 +782,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField5[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите срок действия проездного документа (мм/дд/гггг):")
 
@@ -731,6 +792,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].DateTimeField2[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите ваш родной язык (укажите диалект, если применимо):")
 
@@ -741,6 +803,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].TextField7[0]'] = message.text
     keyboard = FormI589EnglishFluencyChoice()
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Вы свободно владеете английским языком?",
@@ -753,6 +816,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].CheckBox4[1]'] = callback_query.data
         data['[0].CheckBox4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что свободно владеете английским языком.")
     await bot.send_message(callback_query.from_user.id, "Укажите, какими еще языками вы свободно владеете:")
@@ -764,6 +828,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].CheckBox4[0]'] = callback_query.data
         data['[0].CheckBox4[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что не владеете английским языком.")
     await bot.send_message(callback_query.from_user.id, "Укажите, какими еще языками вы свободно владеете:")
@@ -780,6 +845,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id, "Часть А.II. «Информация о вашем супруге и детях.»")
 
     if is_married:
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(message.from_user.id, "Вы указали, что состоите в браке.")
         keyboard = FormI589IfAnyChoice()
@@ -787,6 +853,7 @@ async def process(message: types.Message, state: FSMContext):
                                "Укажите Alien Registration Number вашего супруга (A-Number) (если имеется):",
                                reply_markup=keyboard.markup)
     if is_not_married:
+        time.sleep(0.5)
         await Form_I_589.A_II_HaveChildrenChoice.set()
         await bot.send_message(message.from_user.id, "Вы указали, что не состоите в браке.")
         keyboard = FormI589HaveChildrenChoice()
@@ -802,6 +869,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -814,6 +882,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine1_ANumber[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -826,6 +895,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите дату рождения супруга (мм/дд/гггг):")
@@ -836,6 +906,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения супруга (мм/дд/гггг):")
 
@@ -845,6 +916,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].DateTimeField7[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -857,6 +929,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[2]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего супруга:")
@@ -867,6 +940,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите фамилию вашего супруга:")
 
@@ -876,6 +950,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine5_LastName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего супруга:")
 
@@ -885,6 +960,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine6_FirstName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего супруга:")
 
@@ -894,6 +970,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine7_MiddleName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -906,6 +983,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[3]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Укажите дату вступления в брак с супругом (мм/дд/гггг):")
 
@@ -915,6 +993,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[3]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату вступления в брак с супругом (мм/дд/гггг):")
 
@@ -924,6 +1003,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].DateTimeField8[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите место вступления в брак:")
 
@@ -933,6 +1013,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[4]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения супруга:")
 
@@ -942,6 +1023,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[5]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство супруга:")
 
@@ -951,6 +1033,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите расу, этническую или племенную группу супруга:")
 
@@ -960,6 +1043,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[6]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего супруга:", reply_markup=keyboard.markup)
@@ -970,6 +1054,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].TextField10[2]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего супруга:")
@@ -981,6 +1066,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].CheckBox14_Gender[0]'] = ""
         data['[1].NotMarried[0].CheckBox14_Gender[1]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш супруг — женщина.")
@@ -993,6 +1079,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].CheckBox14_Gender[0]'] = callback_query.data
         data['[1].NotMarried[0].CheckBox14_Gender[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш супруг — мужчина.")
@@ -1005,6 +1092,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine15_CheckBox15[0]'] = ""
         data['[1].NotMarried[0].PtAIILine15_CheckBox15[1]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.A_II_NotMarried_0_PtAIILine16_PlaceofLastEntry_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш супруг находится в США.")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего визита в США:")
@@ -1016,6 +1104,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine15_CheckBox15[0]'] = callback_query.data
         data['[1].NotMarried[0].PtAIILine15_CheckBox15[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.A_II_NotMarried_0_PtAIILine15_Specify_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш супруг не находится в США.")
     await bot.send_message(callback_query.from_user.id, "Укажите местонахождение вашего супруга:")
@@ -1027,6 +1116,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine15_Specify[0]'] = message.text
     keyboard = FormI589HaveChildrenChoice()
+    time.sleep(0.5)
     await Form_I_589.A_II_HaveChildrenChoice.set()
     await bot.send_message(message.from_user.id,
                            "У вас есть дети?\n"
@@ -1040,6 +1130,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine16_PlaceofLastEntry[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату последнего визита США вашего супруга (мм/дд/гггг):")
 
@@ -1049,6 +1140,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine17_DateofLastEntry[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1061,6 +1153,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1074,6 +1167,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine18_I94Number[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1087,6 +1181,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего супруга:")
@@ -1097,6 +1192,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine19_StatusofLastAdmission[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите текущий законный статус вашего супруга:")
 
@@ -1106,6 +1202,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine20_SpouseCurrentStatus[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1119,6 +1216,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589SpouseImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1131,6 +1229,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine21_ExpDateofAuthorizedStay[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589SpouseImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -1144,6 +1243,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine22_No[0]'] = ""
         data['[1].NotMarried[0].PtAIILine22_Yes[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfPreviouslyInUs()
     await bot.send_message(callback_query.from_user.id,
@@ -1159,6 +1259,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine22_No[0]'] = callback_query.data
         data['[1].NotMarried[0].PtAIILine22_Yes[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfPreviouslyInUs()
     await bot.send_message(callback_query.from_user.id,
@@ -1171,6 +1272,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(text="not_previously_in_us",
                            state=Form_I_589.A_II_NotMarried_0_PtAIILine23_PreviousArrivalDate_0)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IncludeSpouseChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1185,6 +1287,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine23_PreviousArrivalDate[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IncludeSpouseChoice()
     await bot.send_message(message.from_user.id,
@@ -1198,6 +1301,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine24_No[0]'] = ""
         data['[1].NotMarried[0].PtAIILine24_Yes[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589HaveChildrenChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1216,6 +1320,7 @@ async def process(callback_query: types.CallbackQuery,
     async with state.proxy() as data:
         data['[1].NotMarried[0].PtAIILine24_No[0]'] = callback_query.data
         data['[1].NotMarried[0].PtAIILine24_Yes[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589HaveChildrenChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1234,6 +1339,7 @@ async def process(callback_query: types.CallbackQuery,
     async with state.proxy() as data:
         data['[1].ChildrenCheckbox[0]'] = ""
         data['[1].ChildrenCheckbox[1]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет детей.")
     await bot.send_message(callback_query.from_user.id,
@@ -1248,6 +1354,7 @@ async def process(callback_query: types.CallbackQuery,
     async with state.proxy() as data:
         data['[1].ChildrenCheckbox[0]'] = callback_query.data
         data['[1].ChildrenCheckbox[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что у вас есть дети.")
@@ -1263,6 +1370,7 @@ async def process(message: types.Message, state: FSMContext):
         except:
             await bot.send_message(message.from_user.id, "Укажите количество ваших детей (цифрами):")
             return
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1277,6 +1385,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1289,6 +1398,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1301,6 +1411,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1313,6 +1424,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(message.from_user.id,
@@ -1325,6 +1437,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = "Single"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок не состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -1338,6 +1451,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = "Married"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -1351,6 +1465,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = "Divorced"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок разведен.")
     keyboard = FormI589IfAnyChoice()
@@ -1364,6 +1479,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = "Widowed"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок вдова(-ец).")
     keyboard = FormI589IfAnyChoice()
@@ -1377,6 +1493,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMarital1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1389,6 +1506,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего первого ребенка:")
@@ -1399,6 +1517,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите фамилию вашего первого ребенка:")
 
@@ -1408,6 +1527,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildLast1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего первого ребенка:")
 
@@ -1417,6 +1537,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildFirst1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего первого ребенка:")
 
@@ -1426,6 +1547,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildMiddle1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения вашего первого ребенка (мм/дд/гггг):")
 
@@ -1435,6 +1557,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildDOB1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения вашего первого ребенка:")
 
@@ -1444,6 +1567,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildCity1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство вашего первого ребенка:")
 
@@ -1453,6 +1577,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildNat1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите расу, этническую или племенную группу вашего первого ребенка:")
@@ -1463,6 +1588,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildRace1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего первого ребенка:", reply_markup=keyboard.markup)
@@ -1474,6 +1600,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].CheckBox16[1]'] = callback_query.data
         data['[1].CheckBox16[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что Ваш первый ребенок — женщина.")
@@ -1488,6 +1615,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].CheckBox16[0]'] = callback_query.data
         data['[1].CheckBox16[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что Ваш первый ребенок — мужчина.")
@@ -1501,6 +1629,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].CheckBox17[0]'] = callback_query.data
         data['[1].CheckBox17[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш первый ребенок находится в США.")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего въезда в США.")
@@ -1517,6 +1646,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 1:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild2.set()
         await bot.send_message(callback_query.from_user.id,
                                "Хотите ли вы заполнить данные для вашего второго ребенка?",
@@ -1525,6 +1655,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и название улицы:")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1537,6 +1668,7 @@ async def process(message: types.Message, state: FSMContext):
 
     if total_number_of_children > 1:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild2.set()
         await bot.send_message(message.from_user.id,
                                "Хотите ли вы заполнить данные для вашего второго ребенка?",
@@ -1545,6 +1677,7 @@ async def process(message: types.Message, state: FSMContext):
         await bot.send_message(message.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и название улицы:")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1553,6 +1686,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine14_PlaceofLastEntry[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату последнего въезда в США вашего первого ребенка (мм/дд/гггг):")
@@ -1563,6 +1697,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine15_ExpirationDate[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1575,6 +1710,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1588,6 +1724,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine16_I94Number[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1601,6 +1738,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine17_StatusofLastAdmission[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего первого ребенка:")
@@ -1611,6 +1749,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine17_StatusofLastAdmission[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите текущий законный статус вашего первого ребенка:")
@@ -1621,6 +1760,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine18_CurrentStatusofChild[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1634,6 +1774,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine19_ExpDateofAuthorizedStay[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1646,6 +1787,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine19_ExpDateofAuthorizedStay[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -1659,6 +1801,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine20_Yes[0]'] = callback_query.data
         data['[1].PtAIILine20_No[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш первый ребенок находится в "
@@ -1675,6 +1818,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].PtAIILine20_Yes[0]'] = ""
         data['[1].PtAIILine20_No[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш первый ребенок не находится в "
@@ -1697,6 +1841,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 1:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild2.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего второго ребенка?",
@@ -1705,6 +1850,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боялись преследования.\nСначала укажите номер и название улицы:")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -1720,6 +1866,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 1:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild2.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего второго ребенка?",
@@ -1728,12 +1875,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боялись преследования.\nСначала укажите номер и название улицы:")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
 @dp.callback_query_handler(text="yes_fill_next_child",
                            state=Form_I_589.A_II_IsFillChild2)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1744,6 +1893,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="no_fill_next_child",
                            state=Form_I_589.A_II_IsFillChild2)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
@@ -1756,6 +1906,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1768,6 +1919,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -1780,6 +1932,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildPassport2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1792,6 +1945,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildPassport2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(message.from_user.id,
@@ -1804,6 +1958,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMarital2[0]'] = "Single"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок не состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -1817,6 +1972,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMarital2[0]'] = "Married"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -1830,6 +1986,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMarital2[0]'] = "Divorced"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок разведен.")
     keyboard = FormI589IfAnyChoice()
@@ -1843,6 +2000,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMarital2[0]'] = "Widowed"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок вдова(-ец).")
     keyboard = FormI589IfAnyChoice()
@@ -1856,6 +2014,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего второго ребенка:")
@@ -1866,6 +2025,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите фамилию вашего второго ребенка:")
@@ -1876,6 +2036,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildLast2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего второго ребенка:")
 
@@ -1885,6 +2046,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildFirst2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего второго ребенка:")
 
@@ -1894,6 +2056,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMiddle2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения вашего второго ребенка (мм/дд/гггг):")
 
@@ -1903,6 +2066,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildDOB2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения вашего второго ребенка:")
 
@@ -1912,6 +2076,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildCity2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство вашего второго ребенка:")
 
@@ -1921,6 +2086,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildNat2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите расу, этническую или племенную группу "
                                                  "вашего второго ребенка:")
@@ -1931,6 +2097,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildRace2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего второго ребенка:", reply_markup=keyboard.markup)
@@ -1942,6 +2109,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox26_Gender[0]'] = callback_query.data
         data['[3].CheckBox26_Gender[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что Ваш второй ребенок — женщина.")
@@ -1955,6 +2123,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox26_Gender[1]'] = callback_query.data
         data['[3].CheckBox26_Gender[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что Ваш второй ребенок — мужчина.")
@@ -1968,6 +2137,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox27[0]'] = callback_query.data
         data['[3].CheckBox27[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry2_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш второй ребенок находится в США.")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего въезда в США.")
@@ -1985,6 +2155,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 2:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(callback_query.from_user.id,
                                "Хотите ли вы заполнить данные для вашего третьего ребенка?",
@@ -1993,6 +2164,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2005,6 +2177,7 @@ async def process(message: types.Message, state: FSMContext):
 
     if total_number_of_children > 2:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(message.from_user.id,
                                "Хотите ли вы заполнить данные для вашего третьего ребенка?",
@@ -2013,6 +2186,7 @@ async def process(message: types.Message, state: FSMContext):
         await bot.send_message(message.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2021,6 +2195,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine14_PlaceofLastEntry2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату последнего въезда в США вашего второго ребенка (мм/дд/гггг):")
@@ -2031,6 +2206,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2043,6 +2219,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2056,6 +2233,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2069,6 +2247,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine17_StatusofLastAdmission2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего второго ребенка:")
@@ -2079,6 +2258,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine17_StatusofLastAdmission2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите текущий законный статус вашего второго ребенка:")
@@ -2089,6 +2269,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2102,6 +2283,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2114,6 +2296,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2126,6 +2309,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -2139,6 +2323,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine20_Yes2[0]'] = callback_query.data
         data['[3].PtAIILine20_No2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш второй ребенок находится в процессе судебного разбирательства "
@@ -2155,6 +2340,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine20_Yes2[0]'] = ""
         data['[3].PtAIILine20_No2[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш второй ребенок не находится в процессе судебного разбирательства "
@@ -2172,12 +2358,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].PtAIILine21_Yes2[0]'] = callback_query.data
         data['[3].PtAIILine21_No2[0]'] = ""
         total_number_of_children = int(data["[1].TotalChild[0]"])
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш второй ребенок должен быть включен в это заявление.")
 
     if total_number_of_children > 2:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего третьего ребенка?",
@@ -2186,6 +2374,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2196,12 +2385,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].PtAIILine21_Yes2[0]'] = ""
         data['[3].PtAIILine21_No2[0]'] = callback_query.data
         total_number_of_children = int(data["[1].TotalChild[0]"])
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш второй ребенок должен быть включен в это заявление.")
 
     if total_number_of_children > 2:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild3.set()
         await bot.send_message(callback_query.from_user.id,
                                "Хотите ли вы заполнить данные для вашего третьего ребенка?",
@@ -2210,12 +2401,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
 @dp.callback_query_handler(text="yes_fill_next_child",
                            state=Form_I_589.A_II_IsFillChild3)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2226,6 +2419,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="no_fill_next_child",
                            state=Form_I_589.A_II_IsFillChild3)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
@@ -2238,6 +2432,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2250,6 +2445,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildAlien3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2273,6 +2469,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport3[0]'] = message.text
+        time.sleep(0.5)
         await Form_I_589.next()
         keyboard = FormI589MaritalStatusChoice()
         await bot.send_message(message.from_user.id,
@@ -2284,6 +2481,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital3[0]'] = "Single"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок не состоит в браке.")
         keyboard = FormI589IfAnyChoice()
@@ -2296,6 +2494,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital3[0]'] = "Married"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок состоит в браке.")
         keyboard = FormI589IfAnyChoice()
@@ -2308,6 +2507,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital3[0]'] = "Divorced"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок разведен.")
         keyboard = FormI589IfAnyChoice()
@@ -2320,6 +2520,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital3[0]'] = "Widowed"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок вдова(-ец).")
         keyboard = FormI589IfAnyChoice()
@@ -2333,6 +2534,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего третьего ребенка:")
@@ -2343,6 +2545,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите фамилию вашего третьего ребенка:")
 
@@ -2352,6 +2555,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildLast3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего третьего ребенка:")
 
@@ -2361,6 +2565,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildFirst3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего третьего ребенка:")
 
@@ -2370,6 +2575,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMiddle3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения вашего третьего ребенка (мм/дд/гггг):")
 
@@ -2379,6 +2585,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildDOB3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения вашего третьего ребенка:")
 
@@ -2388,6 +2595,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildCity3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство вашего третьего ребенка:")
 
@@ -2397,6 +2605,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildNat3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите расу, этническую или племенную группу вашего третьего ребенка:")
@@ -2407,6 +2616,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildRace3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего третьего ребенка:", reply_markup=keyboard.markup)
@@ -2418,6 +2628,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox36_Gender[0]'] = callback_query.data
         data['[3].CheckBox36_Gender[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок — женщина.")
@@ -2430,6 +2641,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox36_Gender[1]'] = callback_query.data
         data['[3].CheckBox36_Gender[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок — мужчина.")
@@ -2442,6 +2654,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox37[0]'] = callback_query.data
         data['[3].CheckBox37[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry3_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш третий ребенок находится в США")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего въезда в США.")
@@ -2458,6 +2671,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 3:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего четвертого ребенка?",
@@ -2466,6 +2680,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2478,6 +2693,7 @@ async def process(message: types.Message, state: FSMContext):
 
     if total_number_of_children > 3:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(message.from_user.id,
                                "Вы хотите заполнить те же данные для вашего четвертого ребенка?",
@@ -2486,6 +2702,7 @@ async def process(message: types.Message, state: FSMContext):
         await bot.send_message(message.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2494,6 +2711,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine14_PlaceofLastEntry3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату последнего въезда в США вашего третьего ребенка (мм/дд/гггг):")
@@ -2504,6 +2722,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2516,6 +2735,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2529,6 +2749,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2542,6 +2763,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine17_StatusofLastAdmission3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего третьего ребенка:")
@@ -2552,6 +2774,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine17_StatusofLastAdmission3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите текущий законный статус вашего третьего ребенка:")
@@ -2562,6 +2785,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2575,6 +2799,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2587,6 +2812,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay3[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -2600,6 +2826,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine20_Yes3[0]'] = callback_query.data
         data['[3].PtAIILine20_No3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш третий ребенок находится "
@@ -2616,6 +2843,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine20_Yes3[0]'] = ""
         data['[3].PtAIILine20_No3[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш третий ребенок не находится "
@@ -2633,12 +2861,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].PtAIILine21_Yes3[0]'] = callback_query.data
         data['[3].PtAIILine21_No3[0]'] = ""
         total_number_of_children = int(data["[1].TotalChild[0]"])
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш третий ребенок должен быть включен в это заявление.")
 
     if total_number_of_children > 3:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего четвертого ребенка?",
@@ -2647,6 +2877,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2657,12 +2888,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[3].PtAIILine21_Yes3[0]'] = ""
         data['[3].PtAIILine21_No3[0]'] = callback_query.data
         total_number_of_children = int(data["[1].TotalChild[0]"])
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш третий ребенок должен быть включен в это заявление.")
 
     if total_number_of_children > 3:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.A_II_IsFillChild4.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего четвертого ребенка?",
@@ -2671,12 +2904,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
 @dp.callback_query_handler(text="yes_fill_next_child",
                            state=Form_I_589.A_II_IsFillChild4)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2688,6 +2923,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="no_fill_next_child",
                            state=Form_I_589.A_II_IsFillChild4)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
@@ -2700,6 +2936,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2712,6 +2949,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildAlien4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2724,6 +2962,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildPassport4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2736,6 +2975,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].ChildPassport4[0]'] = message.text
+        time.sleep(0.5)
         await Form_I_589.next()
         keyboard = FormI589MaritalStatusChoice()
         await bot.send_message(message.from_user.id,
@@ -2747,6 +2987,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital4[0]'] = "Single"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок не состоит в браке.")
         keyboard = FormI589IfAnyChoice()
@@ -2759,6 +3000,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital4[0]'] = "Married"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок состоит в браке.")
         keyboard = FormI589IfAnyChoice()
@@ -2771,6 +3013,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital4[0]'] = "Divorced"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок разведен.")
         keyboard = FormI589IfAnyChoice()
@@ -2783,6 +3026,7 @@ async def process(message: types.Message, state: FSMContext):
     async def process(callback_query: types.CallbackQuery, state: FSMContext):
         async with state.proxy() as data:
             data['[3].ChildMarital4[0]'] = "Widowed"
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок вдова(-ец).")
         keyboard = FormI589IfAnyChoice()
@@ -2796,6 +3040,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего четвертого ребенка:")
@@ -2806,6 +3051,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildSSN4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите фамилию вашего четвертого ребенка:")
 
@@ -2815,6 +3061,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildLast4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего четвертого ребенка:")
 
@@ -2824,6 +3071,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildFirst4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего четвертого ребенка:")
 
@@ -2833,6 +3081,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildMiddle4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения вашего четвертого ребенка (мм/дд/гггг):")
 
@@ -2842,6 +3091,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildDOB4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения вашего четвертого ребенка:")
 
@@ -2851,6 +3101,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildCity4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство вашего четвертого ребенка:")
 
@@ -2860,6 +3111,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildNat4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите расу, этническую или племенную группу вашего четвертого ребенка:")
@@ -2870,6 +3122,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].ChildRace4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего четвертого ребенка:", reply_markup=keyboard.markup)
@@ -2881,6 +3134,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox46_Gender[0]'] = callback_query.data
         data['[3].CheckBox46_Gender[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок — женщина.")
@@ -2893,6 +3147,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox46_Gender[1]'] = callback_query.data
         data['[3].CheckBox46_Gender[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок — мужчина.")
@@ -2905,6 +3160,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].CheckBox47[0]'] = callback_query.data
         data['[3].CheckBox47[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.A_II_PtAIILine14_PlaceofLastEntry4_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш четвертый ребенок находится в США")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего въезда в США.")
@@ -2922,6 +3178,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 4:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.Supplement_A_IsFillChild5.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего пятого ребенка?",
@@ -2930,6 +3187,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2941,6 +3199,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                            "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -2949,6 +3208,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine14_PlaceofLastEntry4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату последнего въезда в США вашего четвертого ребенка (мм/дд/гггг):")
@@ -2959,6 +3219,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine15_DateofLastEntry4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2971,6 +3232,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -2984,6 +3246,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine16_I94Number4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -2997,6 +3260,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine17_StatusofLastAdmission4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего четвертого ребенка:")
@@ -3007,6 +3271,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine17_StatusofLastAdmission4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите текущий законный статус вашего четвертого ребенка:")
@@ -3017,6 +3282,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine18_ChildCurrentStatus4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3030,6 +3296,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3043,6 +3310,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine19_ExpDateofAuthorizedStay4[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -3057,6 +3325,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine20_Yes4[0]'] = callback_query.data
         data['[3].PtAIILine20_No4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш четвертый ребенок находится "
@@ -3073,6 +3342,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[3].PtAIILine20_Yes4[0]'] = ""
         data['[3].PtAIILine20_No4[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш четвертый ребенок не находится "
@@ -3095,6 +3365,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 4:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.Supplement_A_IsFillChild5.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего пятого ребенка?",
@@ -3103,6 +3374,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3118,6 +3390,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 4:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.Supplement_A_IsFillChild5.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего пятого ребенка?",
@@ -3126,12 +3399,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
 @dp.callback_query_handler(text="yes_fill_next_child",
                            state=Form_I_589.Supplement_A_IsFillChild5)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3142,6 +3417,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="no_fill_next_child",
                            state=Form_I_589.Supplement_A_IsFillChild5)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
@@ -3154,6 +3430,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[6]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3166,6 +3443,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[6]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3178,6 +3456,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[7]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3190,6 +3469,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[7]'] = message.text
+        time.sleep(0.5)
         await Form_I_589.next()
         keyboard = FormI589MaritalStatusChoice()
         await bot.send_message(message.from_user.id,
@@ -3202,6 +3482,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[8]'] = "Single"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок не состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -3215,6 +3496,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[8]'] = "Married"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -3228,6 +3510,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[8]'] = "Divorced"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок разведен.")
     keyboard = FormI589IfAnyChoice()
@@ -3241,6 +3524,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[8]'] = "Widowed"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок вдова(-ец).")
     keyboard = FormI589IfAnyChoice()
@@ -3254,6 +3538,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[9]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего пятого ребенка:")
@@ -3264,6 +3549,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[9]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите фамилию вашего пятого ребенка:")
 
@@ -3273,6 +3559,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего пятого ребенка:")
 
@@ -3282,6 +3569,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего пятого ребенка:")
 
@@ -3291,6 +3579,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[3]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения вашего пятого ребенка (мм/дд/гггг):")
 
@@ -3300,6 +3589,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].DateTimeField14[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения вашего пятого ребенка:")
 
@@ -3309,6 +3599,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство вашего пятого ребенка:")
 
@@ -3318,6 +3609,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[4]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите расу, этническую или племенную группу вашего пятого ребенка:")
 
@@ -3327,6 +3619,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[5]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего пятого ребенка:", reply_markup=keyboard.markup)
@@ -3338,6 +3631,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].CheckBox12_Gender[1]'] = callback_query.data
         data['[12].CheckBox12_Gender[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок — женщина.")
@@ -3350,6 +3644,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].CheckBox12_Gender[1]'] = ""
         data['[12].CheckBox12_Gender[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок — мужчина.")
@@ -3362,6 +3657,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].CheckBox57[0]'] = callback_query.data
         data['[12].CheckBox57[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.Supplement_A_ChildEntry5_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш пятый ребенок находится в США")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего въезда в США.")
@@ -3378,6 +3674,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     if total_number_of_children > 5:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.Supplement_A_IsFillChild6.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего шестого ребенка?",
@@ -3386,6 +3683,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3397,6 +3695,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                            "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3405,6 +3704,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildEntry5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату последнего въезда в США вашего пятого ребенка (мм/дд/гггг):")
@@ -3415,6 +3715,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExp5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3427,6 +3728,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum5[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3440,6 +3742,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3453,6 +3756,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildStatus5[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего пятого ребенка:")
@@ -3463,6 +3767,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildStatus5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите текущий законный статус вашего пятого ребенка:")
@@ -3473,6 +3778,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildCurrent5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3486,6 +3792,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExpAuth5[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3498,6 +3805,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExpAuth5[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -3511,6 +3819,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppA_CheckBox20[0]'] = callback_query.data
         data['[12].SuppA_CheckBox20[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш пятый ребенок находится "
@@ -3527,6 +3836,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppA_CheckBox20[1]'] = callback_query.data
         data['[12].SuppA_CheckBox20[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш пятый ребенок не находится "
@@ -3544,12 +3854,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].SuppA_CheckBox21[0]'] = callback_query.data
         data['[12].SuppA_CheckBox21[1]'] = ""
         total_number_of_children = int(data["[1].TotalChild[0]"])
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш пятый ребенок должен быть включен в это заявление.")
 
     if total_number_of_children > 5:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.Supplement_A_IsFillChild6.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего шестого ребенка?",
@@ -3558,6 +3870,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3568,12 +3881,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[12].SuppA_CheckBox21[1]'] = callback_query.data
         data['[12].SuppA_CheckBox21[0]'] = ""
         total_number_of_children = int(data["[1].TotalChild[0]"])
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш пятый ребенок должен быть включен в это заявление.")
 
     if total_number_of_children > 5:
         keyboard = FormI589FillNextChildChoice()
+        time.sleep(0.5)
         await Form_I_589.Supplement_A_IsFillChild6.set()
         await bot.send_message(callback_query.from_user.id,
                                "Вы хотите заполнить те же данные для вашего шестого ребенка?",
@@ -3582,12 +3897,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         await bot.send_message(callback_query.from_user.id,
                                "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                                "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+        time.sleep(0.5)
         await Form_I_589.A_III_TextField13_0.set()
 
 
 @dp.callback_query_handler(text="yes_fill_next_child",
                            state=Form_I_589.Supplement_A_IsFillChild6)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3598,6 +3915,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="no_fill_next_child",
                            state=Form_I_589.Supplement_A_IsFillChild6)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
@@ -3610,6 +3928,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[16]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3622,6 +3941,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[16]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3634,6 +3954,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[17]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3646,6 +3967,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[17]'] = message.text
+        time.sleep(0.5)
         await Form_I_589.next()
         keyboard = FormI589MaritalStatusChoice()
         await bot.send_message(message.from_user.id,
@@ -3658,6 +3980,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[18]'] = "Single"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок не состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -3671,6 +3994,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[18]'] = "Married"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок состоит в браке.")
     keyboard = FormI589IfAnyChoice()
@@ -3684,6 +4008,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[18]'] = "Divorced"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок разведен.")
     keyboard = FormI589IfAnyChoice()
@@ -3697,6 +4022,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[18]'] = "Widowed"
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок вдова(-ец).")
     keyboard = FormI589IfAnyChoice()
@@ -3710,6 +4036,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[19]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите фамилию вашего шестого ребенка:")
@@ -3720,6 +4047,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[19]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите фамилию вашего шестого ребенка:")
 
@@ -3729,6 +4057,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[10]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите имя вашего шестого ребенка:")
 
@@ -3738,6 +4067,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[12]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите отчество вашего шестого ребенка:")
 
@@ -3747,6 +4077,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[13]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения вашего шестого ребенка (мм/дд/гггг):")
 
@@ -3756,6 +4087,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].DateTimeField14[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город/населенный пункт и страну рождения вашего шестого ребенка:")
 
@@ -3765,6 +4097,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[11]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите гражданство вашего шестого ребенка:")
 
@@ -3774,6 +4107,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[14]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите расу, этническую или племенную "
                                                  "группу вашего шестого ребенка:")
@@ -3784,6 +4118,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].TextField12[15]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Укажите пол вашего шестого:", reply_markup=keyboard.markup)
@@ -3795,6 +4130,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppAL12_CheckBox[1]'] = callback_query.data
         data['[12].SuppAL12_CheckBox[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок — женщина.")
@@ -3808,6 +4144,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppAL12_CheckBox[0]'] = callback_query.data
         data['[12].SuppAL12_CheckBox[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LocationChoice()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок — мужчина.")
@@ -3821,6 +4158,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppAL13_CheckBox[0]'] = callback_query.data
         data['[12].SuppAL13_CheckBox[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.Supplement_A_ChildEntry6_0.set()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок находится в США")
     await bot.send_message(callback_query.from_user.id, "Укажите место его последнего въезда в США.")
@@ -3832,11 +4170,13 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppAL13_CheckBox[1]'] = callback_query.data
         data['[12].SuppAL13_CheckBox[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш шестой ребенок находится в США")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                            "где вы не боитесь преследований.\nСначала укажите номер и улицу.")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3848,6 +4188,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите свой последний адрес, по которому вы жили до приезда в Соединенные Штаты, "
                            "где вы не боялись преследования.")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_0.set()
 
 
@@ -3856,6 +4197,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildEntry6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату последнего въезда в США вашего шестого ребенка (мм/дд/гггг):")
@@ -3866,6 +4208,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExp6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3878,6 +4221,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum6[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3891,6 +4235,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildINum6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3904,6 +4249,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildStatus6[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущий законный статус вашего шестого ребенка:")
@@ -3914,6 +4260,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildStatus6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите текущий законный статус вашего шестого ребенка:")
@@ -3924,6 +4271,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildCurrent6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -3937,6 +4285,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExpAuth6[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3949,6 +4298,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[12].ChildExpAuth6[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ChildImmigrationCourtChoice()
     await bot.send_message(message.from_user.id,
@@ -3962,6 +4312,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppALine20_CheckBox2[0]'] = callback_query.data
         data['[12].SuppALine20_CheckBox2[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IncludeChildChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3978,6 +4329,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppALine20_CheckBox2[1]'] = callback_query.data
         data['[12].SuppALine20_CheckBox2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IncludeChildChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -3994,6 +4346,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppALine21_CheckBox[0]'] = callback_query.data
         data['[12].SuppALine21_CheckBox[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш шестой ребенок должен быть включен в это заявление.")
@@ -4009,6 +4362,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[12].SuppALine21_CheckBox[1]'] = callback_query.data
         data['[12].SuppALine21_CheckBox[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш шестой ребенок должен быть включен в это заявление.")
@@ -4023,6 +4377,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город, где вы жили до приезда в Соединенные Штаты и не боялись преследования:")
@@ -4033,6 +4388,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите округ, провинцию или штат, где вы жили до приезда в "
@@ -4044,6 +4400,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[4]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите страну, где Вы жили до приезда в Соединенные Штаты и не боялись преследования:")
@@ -4054,6 +4411,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[6]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, с которой Вы проживали в этом месте (мм/гггг):")
@@ -4064,6 +4422,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField21[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, до которой вы проживали в этом месте (мм/гггг):")
@@ -4075,6 +4434,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField20[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
 
     await bot.send_message(message.from_user.id,
@@ -4088,6 +4448,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город, где вы жили до приезда в Соединенные Штаты, "
@@ -4099,6 +4460,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[3]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите округ, провинцию или штат, где вы жили до приезда "
@@ -4110,6 +4472,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[5]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите страну, где вы жили до приезда в Соединенные Штаты, "
@@ -4121,6 +4484,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[7]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, с которой вы проживали в этом месте (мм/гггг):")
@@ -4131,6 +4495,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField22[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, до которой вы проживали в этом месте (мм/гггг):")
@@ -4142,6 +4507,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField23[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите свой текущий фактический адрес проживания.")
@@ -4153,6 +4519,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[8]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -4162,6 +4529,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[10]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите округ, провинцию или штат:")
 
@@ -4171,6 +4539,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[12]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -4180,6 +4549,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[14]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату, когда вы начали "
                                                  "свое проживание по этому адресу (мм/дд/гггг):")
@@ -4190,6 +4560,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField24[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите дату, когда вы планируете закончить свое проживание"
                                                  " по этому адресу (мм/дд/гггг):")
@@ -4201,6 +4572,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField26[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
@@ -4212,6 +4584,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[9]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город:")
@@ -4222,6 +4595,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[11]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите округ, провинцию или штат:")
@@ -4232,6 +4606,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[13]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
@@ -4242,6 +4617,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[15]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы начали свое проживание по этому адресу (мм/дд/гггг):")
@@ -4252,6 +4628,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField25[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы закончили свое проживание по этому адресу (мм/дд/гггг):")
@@ -4262,6 +4639,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField27[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
@@ -4274,6 +4652,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_16)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_28.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте следующую информацию о своем образовании, "
@@ -4288,6 +4667,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[16]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город второго места жительства")
@@ -4298,6 +4678,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[17]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите округ, провинцию или штат:")
@@ -4308,6 +4689,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[18]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
@@ -4318,6 +4700,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[19]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы начали свое проживание по этому адресу (мм/дд/гггг):")
@@ -4328,6 +4711,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField28[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы закончили свое проживание по этому адресу (мм/дд/гггг):")
@@ -4338,6 +4722,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField29[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
@@ -4350,6 +4735,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_20)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_28.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте следующую информацию о своем образовании, "
@@ -4364,6 +4750,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[20]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город:")
@@ -4374,6 +4761,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[21]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите округ, провинцию или штатe")
@@ -4384,6 +4772,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[23]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
@@ -4394,6 +4783,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[22]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы начали свое проживание по этому адресу (мм/дд/гггг):")
@@ -4404,6 +4794,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField30[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы закончили свое проживание по этому адресу (мм/дд/гггг):")
@@ -4414,6 +4805,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField31[0]'] = message.text
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(message.from_user.id,
                                "Предоставьте следующую информацию о вашем месте жительства за последние 5 лет.")
@@ -4426,6 +4818,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_24)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_28.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте следующую информацию о своем образовании, "
@@ -4440,6 +4833,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[24]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город:")
@@ -4450,6 +4844,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[25]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите округ, провинцию или штат:")
@@ -4460,6 +4855,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[26]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
@@ -4470,6 +4866,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[27]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы начали свое проживание по этому адресу (мм/дд/гггг):")
@@ -4480,6 +4877,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField32[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, когда вы закончили свое проживание по этому адресу (мм/дд/гггг):")
@@ -4490,6 +4888,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField33[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о своем образовании, "
@@ -4504,6 +4903,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[28]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите тип вашей первой школы:")
@@ -4514,6 +4914,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[30]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес вашей первой школы:")
@@ -4524,6 +4925,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[32]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, с которой вы начали посещать школу (мм/дд/гггг):")
@@ -4534,6 +4936,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField41[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания школы (мм/дд/гггг):")
@@ -4544,6 +4947,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField40[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4556,6 +4960,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_29)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_40.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте следующую информацию о вашей занятости за последние 5 лет.\n"
@@ -4569,6 +4974,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[29]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите тип вашей второй школы:")
@@ -4579,6 +4985,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[31]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес вашей второй школы:")
@@ -4589,6 +4996,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[33]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, с которой вы начали посещать школу (мм/дд/гггг):")
@@ -4599,6 +5007,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField38[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания школы (мм/дд/гггг):")
@@ -4609,6 +5018,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField39[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4621,6 +5031,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_34)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_40.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте следующую информацию о вашей занятости за последние 5 лет.\n"
@@ -4634,6 +5045,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[34]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите тип вашей третьей школы:")
@@ -4644,6 +5056,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[35]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес вашей третьей школы:")
@@ -4654,6 +5067,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[36]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, с которой вы начали посещать школу (мм/дд/гггг):")
@@ -4664,6 +5078,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField37[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания школы (мм/дд/гггг):")
@@ -4675,6 +5090,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField36[0]'] = message.text
 
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4687,6 +5103,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_34)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_40.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте следующую информацию о вашей занятости за последние 5 лет.\n"
@@ -4700,6 +5117,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[37]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите тип вашей четвертой школы:")
@@ -4710,6 +5128,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[38]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес вашей четвертой школы:")
@@ -4720,6 +5139,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[39]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату, с которой вы начали посещать школу (мм/дд/гггг):")
@@ -4730,6 +5150,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField34[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания школы (мм/дд/гггг):")
@@ -4740,6 +5161,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField35[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте следующую информацию о вашей занятости за последние 5 лет.\n"
@@ -4753,6 +5175,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[40]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id, "Укажите вашу должность:")
 
@@ -4762,6 +5185,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[42]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату начала работы (мм/дд/гггг):")
@@ -4772,6 +5196,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField42[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания работы (мм/дд/гггг):")
@@ -4783,6 +5208,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField44[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4796,6 +5222,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_41)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_46.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
@@ -4808,6 +5235,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[41]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите вашу должность:")
@@ -4818,6 +5246,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[43]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату начала работы (мм/дд/гггг):")
@@ -4828,6 +5257,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField43[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания работы (мм/дд/гггг):")
@@ -4838,6 +5268,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField45[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4847,6 +5278,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_41)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_46.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
@@ -4860,6 +5292,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[44]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4873,6 +5306,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_45)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_46.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
@@ -4884,6 +5318,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[45]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату начала работы (мм/дд/гггг):")
@@ -4894,6 +5329,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField46[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите дату окончания работы (мм/дд/гггг):")
@@ -4904,6 +5340,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].DateTimeField47[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
@@ -4916,6 +5353,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_46)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_47.set()
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
@@ -4927,6 +5365,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="don't_have_it",
                            state=Form_I_589.A_III_TextField13_47)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_48.set()
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(message.from_user.id,
@@ -4939,6 +5378,7 @@ async def process(callback_query: types.CallbackQuery):
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField13_48)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет братьев\сестер.")
     keyboard = FormI589AsylumReasonChoice()
@@ -4946,6 +5386,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -4955,6 +5396,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[46]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город/населенный пункт и страну рождения матери:")
@@ -4965,6 +5407,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[49]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589MotherDeceasedChoice()
     await bot.send_message(message.from_user.id,
@@ -4977,12 +5420,14 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[4].CheckBoxAIII5\\\\.m[0]"] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша мать скончалась.")
     await bot.send_message(callback_query.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите полное имя вашего отца:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_47.set()
 
 
@@ -4991,10 +5436,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.m[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша мать не скончалась.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущее местонахождение вашей матери:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField35_0.set()
 
 
@@ -5003,6 +5450,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField35[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Предоставьте информацию о ваших родителях, братьях и сестрах.")
@@ -5016,6 +5464,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[47]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город/населенный пункт и страну рождения отца:")
@@ -5026,6 +5475,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[50]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589FatherDeceasedChoice()
     await bot.send_message(message.from_user.id,
@@ -5038,18 +5488,21 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.f[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш отец скончался.")
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите полное имя брата или сестры:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_48.set()
 
 
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField35_1)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет братьев\сестер.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5057,6 +5510,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5065,10 +5519,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.f[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваш отец не скончался.")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущее местонахождение вашего отца:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField35_1.set()
 
 
@@ -5077,6 +5533,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField35[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(message.from_user.id,
@@ -5089,6 +5546,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField13_48)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет братьев\сестер.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5096,6 +5554,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5105,6 +5564,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[48]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город/населенный пункт и страну рождения брата или сестры:")
@@ -5115,6 +5575,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[51]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI5891siblingDeceasedChoice()
     await bot.send_message(message.from_user.id,
@@ -5127,6 +5588,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s1[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
     await bot.send_message(callback_query.from_user.id,
@@ -5135,12 +5597,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите полное имя брата или сестры:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_52.set()
 
 
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField35_2)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет второго(-ой) брата\сестры.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5148,6 +5612,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5156,10 +5621,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат не скончалась(-лся).")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущее местоположение брата или сестры:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField35_2.set()
 
 
@@ -5168,6 +5635,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField35[2]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(message.from_user.id,
@@ -5180,6 +5648,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField13_52)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет второго(-ой) брата\сестры.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5187,6 +5656,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5196,6 +5666,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[52]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город/населенный пункт и страну рождения брата или сестры:")
@@ -5206,6 +5677,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[53]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI5892siblingDeceasedChoice()
     await bot.send_message(message.from_user.id,
@@ -5218,18 +5690,21 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s2[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите полное имя брата или сестры:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_54.set()
 
 
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField35_3)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет третьего(-ей) брата\сестры.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5237,6 +5712,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5245,10 +5721,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат не скончалась(-лся).")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущее местоположение брата или сестры:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField35_3.set()
 
 
@@ -5257,6 +5735,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField35[3]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(message.from_user.id,
@@ -5269,6 +5748,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField13_54)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет третьего(-ей) брата\сестры.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5276,6 +5756,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5285,6 +5766,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[54]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город/населенный пункт и страну рождения брата или сестры:")
@@ -5295,6 +5777,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[55]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI5893siblingDeceasedChoice()
     await bot.send_message(message.from_user.id,
@@ -5307,18 +5790,21 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s3[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите полное имя брата или сестры:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField13_56.set()
 
 
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField35_4)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет четвертого(-ой) брата\сестры.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5326,6 +5812,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5334,10 +5821,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат не скончалась(-лся).")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущее местоположение брата или сестры:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField35_4.set()
 
 
@@ -5346,6 +5835,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField35[4]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589HaveSiblingsChoice()
     await bot.send_message(message.from_user.id,
@@ -5358,6 +5848,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="have_no_siblings",
                            state=Form_I_589.A_III_TextField13_56)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что у вас нет четвертого(-ой) брата\сестры.")
     keyboard = FormI589AsylumReasonChoice()
@@ -5365,6 +5856,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5374,6 +5866,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[56]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город/населенный пункт и страну рождения брата или сестры:")
@@ -5384,6 +5877,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField13[57]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI5894siblingDeceasedChoice()
     await bot.send_message(message.from_user.id,
@@ -5396,6 +5890,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s4[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат скончалась(-лся).")
     keyboard = FormI589AsylumReasonChoice()
@@ -5403,6 +5898,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Укажите верное:\n"
                            "Я прошу убежища или приостановления депортации на основании:",
                            reply_markup=keyboard.markup)
+    time.sleep(0.5)
     await Form_I_589.B_Asylum_Reason_Choice.set()
 
 
@@ -5411,10 +5907,12 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[4].CheckBoxAIII5\\\\.s4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что ваша сестра или брат не скончалась(-лся).")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите текущее местоположение брата или сестры:")
+    time.sleep(0.5)
     await Form_I_589.A_III_TextField35_5.set()
 
 
@@ -5423,6 +5921,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].TextField35[5]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589AsylumReasonChoice()
     await bot.send_message(message.from_user.id,
@@ -5435,6 +5934,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].CheckBoxrace[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что просите убежища или приостановления депортации "
@@ -5451,6 +5951,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].CheckBoxreligion[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что просите убежища или приостановления депортации "
@@ -5467,6 +5968,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].CheckBoxnationality[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что просите убежища или приостановления депортации "
@@ -5483,6 +5985,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].CheckBoxpolitics[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что просите убежища или приостановления депортации "
@@ -5499,6 +6002,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].CheckBoxsocial[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что просите убежища или приостановления депортации "
@@ -5515,6 +6019,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].CheckBoxtorture[0]'] = callback_query.data
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что просите убежища или приостановления депортации "
@@ -5533,6 +6038,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].ckboxyn1a[0]'] = callback_query.data
         data['[5].#subform[6].ckboxyn1a[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вашей семье, близким друзьям или коллегам причиняли вред, или "
@@ -5551,6 +6057,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].TextField14[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589YouFearHarmOrMistreatmentChoice()
     await bot.send_message(message.from_user.id,
@@ -5564,6 +6071,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].ckboxyn1a[1]'] = callback_query.data
         data['[5].#subform[6].ckboxyn1a[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.B_You_Fear_Harm_Or_Mistreatment_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вашей семье, близким друзьям или коллегам не причиняли вред или "
@@ -5581,6 +6089,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].ckboxyn1b[0]'] = callback_query.data
         data['[5].#subform[6].ckboxyn1b[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.B_TextField15_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что опасаетесь причинения вреда или жестокого обращения, "
@@ -5598,6 +6107,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].TextField15[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.B_You_Or_Family_Accused_Charged_Arrested_Detained_Choice.set()
     keyboard = FormI589YouOrFamilyAccusedChargedArrestedDetainedChoice()
     await bot.send_message(message.from_user.id,
@@ -5614,6 +6124,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[5].#subform[6].ckboxyn1b[1]'] = callback_query.data
         data['[5].#subform[6].ckboxyn1b[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что не боитесь причинения вреда или плохого обращения, "
@@ -5633,6 +6144,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn2[0]'] = callback_query.data
         data['[7].ckboxyn2[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы или члены вашей семьи были обвинены, арестованы, задержаны, допрошены, "
@@ -5646,6 +6158,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[7].PBL2_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589YouBeenAssociatedWithAnyOrganizationsChoice()
     await bot.send_message(message.from_user.id,
@@ -5663,6 +6176,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn2[1]'] = callback_query.data
         data['[7].ckboxyn2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.B_Been_Associated_With_Any_Organizations_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы или члены вашей семьи не были обвинены, арестованы, задержаны, "
@@ -5686,6 +6200,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn3a[0]'] = callback_query.data
         data['[7].ckboxyn3a[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Опишите для каждого человека уровень участия, какие-либо руководящие или другие должности, "
@@ -5698,6 +6213,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[7].PBL3A_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589YouContinueToParticipateInOrganizationsChoice()
     await bot.send_message(message.from_user.id,
@@ -5712,6 +6228,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn3a[1]'] = callback_query.data
         data['[7].ckboxyn3a[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.B_Continue_To_Participate_In_Organizations_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы или члены вашей семьи никогда не принадлежали и не были связаны "
@@ -5732,6 +6249,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn3b[0]'] = callback_query.data
         data['[7].ckboxyn3b[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Опишите для каждого человека текущий уровень вашего участия или участия членов вашей "
@@ -5744,6 +6262,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[7].PBL3B_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589YouAfraidOfBeingSubjectedToTortureChoice()
     await bot.send_message(message.from_user.id,
@@ -5758,6 +6277,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn3b[1]'] = callback_query.data
         data['[7].ckboxyn3b[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.B_Afraid_Of_Being_Subjected_To_Torture_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы или члены вашей семьи не продолжаете каким-либо образом участвовать "
@@ -5775,6 +6295,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn4[0]'] = callback_query.data
         data['[7].ckboxyn4[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Объясните, почему вы боитесь, и опишите характер пыток, которых вы опасаетесь, "
@@ -5786,6 +6307,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[7].PB4_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589FamilyAppliedForUsrefugeeStatusChoice()
     await bot.send_message(message.from_user.id,
@@ -5801,6 +6323,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[7].ckboxyn4[1]'] = callback_query.data
         data['[7].ckboxyn4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.C_Family_Applied_For_USRefugee_Status_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что не боитесь подвергнуться пыткам в своей родной стране или в "
@@ -5819,6 +6342,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync1[0]'] = callback_query.data
         data['[8].ckboxync1[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш супруг, ваш ребенок (дети), ваши родители или братья "
@@ -5839,6 +6363,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[8].PCL1_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589FamilyTravelOrResideInOtherCountriesBeforeUsChoice()
     await bot.send_message(message.from_user.id,
@@ -5854,6 +6379,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync1[1]'] = callback_query.data
         data['[8].ckboxync1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.C_Family_Travel_Or_Reside_In_Other_Countries_Before_US_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы, ваш супруг, ваш ребенок (дети), ваши родители или ваши братья и "
@@ -5873,6 +6399,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync2a[0]'] = callback_query.data
         data['[8].ckboxync2a[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы, ваш супруг или ребенок (дети), которые сейчас находятся в "
@@ -5892,6 +6419,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync2a[1]'] = callback_query.data
         data['[8].ckboxync2a[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы, ваш супруг или ребенок (дети), которые сейчас находятся в "
@@ -5911,6 +6439,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync2b[0]'] = callback_query.data
         data['[8].ckboxync2b[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите для каждого лица следующее: название каждой страны и продолжительность пребывания, "
@@ -5928,6 +6457,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         answered_yes_in_previous_question = data['[8].ckboxync2a[0]']
 
     if answered_yes_in_previous_question:
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(callback_query.from_user.id, "Укажите для каждого лица следующее: название каждой "
                                                             "страны и продолжительность пребывания, статус лица во "
@@ -5949,6 +6479,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[8].PCL2B_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589YouOrFamilyCausedHarmOrSufferingChoice()
     await bot.send_message(message.from_user.id,
@@ -5965,6 +6496,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync3[0]'] = callback_query.data
         data['[8].ckboxync3[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
 
     await bot.send_message(callback_query.from_user.id,
@@ -5977,6 +6509,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[8].PCL3_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ReturnedToBadCountryChoice()
     await bot.send_message(message.from_user.id,
@@ -5991,6 +6524,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[8].ckboxync1[1]'] = callback_query.data
         data['[8].ckboxync1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.C_Returned_To_Bad_Country_Choice.set()
     keyboard = FormI589ReturnedToBadCountryChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6005,6 +6539,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[9].PCckboxyn4[0]'] = callback_query.data
         data['[9].PCckboxyn4[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Подробно опишите обстоятельства вашего визита(ов) (например, дату(ы) поездки(ей), цель(и) "
@@ -6017,6 +6552,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[9].PCL4_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589LastArrivalToUsMoreThan1YearChoice()
     await bot.send_message(message.from_user.id,
@@ -6031,6 +6567,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[9].PCckboxyn4[1]'] = callback_query.data
         data['[9].PCckboxyn4[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.C_Last_Arrival_To_US_More_Than_1_Year_Choice.set()
     keyboard = FormI589LastArrivalToUsMoreThan1YearChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6045,6 +6582,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[9].ckboxync5[0]'] = callback_query.data
         data['[9].ckboxync5[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Объясните, почему вы не подали заявление в течение первого года после прибытия. "
@@ -6057,6 +6595,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[9].PCL5_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589YouOrFamilyDidCrimeChoice()
     await bot.send_message(message.from_user.id,
@@ -6072,6 +6611,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[9].ckboxync5[1]'] = callback_query.data
         data['[9].ckboxync5[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.C_You_Or_Family_Did_Crime_Choice.set()
     keyboard = FormI589YouOrFamilyDidCrimeChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6087,6 +6627,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[9].ckboxync6[0]'] = callback_query.data
         data['[9].ckboxync6[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Для каждого случая укажите в своем ответе: что произошло и обстоятельства, даты, срок "
@@ -6101,6 +6642,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[9].PCL6_TextField[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите ваше полное имя:")
@@ -6112,6 +6654,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[9].ckboxync6[1]'] = callback_query.data
         data['[9].ckboxync6[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.D_TextField20_0.set()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите ваше полное имя:")
@@ -6122,6 +6665,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].TextField20[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите ваше имя на родном алфавите:")
@@ -6132,6 +6676,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].TextField20[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589FamilyHelpedCompleteApplicationChoice()
     await bot.send_message(message.from_user.id,
@@ -6145,6 +6690,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtD_ckboxynd1[0]'] = callback_query.data
         data['[10].PtD_ckboxynd1[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что ваш супруг, родитель или ребенок "
@@ -6158,6 +6704,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtD_ChildName1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите ваши отношения с этим человеком:")
@@ -6168,6 +6715,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtD_ChildName1[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589FamilyHelpedCompleteFillNextMemberChoice()
     await bot.send_message(message.from_user.id,
@@ -6189,6 +6737,7 @@ async def process(callback_query: types.CallbackQuery):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtD_ChildName2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите ваши отношения с этим человеком:")
@@ -6199,6 +6748,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtD_RelationshipOfChild2[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589NotFamilyHelpedCompleteApplicationChoice()
     await bot.send_message(message.from_user.id,
@@ -6209,6 +6759,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.callback_query_handler(text="no_Family_Helped_Complete_Fill_Next_Member_Choice",
                            state=Form_I_589.D_PtD_ChildName2_0)
 async def process(callback_query: types.CallbackQuery):
+    time.sleep(0.5)
     await Form_I_589.D_Not_Family_Helped_Complete_Application.set()
     keyboard = FormI589NotFamilyHelpedCompleteApplicationChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6222,6 +6773,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtD_ckboxynd1[1]'] = callback_query.data
         data['[10].PtD_ckboxynd1[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.D_Not_Family_Helped_Complete_Application.set()
     keyboard = FormI589NotFamilyHelpedCompleteApplicationChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6235,6 +6787,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].ckboxynd2[0]'] = callback_query.data
         data['[10].ckboxynd2[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ProvidedWithListOfPersonsWhoMayAssistChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6250,6 +6803,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].ckboxynd2[1]'] = callback_query.data
         data['[10].ckboxynd2[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     keyboard = FormI589ProvidedWithListOfPersonsWhoMayAssistChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -6265,6 +6819,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].ckboxynd3[0]'] = callback_query.data
         data['[10].ckboxynd3[1]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу подпись:")
@@ -6276,6 +6831,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[10].ckboxynd3[1]'] = callback_query.data
         data['[10].ckboxynd3[0]'] = ""
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу подпись:")
@@ -6289,6 +6845,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[10].DateTimeField48[0]'] = datetime.datetime.now().strftime("%d/%m/%Y")
         is_preparer = data['[10].ckboxynd2[0]']
     if is_preparer:
+        time.sleep(0.5)
         await Form_I_589.next()
         await bot.send_message(message.from_user.id,
                                "Укажите подпись составителя:")
@@ -6313,6 +6870,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_PreparerSignature[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Если заявление было составлено не вами, укажите полное имя составителя:")
@@ -6323,6 +6881,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_PreparerName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите код номера телефона составителя:")
@@ -6333,6 +6892,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].TextField25[1]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите номер телефона составителя:")
@@ -6343,6 +6903,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].TextField25[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес проживания составителя.\nУкажите номер и название улицы:")
@@ -6353,6 +6914,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_StreetNumAndName[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите номер квартиры:")
@@ -6363,6 +6925,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_AptNumber[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите город:")
@@ -6373,6 +6936,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_City[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите штат:")
@@ -6383,6 +6947,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_State[0]'] = message.text
+    time.sleep(0.5)
     await Form_I_589.next()
     await bot.send_message(message.from_user.id,
                            "Укажите Zipcode (например, 123456).\n"
