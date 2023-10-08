@@ -136,53 +136,79 @@ class FormI131(StatesGroup):
     Page3_1a_Purpose_0 = State()
     Page3_1b_ListCountries_0 = State()
 
-    Page3_1a_Lessthan6_0 = State()
-    Page3_1b_6months_0 = State()
-    Page3_1c_1to2_0 = State()
-    Page3_1d_2to3_0 = State()
-    Page3_1e_3to4_0 = State()
-    Page3_1f_morethan_0 = State()
+    Page3_ApplyingForReentryPermitChoice = State()
 
-    Page3_2_Yes_0 = State()
-    Page3_2_No_0 = State()
+    Page3_HowMuchTotalTimeSpentOutsideUSChoice = State()
+    # Page3_1a_Lessthan6_0 = State()
+    # Page3_1b_6months_0 = State()
+    # Page3_1c_1to2_0 = State()
+    # Page3_1d_2to3_0 = State()
+    # Page3_1e_3to4_0 = State()
+    # Page3_1f_morethan_0 = State()
+
+    Page3_HaveEverFiledFederalIncomeTaxReturnChoice = State()
+    # Page3_2_Yes_0 = State()
+    # Page3_2_No_0 = State()
+
+    Page3_ApplyingForTravelDocumentOfRefugeeChoice = State()
 
     Page4_1_CountryRefugee_0 = State()
-    Page4_2_No1_0 = State()
-    Page4_2_Yes1_0 = State()
 
-    Page4_3a_Yes1_0 = State()
-    Page4_3a_No1_0 = State()
+    Page4_IntendToComebackChoice = State()
+    # Page4_2_No1_0 = State()
+    # Page4_2_Yes1_0 = State()
+    Page4_IntendToComebackExplanation = State()
 
-    Page4_3b_No_0 = State()
-    Page4_3b_Yes_0 = State()
+    Page4_HaveEverCameBackChoice = State()
+    # Page4_3a_Yes1_0 = State()
+    # Page4_3a_No1_0 = State()
+    Page4_ReasonOfComebackExplanation = State()
 
-    Page4_3c_Yes_0 = State()
-    Page4_3c_No_0 = State()
+    Page4_HaveEverIssuedPassport = State()
+    # Page4_3b_No_0 = State()
+    # Page4_3b_Yes_0 = State()
+    Page4_ReasonOfIssuedPassport = State()
 
-    Page4_4a_No_1 = State()
-    Page4_4a_Yes_1 = State()
+    Page4_HaveEverGotHelpFromGovernmentChoice = State()
+    # Page4_3c_Yes_0 = State()
+    # Page4_3c_No_0 = State()
+    Page4_TellAboutHelpFromGovernment = State()
 
-    Page4_4b_Yes_0 = State()
-    Page4_4b_No_0 = State()
+    Page4_RestoredCitizenshipOfLeftCountry = State()
+    # Page4_4a_No_1 = State()
+    # Page4_4a_Yes_1 = State()
+    Page4_RestoredCitizenshipOfLeftCountryReason = State()
 
-    Page4_4c_No_0 = State()
-    Page4_4c_Yes_0 = State()
+    Page4_GotNewCitizenshipChoice = State()
+    # Page4_4b_Yes_0 = State()
+    # Page4_4b_No_0 = State()
+    Page4_GotNewCitizenshipReason = State()
 
-    Page4_1_OneTrip_0 = State()
-    Page4_1_MoreThanOne_0 = State()
+    Page4_GotRefugeeStatusElsewhereChoice = State()
+    # Page4_4c_No_0 = State()
+    # Page4_4c_Yes_0 = State()
+    Page4_GotRefugeeStatusElsewhereReason = State()
+
+    Page4_ApplyingForAdvancedParoleChoice = State()
+
+    Page4_HowManyTripsChoice = State()
+    # Page4_1_OneTrip_0 = State()
+    # Page4_1_MoreThanOne_0 = State()
 
     Page4_2a_CityOrTown_0 = State()
     Page4_2b_Country_0 = State()
 
-    Page4_3_AddressPart2_0 = State()
-    Page4_4_AddressBelow_0 = State()
+    Page4_AddressOfNotificationChoice = State()
+    # Page4_3_AddressPart2_0 = State()
+    # Page4_4_AddressBelow_0 = State()
 
     Page4_4a_InCareofName_0 = State()
     Page4_4b_StreetNumberName_0 = State()
 
-    Page4_4c_Unit_0 = State()
-    Page4_4c_Unit_1 = State()
-    Page4_4c_Unit_2 = State()
+    Page4_TypeOfBuilding = State()
+    # Page4_4c_Unit_0 = State()
+    # Page4_4c_Unit_1 = State()
+    # Page4_4c_Unit_2 = State()
 
     Page4_4c_AptSteFlrNumber_0 = State()
     Page4_4d_CityOrTown_0 = State()
@@ -196,17 +222,18 @@ class FormI131(StatesGroup):
 
     Page4_4j_DaytimePhoneNumber1_0 = State()
     Page4_4j_DaytimePhoneNumber2_0 = State()
-    Page4_4j_DaytimePhoneNumber3_0 = State()
 
-    Page4_1_OAW_0 = State()
-    Page4_1_OAW_1 = State()
+    Page4_EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOAWChoice = State()
+    # Page4_1_OAW_0 = State()
+    # Page4_1_OAW_1 = State()
+
+    Page5_UnderFearOfPunishmentForDisinformationChoice = State()
 
     Page5_1a_SignatureofApplicant_0 = State()
-    Page5_1b_DateOfSignature_0 = State()
 
     Page5__2_DaytimePhoneNumber1_0 = State()
     Page5__2_DaytimePhoneNumber2_0 = State()
-    Page5__2_DaytimePhoneNumber3_0 = State()
+
 
     Page5_1a_PreparerFamilyName_0 = State()
     Page5_1b_PreparerGivenName_0 = State()

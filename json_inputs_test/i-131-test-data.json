@@ -136,23 +136,36 @@
     "[2].Line2_No[0]": "76",
 
     "[3].Line1_CountryRefugee[0]": "126",
+
     "[3].Line2_No1[0]": "111",
     "[3].Line2_Yes1[0]": "114",
+
+    "IntendToComeBackExplanation": "",
 
     "[3].Line3a_Yes1[0]": "112",
     "[3].Line3a_No1[0]": "113",
 
+    "ReasonOfIssuedPassport": "",
+
     "[3].Line3b_No[0]": "96",
     "[3].Line3b_Yes[0]": "107",
+
+    "TellAboutHelpFromGovernment": "",
 
     "[3].Line3c_Yes[0]": "97",
     "[3].Line3c_No[0]": "105",
 
+    "RestoredCitizenshipOfLeftCountryReason": "",
+
     "[3].Line4a_No[1]": "99",
     "[3].Line4a_Yes[1]": "104",
 
+    "GotNewCitizenshipReason": "",
+
     "[3].Line4b_Yes[0]": "100",
     "[3].Line4b_No[0]": "103",
+
+    "GotRefugeeStatusElsewhereReason": "",
 
     "[3].Line4c_No[0]": "101",
     "[3].Line4c_Yes[0]": "102",
@@ -187,7 +200,7 @@
     "[3].#area[6].Line4j_DaytimePhoneNumber2[0]": "132",
     "[3].#area[6].Line4j_DaytimePhoneNumber3[0]": "133",
 
-    "[3].Line1_OAW[0]": "129",
+    "[3].Line1_OAW[0]": "",
     "[3].Line1_OAW[1]": "130",
 
     "[4].Line1a_SignatureofApplicant[0]": "140",
