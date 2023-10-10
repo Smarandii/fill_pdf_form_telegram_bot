@@ -149,6 +149,7 @@ class FormI131(StatesGroup):
     Page3_HaveEverFiledFederalIncomeTaxReturnChoice = State()
     # Page3_2_Yes_0 = State()
     # Page3_2_No_0 = State()
+    Page3_HaveEverFiledFederalIncomeTaxReturnReason = State()
 
     Page3_ApplyingForTravelDocumentOfRefugeeChoice = State()
 

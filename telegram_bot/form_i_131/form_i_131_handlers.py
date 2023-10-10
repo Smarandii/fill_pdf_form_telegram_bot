@@ -317,9 +317,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                                                         "2) У меня есть статус беженца или лица, получившего убежище"
                                                         " в США, и я подаю заявление на получение проездного документа "
                                                         "беженца.\n"
-                                                        "3) Я являюсь постоянным жителем в результате получения статуса"
-                                                        " беженца или лица, получившего убежище, и подаю заявление на "
-                                                        "получение проездного документа беженца.\n"
+                                                        "3) Я являюсь постоянным жителем в результате получения "
+                                                        "статуса  беженца или получения "
+                                                        "убежища, и подаю заявление на получение проездного документа беженца.\n"
                                                         "4) Я подаю на разрешение на обратный въезд (Advance Parole "
                                                         "Document), чтобы мне позволили вернуться в Соединенные Штаты "
                                                         "после временной поездки за границу.\n"
@@ -346,9 +346,7 @@ async def process(message: types.Message, state: FSMContext):
                                                  "2) У меня есть статус беженца или лица, получившего убежище"
                                                  " в США, и я подаю заявление на получение проездного документа "
                                                  "беженца.\n"
-                                                 "3) Я являюсь постоянным жителем в результате получения статуса"
-                                                 "беженца или лица, получившего убежище, и подаю заявление на "
-                                                 "получение проездного документа беженца.\n"
+                                                 "3) Я являюсь постоянным жителем в результате получения статуса  беженца или получения убежища, и подаю заявление на получение проездного документа беженца.\n"
                                                  "4) Я подаю на разрешение на обратный въезд (Advance Parole "
                                                  "Document), чтобы мне позволили вернуться в Соединенные Штаты "
                                                  "после временной поездки за границу.\n"
@@ -691,7 +689,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "или проездной документ беженца (refugee travel document)?",
                            reply_markup=keyboard.markup)
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
-    await FormI131.Page3_WhereToSendTravelDocumentChoice.set()
+    await FormI131.Page2_HadBeenPermitedReentryChoice.set()
 
 
 @escape_json_special_chars
@@ -1177,12 +1175,23 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[2].Line2_Yes[0]"] = "x"
-    keyboard = FormI131ApplyingForTravelDocumentOfRefugeeChoice()
+
     await bot.send_message(callback_query.from_user.id,
-                           "Вы подаете на проездной документ беженца (refugee travel document)?",
-                           reply_markup=keyboard.markup)
+                           "Разъясните ситуацию в деталях:")
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
     await FormI131.next()
+
+
+@escape_json_special_chars
+@dp.message_handler(state=FormI131.Page3_HaveEverFiledFederalIncomeTaxReturnReason)
+async def process(message: types.Message, state: FSMContext):
+    async with state.proxy() as data:
+        data['HaveEverFiledFederalIncomeTaxReturnReason'] = message.text
+    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    await FormI131.next()
+    keyboard = FormI131ApplyingForTravelDocumentOfRefugeeChoice()
+    await bot.send_message(message.from_user.id, "Вы подаете на проездной документ беженца (refugee travel document)?",
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="HaveEverFiledFederalIncomeTaxReturn_No",
@@ -1195,7 +1204,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Вы подаете на проездной документ беженца (refugee travel document)?",
                            reply_markup=keyboard.markup)
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
-    await FormI131.next()
+    await FormI131.Page3_ApplyingForTravelDocumentOfRefugeeChoice.set()
 
 
 @dp.callback_query_handler(text="ApplyingForTravelDocumentOfRefugee_Yes",
@@ -1287,7 +1296,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.message_handler(state=FormI131.Page4_ReasonOfComebackExplanation)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['ReasonOfComebackExplanation'] = message.text
+        data['ReasonOfComeBackExplanation'] = message.text
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
     await FormI131.next()
     keyboard = FormI131HaveEverIssuedPassportChoice()
