@@ -28,7 +28,7 @@ class FormI131HowMuchTimeSpentOutsideUSChoice:
         keyboard_markup.add(button_no)
         button_empty = InlineKeyboardButton("От 1 до 2 лет.", callback_data="HowMuchTimeSpentOutsideUS_3")
         keyboard_markup.add(button_empty)
-        button_yes = InlineKeyboardButton("От 2 до 3 лет.", callback_data="ApplicationType_4")
+        button_yes = InlineKeyboardButton("От 2 до 3 лет.", callback_data="HowMuchTimeSpentOutsideUS_4")
         keyboard_markup.add(button_yes)
         button_no = InlineKeyboardButton("От 3 до 4 лет.", callback_data="HowMuchTimeSpentOutsideUS_5")
         keyboard_markup.add(button_no)
