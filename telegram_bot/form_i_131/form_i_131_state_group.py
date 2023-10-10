@@ -195,6 +195,8 @@ class FormI131(StatesGroup):
     # Page4_1_OneTrip_0 = State()
     # Page4_1_MoreThanOne_0 = State()
 
+    Page4_RecieverOutsideOfUSIntendToGetThisDocumentChoice = State()
+
     Page4_2a_CityOrTown_0 = State()
     Page4_2b_Country_0 = State()
 

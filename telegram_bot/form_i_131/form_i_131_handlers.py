@@ -14,7 +14,7 @@ from telegram_bot.form_i_131.f_i_131_keyboards import FormI131ApplicationTypeCho
     FormI131GotNewCitizenshipChoice, FormI131GotRefugeeStatusElsewhereChoice, FormI131HowManyTripsChoice, \
     FormI131AddressOfNotificationChoice, \
     FormI131EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOperationAlliesWelcomeChoice, \
-    FormI131UnderFearOfPunishmentForDisinformationChoice
+    FormI131UnderFearOfPunishmentForDisinformationChoice, FormI131RecieverOutsideOfUSIntendToGetThisDocument
 from telegram_bot.form_i_131.form_i_131_state_group import FormI131
 from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, FormI589GenderChoice
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
@@ -724,10 +724,14 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Line4a_No[0]"] = "x"
-    await bot.send_message(callback_query.from_user.id,
-                           "Укажите дату выдачи такого документа (мм/дд/гггг):")
+    keyboard = FormI131WhereToSendTravelDocumentChoice()
+    await bot.send_message(callback_query.from_user.id, "Куда вы хотите, чтобы проездной документ был отправлен? "
+                                                        "(укажите 1 вариант)\n"
+                                                        "1. По вашему адресу фактического проживания.\n"
+                                                        "2. В посольство или консульство США.\n"
+                                                        "3. В DHS office за рубежом.", reply_markup=keyboard.markup)
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
-    await FormI131.Page2_4b_DateIssued_0.set()
+    await FormI131.Page3_WhereToSendTravelDocumentChoice.set()
 
 
 @escape_json_special_chars
@@ -843,7 +847,7 @@ async def process(message: types.Message, state: FSMContext):
                            "1. По адресу лица, находящегося за пределами США, от имени которого вы подаете на Advance "
                            "Parole Document (часть 2).\n"
                            "2. По иному адресу.",
-                           reply_markup=keyboard)
+                           reply_markup=keyboard.markup)
 
 
 @dp.callback_query_handler(text="NoticeAddress_1",
@@ -1264,7 +1268,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await FormI131.Page4_HaveEverCameBackChoice.set()
     keyboard = FormI131HaveEverCameBackChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
-                                                 "получившего убежище, вы возвращались в эту страну?",
+                                                        "получившего убежище, вы возвращались в эту страну?",
                            reply_markup=keyboard.markup)
 
 
@@ -1303,9 +1307,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await FormI131.Page4_HaveEverIssuedPassport.set()
     keyboard = FormI131HaveEverIssuedPassportChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
-                                                 "получившего убежище, вы подавали заявку на получение или получали "
-                                                 "национальный паспорт, подавали заявку на обновление или обновляли "
-                                                 "имеющийся паспорт, подавали заявку или получали разрешение на въезд в эту страну?",
+                                                        "получившего убежище, вы подавали заявку на получение или получали "
+                                                        "национальный паспорт, подавали заявку на обновление или обновляли "
+                                                        "имеющийся паспорт, подавали заявку или получали разрешение на въезд в эту страну?",
                            reply_markup=keyboard.markup)
 
 
@@ -1344,9 +1348,9 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await FormI131.Page4_HaveEverGotHelpFromGovernmentChoice.set()
     keyboard = FormI131HaveEverGotHelpFromGovernmentChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
-                                                 "получившего убежище, вы подавали заявку на получение или получали "
-                                                 "какие-либо выплаты или пособия в этой стране? (например, "
-                                                 "выплаты по медицинской страховке)",
+                                                        "получившего убежище, вы подавали заявку на получение или получали "
+                                                        "какие-либо выплаты или пособия в этой стране? (например, "
+                                                        "выплаты по медицинской страховке)",
                            reply_markup=keyboard.markup)
 
 
@@ -1384,8 +1388,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await FormI131.Page4_RestoredCitizenshipOfLeftCountry.set()
     keyboard = FormI131RestoredCitizenshipOfLeftCountryChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
-                                                 "получившего убежище, вы восстанавливали гражданство вышеназванной "
-                                                 "страны?",
+                                                        "получившего убежище, вы восстанавливали гражданство вышеназванной "
+                                                        "страны?",
                            reply_markup=keyboard.markup)
 
 
@@ -1422,7 +1426,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await FormI131.Page4_GotNewCitizenshipChoice.set()
     keyboard = FormI131GotNewCitizenshipChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
-                                                 "получившего убежище, вы приобрели новое гражданство?",
+                                                        "получившего убежище, вы приобрели новое гражданство?",
                            reply_markup=keyboard.markup)
 
 
@@ -1532,13 +1536,38 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line1_OneTrip[0]"] = "x"
+    keyboard = FormI131RecieverOutsideOfUSIntendToGetThisDocument()
     await bot.send_message(callback_query.from_user.id,
-                           "Если лицо, намеревающееся получить данный документ, находится за пределами США, "
-                           "укажите местоположение посольства, консульства или DHS office США:")
-    await bot.send_message(callback_query.from_user.id,
-                           "Укажите город:")
+                           "Лицо, намеревающееся получить данный документ, находится за пределами США?",
+                           reply_markup=keyboard.markup)
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
     await FormI131.next()
+
+
+@dp.callback_query_handler(text="RecieverOutsideOfUSIntendToGetThisDocument_Yes",
+                           state=FormI131.Page4_RecieverOutsideOfUSIntendToGetThisDocumentChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите адрес посольства, консульства или DHS Office США.\nУкажите город:")
+    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    await FormI131.next()
+
+
+@dp.callback_query_handler(text="RecieverOutsideOfUSIntendToGetThisDocument_No",
+                           state=FormI131.Page4_RecieverOutsideOfUSIntendToGetThisDocumentChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data["[3].Line1_OneTrip[0]"] = "x"
+    keyboard = FormI131AddressOfNotificationChoice()
+    await bot.send_message(callback_query.from_user.id, "Если проездной документ будет направляться в офис за рубежом, "
+                                                        "укажите адрес, куда должно прийти уведомление о готовности "
+                                                        "документа?\n\n"
+                                                        "1. По адресу лица, находящегося за пределами США, от имени "
+                                                        "которого"
+                                                        "вы подаете на Advance Parole Document (часть 2).\n"
+                                                        "2. По иному адресу.", reply_markup=keyboard.markup)
+    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    await FormI131.Page4_AddressOfNotificationChoice.set()
 
 
 @dp.callback_query_handler(text="HowManyTrips_2",
@@ -1546,11 +1575,10 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line1_MoreThanOne[0]"] = "x"
+    keyboard = FormI131RecieverOutsideOfUSIntendToGetThisDocument()
     await bot.send_message(callback_query.from_user.id,
-                           "Если лицо, намеревающееся получить данный документ, находится за пределами США, "
-                           "укажите местоположение посольства, консульства или DHS office США:")
-    await bot.send_message(callback_query.from_user.id,
-                           "Укажите город:")
+                           "Лицо, намеревающееся получить данный документ, находится за пределами США?",
+                           reply_markup=keyboard.markup)
     time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
     await FormI131.next()
 
@@ -1763,7 +1791,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[3].#area[6].Line4j_DaytimePhoneNumber3[0]'] = message.text[:4:]
     keyboard = FormI131EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOperationAlliesWelcomeChoice()
     await bot.send_message(message.from_user.id, "Часть 8. «Разрешение на работу по программе OAW для граждан "
-                                                        "Афганистана.»")
+                                                 "Афганистана.»")
     await bot.send_message(message.from_user.id,
                            "Вы запрашиваете разрешение на работу при получении одобрения на въезд по программе OAW ("
                            "для граждан Афганистана)?",
@@ -1844,7 +1872,6 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page5__2_DaytimePhoneNumber1_0)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=callback_query.from_user.id,
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))

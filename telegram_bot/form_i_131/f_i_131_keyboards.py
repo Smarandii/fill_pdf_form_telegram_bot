@@ -223,6 +223,16 @@ class FormI131HadBeenPermitedReentryChoice:
         self.markup = keyboard_markup
 
 
+class FormI131RecieverOutsideOfUSIntendToGetThisDocument:
+    def __init__(self):
+        keyboard_markup = InlineKeyboardMarkup(row_width=2)
+        button_yes = InlineKeyboardButton("Да", callback_data="RecieverOutsideOfUSIntendToGetThisDocument_Yes")
+        keyboard_markup.add(button_yes)
+        button_no = InlineKeyboardButton("Нет", callback_data="RecieverOutsideOfUSIntendToGetThisDocument_No")
+        keyboard_markup.add(button_no)
+        self.markup = keyboard_markup
+
+
 class FormI131ApplyingForReentryPermitChoice:
     def __init__(self):
         keyboard_markup = InlineKeyboardMarkup(row_width=2)
