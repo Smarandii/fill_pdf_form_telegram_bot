@@ -6,9 +6,9 @@
 
     "[0].Line2b_StreetNumberName[0]": "10",
 
-    "[0].Line2c_Unit[0]": "11",
-    "[0].Line2c_Unit[1]": "12",
-    "[0].Line2c_Unit[2]": "13",
+    "[0].Line2c_Unit[2]": "x",
+    "[0].Line2c_Unit[0]": "",
+    "[0].Line2c_Unit[1]": "",
 
     "[0].Line2c_AptSteFlrNumber[0]": "14",
 
@@ -145,30 +145,32 @@
     "[3].Line3a_Yes1[0]": "112",
     "[3].Line3a_No1[0]": "113",
 
-    "ReasonOfIssuedPassport": "",
+    "ReasonOfComeBackExplanation": "",
 
     "[3].Line3b_No[0]": "96",
     "[3].Line3b_Yes[0]": "107",
 
-    "TellAboutHelpFromGovernment": "",
+    "ReasonOfIssuedPassport": "",
 
     "[3].Line3c_Yes[0]": "97",
     "[3].Line3c_No[0]": "105",
 
-    "RestoredCitizenshipOfLeftCountryReason": "",
+    "TellAboutHelpFromGovernment": "",
 
     "[3].Line4a_No[1]": "99",
     "[3].Line4a_Yes[1]": "104",
 
-    "GotNewCitizenshipReason": "",
+    "RestoredCitizenshipOfLeftCountryReason": "",
 
     "[3].Line4b_Yes[0]": "100",
     "[3].Line4b_No[0]": "103",
 
-    "GotRefugeeStatusElsewhereReason": "",
+    "GotNewCitizenshipReason": "",
 
     "[3].Line4c_No[0]": "101",
     "[3].Line4c_Yes[0]": "102",
+
+    "GotRefugeeStatusElsewhereReason": "",
 
     "[3].Line1_OneTrip[0]": "98",
     "[3].Line1_MoreThanOne[0]": "106",

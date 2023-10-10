@@ -43,7 +43,7 @@ async def ar_11_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
         data['form_identifier'] = "I-131"
     await bot.send_message(callback_query.from_user.id, "Вы выбрали форму I-131. Давайте приступим к ее заполнению.\n"
                                                         "Часть 1. «Информация о вас.»")
-    await bot.send_message(callback_query.from_user.id, "Укажите Вашу фамилию:")
+    await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
     time.sleep(0.5)
     await FormI131.Page1_1a_FamilyName_0.set()
 
@@ -55,7 +55,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[0].Line1a_FamilyName[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
+    await bot.send_message(message.from_user.id, "Укажите ваше имя:")
 
 
 @escape_json_special_chars
@@ -65,7 +65,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[0].Line1b_GivenName[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
+    await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
 
 
 @escape_json_special_chars
@@ -117,7 +117,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page1_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[0].Line2c_Unit[2]"] = "x"
+        data["[0].Line2c_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(0.5)
@@ -128,7 +128,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page1_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[0].Line2c_Unit[1]"] = "x"
+        data["[0].Line2c_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(0.5)
@@ -139,7 +139,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page1_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[0].Line2c_Unit[0]"] = "x"
+        data["[0].Line2c_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(0.5)
@@ -211,12 +211,12 @@ async def process(message: types.Message, state: FSMContext):
 @dp.message_handler(state=FormI131.Page1_2i_Country_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].Line2i_Country[0]'] = ""
+        data['[0].Line2i_Country[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Раздел «Иная информация.»\n"
-                                                 "Укажите Ваш регистрационный номер иностранца (A-number) "
+                                                 "Укажите ваш регистрационный номер иностранца (A-number) "
                                                  "(если имеется):", reply_markup=keyboard.markup)
 
 
@@ -317,7 +317,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                                                         " в США, и я подаю заявление на получение проездного документа "
                                                         "беженца.\n"
                                                         "3) Я являюсь постоянным жителем в результате получения статуса"
-                                                        "беженца или лица, получившего убежище, и подаю заявление на "
+                                                        " беженца или лица, получившего убежище, и подаю заявление на "
                                                         "получение проездного документа беженца.\n"
                                                         "4) Я подаю на разрешение на обратный въезд (Advance Parole "
                                                         "Document), чтобы мне позволили вернуться в Соединенные Штаты "
@@ -462,7 +462,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[1].Line2d_DateOfBirth[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите страну, где вы родились:")
+    await bot.send_message(message.from_user.id, "Укажите страну рождения:")
 
 
 @escape_json_special_chars
@@ -544,7 +544,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page2_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[1].Line2j_Unit[2]"] = "x"
+        data["[1].Line2j_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(0.5)
@@ -555,7 +555,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page2_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[1].Line2j_Unit[1]"] = "x"
+        data["[1].Line2j_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(0.5)
@@ -566,7 +566,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page2_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[1].Line2j_Unit[0]"] = "x"
+        data["[1].Line2j_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(0.5)
@@ -600,7 +600,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[1].Line2l_State[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите ваш zip код (например, 123456).\nНайти zip код можно по "
+    await bot.send_message(message.from_user.id, "Укажите zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
 
 
@@ -611,7 +611,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[1].Line2m_ZipCode[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите ваш почтовый индекс:")
+    await bot.send_message(message.from_user.id, "Укажите почтовый индекс:")
 
 
 @escape_json_special_chars
@@ -684,12 +684,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Line3a_No[0]"] = "x"
-    keyboard = FormI131WhereToSendTravelDocumentChoice()
-    await bot.send_message(callback_query.from_user.id, "Куда вы хотите, чтобы проездной документ был отправлен? "
-                                                        "(укажите 1 вариант)\n"
-                                                        "1. По вашему адресу фактического проживания.\n"
-                                                        "2. В посольство или консульство США.\n"
-                                                        "3. В DHS office за рубежом.", reply_markup=keyboard.markup)
+    keyboard = FormI131HadBeenPermitedReentryChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Вам ранее выдавали разрешение на повторный въезд (re-entry permit) "
+                           "или проездной документ беженца (refugee travel document)?",
+                           reply_markup=keyboard.markup)
     time.sleep(0.5)
     await FormI131.Page3_WhereToSendTravelDocumentChoice.set()
 
@@ -725,7 +724,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[1].Line4a_No[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
-                           "Укажите дату выдачи такого документа (мм/дд/гггг).:")
+                           "Укажите дату выдачи такого документа (мм/дд/гггг):")
     time.sleep(0.5)
     await FormI131.Page2_4b_DateIssued_0.set()
 
@@ -866,7 +865,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[2].Line9_AddressBelow[0]"] = "x"
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Если получать корреспонденцию будет иное лицо, чем укаазано в заявлении, "
+                           "Если получать корреспонденцию будет иное лицо, чем указано в заявлении, "
                            "укажите ФИО такого лица:", reply_markup=keyboard.markup)
     time.sleep(0.5)
     await FormI131.Page3_10a_InCareofName_0.set()
@@ -907,7 +906,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page3_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[2].Line10c_Unit[2]"] = "x"
+        data["[2].Line10c_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(0.5)
@@ -918,7 +917,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page3_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[2].Line10c_Unit[1]"] = "x"
+        data["[2].Line10c_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(0.5)
@@ -929,7 +928,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page3_TypeOfBuildingChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[2].Line10c_Unit[0]"] = "x"
+        data["[2].Line10c_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(0.5)
@@ -963,7 +962,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[2].Line10e_State[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите ваш zip код (например, 123456).\nНайти zip код можно по "
+    await bot.send_message(message.from_user.id, "Укажите zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
 
 
@@ -974,7 +973,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[2].Line10f_ZipCode[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите ваш почтовый индекс:")
+    await bot.send_message(message.from_user.id, "Укажите почтовый индекс:")
 
 
 @escape_json_special_chars
@@ -1261,7 +1260,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line2_No1[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_HaveEverCameBackChoice.set()
     keyboard = FormI131HaveEverCameBackChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
                                                  "получившего убежище, вы возвращались в эту страну?",
@@ -1300,7 +1299,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line3a_No1[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_HaveEverIssuedPassport.set()
     keyboard = FormI131HaveEverIssuedPassportChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
                                                  "получившего убежище, вы подавали заявку на получение или получали "
@@ -1313,7 +1312,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_HaveEverIssuedPassport)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line3b_Yes1[0]"] = "x"
+        data["[3].Line3b_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
     time.sleep(0.5)
@@ -1339,9 +1338,9 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page4_HaveEverIssuedPassport)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line3b_No1[0]"] = "x"
+        data["[3].Line3b_No[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_HaveEverGotHelpFromGovernmentChoice.set()
     keyboard = FormI131HaveEverGotHelpFromGovernmentChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
                                                  "получившего убежище, вы подавали заявку на получение или получали "
@@ -1354,7 +1353,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_HaveEverGotHelpFromGovernmentChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line3c_Yes1[0]"] = "x"
+        data["[3].Line3c_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
     time.sleep(0.5)
@@ -1379,9 +1378,9 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page4_HaveEverGotHelpFromGovernmentChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line3c_No1[0]"] = "x"
+        data["[3].Line3c_No[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_RestoredCitizenshipOfLeftCountry.set()
     keyboard = FormI131RestoredCitizenshipOfLeftCountryChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
                                                  "получившего убежище, вы восстанавливали гражданство вышеназванной "
@@ -1393,7 +1392,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_RestoredCitizenshipOfLeftCountry)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4a_Yes1[0]"] = "x"
+        data["[3].Line4a_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
     time.sleep(0.5)
@@ -1417,9 +1416,9 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page4_RestoredCitizenshipOfLeftCountry)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4a_No1[0]"] = "x"
+        data["[3].Line4a_No[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_GotNewCitizenshipChoice.set()
     keyboard = FormI131GotNewCitizenshipChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
                                                  "получившего убежище, вы приобрели новое гражданство?",
@@ -1430,7 +1429,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_GotNewCitizenshipChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4b_Yes1[0]"] = "x"
+        data["[3].Line4b_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
     time.sleep(0.5)
@@ -1455,9 +1454,9 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page4_GotNewCitizenshipChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4b_No1[0]"] = "x"
+        data["[3].Line4b_No[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_GotRefugeeStatusElsewhereChoice.set()
     keyboard = FormI131GotRefugeeStatusElsewhereChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
                                                         "получившего убежище, вам был предоставлен статус беженца или "
@@ -1469,7 +1468,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_GotRefugeeStatusElsewhereChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4c_Yes1[0]"] = "x"
+        data["[3].Line4c_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
     time.sleep(0.5)
@@ -1492,9 +1491,9 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page4_GotRefugeeStatusElsewhereChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4c_No1[0]"] = "x"
+        data["[3].Line4c_No[0]"] = "x"
     time.sleep(0.5)
-    await FormI131.next()
+    await FormI131.Page4_ApplyingForAdvancedParoleChoice.set()
     keyboard = FormI131ApplyingForAdvancedParoleChoice()
     await bot.send_message(callback_query.from_user.id, "Вы подаете на обратный въезд (advance parole)?",
                            reply_markup=keyboard.markup)
@@ -1604,7 +1603,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4_AddressBelow[0]"] = "x"
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
-                           "Если получать корреспонденцию будет иное лицо, чем укаазано в заявлении, "
+                           "Если получать корреспонденцию будет иное лицо, чем указано в заявлении, "
                            "укажите ФИО такого лица:", reply_markup=keyboard.markup)
     time.sleep(0.5)
     await FormI131.next()
@@ -1623,7 +1622,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.message_handler(state=FormI131.Page4_4a_InCareofName_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[2].Line10a_InCareofName[0]'] = message.text
+        data['[3].Line4a_InCareofName[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите название и номер улицы:")
@@ -1633,7 +1632,7 @@ async def process(message: types.Message, state: FSMContext):
 @dp.message_handler(state=FormI131.Page4_4b_StreetNumberName_0)
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        data['[2].Line10b_StreetNumberName[0]'] = message.text
+        data['[3].Line4b_StreetNumberName[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
     keyboard = FormI765TypeOfBuildingChoice()
@@ -1645,7 +1644,7 @@ async def process(message: types.Message, state: FSMContext):
                            state=FormI131.Page4_TypeOfBuilding)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4c_Unit[2]"] = "x"
+        data["[3].Line4c_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(0.5)
@@ -1656,7 +1655,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_TypeOfBuilding)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4c_Unit[1]"] = "x"
+        data["[3].Line4c_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(0.5)
@@ -1667,7 +1666,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            state=FormI131.Page4_TypeOfBuilding)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data["[3].Line4c_Unit[0]"] = "x"
+        data["[3].Line4c_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(0.5)
@@ -1701,7 +1700,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[3].Line4e_State[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите ваш zip код (например, 123456).\nНайти zip код можно по "
+    await bot.send_message(message.from_user.id, "Укажите zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
 
 
@@ -1712,7 +1711,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[3].Line4f_ZipCode[0]'] = message.text
     time.sleep(0.5)
     await FormI131.next()
-    await bot.send_message(message.from_user.id, "Укажите ваш почтовый индекс:")
+    await bot.send_message(message.from_user.id, "Укажите почтовый индекс:")
 
 
 @escape_json_special_chars
@@ -1834,7 +1833,7 @@ async def process(message: types.Message, state: FSMContext):
         data['[4].Line1b_DateOfSignature[0]'] = datetime.datetime.now().strftime("%m/%d/%Y")
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
-                           "Укажите код мобильного телефона заявителя (если имеется):",
+                           "Укажите код номера мобильного телефона заявителя (если имеется):",
                            reply_markup=keyboard.markup)
     time.sleep(0.5)
     await FormI131.next()
@@ -1864,7 +1863,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].#area[7].Line2_DaytimePhoneNumber1[0]'] = message.text
-    await bot.send_message(message.from_user.id, "Укажите номер телефона:")
+    await bot.send_message(message.from_user.id, "Укажите номер мобильного телефона заявителя:")
     time.sleep(0.5)
     await FormI131.next()
 
