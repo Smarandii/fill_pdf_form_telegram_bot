@@ -1,11 +1,12 @@
 import os
 import PyPDF2
+import pdfkit
 import subprocess
 from dotenv import load_dotenv
 from reportlab.pdfgen import canvas
-from reportlab.pdfbase import pdfmetrics
 from reportlab.lib.pagesizes import letter
-from reportlab.pdfbase.ttfonts import TTFont
+from jinja2 import Environment, FileSystemLoader
+
 
 class FillPdfFromJsonAdapter:
     forms_identifier_to_pdf_files_mapping = {"AR-11": "../pdf_inputs/ar-11-unlocked.pdf",
@@ -13,48 +14,45 @@ class FillPdfFromJsonAdapter:
                                              "I-765": "../pdf_inputs/i-765-unlocked.pdf",
                                              "I-485": "../pdf_inputs/i-485-unlocked.pdf",
                                              "I-131": "../pdf_inputs/i-131-unlocked.pdf"}
+    forms_identifier_to_html_templates_mapping = {
+        "I-131": "../static/templates/form-i-131/"
+    }
 
     def __init__(self, data, form_identifier, user_id, timestamp):
         self.pdf_output_folder_path = r"../pdf_outputs/"
         self.user_id = user_id
         self.data = data
+        self.form_identifier = form_identifier
         self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[form_identifier]
         self.json_input_file_path = rf"../json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
         self.pdf_output_file_path = rf"{self.pdf_output_folder_path}{form_identifier}-{user_id}.pdf"
 
-    def register_cyrilic_font(self, c):
-        pdfmetrics.registerFont(TTFont('DejaVuSans', r'../static/fonts/DejaVuSans.ttf'))
-        c.setFont('DejaVuSans', 12)
-        return c
+    def render_html(self, template_name, context):
+        env = Environment(
+            loader=FileSystemLoader(
+                self.forms_identifier_to_html_templates_mapping[self.form_identifier]
+            )
+        )
+        template = env.get_template(template_name)
+        return template.render(context)
 
-    def create_additional_text_page_for_i_131_form(self, output_filename, custom_text):
-        try:
-            c = canvas.Canvas(output_filename, pagesize=letter)
-            width, height = letter
-            c = self.register_cyrilic_font(c)
-            c.drawString(100, height - 100, f'Full name: {self.data["[0].Line1a_FamilyName[0]"]} '
-                                            f'{self.data["[0].Line1b_GivenName[0]"]} '
-                                            f'{self.data["[0].Line1c_MiddleName[0]"]}')
-            c.drawString(100, height - 130, f'Alien Number: {self.data["[0].#area[1].Line3_AlienNumber[0]"]}')
+    def convert_html_to_pdf(self, html, output_filename):
+        options = {
+            'encoding': 'UTF-8',
+        }
+        pdfkit.from_string(html, output_filename, options)
 
-            number_of_lines = len(custom_text) // 62 + custom_text.count("\n")
-            cursor_position = 0
-            for n in range(number_of_lines):
-                line = ""
-                counter = 0
-                for symbol in custom_text[cursor_position::]:
-                    if symbol == "\n":
-                        break
-                    line += symbol
-                    counter += 1
-                    cursor_position += 1
-                    if counter >= 62:
-                        break
-                c.drawString(100, height - 200 - (n * 30), line)
-            c.save()
-        except KeyError:
-            c = canvas.Canvas(output_filename, pagesize=letter)
-            c.save()
+    def create_additional_text_page_for_i_131_form(self, output_filename, data):
+        html = self.render_html('additional_page_template.html', data)
+        self.convert_html_to_pdf(html, output_filename)
+
+    def generate_additional_page_for_i_131(self, complete_pdf_name, data, custom_text, additional_page_name, counter):
+        data['text'] = custom_text
+        self.create_additional_text_page_for_i_131_form(additional_page_name, data)
+        tmp_file_name = f"{self.pdf_output_folder_path}{counter}-{self.user_id}-{self.data['form_identifier']}-additional-pages.pdf"
+        self.merge_pdfs([complete_pdf_name, additional_page_name], tmp_file_name)
+        complete_pdf_name = tmp_file_name
+        return complete_pdf_name
 
     def merge_pdfs(self, pdf_list, output_filename):
         pdf_merger = PyPDF2.PdfMerger()
@@ -64,93 +62,86 @@ class FillPdfFromJsonAdapter:
             pdf_merger.write(output_filehandle)
 
     def fill_additional_page_for_i_131_form(self):
+        data = {
+            'family_name': self.data["[0].Line1a_FamilyName[0]"],
+            'given_name': self.data["[0].Line1b_GivenName[0]"],
+            'middle_name': self.data["[0].Line1c_MiddleName[0]"],
+            'alien_number': self.data["[0].#area[1].Line3_AlienNumber[0]"],
+            'text': ''
+        }
 
-        complete_pdf_name = self.pdf_output_file_path
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            self.pdf_output_file_path,
+            data,
+            f'Вы собираетесь вернуться в страну, от которой вы запрашивали убежище по причине: '
+            f'\n{self.data["IntendToComeBackExplanation"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-IntendToComeBackExplanation.pdf",
+            1)
 
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-IntendToComeBackExplanation.pdf"
-
-        custom_text_for_IntendToComeBackExplanation = (f'Вы собираетесь вернуться в страну, от которой вы '
-                                                       f'запрашивали убежище по причине:\n'
-                                                       f'{self.data["IntendToComeBackExplanation"]}')
-        self.create_additional_text_page_for_i_131_form(additional_page, custom_text_for_IntendToComeBackExplanation)
-        tmp_file_name = f"{self.pdf_output_folder_path}1-{self.user_id}-{self.data['form_identifier']}-additional-pages.pdf"
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
-
-
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-ReasonOfComeBackExplanation.pdf"
-
-        custom_text_for_ReasonOfComeBackExplanation = (
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            complete_pdf_name,
+            data,
             f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы возвращались в '
             f'страну, от которой вы'
-            f'запрашивали убежище по причине:'
-            f'{self.data["ReasonOfComeBackExplanation"]}')
-        self.create_additional_text_page_for_i_131_form(additional_page, custom_text_for_ReasonOfComeBackExplanation)
-        tmp_file_name = f"{self.pdf_output_folder_path}2-{self.user_id}-{self.data['form_identifier']}-additional-pages.pdf"
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
+            f'запрашивали убежище по причине: '
+            f'{self.data["ReasonOfComeBackExplanation"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-ReasonOfComeBackExplanation.pdf",
+            2
+        )
 
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-ReasonOfIssuedPassport.pdf"
-        custom_text_for_ReasonOfIssuedPassport = (
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            complete_pdf_name,
+            data,
             f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы подавали заявку на '
             f'получение или получали национальный паспорт, подавали заявку на обновление или обновляли имеющийся '
             f'паспорт, подавали заявку или получали разрешение на въезд в страну, от которой вы'
-            f'запрашивали убежище по причине:'
-            f'{self.data["ReasonOfIssuedPassport"]}')
-        self.create_additional_text_page_for_i_131_form(additional_page, custom_text_for_ReasonOfIssuedPassport)
-        tmp_file_name = (f"{self.pdf_output_folder_path}3-{self.user_id}-"
-                         f"{self.data['form_identifier']}-additional-pages.pdf")
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
+            f'запрашивали убежище по причине: '
+            f'{self.data["ReasonOfIssuedPassport"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-ReasonOfIssuedPassport.pdf",
+            3
+        )
 
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-TellAboutHelpFromGovernment.pdf"
-        custom_text_for_TellAboutHelpFromGovernment = (
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            complete_pdf_name,
+            data,
             f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы подавали заявку на '
             f'получение или получали какие-либо выплаты или пособия в стране, от которой вы'
-            f'запрашивали убежище по причине:'
-            f'{self.data["TellAboutHelpFromGovernment"]}')
-        self.create_additional_text_page_for_i_131_form(additional_page, custom_text_for_TellAboutHelpFromGovernment)
-        tmp_file_name = (f"{self.pdf_output_folder_path}4-{self.user_id}-"
-                         f"{self.data['form_identifier']}-additional-pages.pdf")
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
+            f'запрашивали убежище по причине: '
+            f'{self.data["TellAboutHelpFromGovernment"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-TellAboutHelpFromGovernment.pdf",
+            4
+        )
 
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-RestoredCitizenshipOfLeftCountryReason.pdf"
-        custom_text_for_RestoredCitizenshipOfLeftCountryReason = (
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            complete_pdf_name,
+            data,
             f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы восстанавливали '
             f'гражданство в стране, от которой вы'
-            f'запрашивали убежище по причине:'
-            f'{self.data["RestoredCitizenshipOfLeftCountryReason"]}')
-        self.create_additional_text_page_for_i_131_form(additional_page,
-                                                        custom_text_for_RestoredCitizenshipOfLeftCountryReason)
-        tmp_file_name = (f"{self.pdf_output_folder_path}5-{self.user_id}-"
-                         f"{self.data['form_identifier']}-additional-pages.pdf")
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
+            f'запрашивали убежище по причине: '
+            f'{self.data["RestoredCitizenshipOfLeftCountryReason"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-RestoredCitizenshipOfLeftCountryReason.pdf",
+            5
+        )
 
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-GotNewCitizenshipReason.pdf"
-        custom_text_for_GotNewCitizenshipReason = (
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            complete_pdf_name,
+            data,
             f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы приобрели новое '
-            f'гражданство по причине:'
-            f'{self.data["GotNewCitizenshipReason"]}')
-        tmp_file_name = (f"{self.pdf_output_folder_path}6-{self.user_id}-"
-                         f"{self.data['form_identifier']}-additional-pages.pdf")
-        self.create_additional_text_page_for_i_131_form(additional_page,
-                                                        custom_text_for_GotNewCitizenshipReason)
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
+            f'гражданство по причине: '
+            f'{self.data["GotNewCitizenshipReason"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-GotNewCitizenshipReason.pdf",
+            6
+        )
 
-        additional_page = f"{self.pdf_output_folder_path}{self.user_id}-GotRefugeeStatusElsewhereReason.pdf"
-        custom_text_for_GotRefugeeStatusElsewhereReason = (
+        complete_pdf_name = self.generate_additional_page_for_i_131(
+            complete_pdf_name,
+            data,
             f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вам был предоставлен '
-            f'статус беженца или лица, получившего убежище, в любой другой стране по причине:\n'
-            f'{self.data["GotRefugeeStatusElsewhereReason"]}')
-        tmp_file_name = (f"{self.pdf_output_folder_path}7-{self.user_id}-"
-                         f"{self.data['form_identifier']}-additional-pages.pdf")
-        self.create_additional_text_page_for_i_131_form(additional_page,
-                                                        custom_text_for_GotRefugeeStatusElsewhereReason)
-        self.merge_pdfs([complete_pdf_name, additional_page], tmp_file_name)
-        complete_pdf_name = tmp_file_name
+            f'статус беженца или лица, получившего убежище, в любой другой стране по причине: '
+            f'{self.data["GotRefugeeStatusElsewhereReason"]}',
+            f"{self.pdf_output_folder_path}{self.user_id}-GotRefugeeStatusElsewhereReason.pdf",
+            7
+        )
 
         return complete_pdf_name
 
