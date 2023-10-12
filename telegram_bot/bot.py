@@ -7,6 +7,8 @@ from telegram_bot.form_i_131.form_i_131_state_group import FormI131
 from telegram_bot.form_i_485.form_i_485_state_group import FormI485
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
+import json
+import aiofiles
 
 
 @dp.message_handler(filters.Command("start"), state="*")
@@ -14,6 +16,20 @@ async def start_cmd_handler(message: types.Message):
     keyboard = AvailableFormsKeyboard()
     keyboard = keyboard.keyboard_markup
     await message.answer(START_PHRASE, reply_markup=keyboard)
+
+
+@dp.message_handler(state="*", content_types=types.ContentType.DOCUMENT)
+async def fill_cmd_handler(message: types.Message, state: FSMContext):
+    document_id = message.document.file_id
+    file_path = rf"../json_inputs/{document_id}.json"
+    await bot.download_file_by_id(document_id, rf"../json_inputs/{document_id}.json")
+    async with aiofiles.open(file_path, mode='r', encoding="utf-8") as f:
+        json_data = await f.read()
+    json_data = json.loads(json_data)
+    async with state.proxy() as data:
+        for key, value in json_data.items():
+            data[key] = value
+    await message.answer("Я заполнил данные, можно писать /end.")
 
 
 @dp.message_handler(filters.Command("jump"), state="*")

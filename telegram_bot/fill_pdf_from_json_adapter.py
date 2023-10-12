@@ -70,78 +70,43 @@ class FillPdfFromJsonAdapter:
             'text': ''
         }
 
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            self.pdf_output_file_path,
-            data,
-            f'Вы собираетесь вернуться в страну, от которой вы запрашивали убежище по причине: '
-            f'\n{self.data["IntendToComeBackExplanation"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-IntendToComeBackExplanation.pdf",
-            1)
+        explanations = [
+            {'key': "IntendToComeBackExplanation",
+             'text': "Вы собираетесь вернуться в страну, от которой вы запрашивали убежище по причине: "},
+            {'key': "ReasonOfComeBackExplanation",
+             'text': "После того как вам был предоставлен статус беженца/лица, получившего убежище, вы возвращались в страну, от которой вы запрашивали убежище по причине: "},
+            {'key': "ReasonOfIssuedPassport",
+             'text': "После того как вам был предоставлен статус беженца/лица, получившего убежище, вы подавали заявку на получение или получали национальный паспорт, подавали заявку на обновление или обновляли имеющийся паспорт, подавали заявку или получали разрешение на въезд в страну, от которой вы запрашивали убежище по причине: "},
+            {'key': "TellAboutHelpFromGovernment",
+             'text': "После того как вам был предоставлен статус беженца/лица, получившего убежище, вы подавали заявку на получение или получали какие-либо выплаты или пособия в стране, от которой вы запрашивали убежище по причине: "},
+            {'key': "RestoredCitizenshipOfLeftCountryReason",
+             'text': "После того как вам был предоставлен статус беженца/лица, получившего убежище, вы восстанавливали гражданство в стране, от которой вы запрашивали убежище по причине: "},
+            {'key': "GotNewCitizenshipReason",
+             'text': "После того как вам был предоставлен статус беженца/лица, получившего убежище, вы приобрели новое гражданство по причине: "},
+            {'key': "GotRefugeeStatusElsewhereReason",
+             'text': "После того как вам был предоставлен статус беженца/лица, получившего убежище, вам был предоставлен статус беженца или лица, получившего убежище, в любой другой стране по причине: "},
+            {'key': "HaveEverFiledFederalIncomeTaxReturnReason",
+             'text': "С тех пор как вы стали постоянным жителем Соединенных Штатов, вы подавали декларацию о федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о федеральном подоходном налоге, потому что считали себя нерезидентом по причине: "}
+        ]
 
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            complete_pdf_name,
-            data,
-            f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы возвращались в '
-            f'страну, от которой вы'
-            f'запрашивали убежище по причине: '
-            f'{self.data["ReasonOfComeBackExplanation"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-ReasonOfComeBackExplanation.pdf",
-            2
-        )
+        complete_pdf_name = self.pdf_output_file_path
+        counter = 1
 
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            complete_pdf_name,
-            data,
-            f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы подавали заявку на '
-            f'получение или получали национальный паспорт, подавали заявку на обновление или обновляли имеющийся '
-            f'паспорт, подавали заявку или получали разрешение на въезд в страну, от которой вы'
-            f'запрашивали убежище по причине: '
-            f'{self.data["ReasonOfIssuedPassport"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-ReasonOfIssuedPassport.pdf",
-            3
-        )
-
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            complete_pdf_name,
-            data,
-            f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы подавали заявку на '
-            f'получение или получали какие-либо выплаты или пособия в стране, от которой вы'
-            f'запрашивали убежище по причине: '
-            f'{self.data["TellAboutHelpFromGovernment"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-TellAboutHelpFromGovernment.pdf",
-            4
-        )
-
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            complete_pdf_name,
-            data,
-            f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы восстанавливали '
-            f'гражданство в стране, от которой вы'
-            f'запрашивали убежище по причине: '
-            f'{self.data["RestoredCitizenshipOfLeftCountryReason"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-RestoredCitizenshipOfLeftCountryReason.pdf",
-            5
-        )
-
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            complete_pdf_name,
-            data,
-            f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вы приобрели новое '
-            f'гражданство по причине: '
-            f'{self.data["GotNewCitizenshipReason"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-GotNewCitizenshipReason.pdf",
-            6
-        )
-
-        complete_pdf_name = self.generate_additional_page_for_i_131(
-            complete_pdf_name,
-            data,
-            f'После того как вам был предоставлен статус беженца/лица, получившего убежище, вам был предоставлен '
-            f'статус беженца или лица, получившего убежище, в любой другой стране по причине: '
-            f'{self.data["GotRefugeeStatusElsewhereReason"]}',
-            f"{self.pdf_output_folder_path}{self.user_id}-GotRefugeeStatusElsewhereReason.pdf",
-            7
-        )
+        for explanation in explanations:
+            try:
+                text_to_add = explanation['text'] + f'\n{self.data[explanation["key"]]}'
+                filename_suffix = explanation['key']
+                complete_pdf_name = self.generate_additional_page_for_i_131(
+                    complete_pdf_name,
+                    data,
+                    text_to_add,
+                    f"{self.pdf_output_folder_path}{self.user_id}-{filename_suffix}.pdf",
+                    counter
+                )
+                counter += 1
+            except KeyError:
+                if counter != 1:
+                    complete_pdf_name = f"{self.pdf_output_folder_path}{counter}-{self.user_id}-{self.data['form_identifier']}-additional-pages.pdf"
 
         return complete_pdf_name
 
