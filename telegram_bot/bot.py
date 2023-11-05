@@ -1,5 +1,5 @@
 from aiogram.dispatcher import FSMContext
-
+import aiofiles
 from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard
 from phrases import START_PHRASE
 from telegram_bot.form_ar_11.form_ar_11_state_group import Form_AR_11
@@ -8,7 +8,6 @@ from telegram_bot.form_i_485.form_i_485_state_group import FormI485
 from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 import json
-import aiofiles
 
 
 @dp.message_handler(filters.Command("start"), state="*")
