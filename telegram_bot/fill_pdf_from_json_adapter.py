@@ -24,10 +24,12 @@ class FillPdfFromJsonAdapter:
         # Set up logging
         logging.basicConfig(level=logging.INFO)
         if platform.system() == "Windows":
+            logging.info(f"Setting FillPdf executable path to {os.getenv('EXECUTABLE_PATH_WINDOWS', r'../binaries/windows/fill_pdf_from_json.exe')}")
             self.executable_path = os.getenv("EXECUTABLE_PATH_WINDOWS", r"../binaries/windows/fill_pdf_from_json.exe")
             self.pdf_output_folder_path = r"../pdf_outputs/"
             self.json_input_file_path = rf"../{user_id}-{form_identifier}-{timestamp}.json"
         else:  # Assume any non-Windows OS uses the Linux path
+            logging.info(f"Setting FillPdf executable path to {os.getenv('EXECUTABLE_PATH_LINUX', r'../binaries/linux-x64/fill_pdf_from_json')}")
             self.executable_path = os.getenv("EXECUTABLE_PATH_LINUX", r"../binaries/linux-x64/fill_pdf_from_json")
             self.pdf_output_folder_path = r"/tmp/pdf_outputs/"
             self.json_input_file_path = rf"/tmp/json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
