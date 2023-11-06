@@ -127,6 +127,7 @@ class FillPdfFromJsonAdapter:
         try:
             logging.info(f"Current working directory: {os.getcwd()}")
             logging.info(f"Attempting to save JSON to: {self.json_input_file_path}")
+            os.makedirs(os.path.dirname(self.json_input_file_path), exist_ok=True)
 
             serializable_data = {key: value for key, value in self.data.items()}
             json_str = json.dumps(serializable_data, ensure_ascii=False, indent=4)
