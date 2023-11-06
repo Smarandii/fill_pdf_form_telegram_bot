@@ -10,13 +10,31 @@ import logging
 
 
 class FillPdfFromJsonAdapter:
-    forms_identifier_to_pdf_files_mapping = {"AR-11": "../pdf_inputs/ar-11-unlocked.pdf",
-                                             "I-589": "../pdf_inputs/i-589-unlocked.pdf",
-                                             "I-765": "../pdf_inputs/i-765-unlocked.pdf",
-                                             "I-485": "../pdf_inputs/i-485-unlocked.pdf",
-                                             "I-131": "../pdf_inputs/i-131-unlocked.pdf"}
+    forms_identifier_to_pdf_files_mapping = {
+        "Windows": {
+            "AR-11": "../pdf_inputs/ar-11-unlocked.pdf",
+            "I-589": "../pdf_inputs/i-589-unlocked.pdf",
+            "I-765": "../pdf_inputs/i-765-unlocked.pdf",
+            "I-485": "../pdf_inputs/i-485-unlocked.pdf",
+            "I-131": "../pdf_inputs/i-131-unlocked.pdf"
+        },
+        "Linux": {
+            "AR-11": "/app/pdf_inputs/ar-11-unlocked.pdf",
+            "I-589": "/app/pdf_inputs/i-589-unlocked.pdf",
+            "I-765": "/app/pdf_inputs/i-765-unlocked.pdf",
+            "I-485": "/app/pdf_inputs/i-485-unlocked.pdf",
+            "I-131": "/app/pdf_inputs/i-131-unlocked.pdf"
+        }
+    }
     forms_identifier_to_html_templates_mapping = {
-        "I-131": "../static/templates/form-i-131/"
+        "Windows":
+            {
+                "I-131": "../static/templates/form-i-131/"
+            },
+        "Linux":
+            {
+                "I-131": "/app/static/templates/form-i-131/"
+            }
     }
 
     def __init__(self, data, form_identifier, user_id, timestamp):
@@ -24,29 +42,31 @@ class FillPdfFromJsonAdapter:
         # Set up logging
         logging.basicConfig(level=logging.INFO)
         if platform.system() == "Windows":
+            self.current_os = "Windows"
             logging.info(f"Setting FillPdf executable path to {os.getenv('EXECUTABLE_PATH_WINDOWS', r'../binaries/windows/fill_pdf_from_json.exe')}")
             self.executable_path = os.getenv("EXECUTABLE_PATH_WINDOWS", r"../binaries/windows/fill_pdf_from_json.exe")
             self.pdf_output_folder_path = r"../pdf_outputs/"
             self.json_input_file_path = rf"../{user_id}-{form_identifier}-{timestamp}.json"
+            self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[self.current_os][form_identifier]
         else:  # Assume any non-Windows OS uses the Linux path
+            self.current_os = "Linux"
             logging.info(f"Allowing to run FillPdf executable")
             os.system('chmod +x /app/binaries/linux-x64/fill_pdf_from_json')
             logging.info(f"Setting FillPdf executable path to {os.getenv('EXECUTABLE_PATH_LINUX', r'/app/binaries/linux-x64/fill_pdf_from_json')}")
             self.executable_path = os.getenv("EXECUTABLE_PATH_LINUX", r"/app/binaries/linux-x64/fill_pdf_from_json")
             self.pdf_output_folder_path = r"/tmp/pdf_outputs/"
             self.json_input_file_path = rf"/tmp/json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
+            self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[self.current_os][form_identifier]
 
         self.user_id = user_id
         self.data = data
         self.form_identifier = form_identifier
-        self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[form_identifier]
-
         self.pdf_output_file_path = rf"{self.pdf_output_folder_path}{form_identifier}-{user_id}.pdf"
 
     def render_html(self, template_name, context):
         env = Environment(
             loader=FileSystemLoader(
-                self.forms_identifier_to_html_templates_mapping[self.form_identifier]
+                self.forms_identifier_to_html_templates_mapping[self.current_os][self.form_identifier]
             )
         )
         template = env.get_template(template_name)
