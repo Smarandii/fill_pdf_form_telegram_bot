@@ -3,9 +3,10 @@ import PyPDF2
 import pdfkit
 import subprocess
 from dotenv import load_dotenv
-from reportlab.pdfgen import canvas
-from reportlab.lib.pagesizes import letter
 from jinja2 import Environment, FileSystemLoader
+import platform
+import json
+import logging
 
 
 class FillPdfFromJsonAdapter:
@@ -19,12 +20,23 @@ class FillPdfFromJsonAdapter:
     }
 
     def __init__(self, data, form_identifier, user_id, timestamp):
-        self.pdf_output_folder_path = r"../pdf_outputs/"
+        load_dotenv()
+        # Set up logging
+        logging.basicConfig(level=logging.INFO)
+        if platform.system() == "Windows":
+            self.executable_path = os.getenv("EXECUTABLE_PATH_WINDOWS")
+            self.pdf_output_folder_path = r"../pdf_outputs/"
+            self.json_input_file_path = rf"../{user_id}-{form_identifier}-{timestamp}.json"
+        else:  # Assume any non-Windows OS uses the Linux path
+            self.executable_path = os.getenv("EXECUTABLE_PATH_LINUX")
+            self.pdf_output_folder_path = r"/tmp/pdf_outputs/"
+            self.json_input_file_path = rf"/tmp/json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
+
         self.user_id = user_id
         self.data = data
         self.form_identifier = form_identifier
         self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[form_identifier]
-        self.json_input_file_path = rf"../json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
+
         self.pdf_output_file_path = rf"{self.pdf_output_folder_path}{form_identifier}-{user_id}.pdf"
 
     def render_html(self, template_name, context):
@@ -111,20 +123,10 @@ class FillPdfFromJsonAdapter:
         return complete_pdf_name
 
     def save_json(self):
-        import json
-        import os
-        import logging
-
-        # Set up logging
-        logging.basicConfig(level=logging.INFO)
 
         try:
-            # Log the directory and file path information
             logging.info(f"Current working directory: {os.getcwd()}")
             logging.info(f"Attempting to save JSON to: {self.json_input_file_path}")
-
-            # Make sure the directory exists before trying to write the file
-            os.makedirs(os.path.dirname(self.json_input_file_path), exist_ok=True)
 
             serializable_data = {key: value for key, value in self.data.items()}
             json_str = json.dumps(serializable_data, ensure_ascii=False, indent=4)
@@ -144,19 +146,11 @@ class FillPdfFromJsonAdapter:
             raise
 
     def fill_pdf(self):
-        import platform
-        load_dotenv()
-        # Determine the OS type and set executable_path accordingly
-        if platform.system() == "Windows":
-            executable_path = os.getenv("EXECUTABLE_PATH_WINDOWS")
-        else:  # Assume any non-Windows OS uses the Linux path
-            executable_path = os.getenv("EXECUTABLE_PATH_LINUX")
-
         pdf_input_file_path = self.pdf_input_file_path
         json_input_file_path = self.json_input_file_path
         pdf_output_file_path = self.pdf_output_file_path
 
-        subprocess.run([executable_path, pdf_input_file_path, json_input_file_path, pdf_output_file_path])
+        subprocess.run([self.executable_path, pdf_input_file_path, json_input_file_path, pdf_output_file_path])
         if self.data['form_identifier'] == "I-131":
             return self.fill_additional_page_for_i_131_form()
 
