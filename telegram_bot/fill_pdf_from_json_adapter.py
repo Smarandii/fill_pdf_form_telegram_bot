@@ -48,6 +48,8 @@ class FillPdfFromJsonAdapter:
             self.pdf_output_folder_path = r"../pdf_outputs/"
             self.json_input_file_path = rf"../{user_id}-{form_identifier}-{timestamp}.json"
             self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[self.current_os][form_identifier]
+            logging.info(
+                f"Setting pdf input file path to {self.pdf_input_file_path}")
         else:  # Assume any non-Windows OS uses the Linux path
             self.current_os = "Linux"
             logging.info(f"Allowing to run FillPdf executable")
@@ -57,6 +59,8 @@ class FillPdfFromJsonAdapter:
             self.pdf_output_folder_path = r"/tmp/pdf_outputs/"
             self.json_input_file_path = rf"/tmp/json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
             self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[self.current_os][form_identifier]
+            logging.info(
+                f"Setting pdf input file path to {self.pdf_input_file_path}")
 
         self.user_id = user_id
         self.data = data
