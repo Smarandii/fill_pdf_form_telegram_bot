@@ -112,15 +112,36 @@ class FillPdfFromJsonAdapter:
 
     def save_json(self):
         import json
+        import os
+        import logging
 
-        serializable_data = {key: value for key, value in self.data.items()}
-        json_str = json.dumps(serializable_data, ensure_ascii=False, indent=4)
+        # Set up logging
+        logging.basicConfig(level=logging.INFO)
 
-        json_str = json_str.replace('/', '//')
-        json_str = json_str.replace('\\', '//')
+        try:
+            # Log the directory and file path information
+            logging.info(f"Current working directory: {os.getcwd()}")
+            logging.info(f"Attempting to save JSON to: {self.json_input_file_path}")
 
-        with open(self.json_input_file_path, 'w', encoding="utf-8") as f:
-            f.write(json_str)
+            # Make sure the directory exists before trying to write the file
+            os.makedirs(os.path.dirname(self.json_input_file_path), exist_ok=True)
+
+            serializable_data = {key: value for key, value in self.data.items()}
+            json_str = json.dumps(serializable_data, ensure_ascii=False, indent=4)
+
+            json_str = json_str.replace('/', '//')
+            json_str = json_str.replace('\\', '//')
+
+            with open(self.json_input_file_path, 'w', encoding="utf-8") as f:
+                f.write(json_str)
+
+            # If everything went well
+            logging.info("JSON file saved successfully.")
+
+        except Exception as e:
+            # Log any exceptions that occur
+            logging.error(f"An error occurred: {e}")
+            raise
 
     def fill_pdf(self):
         import platform
