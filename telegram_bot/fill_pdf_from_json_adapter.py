@@ -123,7 +123,6 @@ class FillPdfFromJsonAdapter:
         return complete_pdf_name
 
     def save_json(self):
-
         try:
             logging.info(f"Current working directory: {os.getcwd()}")
             logging.info(f"Attempting to save JSON to: {self.json_input_file_path}")
@@ -147,12 +146,20 @@ class FillPdfFromJsonAdapter:
             raise
 
     def fill_pdf(self):
-        pdf_input_file_path = self.pdf_input_file_path
-        json_input_file_path = self.json_input_file_path
-        pdf_output_file_path = self.pdf_output_file_path
+        try:
+            logging.info(f"Attempting to use {self.pdf_input_file_path} initial PDF")
+            logging.info(f"Attempting to use {self.json_input_file_path} initial JSON")
+            logging.info(f"Attempting to process with {self.executable_path} and save resulting PDF to: {self.pdf_output_file_path}")
+            pdf_input_file_path = self.pdf_input_file_path
+            json_input_file_path = self.json_input_file_path
+            pdf_output_file_path = self.pdf_output_file_path
 
-        subprocess.run([self.executable_path, pdf_input_file_path, json_input_file_path, pdf_output_file_path])
-        if self.data['form_identifier'] == "I-131":
-            return self.fill_additional_page_for_i_131_form()
+            subprocess.run([self.executable_path, pdf_input_file_path, json_input_file_path, pdf_output_file_path])
+            if self.data['form_identifier'] == "I-131":
+                return self.fill_additional_page_for_i_131_form()
 
-        return pdf_output_file_path
+            return pdf_output_file_path
+        except Exception as e:
+            # Log any exceptions that occur
+            logging.error(f"An error occurred: {e}")
+            raise
