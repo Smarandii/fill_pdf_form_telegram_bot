@@ -5,7 +5,10 @@ fill_pdf_from_json_src_code/bin/
 fill_pdf_from_json_src_code/obj/
 */__pycache__/*
 __pycache__/*
-json_inputs
+json_inputs/*
+!json_inputs/.gitkeep
+pdf_outputs/*
+!pdf_outputs/.gitkeep
 pdf_outputs
 pdf_inputs
 pdf_outputs/ar-11-unlocked-filled.pdf
