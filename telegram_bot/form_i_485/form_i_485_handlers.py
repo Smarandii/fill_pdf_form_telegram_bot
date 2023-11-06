@@ -1,3 +1,4 @@
+import os
 import time
 
 from aiogram import types
@@ -46,7 +47,8 @@ async def process(message: types.Message, state: FSMContext):
         await bot.send_chat_action(message.chat.id, "typing")
         pdf_file_path = adapter.fill_pdf()
         with open(pdf_file_path, 'rb') as file:
-            await bot.send_document(message.chat.id, file)
+            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
+            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
     await state.finish()
 
 
@@ -8545,4 +8547,5 @@ async def process(message: types.Message, state: FSMContext):
         await bot.send_chat_action(message.from_user.id, "typing")
         pdf_file_path = adapter.fill_pdf()
         with open(pdf_file_path, 'rb') as file:
-            await bot.send_document(message.from_user.id, file)
+            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
+            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
