@@ -1,8 +1,8 @@
 .idea/
 env/
-fill_pdf_from_json/.vs/
-fill_pdf_from_json/bin/
-fill_pdf_from_json/obj/
+fill_pdf_from_json_src_code/.vs/
+fill_pdf_from_json_src_code/bin/
+fill_pdf_from_json_src_code/obj/
 */__pycache__/*
 __pycache__/*
 json_inputs
