@@ -123,8 +123,14 @@ class FillPdfFromJsonAdapter:
             f.write(json_str)
 
     def fill_pdf(self):
+        import platform
         load_dotenv()
-        executable_path = os.getenv("EXECUTABLE_PATH")
+        # Determine the OS type and set executable_path accordingly
+        if platform.system() == "Windows":
+            executable_path = os.getenv("EXECUTABLE_PATH_WINDOWS")
+        else:  # Assume any non-Windows OS uses the Linux path
+            executable_path = os.getenv("EXECUTABLE_PATH_LINUX")
+
         pdf_input_file_path = self.pdf_input_file_path
         json_input_file_path = self.json_input_file_path
         pdf_output_file_path = self.pdf_output_file_path

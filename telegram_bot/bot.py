@@ -15,7 +15,7 @@ from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from flask import Flask, request
 
 
-WEBHOOK_HOST = 'https://78d3-194-5-212-109.ngrok-free.app'
+WEBHOOK_HOST = 'https://054c-194-5-212-109.ngrok-free.app'
 WEBHOOK_PATH = f'/webhook/{os.getenv("API_TOKEN")}'
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
