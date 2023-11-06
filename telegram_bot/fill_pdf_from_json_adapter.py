@@ -181,6 +181,7 @@ class FillPdfFromJsonAdapter:
             pdf_input_file_path = self.pdf_input_file_path
             json_input_file_path = self.json_input_file_path
             pdf_output_file_path = self.pdf_output_file_path
+            os.makedirs(os.path.dirname(self.pdf_output_file_path), exist_ok=True)
 
             subprocess.run([self.executable_path, pdf_input_file_path, json_input_file_path, pdf_output_file_path])
             if self.data['form_identifier'] == "I-131":
