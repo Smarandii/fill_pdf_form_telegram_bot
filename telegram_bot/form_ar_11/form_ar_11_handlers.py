@@ -19,13 +19,11 @@ async def process(message: types.Message, state: FSMContext):
                                f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла.")
         await bot.send_chat_action(message.chat.id, "typing")
         file_path = adapter.fill_pdf()
-        file = open(file_path, 'rb')  # Open the file manually
-        try:
+        with open(file_path, 'rb') as file:
             await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-            file.seek(0)  # Reset file pointer to the beginning after each send
+
+        with open(file_path, 'rb') as file:
             await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-        finally:
-            file.close()  # Ensure the file is closed even if an error occurs
 
     await state.finish()
 
@@ -415,11 +413,8 @@ async def process_s3_signature_applicant(message: types.Message, state: FSMConte
         await bot.send_message(message.chat.id, f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла. ")
         await bot.send_chat_action(message.chat.id, "typing")
         file_path = adapter.fill_pdf()
-        file = open(file_path, 'rb')  # Open the file manually
-        try:
+        with open(file_path, 'rb') as file:
             await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-            file.seek(0)  # Reset file pointer to the beginning after each send
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-        finally:
-            file.close()  # Ensure the file is closed even if an error occurs
 
+        with open(file_path, 'rb') as file:
+            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
