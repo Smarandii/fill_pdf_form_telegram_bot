@@ -19,7 +19,7 @@ WEBHOOK_HOST = 'https://galleon-7f277686eddf.herokuapp.com'
 WEBHOOK_PATH = f'/webhook/{os.getenv("API_TOKEN")}'
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
-WEBAPP_HOST = 'localhost'  # or 'localhost'
+WEBAPP_HOST = '0.0.0.0'  # or 'localhost'
 WEBAPP_PORT = os.getenv('PORT', default=5000)
 
 logging.basicConfig(level=logging.INFO)
