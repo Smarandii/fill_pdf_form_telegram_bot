@@ -2,6 +2,10 @@ import os
 import json
 import logging
 import aiofiles
+from aiogram.dispatcher.filters import Text
+from aiogram.dispatcher.filters.state import StatesGroup, State
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+
 from phrases import START_PHRASE
 from aiogram.dispatcher import FSMContext
 from aiogram.utils.executor import start_webhook
@@ -14,7 +18,8 @@ from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from flask import Flask, request
 
-webhook_hosts = {"LOCAL": "https://54c9-46-138-2-17.ngrok-free.app", "PROD": "https://galleon-7f277686eddf.herokuapp.com"}
+webhook_hosts = {"LOCAL": "https://54c9-46-138-2-17.ngrok-free.app",
+                 "PROD": "https://galleon-7f277686eddf.herokuapp.com"}
 WEBHOOK_HOST = webhook_hosts[os.getenv('RUNNING_ENV', default="PROD")]
 
 WEBHOOK_PATH = f'/webhook/{os.getenv("API_TOKEN")}'
@@ -29,6 +34,80 @@ logging.basicConfig(level=logging.INFO)
 dp.middleware.setup(LoggingMiddleware())
 
 app = Flask(__name__)
+
+
+class Form(StatesGroup):
+    main_menu = State()  # State for the main menu
+
+
+# Define the keyboard layout
+def get_main_menu_keyboard():
+    keyboard_markup = InlineKeyboardMarkup(row_width=2)
+    btn_forms = InlineKeyboardButton('Формы', callback_data='forms')
+    btn_info = InlineKeyboardButton('Информация', callback_data='info')
+    keyboard_markup.add(btn_forms, btn_info)
+    return keyboard_markup
+
+
+def get_back_button():
+    keyboard_markup = InlineKeyboardMarkup()
+    btn_back = InlineKeyboardButton('Назад', callback_data='back')
+    keyboard_markup.add(btn_back)
+    return keyboard_markup
+
+
+# Welcome message handler
+@dp.message_handler(commands=['start'], state="*")
+async def start_cmd_handler(message: types.Message):
+    await Form.main_menu.set()  # Set state to main menu
+    keyboard = get_main_menu_keyboard()
+    await message.answer(
+        "Привет! Добро пожаловать в главное меню.\n\n"
+        "Для выбора формы к заполнению нажмите кнопку \"формы\". "
+        "Для того, чтобы ознакомиться с информацией по подаче, нажмите кнопку \"информацию\".",
+        reply_markup=keyboard
+    )
+
+
+@dp.callback_query_handler(Text(startswith='forms'), state=Form.main_menu)
+async def handle_forms(callback_query: types.CallbackQuery):
+    keyboard = AvailableFormsKeyboard()
+    keyboard = keyboard.keyboard_markup
+    await bot.send_message(callback_query.from_user.id, START_PHRASE, reply_markup=keyboard)
+
+
+@dp.callback_query_handler(Text(startswith='info'), state=Form.main_menu)
+async def handle_info(callback_query: types.CallbackQuery):
+    keyboard = get_back_button()
+    await bot.send_message(
+        callback_query.from_user.id,
+        "Информация:\n\n"
+        "Кто мы?\n\n"
+        "Мы - Galleon Legal Advice, сервис удобного заполнения и отправки иммиграционных форм.\n\n"
+        "Какие услуги мы предоставляем?\n\n"
+        "Мы предоставляем услуги по удобному, оперативному заполнению иммиграционных форм. "
+        "Мы также предоставляем консультации по вопросам заполнения и отправки.\n\n"
+        "Какая у нас модель оплаты?\n\n"
+        "Мы берем предоплату в размере 50% от стоимости услуги на этапе отправки заполненной формы. "
+        "После проверки формы и консультации по заполнению и отправке вы отправляете нам вторую часть суммы.\n\n"
+        "Какие формы оплаты мы принимаем?\n\n"
+        "Мы принимаем оплату в Zelle и посредством криптовалют (USDT, TRC-20).\n\n"
+        "На каком языке заполнять анкету?\n\n"
+        "На текущий момент заполнение анкеты работает только на английском языке.\n\n"
+        "Что делать, если я не знаю, что отвечать?\n\n"
+        "Напишите, что думаете, или оставьте поле пустым.",
+        reply_markup=keyboard
+    )
+
+
+@dp.callback_query_handler(Text(startswith='back'), state=Form.main_menu)
+async def handle_back(callback_query: types.CallbackQuery, state: FSMContext):
+    keyboard = get_main_menu_keyboard()
+    await bot.send_message(
+        callback_query.from_user.id,
+        "Вы вернулись в главное меню. Выберите действие:",
+        reply_markup=keyboard
+    )
 
 
 @dp.message_handler(filters.Command("start"), state="*")
@@ -70,6 +149,7 @@ async def jump_cmd_handler(message: types.Message, state: FSMContext):
 
     await form_state.set()
     await message.answer("Я прыгнул, напиши что-нибудь:")
+
 
 from form_ar_11 import form_ar_11_handlers
 from form_i_589 import form_i_589_handlers

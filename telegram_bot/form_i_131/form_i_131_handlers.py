@@ -29,14 +29,14 @@ async def process(message: types.Message, state: FSMContext):
         await final_stage(data, message, state, bot)
 
 
-@dp.callback_query_handler(text="I-131")
+@dp.callback_query_handler(text="I-131", state='*')
 async def ar_11_form_chosen(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form_identifier'] = "I-131"
     await bot.send_message(callback_query.from_user.id, "Вы выбрали форму I-131. Давайте приступим к ее заполнению.\n"
                                                         "Часть 1. «Информация о вас.»")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу фамилию:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page1_1a_FamilyName_0.set()
 
 
@@ -45,7 +45,7 @@ async def ar_11_form_chosen(callback_query: types.CallbackQuery, state: FSMConte
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line1a_FamilyName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите ваше имя:")
 
@@ -55,7 +55,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line1b_GivenName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
 
@@ -65,7 +65,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line1c_MiddleName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Раздел «Адрес фактического проживания.» Далее укажите информацию о "
@@ -79,7 +79,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите название и номер улицы:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -88,7 +88,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2a_InCareofName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите название и номер улицы:")
 
@@ -98,7 +98,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2b_StreetNumberName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI765TypeOfBuildingChoice()
     await bot.send_message(message.from_user.id, "Укажите тип помещения:",
@@ -112,7 +112,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[0].Line2c_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page1_2c_AptSteFlrNumber_0.set()
 
 
@@ -123,7 +123,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[0].Line2c_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page1_2c_AptSteFlrNumber_0.set()
 
 
@@ -134,7 +134,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[0].Line2c_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page1_2c_AptSteFlrNumber_0.set()
 
 
@@ -143,7 +143,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2c_AptSteFlrNumber[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -153,7 +153,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2d_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
 
@@ -163,7 +163,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2e_State[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите ваш zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
@@ -174,7 +174,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2f_ZipCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите ваш почтовый индекс:")
 
@@ -184,7 +184,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2g_PostalCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите провинцию (субъект, штат):")
 
@@ -194,7 +194,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2h_Province[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -204,7 +204,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2i_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Раздел «Иная информация.»\n"
@@ -217,7 +217,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите страну, где вы родились:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -226,7 +226,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].#area[1].Line3_AlienNumber[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну, где вы родились:")
 
@@ -236,7 +236,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line4_CountryOfBirth[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну гражданства:")
 
@@ -247,7 +247,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line5_CountryOfCitizenship[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите ваш класс допуска (категорию визы, по которой вы были "
                                                  "допущены в США, например, постоянный житель, условный постоянный "
@@ -259,7 +259,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line6_ClassofAdmission[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI589GenderChoice()
     await bot.send_message(message.from_user.id, "Выберите свой пол:", reply_markup=keyboard.markup)
@@ -270,7 +270,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line7_Male[0]'] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что вы мужчина.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу дату рождения:")
@@ -281,7 +281,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line7_Female[0]'] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что вы женщина.")
     await bot.send_message(callback_query.from_user.id, "Укажите вашу дату рождения:")
@@ -292,7 +292,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line8_DateOfBirth[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите номер социального страхования США (SSN) (если имеется):")
 
@@ -318,7 +318,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                                                         "Document.\n"
                                                         "6) Я подаю на Advance Parole Document от имени лица, "
                                                         "находящегося за пределами США.", reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_ApplicationTypeChoice.set()
 
 
@@ -327,7 +327,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].#area[2].Line9_SSN[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131ApplicationTypeChoice()
     await bot.send_message(message.from_user.id, "Часть 2. «Тип заявления.»")
@@ -354,7 +354,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].Line1a_checkbox[0]'] = "x"
     await bot.send_message(callback_query.from_user.id, "Часть 3. «Обработка информации.»")
     await bot.send_message(callback_query.from_user.id, "Укажите дату предполагаемого отъезда за границу (мм/дд/гггг):")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_1_DateIntendedDeparture_0.set()
 
 
@@ -365,7 +365,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].Line1b_checkbox[0]'] = "x"
     await bot.send_message(callback_query.from_user.id, "Часть 3. «Обработка информации.»")
     await bot.send_message(callback_query.from_user.id, "Укажите дату предполагаемого отъезда за границу (мм/дд/гггг):")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_1_DateIntendedDeparture_0.set()
 
 
@@ -376,7 +376,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].Line1c_checkbox[0]'] = "x"
     await bot.send_message(callback_query.from_user.id, "Часть 3. «Обработка информации.»")
     await bot.send_message(callback_query.from_user.id, "Укажите дату предполагаемого отъезда за границу (мм/дд/гггг):")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_1_DateIntendedDeparture_0.set()
 
 
@@ -387,7 +387,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].Line1d_checkbox[0]'] = "x"
     await bot.send_message(callback_query.from_user.id, "Часть 3. «Обработка информации.»")
     await bot.send_message(callback_query.from_user.id, "Укажите дату предполагаемого отъезда за границу (мм/дд/гггг):")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_1_DateIntendedDeparture_0.set()
 
 
@@ -398,7 +398,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data['[1].Line1e_checkbox[0]'] = "x"
     await bot.send_message(callback_query.from_user.id, "Часть 3. «Обработка информации.»")
     await bot.send_message(callback_query.from_user.id, "Укажите дату предполагаемого отъезда за границу (мм/дд/гггг):")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_1_DateIntendedDeparture_0.set()
 
 
@@ -407,7 +407,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line1f_checkbox[0]'] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(callback_query.from_user.id, "Вы указали, что подаете на Advance Parole Document от имени "
                                                         "лица, находящегося за пределами США. Далее укажите "
@@ -420,7 +420,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2a_FamilyName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите имя:")
 
@@ -430,7 +430,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2b_GivenName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите отчество:")
 
@@ -440,7 +440,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2c_MiddleName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите дату рождения:")
 
@@ -450,7 +450,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2d_DateOfBirth[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну рождения:")
 
@@ -460,7 +460,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2e_CountryOfBirth[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну гражданства:")
 
@@ -470,7 +470,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2f_CountryOfCitizenship[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите код номера телефона:")
 
@@ -480,7 +480,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].#area[4].Line2g_DaytimePhoneNumber1[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите номер телефона:")
 
@@ -491,7 +491,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].#area[4].Line2g_DaytimePhoneNumber2[0]'] = message.text[:3:]
         data['[1].#area[4].Line2g_DaytimePhoneNumber3[0]'] = message.text[:4:]
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id, "Далее укажите адрес фактического проживания такого лица.")
@@ -504,7 +504,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите название и номер улицы:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -513,7 +513,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2h_InCareofName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите название и номер улицы:")
 
@@ -523,7 +523,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[0].Line2b_StreetNumberName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI765TypeOfBuildingChoice()
     await bot.send_message(message.from_user.id, "Укажите тип помещения:",
@@ -537,7 +537,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[1].Line2j_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_2j_AptSteFlrNumber_0.set()
 
 
@@ -548,7 +548,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[1].Line2j_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_2j_AptSteFlrNumber_0.set()
 
 
@@ -559,7 +559,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[1].Line2j_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_2j_AptSteFlrNumber_0.set()
 
 
@@ -568,7 +568,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2j_AptSteFlrNumber[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -578,7 +578,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2k_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
 
@@ -588,7 +588,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2l_State[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
@@ -599,7 +599,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2m_ZipCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите почтовый индекс:")
 
@@ -609,7 +609,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2n_PostalCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите провинцию (субъект, штат):")
 
@@ -619,7 +619,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2o_Province[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -629,7 +629,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2p_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Часть 3. «Обработка информации.»")
     await bot.send_message(message.from_user.id, "Укажите дату предполагаемого отъезда за границу (мм/дд/гггг):")
@@ -640,7 +640,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line1_DateIntendedDeparture[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите ожидаемую длительность поездки (количество дней):")
 
@@ -650,7 +650,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line2_ExpectedLengthTrip[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131PeopleIncludedInApplicationAreInExclusion()
     await bot.send_message(message.from_user.id, "Находится ли ваше дело или дело иного человека, включенного в "
@@ -665,7 +665,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[1].Line3a_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите наименование DHS office:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_3b_NameDHSOffice_0.set()
 
 
@@ -679,7 +679,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Вам ранее выдавали разрешение на повторный въезд (re-entry permit) "
                            "или проездной документ беженца (refugee travel document)?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_HadBeenPermitedReentryChoice.set()
 
 
@@ -688,7 +688,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line3b_NameDHSOffice[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131HadBeenPermitedReentryChoice()
     await bot.send_message(message.from_user.id,
@@ -704,7 +704,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[1].Line4a_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите дату выдачи такого документа (мм/дд/гггг).:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page2_4b_DateIssued_0.set()
 
 
@@ -719,7 +719,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                                                         "1. По вашему адресу фактического проживания.\n"
                                                         "2. В посольство или консульство США.\n"
                                                         "3. В DHS office за рубежом.", reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_WhereToSendTravelDocumentChoice.set()
 
 
@@ -728,7 +728,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line4b_DateIssued[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите состояние документа (приложен, утерян, иное):")
 
@@ -738,7 +738,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[1].Line4c_Disposition[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131WhereToSendTravelDocumentChoice()
     await bot.send_message(message.from_user.id, "Куда вы хотите, чтобы проездной документ был отправлен? "
@@ -757,7 +757,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 4. «Информация о предполагаемой поездке.»")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите цель поездки:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_1a_Purpose_0.set()
 
 
@@ -769,7 +769,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите адрес такого посольства или консульства.\n"
                            "Укажите город:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_6a_CityOrTown_0.set()
 
 
@@ -778,7 +778,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line6a_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -788,7 +788,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line6b_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_NoticeAddressChoice.set()
     keyboard = FormI131NoticeAddressChoice()
     await bot.send_message(message.from_user.id,
@@ -808,7 +808,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите адрес такого DHS office.\n"
                            "Укажите город:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_7a_CityOrTown_0.set()
 
 
@@ -817,7 +817,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line7a_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -827,7 +827,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line7b_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_NoticeAddressChoice.set()
     keyboard = FormI131NoticeAddressChoice()
     await bot.send_message(message.from_user.id,
@@ -848,7 +848,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Часть 4. «Информация о предполагаемой поездке.»")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите цель поездки:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_1a_Purpose_0.set()
 
 
@@ -861,7 +861,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Если получать корреспонденцию будет иное лицо, чем указано в заявлении, "
                            "укажите ФИО такого лица:", reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_10a_InCareofName_0.set()
 
 
@@ -870,7 +870,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите название и номер улицы:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -879,7 +879,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10a_InCareofName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите название и номер улицы:")
 
@@ -889,7 +889,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10b_StreetNumberName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI765TypeOfBuildingChoice()
     await bot.send_message(message.from_user.id, "Укажите тип помещения:",
@@ -903,7 +903,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[2].Line10c_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_10c_AptSteFlrNumber_0.set()
 
 
@@ -914,7 +914,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[2].Line10c_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_10c_AptSteFlrNumber_0.set()
 
 
@@ -925,7 +925,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[2].Line10c_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_10c_AptSteFlrNumber_0.set()
 
 
@@ -934,7 +934,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10c_AptSteFlrNumber[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -944,7 +944,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10d_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
 
@@ -954,7 +954,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10e_State[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
@@ -965,7 +965,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10f_ZipCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите почтовый индекс:")
 
@@ -975,7 +975,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10g_PostalCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите провинцию (субъект, штат):")
 
@@ -985,7 +985,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10h_Province[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -995,7 +995,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line10i_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите код номера телефона:")
 
@@ -1005,7 +1005,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].#area[5].Line10j_DaytimePhoneNumber1[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите номер телефона:")
 
@@ -1016,7 +1016,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].#area[5].Line10j_DaytimePhoneNumber2[0]'] = message.text[:3:]
         data['[2].#area[5].Line10j_DaytimePhoneNumber3[0]'] = message.text[:4:]
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Часть 4. «Информация о предполагаемой поездке.»")
     await bot.send_message(message.from_user.id, "Укажите цель поездки:")
@@ -1027,7 +1027,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line1a_Purpose[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Перечислите страны, которые вы собираетесь посетить:")
 
@@ -1037,7 +1037,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[2].Line1b_ListCountries[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131ApplyingForReentryPermitChoice()
     await bot.send_message(message.from_user.id, "Вы подаете на разрешение на повторный въезд (re-entry permit)?",
@@ -1054,7 +1054,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "С момента получения статуса постоянного жителя США или за последние 5 лет "
                            "(в зависимости от того, что меньше) какое количество времени вы провели за пределами "
                            "США?", reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1067,7 +1067,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1082,7 +1082,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1097,7 +1097,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1112,7 +1112,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1127,7 +1127,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1142,7 +1142,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1157,7 +1157,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "федеральном подоходном налоге в качестве нерезидента или не подавали декларацию о "
                            "федеральном подоходном налоге, потому что считали себя нерезидентом?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1169,7 +1169,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1178,7 +1178,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['HaveEverFiledFederalIncomeTaxReturnReason'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131ApplyingForTravelDocumentOfRefugeeChoice()
     await bot.send_message(message.from_user.id, "Вы подаете на проездной документ беженца (refugee travel document)?",
@@ -1194,7 +1194,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы подаете на проездной документ беженца (refugee travel document)?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page3_ApplyingForTravelDocumentOfRefugeeChoice.set()
 
 
@@ -1206,7 +1206,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "(refugee travel document).»")
     await bot.send_message(callback_query.from_user.id,
                            "Укажите страну, от которой вы запрашивали убежище:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1217,7 +1217,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы подаете на обратный въезд (advance parole)?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_ApplyingForAdvancedParoleChoice.set()
 
 
@@ -1226,7 +1226,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line1_CountryRefugee[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131IntendToComebackChoice()
     await bot.send_message(message.from_user.id, "Если вы ответите «Да» на любой из следующих вопросов, "
@@ -1242,7 +1242,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line2_Yes1[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1251,7 +1251,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['IntendToComeBackExplanation'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131HaveEverCameBackChoice()
     await bot.send_message(message.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1264,7 +1264,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line2_No1[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_HaveEverCameBackChoice.set()
     keyboard = FormI131HaveEverCameBackChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1279,7 +1279,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line3a_Yes1[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1288,7 +1288,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['ReasonOfComeBackExplanation'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131HaveEverIssuedPassportChoice()
     await bot.send_message(message.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1303,7 +1303,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line3a_No1[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_HaveEverIssuedPassport.set()
     keyboard = FormI131HaveEverIssuedPassportChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1320,7 +1320,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line3b_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1329,7 +1329,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['ReasonOfIssuedPassport'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131HaveEverGotHelpFromGovernmentChoice()
     await bot.send_message(message.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1344,7 +1344,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line3b_No[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_HaveEverGotHelpFromGovernmentChoice.set()
     keyboard = FormI131HaveEverGotHelpFromGovernmentChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1361,7 +1361,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line3c_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1370,7 +1370,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['TellAboutHelpFromGovernment'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131RestoredCitizenshipOfLeftCountryChoice()
     await bot.send_message(message.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1384,7 +1384,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line3c_No[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_RestoredCitizenshipOfLeftCountry.set()
     keyboard = FormI131RestoredCitizenshipOfLeftCountryChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1400,7 +1400,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4a_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1409,7 +1409,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['RestoredCitizenshipOfLeftCountryReason'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131GotNewCitizenshipChoice()
     await bot.send_message(message.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1422,7 +1422,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line4a_No[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_GotNewCitizenshipChoice.set()
     keyboard = FormI131GotNewCitizenshipChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1437,7 +1437,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4b_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1446,7 +1446,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['GotNewCitizenshipReason'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131GotRefugeeStatusElsewhereChoice()
     await bot.send_message(message.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1460,7 +1460,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line4b_No[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_GotRefugeeStatusElsewhereChoice.set()
     keyboard = FormI131GotRefugeeStatusElsewhereChoice()
     await bot.send_message(callback_query.from_user.id, "После того как вам был предоставлен статус беженца/лица, "
@@ -1476,7 +1476,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4c_Yes[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Разъясните ситуацию в деталях:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1485,7 +1485,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['GotRefugeeStatusElsewhereReason'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131ApplyingForAdvancedParoleChoice()
     await bot.send_message(message.from_user.id, "Вы подаете на обратный въезд (advance parole)?",
@@ -1497,7 +1497,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[3].Line4c_No[0]"] = "x"
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_ApplyingForAdvancedParoleChoice.set()
     keyboard = FormI131ApplyingForAdvancedParoleChoice()
     await bot.send_message(callback_query.from_user.id, "Вы подаете на обратный въезд (advance parole)?",
@@ -1507,7 +1507,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.callback_query_handler(text="ApplyingForAdvancedParole_Yes",
                            state=FormI131.Page4_ApplyingForAdvancedParoleChoice)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131HowManyTripsChoice()
     await bot.send_message(callback_query.from_user.id,
@@ -1527,7 +1527,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Вы запрашиваете разрешение на работу при получении одобрения на въезд по программе OAW ("
                            "для граждан Афганистана)?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOAWChoice.set()
 
 
@@ -1540,7 +1540,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Лицо, намеревающееся получить данный документ, находится за пределами США?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1549,7 +1549,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите адрес посольства, консульства или DHS Office США.\nУкажите город:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1566,7 +1566,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                                                         "которого"
                                                         "вы подаете на Advance Parole Document (часть 2).\n"
                                                         "2. По иному адресу.", reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_AddressOfNotificationChoice.set()
 
 
@@ -1579,7 +1579,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Лицо, намеревающееся получить данный документ, находится за пределами США?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1588,7 +1588,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line2a_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -1598,7 +1598,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line2b_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI131AddressOfNotificationChoice()
     await bot.send_message(message.from_user.id, "Если проездной документ будет направляться в офис за рубежом, "
@@ -1621,7 +1621,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Вы запрашиваете разрешение на работу при получении одобрения на въезд по программе OAW ("
                            "для граждан Афганистана)?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOAWChoice.set()
 
 
@@ -1634,7 +1634,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Если получать корреспонденцию будет иное лицо, чем указано в заявлении, "
                            "укажите ФИО такого лица:", reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1643,7 +1643,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите название и номер улицы:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1652,7 +1652,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4a_InCareofName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите название и номер улицы:")
 
@@ -1662,7 +1662,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4b_StreetNumberName[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     keyboard = FormI765TypeOfBuildingChoice()
     await bot.send_message(message.from_user.id, "Укажите тип помещения:",
@@ -1676,7 +1676,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4c_Unit[0]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1687,7 +1687,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4c_Unit[2]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1698,7 +1698,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         data["[3].Line4c_Unit[1]"] = "x"
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1707,7 +1707,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4c_AptSteFlrNumber[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите город:")
 
@@ -1717,7 +1717,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4d_CityOrTown[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
 
@@ -1727,7 +1727,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4e_State[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите zip код (например, 123456).\nНайти zip код можно по "
                                                  "ссылке:\nhttps://tools.usps.com/go/ZipLookupAction_input")
@@ -1738,7 +1738,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4f_ZipCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите почтовый индекс:")
 
@@ -1748,7 +1748,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4g_PostalCode[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите провинцию (субъект, штат):")
 
@@ -1758,7 +1758,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4h_Province[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите страну:")
 
@@ -1768,7 +1768,7 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].Line4i_Country[0]'] = message.text
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
     await bot.send_message(message.from_user.id, "Укажите код номера телефона:")
 
@@ -1779,7 +1779,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[3].#area[6].Line4j_DaytimePhoneNumber1[0]'] = message.text
     await bot.send_message(message.from_user.id, "Укажите номер телефона:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1796,7 +1796,7 @@ async def process(message: types.Message, state: FSMContext):
                            "Вы запрашиваете разрешение на работу при получении одобрения на въезд по программе OAW ("
                            "для граждан Афганистана)?",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.Page4_EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOAWChoice.set()
 
 
@@ -1814,7 +1814,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "ним доказательства являются достоверными. Я разрешаю раскрыть любую информацию, "
                            "необходимую USCIS для определения права на получение услуги, которую я запрашиваю.",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1832,7 +1832,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "ним доказательства являются достоверными. Я разрешаю раскрыть любую информацию, "
                            "необходимую USCIS для определения права на получение услуги, которую я запрашиваю.",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1841,7 +1841,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу подпись:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1850,7 +1850,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Укажите вашу подпись:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1864,7 +1864,7 @@ async def process(message: types.Message, state: FSMContext):
     await bot.send_message(message.from_user.id,
                            "Укажите код номера мобильного телефона заявителя (если имеется):",
                            reply_markup=keyboard.markup)
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
@@ -1881,7 +1881,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].#area[7].Line2_DaytimePhoneNumber1[0]'] = message.text
     await bot.send_message(message.from_user.id, "Укажите номер мобильного телефона заявителя:")
-    time.sleep(float(os.environ["RESPONSE_TIMEOUT"]))
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI131.next()
 
 
