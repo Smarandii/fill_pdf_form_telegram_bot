@@ -2,6 +2,8 @@ import os
 import time
 from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
+
+from telegram_bot.form_i_765.f_i_765_keyboards import FormI765TypeOfBuildingChoice
 from telegram_bot.phrases import AR_11_START_PHRASE
 from telegram_bot.form_ar_11.form_ar_11_state_group import Form_AR_11
 from telegram_bot import bot, dp, datetime, Form_AR_11_Mailing_Address_Choice_Keyboard
@@ -84,53 +86,48 @@ async def process_s2b_city_or_town(message: types.Message, state: FSMContext):
         data['[0].S2B_CityOrTown[0]'] = message.text
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await Form_AR_11.next()
-    await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер квартиры:")
+    keyboard = FormI765TypeOfBuildingChoice()
+    await bot.send_message(message.from_user.id, "Укажите тип помещения:",
+                           reply_markup=keyboard.markup)
 
 
-@dp.message_handler(state=Form_AR_11.S2B_Unit)
-async def process_s2b_unit(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Ste",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2B__Unit[0]'] = ""
-        data['[0].S2B__Unit[1]'] = ""
-        data['[0].S2B__Unit[2]'] = ""
-        data['[0].S2B_AptSteFlrNumber[0]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2B__Unit[0]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер квартиры:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2B_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.next()
-            await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер комнаты.")
+        data["[0].S2B__Unit[0]"] = "x"
+        data["[0].S2B__Unit[1]"] = ""
+        data["[0].S2B__Unit[2]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер квартиры:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2B_AptSteFlrNumber.set()
 
 
-@dp.message_handler(state=Form_AR_11.S2B_Unit_1)
-async def process_s2b_unit_1(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Apt",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2B__Unit[1]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер комнаты:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2B_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.next()
-            await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер этажа. ")
+        data["[0].S2B__Unit[1]"] = "x"
+        data["[0].S2B__Unit[0]"] = ""
+        data["[0].S2B__Unit[2]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер апартаментов:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2B_AptSteFlrNumber.set()
 
 
-@dp.message_handler(state=Form_AR_11.S2B_Unit_2)
-async def process_s2b_unit_2(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Flr",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2B__Unit[2]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер этажа:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2B_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2B_State.set()
-            await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
+        data["[0].S2B__Unit[2]"] = "x"
+        data["[0].S2B__Unit[0]"] = ""
+        data["[0].S2B__Unit[1]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер этажа:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2B_AptSteFlrNumber.set()
 
 
 @dp.message_handler(state=Form_AR_11.S2B_AptSteFlrNumber)
@@ -178,53 +175,48 @@ async def process_s2a_city_or_town(message: types.Message, state: FSMContext):
         data['[0].S2A_CityOrTown[0]'] = message.text
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await Form_AR_11.next()
-    await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер квартиры:")
+    keyboard = FormI765TypeOfBuildingChoice()
+    await bot.send_message(message.from_user.id, "Укажите тип помещения:",
+                           reply_markup=keyboard.markup)
 
 
-@dp.message_handler(state=Form_AR_11.S2A_Unit)
-async def process_s2a_unit(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Ste",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice_2)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2A_Unit[0]'] = ""
-        data['[0].S2A_AptSteFlrNumber[0]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2A_Unit[0]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер квартиры:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2A_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.next()
-            await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер комнаты. ")
+        data["[0].S2A_Unit[0]"] = "x"
+        data["[0].S2A_Unit[1]"] = ""
+        data["[0].S2A_Unit[2]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер квартиры:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2A_AptSteFlrNumber.set()
 
 
-@dp.message_handler(state=Form_AR_11.S2A_Unit_1)
-async def process_s2a_unit_1(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Apt",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice_2)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2A_Unit[1]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2A_Unit[1]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер комнаты:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2A_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.next()
-            await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер этажа")
+        data["[0].S2A_Unit[1]"] = "x"
+        data["[0].S2A_Unit[0]"] = ""
+        data["[0].S2A_Unit[2]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер апартаментов:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2A_AptSteFlrNumber.set()
 
 
-@dp.message_handler(state=Form_AR_11.S2A_Unit_2)
-async def process_s2a_unit_2(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Flr",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice_2)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2A_Unit[2]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2A_Unit[2]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер этажа:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2B_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2A_State.set()
-            await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
+        data["[0].S2A_Unit[2]"] = "x"
+        data["[0].S2A_Unit[0]"] = ""
+        data["[0].S2A_Unit[1]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер этажа:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2A_AptSteFlrNumber.set()
 
 
 @dp.message_handler(state=Form_AR_11.S2A_AptSteFlrNumber)
@@ -262,53 +254,48 @@ async def process_s2c_city_or_town(message: types.Message, state: FSMContext):
         data['[0].S2C_CityOrTown[0]'] = message.text
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await Form_AR_11.next()
-    await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер квартиры.")
+    keyboard = FormI765TypeOfBuildingChoice()
+    await bot.send_message(message.from_user.id, "Укажите тип помещения:",
+                           reply_markup=keyboard.markup)
 
 
-@dp.message_handler(state=Form_AR_11.S2C_Unit)
-async def process_s2c_unit(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Ste",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice_3)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2C_Unit[0]'] = ""
-        data['[0].S2C_AptSteFlrNumber[0]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2C_Unit[0]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер квартиры:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2C_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.next()
-            await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер комнаты.")
+        data["[0].S2C_Unit[0]"] = "x"
+        data["[0].S2C_Unit[1]"] = ""
+        data["[0].S2C_Unit[2]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер квартиры:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2C_AptSteFlrNumber.set()
 
 
-@dp.message_handler(state=Form_AR_11.S2C_Unit_1)
-async def process_s2c_unit_1(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Apt",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice_3)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2C_Unit[1]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2C_Unit[1]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер комнаты:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2C_AptSteFlrNumber.set()
-        else:
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.next()
-            await bot.send_message(message.from_user.id, "Пришлите в ответном сообщении «x», если хотите указать номер этажа. ")
+        data["[0].S2C_Unit[1]"] = "x"
+        data["[0].S2C_Unit[0]"] = ""
+        data["[0].S2C_Unit[2]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер апартаментов:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2C_AptSteFlrNumber.set()
 
 
-@dp.message_handler(state=Form_AR_11.S2C_Unit_2)
-async def process_s2c_unit_2(message: types.Message, state: FSMContext):
+@dp.callback_query_handler(text="Flr",
+                           state=Form_AR_11.Page1_TypeOfBuildingChoice_3)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
-        data['[0].S2C_Unit[2]'] = ""
-        if message.text.lower() == "x" or message.text.lower() == "х":
-            data['[0].S2C_Unit[2]'] = message.text
-            await bot.send_message(message.from_user.id, "Укажите номер этажа:")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2C_AptSteFlrNumber.set()
-        else:
-            await bot.send_message(message.from_user.id, "Укажите штат (например, CA, NY, AZ и т.д.):")
-            time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-            await Form_AR_11.S2C_State.set()
+        data["[0].S2C_Unit[2]"] = "x"
+        data["[0].S2C_Unit[0]"] = ""
+        data["[0].S2C_Unit[1]"] = ""
+    await bot.send_message(callback_query.from_user.id,
+                           "Укажите номер этажа:")
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await Form_AR_11.S2C_AptSteFlrNumber.set()
 
 
 @dp.message_handler(state=Form_AR_11.S2C_AptSteFlrNumber)
