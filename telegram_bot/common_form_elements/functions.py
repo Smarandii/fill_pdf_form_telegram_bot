@@ -14,7 +14,7 @@ async def final_stage(data, message, state, bot):
     adapter.save_json()
     await state.finish()
     await bot.send_message(message.chat.id,
-                           f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла. ")
+                           f"Ваши данные для формы {data['form_identifier']} успешно сохранены! С вами свяжется наш оператор для получения предоплаты, отправки заполненной формы и создания чата с юристом-консультантом.")
     await bot.send_chat_action(message.chat.id, "typing")
     file_path = adapter.fill_pdf()
     if os.getenv("RUNNING_ENV", default="PROD") == "PROD":

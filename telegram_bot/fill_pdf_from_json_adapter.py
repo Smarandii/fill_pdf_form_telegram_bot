@@ -46,7 +46,7 @@ class FillPdfFromJsonAdapter:
             logging.info(f"Setting FillPdf executable path to {os.getenv('EXECUTABLE_PATH_WINDOWS', r'../binaries/windows/fill_pdf_from_json.exe')}")
             self.executable_path = os.getenv("EXECUTABLE_PATH_WINDOWS", r"../binaries/windows/fill_pdf_from_json.exe")
             self.pdf_output_folder_path = r"../pdf_outputs/"
-            self.json_input_file_path = rf"../{user_id}-{form_identifier}-{timestamp}.json"
+            self.json_input_file_path = rf"../json_inputs/{user_id}-{form_identifier}-{timestamp}.json"
             self.pdf_input_file_path = FillPdfFromJsonAdapter.forms_identifier_to_pdf_files_mapping[self.current_os][form_identifier]
             logging.info(
                 f"Setting pdf input file path to {self.pdf_input_file_path}")
