@@ -5,6 +5,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
 from aiogram.types.message import ContentType
 
+from telegram_bot.common_form_elements.functions import final_stage
 from telegram_bot.form_i_485.f_i_485_keyboards import \
     FormI485DontNeedAlternateMailingAddressChoice, FormI485SSAChoice, FormI485SSACouldUseInformationChoice, \
     FormI485WasInspectedAtPortOfEntryChoice, FormI485SpecialCategoryEntryGrantedChoice, \
@@ -38,20 +39,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import FormI765UsedOtherNamesChoi
 @dp.message_handler(filters.Command("end"), state="*")
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=message.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime("%Y%m%d%H%M%S"))
-        adapter.save_json()
-        await bot.send_message(message.chat.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.chat.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-    await state.finish()
+        await final_stage(data, message, state, bot)
 
 
 @dp.callback_query_handler(text="I-485")
@@ -8538,18 +8526,4 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[16].Pt5Line6a_Signature[0]'] = message.text
         data['[16].Pt10Line6b_Date[0]'] = datetime.datetime.now().strftime('%m/%d/%Y')
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=message.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await state.finish()
-        await bot.send_message(message.from_user.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                               f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.from_user.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
+        await final_stage(data, message, state, bot)

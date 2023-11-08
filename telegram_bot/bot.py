@@ -14,12 +14,15 @@ from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from flask import Flask, request
 
+webhook_hosts = {"LOCAL": "https://54c9-46-138-2-17.ngrok-free.app", "PROD": "https://galleon-7f277686eddf.herokuapp.com"}
+WEBHOOK_HOST = webhook_hosts[os.getenv('RUNNING_ENV', default="PROD")]
 
-WEBHOOK_HOST = 'https://galleon-7f277686eddf.herokuapp.com'
 WEBHOOK_PATH = f'/webhook/{os.getenv("API_TOKEN")}'
 WEBHOOK_URL = f"{WEBHOOK_HOST}{WEBHOOK_PATH}"
 
-WEBAPP_HOST = '0.0.0.0'  # or 'localhost'
+hosts = {"LOCAL": "localhost", "PROD": "0.0.0.0"}
+
+WEBAPP_HOST = hosts[os.getenv('RUNNING_ENV', default="PROD")]
 WEBAPP_PORT = os.getenv('PORT', default=5000)
 
 logging.basicConfig(level=logging.INFO)

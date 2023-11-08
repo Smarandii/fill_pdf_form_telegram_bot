@@ -1,6 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
-
+import time
 from telegram_bot.form_i_589.f_i_589_keyboards import \
     (FormI589YouFearHarmOrMistreatmentChoice, \
      FormI589YouOrFamilyAccusedChargedArrestedDetainedChoice, \
@@ -62,21 +62,7 @@ def escape_json_special_chars(func):
 @dp.message_handler(filters.Command("end"), state='*')
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=message.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await bot.send_message(message.chat.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                               f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.chat.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-    await state.finish()
+        await final_stage(data, message, state, bot)
 
 
 @dp.callback_query_handler(text="I-589")
@@ -6854,20 +6840,7 @@ async def process(message: types.Message, state: FSMContext):
                                "Укажите подпись составителя:")
     else:
         async with state.proxy() as data:
-            adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                             user_id=message.from_user.id,
-                                             timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-            adapter.save_json()
-            await bot.send_message(message.chat.id,
-                                   f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                                   f"Дождитесь pdf-файла.")
-            await bot.send_chat_action(message.chat.id, "typing")
-            file_path = adapter.fill_pdf()
-            with open(file_path, 'rb') as file:
-                await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-            with open(file_path, 'rb') as file:
-                await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
+            await final_stage(data, message, state, bot)
 
 
 @escape_json_special_chars
@@ -6965,19 +6938,4 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_ZipCode[0]'] = message.text
-
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=message.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await bot.send_message(message.chat.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                               f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.chat.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-    await state.finish()
+        await final_stage(data, message, state, bot)

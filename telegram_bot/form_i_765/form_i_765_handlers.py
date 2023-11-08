@@ -4,6 +4,7 @@ import time
 from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
 
+from telegram_bot.common_form_elements.functions import final_stage
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, FormI589GenderChoice, \
@@ -23,21 +24,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import (
 async def process(message: types.Message, state: FSMContext):
     try:
         async with state.proxy() as data:
-            adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                             user_id=message.from_user.id,
-                                             timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-            adapter.save_json()
-            await bot.send_message(message.chat.id,
-                                   f"Ваши данные для формы {data['form_identifier']} успешно сохранены! Дождитесь pdf-файла.")
-            await bot.send_chat_action(message.chat.id, "typing")
-            file_path = adapter.fill_pdf()
-            with open(file_path, 'rb') as file:
-                await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-            with open(file_path, 'rb') as file:
-                await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-
-        await state.finish()
+            await final_stage(data, message, state, bot)
     except Exception:
         await state.finish()
 
@@ -1597,21 +1584,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что переводчик не помогал вам при заполнении этого заявления.")
     async with state.proxy() as data:
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=callback_query.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await state.finish()
-        await bot.send_message(callback_query.from_user.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                               f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(callback_query.from_user.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
+        await final_stage(data, callback_query, state, bot)
 
 
 @escape_json_special_chars
@@ -1887,21 +1860,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что составитель не помогал вам при заполнении этого заявления.")
     async with state.proxy() as data:
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=callback_query.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await state.finish()
-        await bot.send_message(callback_query.from_user.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                               f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(callback_query.from_user.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
+        await final_stage(data, callback_query, state, bot)
 
 
 @escape_json_special_chars
@@ -2149,18 +2108,4 @@ async def process(message: types.Message, state: FSMContext):
         data['form1[0].Page6[0].Pt5Line8a_Signature[0]'] = message.text
         data['form1[0].Page6[0].Pt5Line8b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
     async with state.proxy() as data:
-        adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
-                                         user_id=message.from_user.id,
-                                         timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
-        adapter.save_json()
-        await state.finish()
-        await bot.send_message(message.from_user.id,
-                               f"Ваши данные для формы {data['form_identifier']} успешно сохранены! "
-                               f"Дождитесь pdf-файла.")
-        await bot.send_chat_action(message.from_user.id, "typing")
-        file_path = adapter.fill_pdf()
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DOCUMENTS_RECEIVER")), file)
-
-        with open(file_path, 'rb') as file:
-            await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
+        await final_stage(data, message, state, bot)

@@ -185,10 +185,11 @@ class FillPdfFromJsonAdapter:
 
             subprocess.run([self.executable_path, pdf_input_file_path, json_input_file_path, pdf_output_file_path])
             if self.data['form_identifier'] == "I-131":
-                return self.fill_additional_page_for_i_131_form()
+                try:
+                    return self.fill_additional_page_for_i_131_form()
+                except Exception as e:
+                    logging.error(f"An error occurred: {e}")
 
             return pdf_output_file_path
         except Exception as e:
-            # Log any exceptions that occur
             logging.error(f"An error occurred: {e}")
-            raise
