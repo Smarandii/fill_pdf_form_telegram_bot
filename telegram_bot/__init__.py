@@ -19,6 +19,7 @@ from aiogram.contrib.fsm_storage.memory import \
 from dotenv import \
     load_dotenv
 
+from telegram_bot.common_form_elements.strapi_client import StrapiClient
 from telegram_bot.fill_pdf_from_json_adapter import \
     FillPdfFromJsonAdapter
 
@@ -54,7 +55,10 @@ from telegram_bot.form_i_589.f_i_589_keyboards import \
 load_dotenv()
 
 API_TOKEN = os.getenv("API_TOKEN")
+STRAPI_TOKEN = os.getenv("STRAPI_TOKEN")
+STRAPI_HOST = os.getenv("STRAPI_HOST")
 logging.basicConfig(level=logging.INFO)
 
 bot = Bot(token=API_TOKEN)
 dp = Dispatcher(bot, storage=MemoryStorage())
+strapi_client = StrapiClient(token=STRAPI_TOKEN, host=STRAPI_HOST)

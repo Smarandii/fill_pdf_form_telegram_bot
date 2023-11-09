@@ -10,7 +10,7 @@ from phrases import START_PHRASE
 from aiogram.dispatcher import FSMContext
 from aiogram.utils.executor import start_webhook
 from aiogram.contrib.middlewares.logging import LoggingMiddleware
-from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard
+from telegram_bot import bot, dp, types, filters, AvailableFormsKeyboard, strapi_client
 from telegram_bot.form_ar_11.form_ar_11_state_group import Form_AR_11
 from telegram_bot.form_i_131.form_i_131_state_group import FormI131
 from telegram_bot.form_i_485.form_i_485_state_group import FormI485
@@ -18,7 +18,7 @@ from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from flask import Flask, request
 
-webhook_hosts = {"LOCAL": "https://54c9-46-138-2-17.ngrok-free.app",
+webhook_hosts = {"LOCAL": "https://9e39-46-138-2-17.ngrok-free.app",
                  "PROD": "https://galleon-7f277686eddf.herokuapp.com"}
 WEBHOOK_HOST = webhook_hosts[os.getenv('RUNNING_ENV', default="PROD")]
 
@@ -61,6 +61,7 @@ def get_back_button():
 async def start_cmd_handler(message: types.Message):
     await Form.main_menu.set()  # Set state to main menu
     keyboard = get_main_menu_keyboard()
+    strapi_client.save_client_to_strapi(message)
     await message.answer(
         "Привет! Добро пожаловать в главное меню.\n\n"
         "Для выбора формы к заполнению нажмите кнопку \"формы\". "
