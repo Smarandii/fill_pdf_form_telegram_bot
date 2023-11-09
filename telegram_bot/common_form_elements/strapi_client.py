@@ -64,11 +64,14 @@ class StrapiClient:
 
     def find_client(self, tg_id):
         """Find a client by tg_id."""
-        url = f"{self.HOST}{self.CLIENTS_URL}?tg_id={tg_id}"
-        response = self.__send_get_request(url)
-        if response.status_code == 200 and response.json():
-            return response.json()['data'][0]
-        return None
+        try:
+            url = f"{self.HOST}{self.CLIENTS_URL}?tg_id={tg_id}"
+            response = self.__send_get_request(url)
+            if response.status_code == 200 and response.json():
+                return response.json()['data'][0]
+            return None
+        except Exception as e:
+            self.logger.error(f"Failed find client with tg_id: {tg_id} | Error {e}")
 
     def create_json_input(self, json_data, client_id):
         """Create a new json_input and link it to the client."""
