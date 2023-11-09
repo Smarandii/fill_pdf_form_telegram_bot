@@ -44,7 +44,9 @@ class StrapiClient:
             data = self.__get_client_data_from_message(message)
             result = self.__send_post_request(url, data)
             if result.status_code != 200:
-                raise Exception(str(result.content, encoding="utf-8"))
+                response_string = str(result.content, encoding="utf-8")
+                if "This attribute must be unique" not in response_string:
+                    raise Exception(response_string)
             return result
         except Exception as e:
             self.logger.error(f"Failed to save user {message.from_user.id} - {message.from_user.username} | Error {e}")
