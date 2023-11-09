@@ -31,7 +31,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import FormI765TypeOfBuildingChoi
     FormI765OnlyTrueInformationChoice
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_485.form_i_485_state_group import FormI485
-from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, FormI589GenderChoice
+from telegram_bot import bot, dp, strapi_client, datetime, FormI589IfAnyChoice, FormI589GenderChoice
 from telegram_bot.form_i_765.f_i_765_keyboards import FormI765UsedOtherNamesChoice, FormI765WantSSACardToBeIssuedChoice
 
 
@@ -39,7 +39,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import FormI765UsedOtherNamesChoi
 @dp.message_handler(filters.Command("end"), state="*")
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)
 
 
 @dp.callback_query_handler(text="I-485", state='*')
@@ -8526,4 +8526,4 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[16].Pt5Line6a_Signature[0]'] = message.text
         data['[16].Pt10Line6b_Date[0]'] = datetime.datetime.now().strftime('%m/%d/%Y')
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)

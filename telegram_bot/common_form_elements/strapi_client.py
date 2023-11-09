@@ -8,6 +8,7 @@ class StrapiClient:
     TOKEN = os.getenv("STRAPI_TOKEN")
     HOST = os.getenv("STRAPI_HOST")
     CLIENTS_URL = "api/clients"
+    JSON_INPUTS_URL = "api/json-inputs"
 
     def __init__(self, token=None, host=None):
         self.logger = logging.getLogger("StrapiClient")
@@ -23,6 +24,16 @@ class StrapiClient:
         return requests.post(
             url=url,
             json=data,
+            headers=headers
+        )
+
+    def __send_get_request(self, url: str, headers: dict | None = None):
+        if headers is None:
+            headers = {"Authorization": f"Bearer {self.TOKEN}"}
+        else:
+            headers.update({"Authorization": f"Bearer {self.TOKEN}"})
+        return requests.get(
+            url=url,
             headers=headers
         )
 
@@ -50,3 +61,31 @@ class StrapiClient:
             return result
         except Exception as e:
             self.logger.error(f"Failed to save user {message.from_user.id} - {message.from_user.username} | Error {e}")
+
+    def find_client(self, tg_id):
+        """Find a client by tg_id."""
+        url = f"{self.HOST}{self.CLIENTS_URL}?tg_id={tg_id}"
+        response = self.__send_get_request(url)
+        if response.status_code == 200 and response.json():
+            return response.json()['data'][0]
+        return None
+
+    def create_json_input(self, json_data, client_id):
+        """Create a new json_input and link it to the client."""
+        try:
+            url = f"{self.HOST}{self.JSON_INPUTS_URL}"
+            payload = {
+                "data": {
+                    "data": json_data,
+                    "client": client_id,
+                }
+            }
+            headers = {"Content-Type": "application/json"}
+            response = self.__send_post_request(url, payload, headers=headers)
+            if response.status_code in (200, 201) and response.json():
+                return response.json()
+            else:
+                self.logger.error(f"Failed to create json_input: {response.content}")
+            return response
+        except Exception as e:
+            self.logger.error(f"Failed to save json: {json_data} of client_id: {client_id} | Error {e}")

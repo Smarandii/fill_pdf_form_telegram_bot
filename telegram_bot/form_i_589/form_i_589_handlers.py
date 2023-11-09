@@ -48,7 +48,7 @@ from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot import \
     bot, \
     dp, \
-    FillPdfFromJsonAdapter, \
+    strapi_client, \
     datetime
 
 
@@ -63,7 +63,7 @@ def escape_json_special_chars(func):
 @dp.message_handler(filters.Command("end"), state='*')
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)
 
 
 @dp.callback_query_handler(text="I-589", state='*')
@@ -6841,7 +6841,7 @@ async def process(message: types.Message, state: FSMContext):
                                "Укажите подпись составителя:")
     else:
         async with state.proxy() as data:
-            await final_stage(data, message, state, bot)
+            await final_stage(data, message, state, bot, strapi_client)
 
 
 @escape_json_special_chars
@@ -6939,4 +6939,4 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[10].PtE_ZipCode[0]'] = message.text
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)

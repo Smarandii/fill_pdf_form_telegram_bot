@@ -17,7 +17,7 @@ from telegram_bot.form_i_131.f_i_131_keyboards import FormI131ApplicationTypeCho
     FormI131EmploymentAuthorizationDocumentForNewPeriodOfParoleUnderOperationAlliesWelcomeChoice, \
     FormI131UnderFearOfPunishmentForDisinformationChoice, FormI131RecieverOutsideOfUSIntendToGetThisDocument
 from telegram_bot.form_i_131.form_i_131_state_group import FormI131
-from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, FormI589GenderChoice
+from telegram_bot import bot, dp, strapi_client, datetime, FormI589IfAnyChoice, FormI589GenderChoice
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_765.f_i_765_keyboards import FormI765TypeOfBuildingChoice
 
@@ -26,7 +26,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import FormI765TypeOfBuildingChoi
 @dp.message_handler(filters.Command("end"), state='*')
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)
 
 
 @dp.callback_query_handler(text="I-131", state='*')
@@ -1891,4 +1891,4 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['[4].#area[7].Line2_DaytimePhoneNumber2[0]'] = message.text[:3:]
         data['[4].#area[7].Line2_DaytimePhoneNumber3[0]'] = message.text[:4:]
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)

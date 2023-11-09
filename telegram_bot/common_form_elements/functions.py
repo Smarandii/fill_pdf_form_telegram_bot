@@ -3,7 +3,7 @@ import os
 from telegram_bot import FillPdfFromJsonAdapter
 
 
-async def final_stage(data, message, state, bot):
+async def final_stage(data, message, state, bot, strapi_client):
     try:
         adapter = FillPdfFromJsonAdapter(data=data, form_identifier=data['form_identifier'],
                                          user_id=message.from_user.id,
@@ -12,6 +12,9 @@ async def final_stage(data, message, state, bot):
         bot.send_message(message.chat.id, "form_identifier is not set")
         return None
     adapter.save_json()
+    client_model = strapi_client.find_client(message.from_user.id)
+    json_data = await state.get_data()
+    strapi_client.create_json_input(json_data, client_model['id'])
     await state.finish()
     await bot.send_message(message.chat.id,
                            f"Ваши данные для формы {data['form_identifier']} успешно сохранены! С вами свяжется наш оператор для получения предоплаты, отправки заполненной формы и создания чата с юристом-консультантом.")

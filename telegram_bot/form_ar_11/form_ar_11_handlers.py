@@ -6,14 +6,14 @@ from aiogram.dispatcher import FSMContext, filters
 from telegram_bot.form_i_765.f_i_765_keyboards import FormI765TypeOfBuildingChoice
 from telegram_bot.phrases import AR_11_START_PHRASE
 from telegram_bot.form_ar_11.form_ar_11_state_group import Form_AR_11
-from telegram_bot import bot, dp, datetime, Form_AR_11_Mailing_Address_Choice_Keyboard
+from telegram_bot import bot, dp, datetime, Form_AR_11_Mailing_Address_Choice_Keyboard, strapi_client
 from telegram_bot.common_form_elements.functions import final_stage
 
 
 @dp.message_handler(filters.Command("end"), state='*')
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)
 
 
 @dp.callback_query_handler(text="AR-11", state='*')
@@ -377,4 +377,4 @@ async def process_s3_signature_applicant(message: types.Message, state: FSMConte
     async with state.proxy() as data:
         data['[0].S3_SignatureApplicant[0]'] = message.text
         data['[0].S3_DateofSignature[0]'] = datetime.datetime.now().strftime("%d/%m/%Y")
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)

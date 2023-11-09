@@ -37,10 +37,9 @@ app = Flask(__name__)
 
 
 class Form(StatesGroup):
-    main_menu = State()  # State for the main menu
+    main_menu = State()
 
 
-# Define the keyboard layout
 def get_main_menu_keyboard():
     keyboard_markup = InlineKeyboardMarkup(row_width=2)
     btn_forms = InlineKeyboardButton('Формы', callback_data='forms')
@@ -56,12 +55,13 @@ def get_back_button():
     return keyboard_markup
 
 
-# Welcome message handler
 @dp.message_handler(commands=['start'], state="*")
 async def start_cmd_handler(message: types.Message):
     await Form.main_menu.set()  # Set state to main menu
     keyboard = get_main_menu_keyboard()
-    strapi_client.save_client_to_strapi(message)
+    user = strapi_client.find_client(message.from_user.id)
+    if user is None:
+        strapi_client.save_client_to_strapi(message)
     await message.answer(
         "Привет! Добро пожаловать в главное меню.\n\n"
         "Для выбора формы к заполнению нажмите кнопку \"формы\". "

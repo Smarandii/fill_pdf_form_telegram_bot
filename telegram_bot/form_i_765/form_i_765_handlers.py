@@ -7,7 +7,7 @@ from aiogram.dispatcher import FSMContext, filters
 from telegram_bot.common_form_elements.functions import final_stage
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
-from telegram_bot import bot, dp, FillPdfFromJsonAdapter, datetime, FormI589IfAnyChoice, FormI589GenderChoice, \
+from telegram_bot import bot, dp, strapi_client, datetime, FormI589IfAnyChoice, FormI589GenderChoice, \
     FormI589MaritalStatusChoice
 
 from telegram_bot.form_i_765.f_i_765_keyboards import (
@@ -24,7 +24,7 @@ from telegram_bot.form_i_765.f_i_765_keyboards import (
 async def process(message: types.Message, state: FSMContext):
     try:
         async with state.proxy() as data:
-            await final_stage(data, message, state, bot)
+            await final_stage(data, message, state, bot, strapi_client)
     except Exception:
         await state.finish()
 
@@ -2108,4 +2108,4 @@ async def process(message: types.Message, state: FSMContext):
         data['form1[0].Page6[0].Pt5Line8a_Signature[0]'] = message.text
         data['form1[0].Page6[0].Pt5Line8b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
     async with state.proxy() as data:
-        await final_stage(data, message, state, bot)
+        await final_stage(data, message, state, bot, strapi_client)
