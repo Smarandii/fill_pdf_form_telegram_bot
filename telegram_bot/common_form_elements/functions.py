@@ -18,7 +18,6 @@ async def final_stage(data, message, state, bot, strapi_client):
         strapi_client.create_json_input(json_data, client_model['id'])
     except Exception as e:
         logger = logging.getLogger("Final Stage")
-        logger.setLevel(logger.INFO)
         logger.error(f"Error trying to save json: {e}")
     await state.finish()
     await bot.send_message(message.chat.id,
