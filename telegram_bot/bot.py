@@ -60,6 +60,8 @@ async def start_cmd_handler(message: types.Message):
     await Form.main_menu.set()  # Set state to main menu
     keyboard = get_main_menu_keyboard()
     user = strapi_client.find_client(message.from_user.id)
+    logger = logging.getLogger("START HANDLER")
+    logger.info(f"Trying to find user, result: {user}")
     if user is None:
         strapi_client.save_client_to_strapi(message)
     await message.answer(
@@ -109,13 +111,6 @@ async def handle_back(callback_query: types.CallbackQuery, state: FSMContext):
         "Вы вернулись в главное меню. Выберите действие:",
         reply_markup=keyboard
     )
-
-
-@dp.message_handler(filters.Command("start"), state="*")
-async def start_cmd_handler(message: types.Message):
-    keyboard = AvailableFormsKeyboard()
-    keyboard = keyboard.keyboard_markup
-    await message.answer(START_PHRASE, reply_markup=keyboard)
 
 
 @dp.message_handler(state="*", content_types=types.ContentType.DOCUMENT)
