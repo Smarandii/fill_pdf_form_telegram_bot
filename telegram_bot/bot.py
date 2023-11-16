@@ -129,23 +129,25 @@ async def fill_cmd_handler(message: types.Message, state: FSMContext):
 
 @dp.message_handler(filters.Command("jump"), state="*")
 async def jump_cmd_handler(message: types.Message, state: FSMContext):
-    command, form, form_state = message.text.split()
-    async with state.proxy() as data:
-        data['form_identifier'] = form.upper()
-    if form.upper() == "I-485":
-        form_state = FormI485.__getattribute__(FormI485, form_state)
-    if form.upper() == "I-131":
-        form_state = FormI131.__getattribute__(FormI131, form_state)
-    if form.upper() == "I-589":
-        form_state = Form_I_589.__getattribute__(Form_I_589, form_state)
-    if form.upper() == "I-765":
-        form_state = FormI765.__getattribute__(FormI765, form_state)
-    if form.upper() == "AR-11":
-        form_state = Form_AR_11.__getattribute__(Form_AR_11, form_state)
-
-    await form_state.set()
-    await message.answer("Я прыгнул, напиши что-нибудь:")
-
+    try:
+        command, form, form_state = message.text.split()
+        async with state.proxy() as data:
+            data['form_identifier'] = form.upper()
+        if form.upper() == "I-485":
+            form_state = FormI485.__getattribute__(FormI485, form_state)
+        if form.upper() == "I-131":
+            form_state = FormI131.__getattribute__(FormI131, form_state)
+        if form.upper() == "I-589":
+            form_state = Form_I_589.__getattribute__(Form_I_589, form_state)
+        if form.upper() == "I-765":
+            form_state = FormI765.__getattribute__(FormI765, form_state)
+        if form.upper() == "AR-11":
+            form_state = Form_AR_11.__getattribute__(Form_AR_11, form_state)
+    
+        await form_state.set()
+        await message.answer("Я прыгнул, напиши что-нибудь:")
+    except Exception as e:
+        await message.answer(f"Error: {e}")  
 
 from form_ar_11 import form_ar_11_handlers
 from form_i_589 import form_i_589_handlers
