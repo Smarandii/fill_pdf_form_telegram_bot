@@ -51,6 +51,8 @@ from telegram_bot import \
     strapi_client, \
     datetime
 
+from telegram_bot.common_form_elements.functions import final_stage
+
 
 def escape_json_special_chars(func):
     def wrapper(message, *args, **kwargs):
