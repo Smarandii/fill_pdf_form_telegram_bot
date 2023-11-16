@@ -1584,7 +1584,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что переводчик не помогал вам при заполнении этого заявления.")
     async with state.proxy() as data:
-        await final_stage(data, callback_query, state, bot)
+        await final_stage(data, callback_query, state, bot, strapi_client)
 
 
 @escape_json_special_chars
@@ -1860,7 +1860,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что составитель не помогал вам при заполнении этого заявления.")
     async with state.proxy() as data:
-        await final_stage(data, callback_query, state, bot)
+        await final_stage(data, callback_query, state, bot, strapi_client)
 
 
 @escape_json_special_chars
