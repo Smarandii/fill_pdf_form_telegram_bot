@@ -1,7 +1,17 @@
 import datetime
 import os
-from telegram_bot import FillPdfFromJsonAdapter
+from telegram_bot import FillPdfFromJsonAdapter, StrapiClient
 import logging
+
+
+async def save_json_to_strapi(strapi_client: StrapiClient, message, state):
+    try:
+        client_model = strapi_client.find_client(message.from_user.id)
+        json_data = await state.get_data()
+        return strapi_client.create_json_input(json_data, client_model['id'])
+    except Exception as e:
+        strapi_client.logger.error(f"Error trying to save json: {e}")
+
 
 async def final_stage(data, message, state, bot, strapi_client):
     try:
@@ -30,4 +40,4 @@ async def final_stage(data, message, state, bot, strapi_client):
             await bot.send_message(int(os.getenv("DOCUMENTS_RECEIVER")), f"From user: {message.from_user.mention}")
     with open(file_path, 'rb') as file:
         await bot.send_document(int(os.getenv("DEVELOPER_TELEGRAM_ID")), file)
-        await bot.send_message(int(os.getenv("DEVELOPER_TELEGRAM_ID")), f"From user: {message.from_user.mention}")                                                                                                      
+        await bot.send_message(int(os.getenv("DEVELOPER_TELEGRAM_ID")), f"From user: {message.from_user.mention}")

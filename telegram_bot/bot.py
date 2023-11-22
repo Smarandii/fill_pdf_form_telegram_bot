@@ -18,7 +18,7 @@ from telegram_bot.form_i_589.form_i_589_state_group import Form_I_589
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from flask import Flask, request
 
-webhook_hosts = {"LOCAL": "https://ee9b-194-5-212-109.ngrok-free.app",
+webhook_hosts = {"LOCAL": "https://a9f8-46-138-2-17.ngrok-free.app",
                  "PROD": "https://galleon-7f277686eddf.herokuapp.com"}
 WEBHOOK_HOST = webhook_hosts[os.getenv('RUNNING_ENV', default="PROD")]
 

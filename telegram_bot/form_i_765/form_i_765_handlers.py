@@ -4,7 +4,7 @@ import time
 from aiogram import types
 from aiogram.dispatcher import FSMContext, filters
 
-from telegram_bot.common_form_elements.functions import final_stage
+from telegram_bot.common_form_elements.functions import final_stage, save_json_to_strapi
 from telegram_bot.form_i_589.form_i_589_handlers import escape_json_special_chars
 from telegram_bot.form_i_765.form_i_765_state_group import FormI765
 from telegram_bot import bot, dp, strapi_client, datetime, FormI589IfAnyChoice, FormI589GenderChoice, \
@@ -33,6 +33,8 @@ async def process(message: types.Message, state: FSMContext):
 async def i_765_form_chosen(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form_identifier'] = "I-765"
+        response = await save_json_to_strapi(strapi_client, message=callback_query, state=state)
+        data['json_input_strapi_id'] = response['data']['id']
     keyboard = FormI765ApplyingForChoiceKeyboard()
     await bot.send_message(callback_query.from_user.id, "Вы выбрали форму I-765. Давайте приступим к ее заполнению.")
     await bot.send_message(callback_query.from_user.id,
@@ -55,7 +57,8 @@ async def callback_query_handler_1_a(callback_query: types.CallbackQuery, state:
                            "Вы подаете заявление о выдаче первичного разрешения на работу.")
     async with state.proxy() as data:
         data['form1[0].Page1[0].Part1_Checkbox[0]'] = "x"
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.Line1a_FamilyName_0.set()
     await bot.send_message(callback_query.from_user.id, "Часть 2. «Информация о вас.»\n"
@@ -69,7 +72,8 @@ async def callback_query_handler_1_b(callback_query: types.CallbackQuery, state:
                            "кражей или внесением изменений в разрешение на работу, не связанных с ошибкой USCIS;")
     async with state.proxy() as data:
         data['form1[0].Page1[0].Part1_Checkbox[1]'] = "x"
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.Line1a_FamilyName_0.set()
     await bot.send_message(callback_query.from_user.id, "Часть 2. «Информация о вас.»\n"
@@ -82,7 +86,8 @@ async def callback_query_handler_1_c(callback_query: types.CallbackQuery, state:
                            "Вы подаете заявление об обновлении разрешения на работу.")
     async with state.proxy() as data:
         data['form1[0].Page1[0].Part1_Checkbox[2]'] = "x"
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.Line1a_FamilyName_0.set()
     await bot.send_message(callback_query.from_user.id, "Часть 2. «Информация о вас.»\n"
@@ -94,6 +99,8 @@ async def callback_query_handler_1_c(callback_query: types.CallbackQuery, state:
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line1a_FamilyName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите ваше имя:")
@@ -104,6 +111,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line1b_GivenName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите ваше отчество:")
@@ -114,6 +123,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line1c_MiddleName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI765UsedOtherNamesChoice()
@@ -138,6 +149,8 @@ async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.Callba
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line2a_FamilyName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
@@ -148,6 +161,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line2b_GivenName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
@@ -158,6 +173,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line2c_MiddleName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.Used_Other_Names_1.set()
     keyboard = FormI765UsedOtherNamesChoice()
@@ -196,6 +213,8 @@ async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.Callba
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line3a_FamilyName[1]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
@@ -206,6 +225,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line3b_GivenName[1]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
@@ -216,6 +237,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line3c_MiddleName[1]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.Used_Other_Names_2.set()
     keyboard = FormI765UsedOtherNamesChoice()
@@ -254,6 +277,8 @@ async def callback_query_handler_UsedOtherNames_Yes(callback_query: types.Callba
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line3a_FamilyName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите Ваше имя:")
@@ -264,6 +289,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line3b_GivenName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id, "Укажите Ваше отчество:")
@@ -274,6 +301,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page1[0].Line3c_MiddleName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI589IfAnyChoice()
@@ -312,6 +341,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line4a_InCareofName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id,
@@ -323,6 +354,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line4b_StreetNumberName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI765TypeOfBuildingChoice()
@@ -336,6 +369,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_Unit[2]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -347,6 +382,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_Unit[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -358,6 +395,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_Unit[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -369,6 +408,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_AptSteFlrNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id,
@@ -380,6 +421,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_CityOrTown[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id,
@@ -391,6 +434,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_State[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите Zipcode (например, 123456).\n"
                            "Найти Zipcode можно по ссылке: https://tools.usps.com/go/ZipLookupAction_input")
@@ -403,6 +448,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line5_ZipCode[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI765MailingAddressChoiceKeyboard()
@@ -416,6 +463,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Part2Line5_Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id, "Раздел «Иная информация.»")
     await bot.send_message(callback_query.from_user.id,
@@ -430,6 +479,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Part2Line5_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите название и номер улицы:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -441,6 +492,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_StreetNumberName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI765TypeOfBuildingChoice()
@@ -454,6 +507,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_Unit[2]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -465,6 +520,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_Unit[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -476,6 +533,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_Unit[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -487,6 +546,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_AptSteFlrNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id,
@@ -498,6 +559,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_CityOrTown[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id,
@@ -509,6 +572,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_State[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     await bot.send_message(message.from_user.id,
@@ -521,6 +586,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Pt2Line7_ZipCode[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI589IfAnyChoice()
@@ -557,6 +624,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line7_AlienNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI589IfAnyChoice()
@@ -570,6 +639,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line8_ElisAccountNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI765.next()
     keyboard = FormI589GenderChoice()
@@ -585,6 +656,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line9_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы женщина.")
@@ -600,6 +673,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line9_Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589MaritalStatusChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы мужчина.")
@@ -615,6 +690,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line10_Checkbox[2]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765AppliedEarlierChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что не состоите в браке.")
@@ -630,6 +707,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line10_Checkbox[3]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765AppliedEarlierChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что состоите в браке.")
@@ -645,6 +724,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line10_Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765AppliedEarlierChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы разведены.")
@@ -660,6 +741,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line10_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765AppliedEarlierChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы вдова(-ец).")
@@ -675,6 +758,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line19_Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765SSACardWasIssuedChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что раннее подавали форму I-765.")
@@ -691,6 +776,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line19_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765SSACardWasIssuedChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что никогда не подавали форму I-765.")
@@ -707,6 +794,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line12a_Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что управление социального обеспечения (SSA) выдавало вам карту социального "
@@ -723,6 +812,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line12b_SSN[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765WantSSACardToBeIssuedChoice()
     await bot.send_message(message.from_user.id,
                            "Вы хотите, чтобы SSA выдало вам карту социального обеспечения?",
@@ -736,6 +827,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line12a_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что управление социального обеспечения (SSA) не выдавало вам карту социального "
                            "обеспечения (social security card).")
@@ -755,6 +848,8 @@ async def process(message: types.Message, state: FSMContext):
             data['number_of_countries'] = int(message.text)
         except Exception:
             data['number_of_countries'] = 1
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -777,6 +872,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line13_Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765WantToShareInformationWithSSAChoice()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы хотите, чтобы SSA выдало вам карту социального обеспечения.")
@@ -794,6 +891,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line13_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы не хотите, чтобы SSA выдало вам карту социального обеспечения.")
     await bot.send_message(callback_query.from_user.id,
@@ -809,6 +908,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line14_Checkbox_Yes[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы разрешаете раскрытие информации из этого заявления Управлению "
                            "социального обеспечения (SSA).")
@@ -825,6 +926,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line14_Checkbox_No[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы не разрешаете раскрытие информации из этого заявления Управлению "
                            "социального обеспечения (SSA).")
@@ -841,6 +944,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line15a_FamilyName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите имя вашего отца:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -852,6 +957,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line15b_GivenName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Информация о вашей матери.»")
     await bot.send_message(message.from_user.id,
@@ -865,6 +972,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line16a_FamilyName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите имя вашей матери:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -876,6 +985,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line16b_GivenName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Ваша страна или страны гражданства.» Далее перечислите все страны, гражданином "
                            "которых вы в настоящее время являетесь.")
@@ -890,6 +1001,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line17a_CountryOfBirth[0]'] = message.text
         number_of_countries = data["number_of_countries"]
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     if number_of_countries > 1:
         await bot.send_message(message.from_user.id,
                                "Укажите страну:")
@@ -910,6 +1023,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page2[0].Line17b_CountryOfBirth[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Место рождения.» Далее укажите город/поселок/деревню, штат/провинцию и страну, "
                            "где вы родились.")
@@ -924,6 +1039,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line18a_CityTownOfBirth[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите штат / провинцию, где вы родились:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -935,6 +1052,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line18b_CityTownOfBirth[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите страну, где вы родились:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -946,6 +1065,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line18c_CountryOfBirth[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите вашу дату рождения:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -957,6 +1078,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line19_DOB[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Раздел «Информация о вашем последнем въезде в Соединенные Штаты.»")
@@ -983,6 +1106,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line20a_I94Number[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите номер последнего выданного вам паспорта:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -994,6 +1119,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line20b_Passport[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер проездного документа (если имеется):",
@@ -1018,6 +1145,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line20c_TravelDoc[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Какая страна выдала вам последний паспорт или проездной документ (travel document)?")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1029,6 +1158,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line20d_CountryOfIssuance[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите дату истечения срока действия паспорта или проездного документа (мм/дд/гггг):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1040,6 +1171,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line20e_ExpDate[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите дату вашего последнего въезда в США (мм/дд/гггг):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1051,6 +1184,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line21_DateOfLastEntry[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите место вашего последнего въезда в США:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1062,6 +1197,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].place_entry[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите ваш законный статус при вашем последнем въезде в США "
                            "(например, B-2 посетитель, F-1 студент):")
@@ -1074,6 +1211,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line23_StatusLastEntry[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите ваш текущий законный статус в США (например, B-2 посетитель, F-1 студент):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1085,6 +1224,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line24_CurrentStatus[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите ваш номер информационной системы для студентов и посетителей по обмену (SEVIS) "
@@ -1115,6 +1256,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line26_SEVISnumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Информация о вашей категории соответствия требования для получения разрешения "
                            "на работу.»")
@@ -1135,7 +1278,9 @@ async def process(message: types.Message, state: FSMContext):
             data['form1[0].Page3[0].#area[1].section_1[0]'] = input_data[0]
             data['form1[0].Page3[0].#area[1].section_2[0]'] = input_data[1]
             data['form1[0].Page3[0].#area[1].section_3[0]'] = input_data[2]
-        except IndexError:
+            json_data = await state.get_data()
+            strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
+        except:
             pass
     keyboard = FormI765EligibilityCategoryChoice()
     await bot.send_message(message.from_user.id,
@@ -1166,6 +1311,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line27a_Degree[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите наименование работодателя как оно указано в E-Verify:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1177,6 +1324,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line27b_Everify[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите идентификационный номер компании работодателя E-Verify или действующий "
                            "идентификационный номер компании клиента E-Verify:")
@@ -1189,6 +1338,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line27c_EverifyIDNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765EligibilityCategoryChoice()
     await bot.send_message(message.from_user.id,
                            "Если вы указали категорию соответствия (с)(26), укажите номер квитанции последнего "
@@ -1218,6 +1369,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line28_ReceiptNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765EligibilityCategoryArrestedChoice()
     await bot.send_message(message.from_user.id,
                            "Если вы указали категорию соответствия (с)(8), были ли вы когда-либо были арестованы "
@@ -1232,6 +1385,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].PtLine29_YesNo[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы были арестованы и/или осуждены за какое-либо преступление.")
     keyboard = FormI765EligibilityCategoryChoice()
@@ -1250,6 +1405,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].PtLine29_YesNo[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы никогда не были арестованы и/или осуждены за какое-либо преступление.")
     keyboard = FormI765EligibilityCategoryChoice()
@@ -1284,6 +1441,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].Line18a_Receipt[0].Line30a_ReceiptNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765EligibilityCategoryArrestedChoice()
     await bot.send_message(message.from_user.id,
                            "Если вы указали категорию соответствия (с) (35) или (с)(36), были ли вы когда-либо "
@@ -1298,6 +1457,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].PtLine30b_YesNo[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы были арестованы и/или осуждены за какое-либо преступление.")
     keyboard = FormI765ApplicantStatementChoice()
@@ -1321,6 +1482,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page3[0].PtLine30b_YesNo[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы никогда не были арестованы и/или осуждены за какое-либо преступление.")
     keyboard = FormI765ApplicantStatementChoice()
@@ -1386,6 +1549,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line1Checkbox[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что вы можете читать и понимать по-английски, я прочитал и понял каждый вопрос "
                            "и инструкцию к этому заявлению, а также свои ответы на все вопросы.")
@@ -1398,6 +1563,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line1Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что переводчик зачитал вам все вопросы и инструкцию к этому заявлению, "
                            "а также ваши ответы на каждый вопрос на языке, которым вы свободно владеете, "
@@ -1414,6 +1581,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line1b_Language[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765OnlyTrueInformationChoice()
     await bot.send_message(message.from_user.id,
                            "Верно ли следующее: по моей просьбе составитель (третье лицо) заполнил за меня это "
@@ -1429,6 +1598,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Part3_Checkbox[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите имя третьего лица, которое по вашей просьбе заполнило это заявление:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1440,6 +1611,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line2_RepresentativeName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Контактная информация заявителя.»")
     await bot.send_message(message.from_user.id,
@@ -1464,6 +1637,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line3_DaytimePhoneNumber1[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер мобильного телефона заявителя (если имеется):",
@@ -1488,6 +1663,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line4_MobileNumber1[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес электронной почты заявителя (если имеется):",
@@ -1513,6 +1690,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line5_Email[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765SalvadorOrGwatemalaResidentChoice()
     await bot.send_message(message.from_user.id,
                            "Вы являетесь гражданином Сальвадора или Гватемалы и имеете право на получение льгот по"
@@ -1527,6 +1706,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt4Line6_Checkbox[0]'] = ""
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что являетесь гражданином Сальвадора или Гватемалы и имеете право на получение "
                            "льгот по мировому соглашению АВС.")
@@ -1554,7 +1735,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt3Line7a_Signature[0]'] = message.text
         data['form1[0].Page4[0].Pt3Line7b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765TranslatorHelpedChoice()
     await bot.send_message(message.from_user.id,
                            "Вам помогал переводчик при заполнении этого заявления?",
@@ -1592,7 +1774,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt4Line1a_InterpreterFamilyName[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите имя переводчика:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1604,7 +1787,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt4Line1b_InterpreterGivenName[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите название компании или организации, где работает переводчик (если имеется):",
@@ -1631,7 +1815,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page4[0].Pt4Line2_InterpreterBusinessorOrg[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Почтовый адрес переводчика.»")
     await bot.send_message(message.from_user.id,
@@ -1645,7 +1830,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3a_StreetNumberName[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765TypeOfBuildingChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите тип помещения:",
@@ -1659,6 +1845,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3b_Unit[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1670,6 +1858,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3b_Unit[2]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1681,6 +1871,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3b_Unit[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1692,6 +1884,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3b_AptSteFlrNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите город:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1703,6 +1897,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3c_CityOrTown[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите штат (например, CA, NY, AZ и т. д.):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1714,6 +1910,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3d_State[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите Zipcode (например, 123456).\n"
                            "Найти Zipcode можно по ссылке:\n"
@@ -1727,6 +1925,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3e_ZipCode[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите провинцию:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1738,6 +1938,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3f_Province[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите Zipcode (postal code) (например, 12345-1234):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1749,6 +1951,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3g_PostalCode[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1760,6 +1964,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line3h_Country[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Контактная информация переводчика.»")
     await bot.send_message(message.from_user.id,
@@ -1773,6 +1979,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt4Line4_InterpreterDaytimeTelephone[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер мобильного телефона переводчика (если имеется):",
@@ -1797,6 +2005,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt4Line5_MobileNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес электронной почты переводчика (если имеется):",
@@ -1820,7 +2030,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt4Line6_Email[0]'] = message.text
         data['form1[0].Page5[0].Part4_NameofLanguage[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите подпись переводчика:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1833,6 +2044,8 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt4Line6a_Signature[0]'] = message.text
         data['form1[0].Page5[0].Pt4Line6b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765PreparerHelpedChoice()
     await bot.send_message(message.from_user.id,
                            "Вам помогал какое-либо третье лицо (составитель) в заполнении этого заявления?",
@@ -1868,7 +2081,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line1a_PreparerFamilyName[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите имя составителя:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1880,6 +2094,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line1b_PreparerGivenName[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите название компании или организации, где работает составитель (если имеется):",
@@ -1906,7 +2122,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line2_BusinessName[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Почтовый адрес составителя.»")
     await bot.send_message(message.from_user.id,
@@ -1920,7 +2137,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3a_StreetNumberName[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI765TypeOfBuildingChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите тип помещения:",
@@ -1934,6 +2152,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3b_Unit[1]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер апартаментов:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1945,6 +2165,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3b_Unit[0]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер квартиры:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1956,6 +2178,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3b_Unit[2]'] = "x"
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(callback_query.from_user.id,
                            "Укажите номер этажа:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1967,6 +2191,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3b_AptSteFlrNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите город:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1978,6 +2204,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3c_CityOrTown[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите штат (например, CA, NY, AZ и т. д.):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -1989,6 +2217,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3d_State[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите Zipcode (например, 123456).\n"
                            "Найти почтовый индекс можно по ссылке:\n"
@@ -2002,6 +2232,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3e_ZipCode[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите провинцию:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -2013,6 +2245,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3f_Province[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите почтовый индекс (postal code) (например, 12345-1234):")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -2024,6 +2258,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3g_PostalCode[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите страну:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -2035,6 +2271,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt6Line3h_Country[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Раздел «Контактная информация составителя.»")
     await bot.send_message(message.from_user.id,
@@ -2048,6 +2286,8 @@ async def process(message: types.Message, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line4_DaytimePhoneNumber1[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите номер мобильного телефона составителя (если имеется):",
@@ -2072,6 +2312,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line5_PreparerFaxNumber[0]'] = message.text
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     keyboard = FormI589IfAnyChoice()
     await bot.send_message(message.from_user.id,
                            "Укажите адрес электронной почты составителя (если имеется):",
@@ -2094,7 +2336,8 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page5[0].Pt5Line6_Email[0]'] = message.text
-
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     await bot.send_message(message.from_user.id,
                            "Укажите подпись составителя:")
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
@@ -2107,5 +2350,7 @@ async def process(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['form1[0].Page6[0].Pt5Line8a_Signature[0]'] = message.text
         data['form1[0].Page6[0].Pt5Line8b_DateofSignature[0]'] = datetime.datetime.now().strftime('%m/%d%/Y')
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     async with state.proxy() as data:
         await final_stage(data, message, state, bot, strapi_client)

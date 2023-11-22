@@ -27,6 +27,17 @@ class StrapiClient:
             headers=headers
         )
 
+    def __send_put_request(self, url: str, data: dict, headers: dict | None = None):
+        if headers is None:
+            headers = {"Authorization": f"Bearer {self.TOKEN}"}
+        else:
+            headers.update({"Authorization": f"Bearer {self.TOKEN}"})
+        return requests.put(
+            url=url,
+            json=data,
+            headers=headers
+        )
+
     def __send_get_request(self, url: str, headers: dict | None = None):
         if headers is None:
             headers = {"Authorization": f"Bearer {self.TOKEN}"}
@@ -92,3 +103,22 @@ class StrapiClient:
             return response
         except Exception as e:
             self.logger.error(f"Failed to save json: {json_data} of client_id: {client_id} | Error {e}")
+
+    def update_json_input_by_id(self, id_, json_data):
+        """Update json_input json_data by its id"""
+        try:
+            url = f"{self.HOST}{self.JSON_INPUTS_URL}/{id_}"
+            payload = {
+                "data": {
+                    "data": json_data,
+                }
+            }
+            headers = {"Content-Type": "application/json"}
+            response = self.__send_put_request(url, payload, headers=headers)
+            if response.status_code in (200, 201) and response.json():
+                return response.json()
+            else:
+                self.logger.error(f"Failed to update json_input: {response.content}")
+            return response
+        except Exception as e:
+            self.logger.error(f"Failed to update json_input with json_data:: {json_data} of json_input_id: {id_} | Error {e}")
