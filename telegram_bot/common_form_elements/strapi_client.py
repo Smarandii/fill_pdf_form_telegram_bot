@@ -76,7 +76,7 @@ class StrapiClient:
     def find_client(self, tg_id):
         """Find a client by tg_id."""
         try:
-            url = f"{self.HOST}{self.CLIENTS_URL}?tg_id={tg_id}"
+            url = f"{self.HOST}{self.CLIENTS_URL}?filters[$and][0][tg_id][$eq]={tg_id}"
             response = self.__send_get_request(url)
             if response.status_code == 200 and response.json():
                 return response.json()['data'][0]
