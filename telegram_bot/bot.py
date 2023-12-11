@@ -116,8 +116,11 @@ async def handle_back(callback_query: types.CallbackQuery, state: FSMContext):
 @dp.message_handler(state="*", content_types=types.ContentType.DOCUMENT)
 async def fill_cmd_handler(message: types.Message, state: FSMContext):
     document_id = message.document.file_id
-    file_path = rf"../json_inputs/{document_id}.json"
-    await bot.download_file_by_id(document_id, rf"../json_inputs/{document_id}.json")
+    if os.getenv('RUNNING_ENV', default="PROD") == "LOCAL":
+        file_path = rf"../json_inputs/{document_id}.json"
+    else:
+        file_path = rf"/tmp/{document_id}.json"
+    await bot.download_file_by_id(document_id, file_path)
     async with aiofiles.open(file_path, mode='r', encoding="utf-8") as f:
         json_data = await f.read()
     json_data = json.loads(json_data)
