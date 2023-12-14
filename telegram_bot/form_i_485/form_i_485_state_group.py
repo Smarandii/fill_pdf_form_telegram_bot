@@ -1012,7 +1012,7 @@ class FormI485(StatesGroup):
 
     S_15_Pt8Line86b_Nationality_0 = State()
 
-    AreYouRequestingAccomidationBecauseOfDisabilities = State()
+    AreYouRequestingAccommodationBecauseOfDisabilities = State()
     # S_15_Pt9Line1_YesNo_0 = State()
     # S_15_Pt9Line1_YesNo_1 = State()
 

@@ -1336,7 +1336,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="TypeOfEmploymentBasedCategory_1",
-                           state=FormI485.TypeOfFamilyCategoryApplication)
+                           state=FormI485.TypeOfEmploymentBasedCategoryApplication)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[2].Pt2Line1_CB[5]"] = "x"
@@ -1352,7 +1352,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
 
 
 @dp.callback_query_handler(text="TypeOfEmploymentBasedCategory_2",
-                           state=FormI485.TypeOfFamilyCategoryApplication)
+                           state=FormI485.TypeOfEmploymentBasedCategoryApplication)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[2].Pt2Line1_CB[6]"] = "x"
@@ -9402,11 +9402,11 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            "Вы запрашиваете помощь в связи с вашими ограниченными возможностями? ",
                            reply_markup=keyboard.markup)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-    await FormI485.AreYouRequestingAccomidationBecauseOfDisabilities.set()
+    await FormI485.AreYouRequestingAccommodationBecauseOfDisabilities.set()
 
 
 @dp.callback_query_handler(text="SimpleYesOrNo_Yes",
-                           state=FormI485.AreYouRequestingAccomidationBecauseOfDisabilities)
+                           state=FormI485.AreYouRequestingAccommodationBecauseOfDisabilities)
 async def process(callback_query: types.CallbackQuery, state: FSMContext):
     async with state.proxy() as data:
         data["[15].Pt9Line1_YesNo[1]"] = 'x'
@@ -9418,6 +9418,28 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                            reply_markup=keyboard.markup)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
     await FormI485.next()
+
+
+@dp.callback_query_handler(text="SimpleYesOrNo_No",
+                           state=FormI485.AreYouRequestingAccommodationBecauseOfDisabilities)
+async def process(callback_query: types.CallbackQuery, state: FSMContext):
+    async with state.proxy() as data:
+        data["[15].Pt9Line1_YesNo[0]"] = 'x'
+        json_data = await state.get_data()
+        strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
+
+    keyboard = FormI765ApplicantStatementChoice()
+    await bot.send_message(callback_query.from_user.id,
+                           "Часть 10. Заверения заявителя, контактная информация, декларация, сертификация и подпись\n"
+                           "Раздел «Заверения заявителя.»\n"
+                           "Укажите верное:\n"
+                           "1. Я могу читать и понимать по-английски, я прочитал и понял каждый вопрос и инструкцию к "
+                           "этому заявлению, а также свои ответы на все вопросы.\n"
+                           "2. Переводчик зачитал мне все вопросы и инструкцию к этому заявлению, а также мои ответы "
+                           "на каждый вопрос на языке, которым я свободно владею, и я все понял.",
+                           reply_markup=keyboard.markup)
+    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+    await FormI485.ApplicantStatementChoice.set()
 
 
 @dp.callback_query_handler(text="SimpleYesOrNo_Yes",

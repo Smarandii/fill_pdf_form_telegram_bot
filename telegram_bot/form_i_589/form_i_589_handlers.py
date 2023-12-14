@@ -6979,7 +6979,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
         json_data = await state.get_data()
         strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
     time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-    await Form_I_589.next()
+    await Form_I_589.B_You_Or_Family_Accused_Charged_Arrested_Detained_Choice.set()
     await bot.send_message(callback_query.from_user.id,
                            "Вы указали, что не боитесь причинения вреда или плохого обращения, "
                            "если вернетесь в свою родную страну.")
@@ -7357,6 +7357,7 @@ async def process(callback_query: types.CallbackQuery, state: FSMContext):
                                                             "ли это лицо за статусом беженца или за убежищем, находясь "
                                                             "там, и если нет, то почему оно этого не сделало.")
     else:
+        await Form_I_589.C_You_Or_Family_Caused_Harm_Or_Suffering_Choice.set()
         keyboard = FormI589YouOrFamilyCausedHarmOrSufferingChoice()
         await bot.send_message(callback_query.from_user.id,
                                "Вы, ваш супруг или ваш ребенок (дети) когда-либо подстрекали, помогали или иным "
