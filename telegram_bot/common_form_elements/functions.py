@@ -19,7 +19,8 @@ async def final_stage(data, message, state, bot, strapi_client):
                                          user_id=message.from_user.id,
                                          timestamp=datetime.datetime.now().strftime('%Y%m%d%H%M%S'))
     except KeyError:
-        bot.send_message(message.chat.id, "form_identifier is not set")
+        logger = logging.getLogger("Final Stage")
+        logger.error(f"form_identifier is not set")
         return None
     adapter.save_json()
     try:

@@ -3948,12 +3948,20 @@ async def process_S_6_Pt5Line3_TimesMarried_0(message: types.Message, state: FSM
         data["[6].Pt5Line3_TimesMarried[0]"] = message.text
         json_data = await state.get_data()
         strapi_client.update_json_input_by_id(id_=data['json_input_strapi_id'], json_data=json_data)
-    await bot.send_message(message.from_user.id,
-                           "Раздел «Информация о вашем нынешнем браке.»")
-    await bot.send_message(message.from_user.id,
-                           "Укажите ФИО нынешнего супруга, как указано в паспорте.\nУкажите фамилию:")
-    time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
-    await FormI485.next()
+        is_divorced = data["[6].Pt5Line1_MaritalStatus[2]"] == "x"
+    if not is_divorced:
+        await bot.send_message(message.from_user.id,
+                               "Раздел «Информация о вашем нынешнем браке.»")
+        await bot.send_message(message.from_user.id,
+                               "Укажите ФИО нынешнего супруга, как указано в паспорте.\nУкажите фамилию:")
+        time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+        await FormI485.next()
+    else:
+        keyboard = FormI485HaveKidsChoice()
+        await bot.send_message(message.from_user.id,
+                               "У вас есть дети?", reply_markup=keyboard.markup)
+        time.sleep(float(os.getenv('RESPONSE_DELAY', default="0.1")))
+        await FormI485.HaveKidsChoice.set()
 
 
 @escape_json_special_chars
